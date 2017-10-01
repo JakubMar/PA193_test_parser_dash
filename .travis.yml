@@ -1,0 +1,12 @@
+language: cpp
+
+os:
+  - linux
+  
+compiler:
+  - gcc 
+  
+script:     
+  - qmake QMAKE_CXX=g++-4.8  messec.pro
+  - make
+  - ./tests/tests

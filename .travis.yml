@@ -23,7 +23,7 @@ addons:
     notification_email: kubo.martinka@gmail.com
     build_command_prepend: "qmake"
     build_command:   "make -j 4"
-    branch_pattern: master #coverity_scan
+    branch_pattern: coverity_scan
 
 script:     
   - qmake QMAKE_CXX=g++-4.8 QMAKE_C=gcc-4.8 PA193_test_parser_dash.pro

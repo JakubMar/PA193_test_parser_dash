@@ -31,6 +31,10 @@
 *.exe
 *.out
 *.app
+src/parser
+tests/tests
 
 # Makefiles
 *Makefile
+
+

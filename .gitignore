@@ -33,4 +33,4 @@
 *.app
 
 # Makefiles
-*./Makefile
+*Makefile

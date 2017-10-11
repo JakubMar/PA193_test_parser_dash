@@ -10,5 +10,7 @@ TARGET = parser
 TEMPLATE = app
 
 SOURCES += main.cpp
-HEADERS += 
+HEADERS += \ 
+    block.h \
+    common.h
 

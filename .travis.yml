@@ -5,25 +5,6 @@ os:
   
 compiler:
   - gcc 
-  
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "CV2s2g//EeCDhvkCjV5EiZS9/XLQsBArGgjNjE94o/mKsefQE3ZEQhTWuf44UsMPPDQMMx6rH83lQHEOu5cE4OhDOqPsBT3v/rX9ghr2tPBhfi6nBOqYN2TpbDOMim9dtkMPkYfL5btt7lSqM5df2jP+xJebhR+Q3k3AwVcjT/a7XXj/yPjI9e+hN1l+WjZzuG1Nk6HKWk8RKkOU4Yp8pG7vT7OhWdqIo3FOTOFx1hJqEfuoOCiYO0Jkw1dYUeZYfx3IGG+llLeBKdvYK03xxBCROz8oS2zg+CGCcDSeUDf0fW/26lnvjODm2hLVoUo7P5aO7zCqown8EObJq6N6Nk1K0kbC6UDrPqEqeGpukxUeXpdR+QBoE18KnmkDuzk9wfW9MqUi9VvpYEu1HhJKKyLi7K8opa7FNDBalqodaUMuPTP9V+hLOBcX1ghsf1lnJX5vuQG2ZzOL7AXohUanXnrl5/r7Rz+YKwx7H8LhnTsNZsATU7/NZqbXnUIpJF4w8YgwqmMmFVAtu7vAh00j4q012Uw+QZTtXD6HknrQbBqrwKlwgO7J+uxR8y4C9JWtqrx+JaW+lJidHQnBNSVEwXK8swz4irkaPSx4OTpnL0u8Xg8AErCqc+seBKf7eI1x4hlTj0Hv+fM4tLDqfqjfwHUpkuGMWO7Lq2jf/fFCvQg="
-
-before_install:
-      - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
-
-addons:
-  coverity_scan:
-    project:
-      name: "JakubMar/PA193_test_parser_dash"
-      description: "Build submitted via Travis CI"
-    notification_email: kubo.martinka@gmail.com
-    build_command_prepend: "qmake"
-    build_command:   "make -j 4"
-    branch_pattern: coverity_scan
 
 script:     
   - qmake QMAKE_CXX=g++-4.8 QMAKE_C=gcc-4.8 PA193_test_parser_dash.pro

@@ -71,17 +71,17 @@ public:
 };
 
 
-std::ostream& operator<< (std::ostream& stream, const Block& block)
-{
-    stream << "Size: " << block.nSize << std::endl;
-    stream << "Version: " << block.nVersion << std::endl;
-    stream << "Hash of the previous block: " << block.hashPrevBlock.toHex().toStdString() << std::endl;
-    stream << "Merkle root: " << block.hashMerkleRoot.toHex().toStdString() << std::endl;
-    stream << "Time: " << block.nTime << std::endl;
-    stream << "Bits: " << block.nBits.toHex().toStdString() << std::endl;
-    stream << "Nonce: " << block.nNonce << std::endl;
-    return stream;
-}
+//std::ostream& operator<< (std::ostream& stream, const Block& block)
+//{
+//    stream << "Size: " << block.nSize << std::endl;
+//    stream << "Version: " << block.nVersion << std::endl;
+//    stream << "Hash of the previous block: " << block.hashPrevBlock.toHex().toStdString() << std::endl;
+//    stream << "Merkle root: " << block.hashMerkleRoot.toHex().toStdString() << std::endl;
+//    stream << "Time: " << block.nTime << std::endl;
+//    stream << "Bits: " << block.nBits.toHex().toStdString() << std::endl;
+//    stream << "Nonce: " << block.nNonce << std::endl;
+//    return stream;
+//}
 
 
 #endif // BLOCK

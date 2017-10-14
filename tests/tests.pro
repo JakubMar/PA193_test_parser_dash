@@ -1,5 +1,3 @@
-INCLUDEPATH += ../src/include/ ../src/include/third/
-
 CONFIG += c++11     
 CONFIG += console  
 CONFIG += testcase   
@@ -8,6 +6,9 @@ QMAKE_CXXFLAGS += -std=c++11
 TARGET = tests
 TEMPLATE = app
 
+include(../src/src.pri)
+
+SOURCES -= ../src/sources/main.cpp
 SOURCES += main.cpp
 HEADERS += catch.hpp
 

@@ -1,3 +1,5 @@
+INCLUDEPATH += ../src/include/ ../src/include/third/
+
 CONFIG += c++11     
 CONFIG += console  
 CONFIG += testcase   

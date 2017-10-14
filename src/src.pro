@@ -1,11 +1,11 @@
-INCLUDEPATH += include/ include/third/ include/third/crypto
-
 CONFIG += c++11     
 CONFIG += console  
 QMAKE_CXXFLAGS += -std=c++11
 
 TARGET = parser
 TEMPLATE = app
+
+INCLUDEPATH += include/ include/third/ include/third/crypto
 
 HEADERS +=  $$files(include/*.h) \
             $$files(include/third/*.h) \
@@ -20,3 +20,6 @@ CONFIG(debug, debug|release) {
 }
 
 OBJECTS_DIR = $$DESTDIR/.obj
+
+DISTFILES += \
+    src .pri

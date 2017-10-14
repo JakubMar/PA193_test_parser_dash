@@ -11,28 +11,43 @@ INCLUDEPATH += ../src/include/ ../src/include/third/ ../src/include/third/crypto
 #LIBS += ../build/release/src/.obj/*.o
 #LIBS -= -L/../build/release/src/.obj/ -lmain.o
 
-#LIBS += ../build/release/src/.obj/aes_helper.o  \
-LIBS += ../build/release/src/.obj/cubehash.o    \
-        ../build/release/src/.obj/jh.o          \
-        ../build/release/src/.obj/skein.o       \
-        ../build/release/src/.obj/blake.o       \
-        ../build/release/src/.obj/echo.o        \
-        ../build/release/src/.obj/keccak.o      \
-        ../build/release/src/.obj/shavite.o     \
-        ../build/release/src/.obj/uint256.o     \
-        ../build/release/src/.obj/bmw.o         \
-        ../build/release/src/.obj/groestl.o     \
-        ../build/release/src/.obj/luffa.o       \
-        ../build/release/src/.obj/simd.o        \
-        ../build/release/src/.obj/utilstrencodings.o
+#Don't know why this file is not generated/needed
+#LIBS += ../build/release/src/.obj/aes_helper.o
+
 
 SOURCES += main.cpp
 HEADERS += catch.hpp
 
 CONFIG(debug, debug|release) {
     DESTDIR = ../build/debug/tests
+LIBS +=     ../build/debug/src/.obj/cubehash.o    \
+            ../build/debug/src/.obj/jh.o          \
+            ../build/debug/src/.obj/skein.o       \
+            ../build/debug/src/.obj/blake.o       \
+            ../build/debug/src/.obj/echo.o        \
+            ../build/debug/src/.obj/keccak.o      \
+            ../build/debug/src/.obj/shavite.o     \
+            ../build/debug/src/.obj/uint256.o     \
+            ../build/debug/src/.obj/bmw.o         \
+            ../build/debug/src/.obj/groestl.o     \
+            ../build/debug/src/.obj/luffa.o       \
+            ../build/debug/src/.obj/simd.o        \
+            ../build/debug/src/.obj/utilstrencodings.o
 } else {
     DESTDIR = ../build/release/tests
+    LIBS += ../build/release/src/.obj/cubehash.o    \
+            ../build/release/src/.obj/jh.o          \
+            ../build/release/src/.obj/skein.o       \
+            ../build/release/src/.obj/blake.o       \
+            ../build/release/src/.obj/echo.o        \
+            ../build/release/src/.obj/keccak.o      \
+            ../build/release/src/.obj/shavite.o     \
+            ../build/release/src/.obj/uint256.o     \
+            ../build/release/src/.obj/bmw.o         \
+            ../build/release/src/.obj/groestl.o     \
+            ../build/release/src/.obj/luffa.o       \
+            ../build/release/src/.obj/simd.o        \
+            ../build/release/src/.obj/utilstrencodings.o
 }
 
 OBJECTS_DIR = $$DESTDIR/.obj

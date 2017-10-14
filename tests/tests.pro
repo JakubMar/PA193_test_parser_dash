@@ -1,7 +1,3 @@
-QT += core
-QT -= gui  
-QT += network
-
 CONFIG += c++11     
 CONFIG += console  
 CONFIG += testcase   
@@ -13,3 +9,10 @@ TEMPLATE = app
 SOURCES += main.cpp
 HEADERS += catch.hpp
 
+CONFIG(debug, debug|release) {
+    DESTDIR = ../build/debug/tests
+} else {
+    DESTDIR = ../build/release/tests
+}
+
+OBJECTS_DIR = $$DESTDIR/.obj

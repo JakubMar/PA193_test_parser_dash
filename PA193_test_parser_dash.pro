@@ -1,11 +1,8 @@
 TEMPLATE = subdirs
 
-CONFIG += c++11
-QMAKE_CXXFLAGS += -std=c++11
-
 SUBDIRS += \
     src \
-    tests  \
+    tests
 
-src.subdir  = src
-tests.subdir  = tests
+tests.depends  = src
+

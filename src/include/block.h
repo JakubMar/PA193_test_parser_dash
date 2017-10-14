@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include <cmath>
+#include "uint256.h"
 
 // This probably works only for bitcoin
 /*inline float fast_log(float val)
@@ -36,52 +37,49 @@ class Block
 public:
 
     int32_t nVersion;
-    QByteArray hashPrevBlock;
-    QByteArray hashMerkleRoot;
+    uint256 hashPrevBlock;
+    uint256 hashMerkleRoot;
     uint32_t nTime;
-    QByteArray nBits;
+    uint32_t nBits;
     uint32_t nNonce;
     uint32_t nSize;
 
-    Block(QByteArray& array, uint32_t size) : nSize(size)
+    Block(char* buffer, uint32_t size) : nSize(size)
     {
         uint32_t offset = 0;
 
-        nVersion = ParseUint32R(array.mid(offset, VERSION_SIZE));
+        nVersion = ParseUint32(buffer);
         offset += VERSION_SIZE;
 
-        QByteArray previousHashArray = array.mid(offset, HASH_SIZE);
-        hashPrevBlock = Reverse(previousHashArray);
+        memcpy(&hashPrevBlock, buffer + offset, HASH_SIZE);
         offset += HASH_SIZE;
 
-        QByteArray merkleRootArray = array.mid(offset, MERKLE_ROOT_SIZE);
-        hashMerkleRoot = Reverse(merkleRootArray);
+        memcpy(&hashMerkleRoot, buffer + offset, MERKLE_ROOT_SIZE);
         offset += MERKLE_ROOT_SIZE;
 
-        nTime = ParseUint32R(array.mid(offset, TIME_SIZE));
+        nTime = ParseUint32(buffer + offset);
         offset += TIME_SIZE;
 
-        QByteArray bitsArray = array.mid(offset, BITS_SIZE);
-        nBits = Reverse(bitsArray);
+        nBits =  ParseUint32(buffer + offset);
         offset += BITS_SIZE;
 
-        nNonce = ParseUint32R(array.mid(offset, NONCE_SIZE));
+        nNonce = ParseUint32(buffer + offset);
         offset += NONCE_SIZE;
     }
 };
 
 
-//std::ostream& operator<< (std::ostream& stream, const Block& block)
-//{
-//    stream << "Size: " << block.nSize << std::endl;
-//    stream << "Version: " << block.nVersion << std::endl;
-//    stream << "Hash of the previous block: " << block.hashPrevBlock.toHex().toStdString() << std::endl;
-//    stream << "Merkle root: " << block.hashMerkleRoot.toHex().toStdString() << std::endl;
-//    stream << "Time: " << block.nTime << std::endl;
-//    stream << "Bits: " << block.nBits.toHex().toStdString() << std::endl;
-//    stream << "Nonce: " << block.nNonce << std::endl;
-//    return stream;
-//}
+std::ostream& operator<< (std::ostream& stream, const Block& block)
+{
+    stream << "Size: " << block.nSize << std::endl;
+    stream << "Version: " << block.nVersion << std::endl;
+    stream << "Hash of the previous block: " << block.hashPrevBlock.GetHex() << std::endl;
+    stream << "Merkle root: " << block.hashMerkleRoot.GetHex() << std::endl;
+    stream << "Time: " << block.nTime << std::endl;
+    stream << "Bits: " << std::hex << block.nBits << std::endl;
+    stream << "Nonce: " << std::dec << block.nNonce << std::endl;
+    return stream;
+}
 
 
 #endif // BLOCK

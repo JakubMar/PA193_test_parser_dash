@@ -1,44 +1,56 @@
 #include <iostream>
-#include <QFile>
 #include "block.h"
 #include "common.h"
+#include <fstream>
 
 using namespace std;
 
-//const QByteArray MAGIC_NUMBER = QByteArrayLiteral("\xbf\x0c\x6b\xbd");
+const char MAGIC_NUMBER[] = "\xbf\x0c\x6b\xbd";
 
 int main()
 {
-//    QFile file("./block.bin");
+    ifstream file;
+    file.open("./block.bin");
 
-//    if (!file.open(QIODevice::ReadOnly))
-//    {
-//        std::cout << "File cannot be open" << std::endl;
-//        return 0;
-//    }
+    if (!file.is_open())
+    {
+        std::cout << "File cannot be open" << std::endl;
+        return 0;
+    }
 
-//    QByteArray fileContent = file.readAll();
+    const unsigned int SIZE = 4;
 
-//    if(!fileContent.startsWith(MAGIC_NUMBER))
-//    {
-//        std::cout << "File does not start with magic number" << std::endl;
-//        return 0;
-//    }
+    char buffer[SIZE];
+    file.read(buffer, SIZE);
 
-//    std::cout << "File starts with magic number" << std::endl;
+    if(strncmp(buffer, MAGIC_NUMBER, SIZE) != 0)
+    {
+        std::cout << "File does not start with magic number" << std::endl;
+        return 0;
+    }
 
-//    uint32_t size = ParseUint32R(fileContent.mid(4, 4));
+    std::cout << "File starts with magic number" << std::endl;
 
-//    if(size > MAX_BLOCKFILE_SIZE)
-//    {
-//        std::cout << "Block size is invalid" << std::endl;
-//        return 0;
-//    }
+    uint32_t block_size;
+    file.read(reinterpret_cast<char*>(&block_size), 4);
 
-//    Block block(fileContent.remove(0, 8), size);
+    if(block_size > MAX_BLOCKFILE_SIZE)
+    {
+        std::cout << "Block size: " << block_size << " is invalid" << std::endl;
+        return 0;
+    }
 
-//    std::cout << block << std::endl;
+    char* block_buffer = new char[block_size];
+    file.read(block_buffer, block_size);
 
+    std::cout << "Block size: " << block_size  << std::endl;
+
+    Block block(block_buffer, block_size);
+
+    std::cout << block << std::endl;
+
+    delete[] block_buffer;
+    file.close();
     return 0;
 }
 

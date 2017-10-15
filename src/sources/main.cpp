@@ -1,56 +1,47 @@
 #include <iostream>
-#include "block.h"
+#include "blockchain.h"
 #include "common.h"
 #include <fstream>
 
 using namespace std;
 
-const char MAGIC_NUMBER[] = "\xbf\x0c\x6b\xbd";
-
 int main()
 {
     ifstream file;
-    file.open("./block.bin");
+    file.open("./blocks.bin");
 
     if (!file.is_open())
     {
-        std::cout << "File cannot be open" << std::endl;
+        cout << "File cannot be open" << std::endl;
         return 0;
     }
 
-    const unsigned int SIZE = 4;
+    Blockchain* chain = nullptr;
 
-    char buffer[SIZE];
-    file.read(buffer, SIZE);
-
-    if(strncmp(buffer, MAGIC_NUMBER, SIZE) != 0)
+    try
     {
-        std::cout << "File does not start with magic number" << std::endl;
-        return 0;
+        chain = new Blockchain(file);
     }
-
-    std::cout << "File starts with magic number" << std::endl;
-
-    uint32_t block_size;
-    file.read(reinterpret_cast<char*>(&block_size), 4);
-
-    if(block_size > MAX_BLOCKFILE_SIZE)
+    catch(exception& ex)
     {
-        std::cout << "Block size: " << block_size << " is invalid" << std::endl;
-        return 0;
+        cout << ex.what();
+
+        if(chain)
+        {
+          delete chain;
+        }
+        file.close();
+        return 1;
     }
 
-    char* block_buffer = new char[block_size];
-    file.read(block_buffer, block_size);
+    for(unsigned int i = 0; i < chain->nBlocks.size(); ++i)
+    {
+       cout << chain->nBlocks[i];
+    }
 
-    std::cout << "Block size: " << block_size  << std::endl;
-
-    Block block(block_buffer, block_size);
-
-    std::cout << block << std::endl;
-
-    delete[] block_buffer;
     file.close();
+    delete chain;
+
     return 0;
 }
 

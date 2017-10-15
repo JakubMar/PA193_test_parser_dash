@@ -3,7 +3,9 @@
 
 #include <string.h>
 
+const char MAGIC_NUMBER[] = "\xbf\x0c\x6b\xbd";
 const unsigned int MAX_BLOCKFILE_SIZE = 0x8000000; // 128 MiB
+const unsigned int MAX_NUMBER_OF_BLOCKS = 10;
 
 uint32_t ParseUint32(const char* array)
 {

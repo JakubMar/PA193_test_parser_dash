@@ -10,6 +10,7 @@ INCLUDEPATH += include/ include/third/ include/third/crypto
 HEADERS += $$files(include/*.h) \
            $$files(include/third/*.h) \
            $$files(include/third/crypto/*.h) \
+    include/blockchain.h
 
 SOURCES += $$files(sources/*.cpp) \
            $$files(sources/third/*.cpp) \

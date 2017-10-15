@@ -71,6 +71,7 @@ public:
 
 std::ostream& operator<< (std::ostream& stream, const Block& block)
 {
+    stream << "----------BLOCK----------: " << std::endl;
     stream << "Size: " << block.nSize << std::endl;
     stream << "Version: " << block.nVersion << std::endl;
     stream << "Hash of the previous block: " << block.hashPrevBlock.GetHex() << std::endl;

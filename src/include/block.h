@@ -44,7 +44,7 @@ public:
     uint32_t nNonce;
     uint32_t nSize;
 
-    Block(char* buffer, uint32_t size) : nSize(size)
+    Block(const char* buffer, uint32_t size) : nSize(size)
     {
         uint32_t offset = 0;
 

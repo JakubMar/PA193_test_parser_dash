@@ -2,11 +2,13 @@
 #include "blockchain.h"
 #include "common.h"
 #include <fstream>
+#include <memory>
 
 using namespace std;
 
 int main()
 {
+    std::cout << "Starting main" << std::endl;
     ifstream file;
     file.open("./blocks.bin");
 
@@ -16,20 +18,16 @@ int main()
         return 0;
     }
 
-    Blockchain* chain = nullptr;
+    std::unique_ptr<Blockchain> chain;
 
     try
     {
-        chain = new Blockchain(file);
+        std::unique_ptr<Blockchain> tmpChain(new Blockchain(file));
+        chain = std::move(tmpChain);
     }
     catch(exception& ex)
     {
         cout << ex.what();
-
-        if(chain)
-        {
-          delete chain;
-        }
         file.close();
         return 1;
     }
@@ -40,7 +38,6 @@ int main()
     }
 
     file.close();
-    delete chain;
 
     return 0;
 }

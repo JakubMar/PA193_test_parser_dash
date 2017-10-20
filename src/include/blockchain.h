@@ -63,11 +63,11 @@ class Blockchain
 
         return block_size;
     }
-//TODO: this is allocating memory? kinda magic - maybe use move semantics instead?
-    char* ReadBlockContent(std::ifstream& file, uint32_t block_size)
+//TODO: this is allocating memory? kinda magic - refactor somehow?
+    std::unique_ptr<char[]> ReadBlockContent(std::ifstream& file, uint32_t block_size)
     {
-        char* block_buffer = new char[block_size];
-        file.read(block_buffer, block_size);
+        std::unique_ptr<char[]> block_buffer( new char[block_size]);
+        file.read(block_buffer.get(), block_size);
 
         if(file.fail())
         {
@@ -91,11 +91,11 @@ class Blockchain
             }
 
             uint32_t block_size = ReadBlockSize(file);
-            char* block_buffer = ReadBlockContent(file, block_size);
+            std::unique_ptr<char[]> block_buffer= ReadBlockContent(file, block_size);
 
-            nBlocks.push_back(Block(block_buffer, block_size));
+            nBlocks.push_back(Block(block_buffer.get(), block_size));
 
-            delete[] block_buffer;
+            //delete[] block_buffer;
 
             ++numberOfBlocks;
         }

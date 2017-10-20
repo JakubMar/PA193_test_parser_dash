@@ -23,9 +23,9 @@ int main()
         return 1;
     }
 
-    for(unsigned int i = 0; i < chain->nBlocks.size(); ++i)
+    for(unsigned int i = 0; i < chain->getBlocks().size(); ++i)
     {
-       cout << chain->nBlocks[i];
+       cout << chain->getBlocks()[i];
     }
 
     return 0;

@@ -11,6 +11,10 @@ const uint32_t BLOCK_SIZE_SIZE = 4;
 
 class Blockchain
 {
+
+    std::vector<Block> nBlocks;
+
+
     void ReadMagicNumber(std::ifstream& file)
     {
 
@@ -99,7 +103,9 @@ class Blockchain
 
 public:
 
-    std::vector<Block> nBlocks; //TODO: getter? - maybe even give a const value?
+    const std::vector<Block> getBlocks(){
+        return nBlocks;
+    }
 
     Blockchain(std::ifstream& file)
     {

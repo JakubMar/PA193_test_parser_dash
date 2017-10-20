@@ -1,8 +1,6 @@
 #include <iostream>
 #include "blockchain.h"
-#include "common.h"
 #include <fstream>
-#include <memory>
 
 using namespace std;
 

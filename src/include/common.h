@@ -2,6 +2,8 @@
 #define COMMON
 
 #include <string.h>
+#include <memory>
+
 
 const char MAGIC_NUMBER[] = "\xbf\x0c\x6b\xbd";
 const unsigned int MAX_BLOCKFILE_SIZE = 0x8000000; // 128 MiB

@@ -9,20 +9,12 @@ using namespace std;
 int main()
 {
     std::cout << "Starting main" << std::endl;
-    ifstream file;
-    file.open("./blocks.bin");
-
-    if (!file.is_open())
-    {
-        cout << "File cannot be open" << std::endl;
-        return 0;
-    }
-
     std::unique_ptr<Blockchain> chain;
 
     try
     {
-        std::unique_ptr<Blockchain> tmpChain(new Blockchain(file));
+        std::string fileName = "./blocks.bin";
+        std::unique_ptr<Blockchain> tmpChain(new Blockchain(fileName));
         chain = std::move(tmpChain);
     }
     catch(exception& ex)

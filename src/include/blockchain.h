@@ -59,7 +59,7 @@ class Blockchain
 
         return block_size;
     }
-
+//TODO: this is allocating memory? kinda magic - maybe use move semantics instead?
     char* ReadBlockContent(std::ifstream& file, uint32_t block_size)
     {
         char* block_buffer = new char[block_size];
@@ -74,12 +74,7 @@ class Blockchain
     }
 
 
-public:
-
-    std::vector<Block> nBlocks;
-
-    Blockchain(std::ifstream& file)
-    {
+    void initializer(std::ifstream& file){
         unsigned int numberOfBlocks = 0;
 
         while(numberOfBlocks < MAX_NUMBER_OF_BLOCKS && !file.eof())
@@ -101,6 +96,28 @@ public:
             ++numberOfBlocks;
         }
     }
+
+public:
+
+    std::vector<Block> nBlocks; //TODO: getter? - maybe even give a const value?
+
+    Blockchain(std::ifstream& file)
+    {
+        initializer(file);
+    }
+
+    Blockchain(std::string fileName){
+        std::ifstream file;
+        file.open(fileName.c_str());
+
+        if (!file.is_open())
+        {
+            throw std::runtime_error("File cannot be open");
+        }
+
+        initializer(file);
+    }
+
 };
 
 #endif // BLOCKCHAIN

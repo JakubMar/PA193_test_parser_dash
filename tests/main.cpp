@@ -100,7 +100,7 @@ TEST_CASE("Blockchain tests")
 
         Blockchain chain(testStream);
 
-        Block block = chain.nBlocks[0];
+        Block block = chain.getBlocks()[0];
 
         uint32_t expectedVersion = 2;
         std::string expectedHashPrevBlock = "00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6";
@@ -162,8 +162,8 @@ TEST_CASE("Blockchain tests")
 
         Blockchain chain(testStream);
 
-        Block block1 = chain.nBlocks[0];
-        Block block2 = chain.nBlocks[1];
+        Block block1 = chain.getBlocks()[0];
+        Block block2 = chain.getBlocks()[1];
 
         uint32_t expectedVersion = 2;
         std::string expectedHashPrevBlock = "00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6";

@@ -6,12 +6,21 @@
 #include <fstream>
 #include <stdexcept>
 
+const uint32_t MAGIC_NUMBER_SIZE = 4;
+const uint32_t BLOCK_SIZE_SIZE = 4;
+
 class Blockchain
 {
+
+    std::vector<Block> nBlocks;
+
+
     void ReadMagicNumber(std::ifstream& file)
     {
-        char buffer[4];
-        file.read(buffer, 4);
+
+        unsigned bufferSize = MAGIC_NUMBER_SIZE;
+        char buffer[bufferSize];
+        file.read(buffer, bufferSize);
 
         if(file.eof())
         {
@@ -24,7 +33,7 @@ class Blockchain
             throw std::runtime_error("Reading magic number from file was not succesfull");
         }
 
-        if(strncmp(buffer, MAGIC_NUMBER, 4) != 0)
+        if(memcmp(buffer, MAGIC_NUMBER, bufferSize) != 0)
         {
             //printf("%hhX %hhX %hhX %hhX\n", buffer[0], buffer[1], buffer[2], buffer[3]); -- for debug
             throw std::runtime_error("File does not start with magic number");
@@ -38,7 +47,7 @@ class Blockchain
     uint32_t ReadBlockSize(std::ifstream& file)
     {
         uint32_t block_size;
-        file.read(reinterpret_cast<char*>(&block_size), 4);
+        file.read(reinterpret_cast<char*>(&block_size), BLOCK_SIZE_SIZE);
 
         if(file.fail())
         {
@@ -54,11 +63,10 @@ class Blockchain
 
         return block_size;
     }
-
-    char* ReadBlockContent(std::ifstream& file, uint32_t block_size)
+    std::unique_ptr<char[]> ReadBlockContent(std::ifstream& file, uint32_t block_size)
     {
-        char* block_buffer = new char[block_size];
-        file.read(block_buffer, block_size);
+        std::unique_ptr<char[]> block_buffer( new char[block_size]);
+        file.read(block_buffer.get(), block_size);
 
         if(file.fail())
         {
@@ -69,12 +77,7 @@ class Blockchain
     }
 
 
-public:
-
-    std::vector<Block> nBlocks;
-
-    Blockchain(std::ifstream& file)
-    {
+    void initializer(std::ifstream& file){
         unsigned int numberOfBlocks = 0;
 
         while(numberOfBlocks < MAX_NUMBER_OF_BLOCKS && !file.eof())
@@ -87,15 +90,37 @@ public:
             }
 
             uint32_t block_size = ReadBlockSize(file);
-            char* block_buffer = ReadBlockContent(file, block_size);
+            std::unique_ptr<char[]> block_buffer= ReadBlockContent(file, block_size);
 
-            nBlocks.push_back(Block(block_buffer, block_size));
-
-            delete[] block_buffer;
+            nBlocks.push_back(Block(block_buffer.get(), block_size));
 
             ++numberOfBlocks;
         }
     }
+
+public:
+
+    const std::vector<Block> &getBlocks(){
+        return nBlocks;
+    }
+
+    Blockchain(std::ifstream& file)
+    {
+        initializer(file);
+    }
+
+    Blockchain(std::string fileName){
+        std::ifstream file;
+        file.open(fileName.c_str());
+
+        if (!file.is_open())
+        {
+            throw std::runtime_error("File cannot be open");
+        }
+
+        initializer(file);
+    }
+
 };
 
 #endif // BLOCKCHAIN

@@ -2,45 +2,31 @@
 #include "blockchain.h"
 #include "common.h"
 #include <fstream>
+#include <memory>
 
 using namespace std;
 
 int main()
 {
-    ifstream file;
-    file.open("./blocks.bin");
-
-    if (!file.is_open())
-    {
-        cout << "File cannot be open" << std::endl;
-        return 0;
-    }
-
-    Blockchain* chain = nullptr;
+    std::cout << "Starting main" << std::endl;
+    std::unique_ptr<Blockchain> chain;
 
     try
     {
-        chain = new Blockchain(file);
+        std::string fileName = "./blocks.bin";
+        std::unique_ptr<Blockchain> tmpChain(new Blockchain(fileName));
+        chain = std::move(tmpChain);
     }
     catch(exception& ex)
     {
         cout << ex.what();
-
-        if(chain)
-        {
-          delete chain;
-        }
-        file.close();
         return 1;
     }
 
-    for(unsigned int i = 0; i < chain->nBlocks.size(); ++i)
+    for(unsigned int i = 0; i < chain->getBlocks().size(); ++i)
     {
-       cout << chain->nBlocks[i];
+       cout << chain->getBlocks()[i];
     }
-
-    file.close();
-    delete chain;
 
     return 0;
 }

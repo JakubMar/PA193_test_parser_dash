@@ -11,7 +11,10 @@
 
 #include <stdint.h>
 
-//#include "compat/endian.h"
+
+#ifdef __APPLE__
+#include "osx/endian.h"
+#endif
 
 uint16_t static inline ReadLE16(const unsigned char* ptr)
 {

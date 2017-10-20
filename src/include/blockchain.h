@@ -63,7 +63,6 @@ class Blockchain
 
         return block_size;
     }
-//TODO: this is allocating memory? kinda magic - refactor somehow?
     std::unique_ptr<char[]> ReadBlockContent(std::ifstream& file, uint32_t block_size)
     {
         std::unique_ptr<char[]> block_buffer( new char[block_size]);
@@ -94,8 +93,6 @@ class Blockchain
             std::unique_ptr<char[]> block_buffer= ReadBlockContent(file, block_size);
 
             nBlocks.push_back(Block(block_buffer.get(), block_size));
-
-            //delete[] block_buffer;
 
             ++numberOfBlocks;
         }

@@ -103,7 +103,7 @@ class Blockchain
 
 public:
 
-    const std::vector<Block> getBlocks(){
+    const std::vector<Block> &getBlocks(){
         return nBlocks;
     }
 

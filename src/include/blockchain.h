@@ -29,7 +29,7 @@ class Blockchain
             throw std::runtime_error("Reading magic number from file was not succesfull");
         }
 
-        if(strncmp(buffer, MAGIC_NUMBER, bufferSize) != 0)
+        if(memcmp(buffer, MAGIC_NUMBER, bufferSize) != 0)
         {
             //printf("%hhX %hhX %hhX %hhX\n", buffer[0], buffer[1], buffer[2], buffer[3]); -- for debug
             throw std::runtime_error("File does not start with magic number");

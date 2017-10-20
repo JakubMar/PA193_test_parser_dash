@@ -28,7 +28,6 @@ int main()
     catch(exception& ex)
     {
         cout << ex.what();
-        file.close();
         return 1;
     }
 
@@ -36,8 +35,6 @@ int main()
     {
        cout << chain->nBlocks[i];
     }
-
-    file.close();
 
     return 0;
 }

@@ -13,7 +13,7 @@ HEADERS += $$files(include/*.h) \
 
 SOURCES += $$files(sources/*.cpp) \
            $$files(sources/third/*.cpp) \
-           $$files(sources/third/*.c)
+           $$files(sources/third/*.c) \
 
 CONFIG(debug, debug|release) {
     DESTDIR = ../build/debug/src

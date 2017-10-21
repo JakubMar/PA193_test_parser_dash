@@ -37,3 +37,6 @@
 
 # Build directory
 build/*
+
+# Binary files
+*.bin

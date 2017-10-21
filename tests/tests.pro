@@ -32,7 +32,10 @@ LIBS +=     ../build/debug/src/.obj/cubehash.o    \
             ../build/debug/src/.obj/groestl.o     \
             ../build/debug/src/.obj/luffa.o       \
             ../build/debug/src/.obj/simd.o        \
-            ../build/debug/src/.obj/utilstrencodings.o
+            ../build/debug/src/.obj/utilstrencodings.o \
+            ../build/debug/src/.obj/block.o       \
+            ../build/debug/src/.obj/blockchain.o
+
 } else {
     DESTDIR = ../build/release/tests
     LIBS += ../build/release/src/.obj/cubehash.o    \
@@ -47,7 +50,9 @@ LIBS +=     ../build/debug/src/.obj/cubehash.o    \
             ../build/release/src/.obj/groestl.o     \
             ../build/release/src/.obj/luffa.o       \
             ../build/release/src/.obj/simd.o        \
-            ../build/release/src/.obj/utilstrencodings.o
+            ../build/release/src/.obj/utilstrencodings.o \
+            ../build/release/src/.obj/block.o       \
+            ../build/release/src/.obj/blockchain.o
 }
 
 OBJECTS_DIR = $$DESTDIR/.obj

@@ -4,6 +4,8 @@
 
 using namespace std;
 
+
+
 int main()
 {
     std::cout << "Starting main" << std::endl;
@@ -13,6 +15,7 @@ int main()
     {
         std::string fileName = "./blocks.bin";
         std::unique_ptr<Blockchain> tmpChain(new Blockchain(fileName));
+        tmpChain->parseFile();
         chain = std::move(tmpChain);
     }
     catch(exception& ex)
@@ -28,17 +31,3 @@ int main()
 
     return 0;
 }
-
-/*
-char buffer[] = {0x00,0x11};
-
-buffer = read_resources();
-block = parse(buffer);
-if(block)
-{
-if(valid(block))
-    {
-     print(block);
-    }
-}
-*/

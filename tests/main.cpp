@@ -96,9 +96,8 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_block), 194);
         file.close();
 
-        std::ifstream testStream(FILE_NAME);
-
-        Blockchain chain(testStream);
+        Blockchain chain(FILE_NAME);
+        chain.parseFile();
 
         Block block = chain.getBlocks()[0];
 
@@ -158,9 +157,8 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 2 * 194);
         file.close();
 
-        std::ifstream testStream(FILE_NAME);
-
-        Blockchain chain(testStream);
+        Blockchain chain(FILE_NAME);
+        chain.parseFile();
 
         Block block1 = chain.getBlocks()[0];
         Block block2 = chain.getBlocks()[1];
@@ -203,11 +201,10 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 3);
         file.close();
 
-        std::ifstream testStream(FILE_NAME);
-
         try
         {
-            Blockchain chain(testStream);
+            Blockchain chain(FILE_NAME);
+            chain.parseFile();
         }
         catch(std::exception& ex)
         {
@@ -228,11 +225,10 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 4);
         file.close();
 
-        std::ifstream testStream(FILE_NAME);
-
         try
         {
-            Blockchain chain(testStream);
+            Blockchain chain(FILE_NAME);
+            chain.parseFile();
         }
         catch(std::exception& ex)
         {
@@ -253,11 +249,10 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 5);
         file.close();
 
-        std::ifstream testStream(FILE_NAME);
-
         try
         {
-            Blockchain chain(testStream);
+            Blockchain chain(FILE_NAME);
+            chain.parseFile();
         }
         catch(std::exception& ex)
         {
@@ -278,11 +273,10 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 8);
         file.close();
 
-        std::ifstream testStream(FILE_NAME);
-
         try
         {
-            Blockchain chain(testStream);
+            Blockchain chain(FILE_NAME);
+            chain.parseFile();
         }
         catch(std::exception& ex)
         {
@@ -303,11 +297,10 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 9);
         file.close();
 
-        std::ifstream testStream(FILE_NAME);
-
         try
         {
-            Blockchain chain(testStream);
+            Blockchain chain(FILE_NAME);
+            chain.parseFile();
         }
         catch(std::exception& ex)
         {

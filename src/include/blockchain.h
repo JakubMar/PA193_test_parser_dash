@@ -54,7 +54,7 @@ class Blockchain
             throw std::runtime_error("Reading size of block from file was not succesfull");
         }
 
-        if(block_size > MAX_BLOCKFILE_SIZE)
+        if(block_size > MAX_BLOCKFILE_SIZE || block_size < 80)
         {
             throw std::runtime_error("Block size is invalid");
         }
@@ -63,9 +63,11 @@ class Blockchain
 
         return block_size;
     }
+
+
     std::unique_ptr<char[]> ReadBlockContent(std::ifstream& file, uint32_t block_size)
     {
-        std::unique_ptr<char[]> block_buffer( new char[block_size]);
+        std::unique_ptr<char[]> block_buffer(new char[block_size]);
         file.read(block_buffer.get(), block_size);
 
         if(file.fail())
@@ -104,10 +106,12 @@ public:
         return nBlocks;
     }
 
+
     Blockchain(std::ifstream& file)
     {
         initializer(file);
     }
+
 
     Blockchain(std::string fileName){
         std::ifstream file;

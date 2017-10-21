@@ -6,6 +6,7 @@ Travis CI: [![Build Status](https://travis-ci.org/JakubMar/PA193_test_parser_das
 
 ## Build steps
 * qmake
+* ./build_dir_tree.sh
 * make
 
 ## References

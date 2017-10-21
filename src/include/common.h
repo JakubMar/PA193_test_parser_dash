@@ -16,10 +16,10 @@ inline uint32_t ParseUint32(const char* array)
 }
 
 // Parse reverse array to unsigned int
-inline uint32_t ParseUint32R(const char* array)
+/*inline uint32_t ParseUint32R(const char* array)
 {
     return 0; //_0xFD_builtin_bswap32(ParseUint32(array)) - gcc function to change endian (if needed in future)
-}
+}*/
 
 inline uint64_t ParseVarLength(const unsigned char* array)
 {

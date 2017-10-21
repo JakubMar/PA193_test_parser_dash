@@ -316,4 +316,51 @@ TEST_CASE("Blockchain tests")
     }
 }
 
+
+TEST_CASE("ParseVarLength tests")
+{
+    SECTION("Valid uint8_t length")
+    {
+    const unsigned char len_buffer[] = { 0x57 };
+
+    uint8_t expectedValue = 0x57;
+    uint8_t actualValue = ParseVarLength(len_buffer);
+
+    REQUIRE(expectedValue == actualValue);
+    }
+
+
+    SECTION("Valid uint16_t length")
+    {
+    const unsigned char len_buffer[] = { 0xFD, 0xFC, 0x8A };
+
+    uint16_t expectedValue = 0x8AFC;
+    uint16_t actualValue = ParseVarLength(len_buffer);
+
+    REQUIRE(expectedValue == actualValue);
+    }
+
+
+    SECTION("Valid uint32_t length")
+    {
+    const unsigned char len_buffer[] = { 0xFE, 0xFF, 0xFF, 0xFF, 0xFF };
+
+    uint32_t expectedValue = 0xFFFFFFFF;
+    uint32_t actualValue = ParseVarLength(len_buffer);
+
+    REQUIRE(expectedValue == actualValue);
+    }
+
+
+    SECTION("Valid uint64_t length")
+    {
+    const unsigned char len_buffer[] = { 0xFF, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00};
+
+    uint64_t expectedValue = 0x100000000;
+    uint64_t actualValue = ParseVarLength(len_buffer);
+
+    REQUIRE(expectedValue == actualValue);
+    }
+}
+
 #endif // CATCH_CONFIG_MAIN

@@ -2,6 +2,9 @@
 
 #include <string.h>
 #include <memory>
+#include <Exceptions/invalidblocksizeexcepion.h>
+#include <Exceptions/magicnumberexception.h>
+#include <Exceptions/readfileexception.h>
 
 
 const char MAGIC_NUMBER[] = "\xbf\x0c\x6b\xbd";

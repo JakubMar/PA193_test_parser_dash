@@ -7,7 +7,7 @@ Blockchain::Blockchain(std::string fileName)
 
     if (!srcFile.is_open())
     {
-        throw std::runtime_error("Failed to open file\n");
+        throw ReadFileException("Failed to open file");
     }
 }
 
@@ -52,12 +52,12 @@ void Blockchain::ReadMagicNumber(std::ifstream& file)
 
     if(file.fail())
     {
-        throw std::runtime_error("Reading magic number from file was not succesfull");
+        throw ReadFileException("Reading magic number from the file was not succesfull");
     }
 
     if(memcmp(buffer, MAGIC_NUMBER, bufferSize) != 0)
     {
-        throw std::runtime_error("File does not start with magic number");
+        throw MagicNumberException();
     }
 
     std::cout << "Magic word found, parsing another block" << std::endl;
@@ -71,12 +71,12 @@ uint32_t Blockchain::ReadBlockSize(std::ifstream& file)
 
     if(file.fail())
     {
-        throw std::runtime_error("Reading size of block from file was not succesfull");
+        throw ReadFileException("Reading size of the block from the file was not succesfull");
     }
 
     if(block_size > MAX_BLOCKFILE_SIZE || block_size < 80)
     {
-        throw std::runtime_error("Block size is invalid");
+        throw InvalidBlockSizeException();
     }
 
     std::cout << "Block size: " << block_size  << std::endl;
@@ -92,7 +92,7 @@ std::unique_ptr<char[]> Blockchain::ReadBlockContent(std::ifstream& file, uint32
 
     if(file.fail())
     {
-        throw std::runtime_error("Reading content of block from file was not succesfull");
+        throw ReadFileException("Reading content of block from file was not succesfull");
     }
 
     return block_buffer;

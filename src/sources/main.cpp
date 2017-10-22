@@ -18,9 +18,9 @@ int main()
         tmpChain->parseFile();
         chain = std::move(tmpChain);
     }
-    catch(exception& ex)
+    catch(ParserException& ex)
     {
-        cout << ex.what();
+        cout << ex.what() << endl;
         return 1;
     }
 

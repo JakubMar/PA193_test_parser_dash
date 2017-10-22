@@ -9,6 +9,7 @@ Blockchain::Blockchain(std::string fileName)
     {
         throw std::runtime_error("Failed to open file\n");
     }
+    parseFile();
 }
 
 const std::vector<Block>& Blockchain::getBlocks()
@@ -74,7 +75,7 @@ uint32_t Blockchain::ReadBlockSize(std::ifstream& file)
         throw std::runtime_error("Reading size of block from file was not succesfull");
     }
 
-    if(block_size > MAX_BLOCKFILE_SIZE || block_size < 80)
+    if(block_size > MAX_BLOCKFILE_SIZE || block_size < BLOCK_HEADER_SIZE)
     {
         throw std::runtime_error("Block size is invalid");
     }

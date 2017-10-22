@@ -97,7 +97,6 @@ TEST_CASE("Blockchain tests")
         file.close();
 
         Blockchain chain(FILE_NAME);
-        chain.parseFile();
 
         Block block = chain.getBlocks()[0];
 
@@ -158,7 +157,6 @@ TEST_CASE("Blockchain tests")
         file.close();
 
         Blockchain chain(FILE_NAME);
-        chain.parseFile();
 
         Block block1 = chain.getBlocks()[0];
         Block block2 = chain.getBlocks()[1];
@@ -204,7 +202,6 @@ TEST_CASE("Blockchain tests")
         try
         {
             Blockchain chain(FILE_NAME);
-            chain.parseFile();
         }
         catch(std::exception& ex)
         {
@@ -228,7 +225,6 @@ TEST_CASE("Blockchain tests")
         try
         {
             Blockchain chain(FILE_NAME);
-            chain.parseFile();
         }
         catch(std::exception& ex)
         {
@@ -252,7 +248,6 @@ TEST_CASE("Blockchain tests")
         try
         {
             Blockchain chain(FILE_NAME);
-            chain.parseFile();
         }
         catch(std::exception& ex)
         {
@@ -276,7 +271,6 @@ TEST_CASE("Blockchain tests")
         try
         {
             Blockchain chain(FILE_NAME);
-            chain.parseFile();
         }
         catch(std::exception& ex)
         {
@@ -300,7 +294,6 @@ TEST_CASE("Blockchain tests")
         try
         {
             Blockchain chain(FILE_NAME);
-            chain.parseFile();
         }
         catch(std::exception& ex)
         {

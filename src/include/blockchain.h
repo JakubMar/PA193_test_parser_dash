@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include <block.h>
 #include <fstream>
 #include <stdexcept>

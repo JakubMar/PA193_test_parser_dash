@@ -44,14 +44,14 @@ void Blockchain::ReadMagicNumber(std::ifstream& file)
     char buffer[bufferSize];
     file.read(buffer, bufferSize);
 
-    if(file.eof())
-    {
-        std::cout << "All blocks were succesfuly parsed" << std::endl;
-        return;
-    }
-
     if(file.fail())
     {
+        if(file.eof() && file.gcount() == 0)
+        {
+            std::cout << "All blocks were succesfuly parsed " << std::endl;
+            return;
+        }
+
         throw ReadFileException("Reading magic number from the file was not succesfull");
     }
 

@@ -201,15 +201,8 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 3);
         file.close();
 
-        try
-        {
-            Blockchain chain(FILE_NAME);
-            chain.parseFile();
-        }
-        catch(std::exception& ex)
-        {
-            REQUIRE(strcmp(ex.what(), "Reading magic number from file was not succesfull") == 0);
-        }
+        Blockchain chain(FILE_NAME);
+        REQUIRE_THROWS_WITH(chain.parseFile(), "Reading magic number from the file was not succesfull");
     }
 
 
@@ -225,15 +218,8 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 4);
         file.close();
 
-        try
-        {
-            Blockchain chain(FILE_NAME);
-            chain.parseFile();
-        }
-        catch(std::exception& ex)
-        {
-            REQUIRE(strcmp(ex.what(), "File does not start with magic number") == 0);
-        }
+        Blockchain chain(FILE_NAME);
+        REQUIRE_THROWS_AS(chain.parseFile(), MagicNumberException);
     }
 
 
@@ -249,15 +235,8 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 5);
         file.close();
 
-        try
-        {
-            Blockchain chain(FILE_NAME);
-            chain.parseFile();
-        }
-        catch(std::exception& ex)
-        {
-            REQUIRE(strcmp(ex.what(), "Reading size of block from file was not succesfull") == 0);
-        }
+        Blockchain chain(FILE_NAME);
+        REQUIRE_THROWS_WITH(chain.parseFile(), "Reading size of the block from the file was not succesfull");
     }
 
 
@@ -273,15 +252,8 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 8);
         file.close();
 
-        try
-        {
-            Blockchain chain(FILE_NAME);
-            chain.parseFile();
-        }
-        catch(std::exception& ex)
-        {
-            REQUIRE(strcmp(ex.what(), "Block size is invalid") == 0);
-        }
+        Blockchain chain(FILE_NAME);
+        REQUIRE_THROWS_AS(chain.parseFile(), InvalidBlockSizeException);
     }
 
 
@@ -297,15 +269,8 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 9);
         file.close();
 
-        try
-        {
-            Blockchain chain(FILE_NAME);
-            chain.parseFile();
-        }
-        catch(std::exception& ex)
-        {
-            REQUIRE(strcmp(ex.what(), "Reading content of block from file was not succesfull") == 0);
-        }
+        Blockchain chain(FILE_NAME);
+        REQUIRE_THROWS_WITH(chain.parseFile(), "Reading content of block from file was not succesfull");
     }
 }
 

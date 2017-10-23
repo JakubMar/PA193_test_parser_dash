@@ -4,11 +4,6 @@
 #include "common.h"
 #include "transaction.h"
 
-const uint32_t MERKLE_ROOT_SIZE = 32;
-const uint32_t BITS_SIZE = 4;
-const uint32_t NONCE_SIZE = 4;
-const uint32_t BLOCK_HEADER_SIZE = VERSION_SIZE + HASH_SIZE + MERKLE_ROOT_SIZE + TIME_SIZE + BITS_SIZE + NONCE_SIZE;
-
 class Block
 {
 public:
@@ -22,7 +17,10 @@ public:
     uint32_t nSize;
     std::vector<Transaction> nTx;
 
-    Block(const char* buffer, uint32_t size);
+    offsets beginEndOffsets;
+    std::unique_ptr<char[]> binBuffer;
+
+    Block(std::unique_ptr<char[]> buffer, uint32_t size);
 };
 
 std::ostream& operator<< (std::ostream& stream, const Block& block);

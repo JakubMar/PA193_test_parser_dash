@@ -8,11 +8,11 @@ TxOut::TxOut(const char *buffer, uint32_t& globalOffset)
     localOffset += VALUE_SIZE;
 
     //SCRIPT
-    /*varInt scriptLen = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer));
-    std::unique_ptr<char[]> tmpScript(new char[scriptLen.first]);
-    memcpy(tmpScript.get(), buffer + scriptLen.second, scriptLen.first);
-    script = std::move(tmpScript);
-    localOffset += scriptLen.second;*/
+    varInt scriptLen = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer));
+//    std::unique_ptr<char[]> tmpScript(new char[scriptLen.first]);
+//    memcpy(tmpScript.get(), buffer + scriptLen.second, scriptLen.first);
+//    script = std::move(tmpScript);
+    localOffset += scriptLen.second;
 
     globalOffset += localOffset;
 }

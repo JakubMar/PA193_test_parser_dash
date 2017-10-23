@@ -2,34 +2,37 @@
 #include <string>
 #include <ostream>
 
-Block::Block(const char* buffer, uint32_t size) : nSize(size)
+Block::Block(std::unique_ptr<char[]> buffer, uint32_t size) : nSize(size)
 {
+    binBuffer = std::move(buffer);
     uint32_t offset = 0;
 
-    nVersion = ParseUint32(buffer);
+    nVersion = ParseUint32(binBuffer.get());
     offset += VERSION_SIZE;
 
-    memcpy(&hashPrevBlock, buffer + offset, HASH_SIZE);
+    memcpy(&hashPrevBlock, binBuffer.get() + offset, HASH_SIZE);
     offset += HASH_SIZE;
 
-    memcpy(&hashMerkleRoot, buffer + offset, MERKLE_ROOT_SIZE);
+    memcpy(&hashMerkleRoot, binBuffer.get() + offset, MERKLE_ROOT_SIZE);
     offset += MERKLE_ROOT_SIZE;
 
-    nTime = ParseUint32(buffer + offset);
+    nTime = ParseUint32(binBuffer.get() + offset);
     offset += TIME_SIZE;
 
-    nBits =  ParseUint32(buffer + offset);
+    nBits =  ParseUint32(binBuffer.get() + offset);
     offset += BITS_SIZE;
 
-    nNonce = ParseUint32(buffer + offset);
+    nNonce = ParseUint32(binBuffer.get() + offset);
     offset += NONCE_SIZE;
 
-    /*varInt countTx = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer+offset));
+    varInt countTx = ParseVarLength(binBuffer.get()+offset);
     offset += countTx.second;
     for(size_t i = 0; i < countTx.first; ++i)
     {
-        nTx.emplace_back(Transaction(buffer, offset));
-    }*/
+        nTx.emplace_back(Transaction(binBuffer.get()+offset, offset));
+    }
+
+    beginEndOffsets = offsets(0,offset);
 }
 
 std::ostream& operator<< (std::ostream& stream, const Block& block)

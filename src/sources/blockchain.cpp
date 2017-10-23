@@ -32,7 +32,7 @@ void Blockchain::parseFile()
         uint32_t block_size = ReadBlockSize(srcFile);
         std::unique_ptr<char[]> block_buffer = ReadBlockContent(srcFile, block_size);
 
-        nBlocks.push_back(Block(block_buffer.get(), block_size));
+        nBlocks.push_back(Block(std::move(block_buffer), block_size));
 
         ++numberOfBlocks;
     }

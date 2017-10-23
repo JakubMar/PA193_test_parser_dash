@@ -4,8 +4,6 @@
 #include <fstream>
 #include <stdexcept>
 
-const uint32_t MAGIC_NUMBER_SIZE = 4;
-const uint32_t BLOCK_SIZE_SIZE = 4;
 
 class Blockchain
 {

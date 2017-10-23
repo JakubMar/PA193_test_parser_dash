@@ -15,11 +15,14 @@ TxIn::TxIn(const char *buffer, uint32_t &globalOffset)
     localOff += INDEX_SIZE;
 
     //SCRIPT
-    /*varInt scriptLen = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer));
-    std::unique_ptr<char[]> tmpScript(new char[scriptLen.first]);
-    memcpy(tmpScript.get(), buffer + scriptLen.second, scriptLen.first);
-    script = std::move(tmpScript);
-    localOff += scriptLen.second;*/
+    varInt scriptLen = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer));
+    localOff += scriptLen.second;
+    //std::unique_ptr<char[]> tmpScript(new char[scriptLen.first]);
+
+    //memcpy(tmpScript.get(), buffer + localOff, scriptLen.first);
+
+    //script = std::move(tmpScript);
+    localOff += scriptLen.second;
 
     //SEQUENCE NUMBER
     seqNumber = ParseUint32(buffer);

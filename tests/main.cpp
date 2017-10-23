@@ -14,16 +14,13 @@ TEST_CASE("Hash tests")
     {
     //block #1 header - taken binary represenation (no change in endianity)
     const unsigned char b1_header[] = {
-     0xbf, 0x0c, 0x6b, 0xbd, 0xba, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xb6, 0x7a, 0x40, 0xf3, 0xcd, 0x58, 0x04, 0x43, 0x7a, 0x10,
-     0x8f, 0x10, 0x55, 0x33, 0x73, 0x9c, 0x37, 0xe6, 0x22, 0x9b, 0xc1, 0xad, 0xca, 0xb3, 0x85, 0x14, 0x0b, 0x59, 0xfd, 0x0f, 0x00, 0x00,
-     0xa7, 0x1c, 0x1a, 0xad, 0xe4, 0x4b, 0xf8, 0x42, 0x5b, 0xec, 0x0d, 0xeb, 0x61, 0x1c, 0x20, 0xb1, 0x6d, 0xa3, 0x44, 0x28, 0x18, 0xef,
-     0x20, 0x48, 0x9c, 0xa1, 0xe2, 0x51, 0x2b, 0xe4, 0x3e, 0xef, 0x81, 0x4c, 0xdb, 0x52, 0xf0, 0xff, 0x0f, 0x1e, 0xdb, 0xf7, 0x01, 0x00
+     0x02, 0x00, 0x00, 0x00, 0xb6, 0x7a, 0x40, 0xf3, 0xcd, 0x58, 0x04, 0x43, 0x7a, 0x10, 0x8f, 0x10, 0x55, 0x33, 0x73, 0x9c, 0x37, 0xe6,
+     0x22, 0x9b, 0xc1, 0xad, 0xca, 0xb3, 0x85, 0x14, 0x0b, 0x59, 0xfd, 0x0f, 0x00, 0x00, 0xa7, 0x1c, 0x1a, 0xad, 0xe4, 0x4b, 0xf8, 0x42,
+     0x5b, 0xec, 0x0d, 0xeb, 0x61, 0x1c, 0x20, 0xb1, 0x6d, 0xa3, 0x44, 0x28, 0x18, 0xef, 0x20, 0x48, 0x9c, 0xa1, 0xe2, 0x51, 0x2b, 0xe4,
+     0x3e, 0xef, 0x81, 0x4c, 0xdb, 0x52, 0xf0, 0xff, 0x0f, 0x1e, 0xdb, 0xf7, 0x01, 0x00
      };
 
-    //result is                                               239a85fb2092e8b686d758918ab32c956029456c1d3e97a3f260913228773322
-    //expected result with proper endianity and formatting is 000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343
-
-    REQUIRE(HashX11<const unsigned char*>(b1_header, 88).ToString().compare("239a85fb2092e8b686d758918ab32c956029456c1d3e97a3f260913228773322") == 0);
+    REQUIRE(HashX11<const unsigned char*>(b1_header, 80).ToString().compare("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343") == 0);
     }
 }
 
@@ -97,6 +94,7 @@ TEST_CASE("Blockchain tests")
         file.close();
 
         Blockchain chain(FILE_NAME);
+        chain.parseFile();
 
         Block block = chain.getBlocks()[0];
 
@@ -157,6 +155,8 @@ TEST_CASE("Blockchain tests")
         file.close();
 
         Blockchain chain(FILE_NAME);
+        chain.parseFile();
+
 
         Block block1 = chain.getBlocks()[0];
         Block block2 = chain.getBlocks()[1];
@@ -199,14 +199,9 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 3);
         file.close();
 
-        try
-        {
-            Blockchain chain(FILE_NAME);
-        }
-        catch(std::exception& ex)
-        {
-            REQUIRE(strcmp(ex.what(), "Reading magic number from file was not succesfull") == 0);
-        }
+
+        Blockchain chain(FILE_NAME);
+        REQUIRE_THROWS_WITH(chain.parseFile(), "Reading magic number from the file was not succesfull");
     }
 
 
@@ -222,14 +217,8 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 4);
         file.close();
 
-        try
-        {
-            Blockchain chain(FILE_NAME);
-        }
-        catch(std::exception& ex)
-        {
-            REQUIRE(strcmp(ex.what(), "File does not start with magic number") == 0);
-        }
+        Blockchain chain(FILE_NAME);
+        REQUIRE_THROWS_AS(chain.parseFile(), MagicNumberException);
     }
 
 
@@ -245,14 +234,8 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 5);
         file.close();
 
-        try
-        {
-            Blockchain chain(FILE_NAME);
-        }
-        catch(std::exception& ex)
-        {
-            REQUIRE(strcmp(ex.what(), "Reading size of block from file was not succesfull") == 0);
-        }
+        Blockchain chain(FILE_NAME);
+        REQUIRE_THROWS_WITH(chain.parseFile(), "Reading size of the block from the file was not succesfull");
     }
 
 
@@ -268,14 +251,8 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 8);
         file.close();
 
-        try
-        {
-            Blockchain chain(FILE_NAME);
-        }
-        catch(std::exception& ex)
-        {
-            REQUIRE(strcmp(ex.what(), "Block size is invalid") == 0);
-        }
+        Blockchain chain(FILE_NAME);
+        REQUIRE_THROWS_AS(chain.parseFile(), InvalidBlockSizeException);
     }
 
 
@@ -291,14 +268,8 @@ TEST_CASE("Blockchain tests")
         file.write(reinterpret_cast<const char*>(test_blocks), 9);
         file.close();
 
-        try
-        {
-            Blockchain chain(FILE_NAME);
-        }
-        catch(std::exception& ex)
-        {
-            REQUIRE(strcmp(ex.what(), "Reading content of block from file was not succesfull") == 0);
-        }
+        Blockchain chain(FILE_NAME);
+        REQUIRE_THROWS_WITH(chain.parseFile(), "Reading content of block from file was not succesfull");
     }
 }
 
@@ -310,9 +281,10 @@ TEST_CASE("ParseVarLength tests")
     const unsigned char len_buffer[] = { 0x57 };
 
     uint8_t expectedValue = 0x57;
-    uint8_t actualValue = ParseVarLength(len_buffer);
+    varInt actualValue = ParseVarLength(len_buffer);
 
-    REQUIRE(expectedValue == actualValue);
+    REQUIRE(expectedValue == actualValue.first);
+    REQUIRE(actualValue.second == 1); //1 byte
     }
 
 
@@ -321,9 +293,10 @@ TEST_CASE("ParseVarLength tests")
     const unsigned char len_buffer[] = { 0xFD, 0xFC, 0x8A };
 
     uint16_t expectedValue = 0x8AFC;
-    uint16_t actualValue = ParseVarLength(len_buffer);
+    varInt actualValue = ParseVarLength(len_buffer);
 
-    REQUIRE(expectedValue == actualValue);
+    REQUIRE(expectedValue == actualValue.first);
+    REQUIRE(actualValue.second == 2); //2 bytes
     }
 
 
@@ -332,9 +305,10 @@ TEST_CASE("ParseVarLength tests")
     const unsigned char len_buffer[] = { 0xFE, 0xFF, 0xFF, 0xFF, 0xFF };
 
     uint32_t expectedValue = 0xFFFFFFFF;
-    uint32_t actualValue = ParseVarLength(len_buffer);
+    varInt actualValue = ParseVarLength(len_buffer);
 
-    REQUIRE(expectedValue == actualValue);
+    REQUIRE(expectedValue == actualValue.first);
+    REQUIRE(actualValue.second == 4); //4 bytes
     }
 
 
@@ -343,9 +317,10 @@ TEST_CASE("ParseVarLength tests")
     const unsigned char len_buffer[] = { 0xFF, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00};
 
     uint64_t expectedValue = 0x100000000;
-    uint64_t actualValue = ParseVarLength(len_buffer);
+    varInt actualValue = ParseVarLength(len_buffer);
 
-    REQUIRE(expectedValue == actualValue);
+    REQUIRE(expectedValue == actualValue.first);
+    REQUIRE(actualValue.second == 8); //8 bytes
     }
 }
 

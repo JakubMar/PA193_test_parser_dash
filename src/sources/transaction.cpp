@@ -1,5 +1,32 @@
 #include "transaction.h"
 
+Transaction::Transaction(const char *buffer, uint32_t &globalOffset)
+{
+    uint32_t localOffset = 0;
+
+    version = ParseUint32(buffer);
+    localOffset += VERSION_SIZE;
+
+    varInt txInCount = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer + localOffset));
+    localOffset += txInCount.second;
+    for(size_t i = 0; i < txInCount.first; ++i)
+    {
+        //inTrans.emplace_back(TxIn(buffer+localOffset, localOffset));
+    }
+
+    varInt txOutCount = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer + localOffset));
+    localOffset += txOutCount.second;
+    for(size_t i = 0; i < txOutCount.first; ++i)
+    {
+       // outTrans.emplace_back(TxOut(buffer+localOffset, localOffset));
+    }
+
+    lockTime = ParseUint32(buffer);
+    localOffset += TIME_SIZE;
+
+    globalOffset += localOffset;
+}
+
 std::ostream& operator<<(std::ostream& stream, const Transaction& t)
 {
     stream << "-------TRANSACTION-------: " << std::endl;
@@ -17,3 +44,4 @@ std::ostream& operator<<(std::ostream& stream, const Transaction& t)
 
     return stream;
 }
+

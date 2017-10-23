@@ -15,11 +15,12 @@ int main()
     {
         std::string fileName = "./blocks.bin";
         std::unique_ptr<Blockchain> tmpChain(new Blockchain(fileName));
+        tmpChain->parseFile();
         chain = std::move(tmpChain);
     }
-    catch(exception& ex)
+    catch(ParserException& ex)
     {
-        cout << ex.what();
+        cout << ex.what() << endl;
         return 1;
     }
 

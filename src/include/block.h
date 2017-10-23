@@ -4,10 +4,7 @@
 #include "common.h"
 #include "transaction.h"
 
-const uint32_t VERSION_SIZE = 4;
-const uint32_t HASH_SIZE = 32;
 const uint32_t MERKLE_ROOT_SIZE = 32;
-const uint32_t TIME_SIZE = 4;
 const uint32_t BITS_SIZE = 4;
 const uint32_t NONCE_SIZE = 4;
 const uint32_t BLOCK_HEADER_SIZE = VERSION_SIZE + HASH_SIZE + MERKLE_ROOT_SIZE + TIME_SIZE + BITS_SIZE + NONCE_SIZE;

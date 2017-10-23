@@ -5,11 +5,13 @@ QMAKE_CXXFLAGS += -std=c++11
 TARGET = parser
 TEMPLATE = app
 
-INCLUDEPATH += include/ include/third/ include/third/crypto
+INCLUDEPATH += include/ include/third/ include/third/crypto include/Exceptions/
 
 HEADERS += $$files(include/*.h) \
            $$files(include/third/*.h) \
            $$files(include/third/crypto/*.h) \
+           $$files(include/Exceptions/*.h) \
+             include/osx/endian.h \
 
 SOURCES += $$files(sources/*.cpp) \
            $$files(sources/third/*.cpp) \

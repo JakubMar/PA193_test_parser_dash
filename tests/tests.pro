@@ -5,7 +5,7 @@ QMAKE_CXXFLAGS += -std=c++11
 
 TARGET = tests
 TEMPLATE = app
-INCLUDEPATH += ../src/include/ ../src/include/third/ ../src/include/third/crypto
+INCLUDEPATH += ../src/include/ ../src/include/third/ ../src/include/third/crypto ../src/include/Exceptions
 
 #These 2 lines should work :(
 #LIBS += ../build/release/src/.obj/*.o

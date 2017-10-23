@@ -23,6 +23,13 @@ Block::Block(const char* buffer, uint32_t size) : nSize(size)
 
     nNonce = ParseUint32(buffer + offset);
     offset += NONCE_SIZE;
+
+    /*varInt countTx = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer+offset));
+    offset += countTx.second;
+    for(size_t i = 0; i < countTx.first; ++i)
+    {
+        nTx.emplace_back(Transaction(buffer, offset));
+    }*/
 }
 
 std::ostream& operator<< (std::ostream& stream, const Block& block)

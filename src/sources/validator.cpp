@@ -1,11 +1,11 @@
 #include "validator.h"
 
-static bool Validator::validateBlockChain(const Blockchain &chain){
+bool Validator::validateBlockChain(const Blockchain &chain){
 
     return false;
 }
 
-static bool Validator::validateBlock(const Block &head, const Block &predecessor){
+bool Validator::validateBlock(const Block &head, const Block &predecessor){
 
     //previous block header hash
     if(!verifyPreviousBlocHash(head,predecessor)) return false;
@@ -22,7 +22,7 @@ static bool Validator::validateBlock(const Block &head, const Block &predecessor
     return true;
 }
 
-static bool Validator::validateTransactions(const Block &block){
+bool Validator::validateTransactions(const Block &block){
 
     const std::vector<Transaction> &transactions = block.nTx;
 
@@ -48,30 +48,30 @@ static bool Validator::validateTransactions(const Block &block){
     }
 }
 
-static bool Validator::validateTransaction(const Transaction &transaction){
+bool Validator::validateTransaction(const Transaction &transaction){
     //apply "tx" checks 2-4
 }
 
-static bool Validator::timestampNotTooOld(const Block &block){
+bool Validator::timestampNotTooOld(const Block &block){
     return false;
 }
-static bool Validator::verifyPreviousBlocHash(const Block &head, const Block &predecessor){
+bool Validator::verifyPreviousBlocHash(const Block &head, const Block &predecessor){
     return false;
 }
-static bool Validator::verifyMerkleHash(const Block &block){
+bool Validator::verifyMerkleHash(const Block &block){
     return false;
 }
-static bool Validator::satisfyProofOfWork(const Block &block){
-    return false;
-}
-
-static bool Validator::transactionListNonempty(const std::vector<Transaction> &tx){
+bool Validator::satisfyProofOfWork(const Block &block){
     return false;
 }
 
-static bool Validator::isCoinbase(const Transaction &transaction){
+bool Validator::transactionListNonempty(const std::vector<Transaction> &tx){
     return false;
 }
-static bool Validator::isCoinbaseCorrectScriptSigLen(const Transaction &transaction){
+
+bool Validator::isCoinbase(const Transaction &transaction){
+    return false;
+}
+bool Validator::isCoinbaseCorrectScriptSigLen(const Transaction &transaction){
     return false;
 }

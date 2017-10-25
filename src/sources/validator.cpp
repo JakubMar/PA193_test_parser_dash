@@ -33,7 +33,7 @@ bool Validator::validateTransactions(const Block &block){
     if(!isCoinbase(transactions.at(0))) return false;
 
     //other transactions not coinbase
-    for(std::vector<Transaction>::iterator it = (++transactions.begin()); it != transactions.end(); ++it){
+    for(auto it = (++transactions.begin()); it != transactions.end(); ++it){
         if(isCoinbase(*it)) return false;
     }
 
@@ -43,7 +43,7 @@ bool Validator::validateTransactions(const Block &block){
 
 
     //validate all transactions
-    for(std::vector<Transaction>::iterator it = transactions.begin(); it != transactions.end(); ++it){
+    for(auto it = transactions.begin(); it != transactions.end(); ++it){
         if(!validateTransaction(*it)) return false;
     }
 }

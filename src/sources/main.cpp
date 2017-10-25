@@ -1,5 +1,6 @@
 #include <iostream>
 #include "blockchain.h"
+#include "validator.h"
 #include <fstream>
 
 using namespace std;

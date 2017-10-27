@@ -17,6 +17,13 @@ TxOut::TxOut(const char *buffer, uint32_t& globalOffset)
     globalOffset += localOffset;
 }
 
+
+const uint64_t TxOut::GetValue() const
+{
+    return value;
+}
+
+
 std::ostream& operator<< (std::ostream& stream, const TxOut& tout)
 {
     stream << "----------TxOut----------: " << std::endl;

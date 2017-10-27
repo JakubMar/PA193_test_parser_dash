@@ -31,6 +31,13 @@ TxIn::TxIn(const char *buffer, uint32_t &globalOffset)
     globalOffset += localOff;
 }
 
+
+const uint32_t TxIn::GetSeqNumber() const
+{
+    return seqNumber;
+}
+
+
 std::ostream& operator<< (std::ostream& stream, const TxIn& tin)
 {
     stream << "----------TxIn----------: " << std::endl;

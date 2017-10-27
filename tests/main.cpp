@@ -53,23 +53,22 @@ TEST_CASE("Block tests")
         uint32_t expectedNonce = 128987;
         uint32_t expectedSize = 186;
 
-        //TODO - modify constructor according to current structure
-//        Block block(reinterpret_cast<const char*>(test_block), 186);
+        Block block(reinterpret_cast<const char*>(test_block), 186);
 
-//        REQUIRE(block.nVersion == expectedVersion);
-//        REQUIRE(block.hashPrevBlock.ToString() == expectedHashPrevBlock);
-//        REQUIRE(block.hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-//        REQUIRE(block.nTime == expectedTime);
-//        REQUIRE(block.nBits == expectedBits);
-//        REQUIRE(block.nNonce == expectedNonce);
-//        REQUIRE(block.nSize == expectedSize);
+        REQUIRE(block.nVersion == expectedVersion);
+        REQUIRE(block.hashPrevBlock.ToString() == expectedHashPrevBlock);
+        REQUIRE(block.hashMerkleRoot.ToString() == expectedHashMerkleRoot);
+        REQUIRE(block.nTime == expectedTime);
+        REQUIRE(block.nBits == expectedBits);
+        REQUIRE(block.nNonce == expectedNonce);
+        REQUIRE(block.nSize == expectedSize);
     }
 }
 
 
 TEST_CASE("Blockchain tests")
 {
-    SECTION("One valid block") {
+    SECTION("One valid block with one transaction") {
 
         //block #1 with everything
         const unsigned char test_block[] = {
@@ -97,7 +96,7 @@ TEST_CASE("Blockchain tests")
         Blockchain chain(FILE_NAME);
         chain.parseFile();
 
-        uint32_t expectedVersion = 2;
+        uint32_t expectedBlockVersion = 2;
         std::string expectedHashPrevBlock = "00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6";
         std::string expectedHashMerkleRoot = "ef3ee42b51e2a19c4820ef182844a36db1201c61eb0dec5b42f84be4ad1a1ca7";
         uint32_t expectedTime = 1390103681;
@@ -105,17 +104,95 @@ TEST_CASE("Blockchain tests")
         uint32_t expectedNonce = 128987;
         uint32_t expectedSize = 186;
 
-        REQUIRE(chain.getBlocks()[0].nVersion == expectedVersion);
+        uint32_t expectedTransactionVersion = 1;
+        uint32_t expectedLockTime = 0;
+
+        REQUIRE(chain.getBlocks()[0].nVersion == expectedBlockVersion);
         REQUIRE(chain.getBlocks()[0].hashPrevBlock.ToString() == expectedHashPrevBlock);
         REQUIRE(chain.getBlocks()[0].hashMerkleRoot.ToString() == expectedHashMerkleRoot);
         REQUIRE(chain.getBlocks()[0].nTime == expectedTime);
         REQUIRE(chain.getBlocks()[0].nBits == expectedBits);
         REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
         REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
+        REQUIRE(chain.getBlocks()[0].nTx.size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetVersion() == expectedTransactionVersion);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetLockTime() == expectedLockTime);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs()[0].GetValue() == 500);
     }
 
 
-    SECTION("Two valid blocks") {
+    SECTION("One valid block with two transactions") {
+
+        //block #1 with everything
+        const unsigned char test_block[] = {
+            0xbf, 0x0c, 0x6b, 0xbd, 0x23, 0x01, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xB6, 0x7A, 0x40, 0xF3,
+            0xCD, 0x58, 0x04, 0x43, 0x7A, 0x10, 0x8F, 0x10, 0x55, 0x33, 0x73, 0x9C, 0x37, 0xE6, 0x22, 0x9B,
+            0xC1, 0xAD, 0xCA, 0xB3, 0x85, 0x14, 0x0B, 0x59, 0xFD, 0x0F, 0x00, 0x00, 0xA7, 0x1C, 0x1A, 0xAD,
+            0xE4, 0x4B, 0xF8, 0x42, 0x5B, 0xEC, 0x0D, 0xEB, 0x61, 0x1C, 0x20, 0xB1, 0x6D, 0xA3, 0x44, 0x28,
+            0x18, 0xEF, 0x20, 0x48, 0x9C, 0xA1, 0xE2, 0x51, 0x2B, 0xE4, 0x3E, 0xEF, 0x81, 0x4C, 0xDB, 0x52,
+            0xF0, 0xFF, 0x0F, 0x1E, 0xDB, 0xF7, 0x01, 0x00, 0x02, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF,
+            0xFF, 0xFF, 0x0A, 0x51, 0x01, 0x01, 0x06, 0x2F, 0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF,
+            0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00, 0x00, 0x00, 0x23, 0x21, 0x03, 0xA6, 0x98, 0x50,
+            0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8, 0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7,
+            0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24, 0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00,
+            0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0A, 0x51, 0x01, 0x01, 0x06, 0x2F,
+            0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00,
+            0x00, 0x00, 0x23, 0x21, 0x03, 0xA6, 0x98, 0x50, 0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8,
+            0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
+            0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00, 0x00, 0x00
+        };
+
+        const std::string FILE_NAME =  "./blockchainTest1.bin";
+
+        std::ofstream file(FILE_NAME);
+        file.write(reinterpret_cast<const char*>(test_block), 299);
+        file.close();
+
+        Blockchain chain(FILE_NAME);
+        chain.parseFile();
+
+        uint32_t expectedBlockVersion = 2;
+        std::string expectedHashPrevBlock = "00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6";
+        std::string expectedHashMerkleRoot = "ef3ee42b51e2a19c4820ef182844a36db1201c61eb0dec5b42f84be4ad1a1ca7";
+        uint32_t expectedTime = 1390103681;
+        uint32_t expectedBits = 504365040;
+        uint32_t expectedNonce = 128987;
+        uint32_t expectedSize = 291;
+
+        uint32_t expectedTransactionVersion = 1;
+        uint32_t expectedLockTime = 0;
+
+        REQUIRE(chain.getBlocks()[0].nVersion == expectedBlockVersion);
+        REQUIRE(chain.getBlocks()[0].hashPrevBlock.ToString() == expectedHashPrevBlock);
+        REQUIRE(chain.getBlocks()[0].hashMerkleRoot.ToString() == expectedHashMerkleRoot);
+        REQUIRE(chain.getBlocks()[0].nTime == expectedTime);
+        REQUIRE(chain.getBlocks()[0].nBits == expectedBits);
+        REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
+        REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
+        REQUIRE(chain.getBlocks()[0].nTx.size() == 2);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetVersion() == expectedTransactionVersion);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetLockTime() == expectedLockTime);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs()[0].GetValue() == 500);
+        REQUIRE(chain.getBlocks()[0].nTx[1].GetVersion() == expectedTransactionVersion);
+        REQUIRE(chain.getBlocks()[0].nTx[1].GetLockTime() == expectedLockTime);
+        REQUIRE(chain.getBlocks()[0].nTx[1].GetInputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[1].GetOutputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[1].GetInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(chain.getBlocks()[0].nTx[1].GetOutputs()[0].GetValue() == 500);
+    }
+
+
+    SECTION("Two valid blocks with one transaction each") {
 
         //2 * block #1 with everything
         const unsigned char test_blocks[] = {
@@ -164,6 +241,9 @@ TEST_CASE("Blockchain tests")
         uint32_t expectedNonce = 128987;
         uint32_t expectedSize = 186;
 
+        uint32_t expectedTransactionVersion = 1;
+        uint32_t expectedLockTime = 0;
+
         REQUIRE(chain.getBlocks()[0].nVersion == expectedVersion);
         REQUIRE(chain.getBlocks()[0].hashPrevBlock.ToString() == expectedHashPrevBlock);
         REQUIRE(chain.getBlocks()[0].hashMerkleRoot.ToString() == expectedHashMerkleRoot);
@@ -171,6 +251,13 @@ TEST_CASE("Blockchain tests")
         REQUIRE(chain.getBlocks()[0].nBits == expectedBits);
         REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
         REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
+        REQUIRE(chain.getBlocks()[0].nTx.size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetVersion() == expectedTransactionVersion);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetLockTime() == expectedLockTime);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs()[0].GetValue() == 500);
 
         REQUIRE(chain.getBlocks()[1].nVersion == expectedVersion);
         REQUIRE(chain.getBlocks()[1].hashPrevBlock.ToString() == expectedHashPrevBlock);
@@ -179,6 +266,13 @@ TEST_CASE("Blockchain tests")
         REQUIRE(chain.getBlocks()[1].nBits == expectedBits);
         REQUIRE(chain.getBlocks()[1].nNonce == expectedNonce);
         REQUIRE(chain.getBlocks()[1].nSize == expectedSize);
+        REQUIRE(chain.getBlocks()[1].nTx.size() == 1);
+        REQUIRE(chain.getBlocks()[1].nTx[0].GetVersion() == expectedTransactionVersion);
+        REQUIRE(chain.getBlocks()[1].nTx[0].GetLockTime() == expectedLockTime);
+        REQUIRE(chain.getBlocks()[1].nTx[0].GetInputs().size() == 1);
+        REQUIRE(chain.getBlocks()[1].nTx[0].GetOutputs().size() == 1);
+        REQUIRE(chain.getBlocks()[1].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(chain.getBlocks()[1].nTx[0].GetOutputs()[0].GetValue() == 500);
     }
 
 
@@ -316,6 +410,68 @@ TEST_CASE("ParseVarLength tests")
 
         REQUIRE(expectedValue == actualValue.first);
         REQUIRE(actualValue.second == 8); //8 bytes
+    }
+}
+
+
+TEST_CASE("Transaction parse tests")
+{
+    SECTION("Valid transaction")
+    {
+        const unsigned char test_transaction[] = {
+         /*0x01,*/0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0A, 0x51, 0x01, 0x01, 0x06, 0x2F,
+            0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00,
+            0x00, 0x00, 0x23, 0x21, 0x03, 0xA6, 0x98, 0x50, 0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8,
+            0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
+            0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00, 0x00, 0x00
+        };
+
+        uint32_t expectedTransactionVersion = 1;
+        uint32_t expectedLockTime = 0;
+        uint32_t globalOffSet = 0;
+
+        Transaction transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet);
+
+        REQUIRE(transaction.GetVersion() == expectedTransactionVersion);
+        REQUIRE(transaction.GetLockTime() == expectedLockTime);
+        REQUIRE(transaction.GetInputs().size() == 1);
+        REQUIRE(transaction.GetOutputs().size() == 1);
+        REQUIRE(transaction.GetInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction.GetOutputs()[0].GetValue() == 500);
+    }
+
+
+    SECTION("Transaction with invalid length of input")
+    {
+        const unsigned char test_transaction[] = {
+         /*0x01,*/0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0B, /* <- length*/ 0x51, 0x01, 0x01, 0x06, 0x2F,
+            0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00,
+            0x00, 0x00, 0x23, 0x21, 0x03, 0xA6, 0x98, 0x50, 0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8,
+            0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
+            0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00, 0x00, 0x00
+        };
+
+        REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet), InvalidTransactionSizeException);
+    }
+
+
+    SECTION("Transaction with invalid length of output")
+    {
+        const unsigned char test_transaction[] = {
+         /*0x01,*/0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0A, 0x51, 0x01, 0x01, 0x06, 0x2F,
+            0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00,
+            0x00, 0x00, 0x24, /* <- length*/ 0x21, 0x03, 0xA6, 0x98, 0x50, 0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8,
+            0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
+            0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00, 0x00, 0x00
+        };
+
+        REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet), InvalidTransactionSizeException);
     }
 }
 

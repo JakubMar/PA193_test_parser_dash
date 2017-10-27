@@ -11,6 +11,7 @@ private:
     //std::unique_ptr<char[]> script;
 public:
     TxOut(const char* buffer, uint32_t& globalOffset);
+    const uint64_t GetValue() const;
 
     friend std::ostream& operator<< (std::ostream& stream, const TxOut& tout);
 };

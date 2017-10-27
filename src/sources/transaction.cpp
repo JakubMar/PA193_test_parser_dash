@@ -28,9 +28,34 @@ Transaction::Transaction(const char *buffer, uint32_t &globalOffset) : beginEndO
     globalOffset += localOffset;
 }
 
+
 const offsets Transaction::GetOffsets() const
 {
     return beginEndOffsets;
+}
+
+
+const uint32_t Transaction::GetVersion() const
+{
+    return version;
+}
+
+
+const std::vector<TxIn>& Transaction::GetInputs() const
+{
+    return inTrans;
+}
+
+
+const std::vector<TxOut>& Transaction::GetOutputs() const
+{
+    return outTrans;
+}
+
+
+const uint32_t Transaction::GetLockTime() const
+{
+    return lockTime;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Transaction& t)

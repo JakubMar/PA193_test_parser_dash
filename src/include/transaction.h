@@ -16,4 +16,5 @@ private:
 public:
     Transaction(const char* buffer, uint32_t& globalOffset);
     friend std::ostream& operator<<(std::ostream& stream, const Transaction& t);
+    const offsets GetOffsets() const;
 };

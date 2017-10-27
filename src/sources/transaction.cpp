@@ -28,6 +28,11 @@ Transaction::Transaction(const char *buffer, uint32_t &globalOffset) : beginEndO
     globalOffset += localOffset;
 }
 
+const offsets Transaction::GetOffsets() const
+{
+    return beginEndOffsets;
+}
+
 std::ostream& operator<<(std::ostream& stream, const Transaction& t)
 {
     stream << "-------TRANSACTION-------: " << std::endl;

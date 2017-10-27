@@ -11,7 +11,7 @@ Blockchain::Blockchain(std::string fileName)
     }
 }
 
-const std::vector<Block>& Blockchain::getBlocks()
+const std::vector<Block>& Blockchain::getBlocks() const
 {
     return nBlocks;
 }

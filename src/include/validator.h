@@ -2,6 +2,7 @@
 
 #include <ctime>
 
+#include "hash.h"
 #include <block.h>
 #include <blockchain.h>
 #include <transaction.h>

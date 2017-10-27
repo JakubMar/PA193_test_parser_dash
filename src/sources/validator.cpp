@@ -6,7 +6,7 @@ bool Validator::validateBlockChain(const Blockchain &chain){
 
     for(auto it = ++blocks.begin(); it < blocks.end(); ++it) {
         //first block is not validated at all in this construction
-        if(!validateBlock(it,(it-1))) return false;
+        if(!validateBlock(*it,*(it-1))) return false;
     }
 
     return true;
@@ -63,7 +63,7 @@ bool Validator::timestampNotTooNew(const Block &block){
 
     const uint32_t twoHoursInSeconds = 2*60*60;
 
-    uint32_t currentTime = static_cast<uint32_t> time();
+    uint32_t currentTime = static_cast<uint32_t>(time(NULL));
 
     uint32_t blockTime = block.nTime;
 
@@ -98,9 +98,8 @@ bool Validator::isCoinbaseCorrectScriptSigLen(const Transaction &transaction){
 uint256 Validator::hashBlock(const Block &block){
 
     //this is a bit dirty trick
-    const unsigned char* ptr = block.binBuffer.get();
+    const unsigned char* ptr = reinterpret_cast<const unsigned char*>(block.binBuffer.get());
     ptr += block.beginEndOffsets.first;
-
 
     //correct hashing is strongly dependent on correct offsets - otherwise it all goes bye bye
     return HashX11<const unsigned char*>(ptr,block.beginEndOffsets.second-block.beginEndOffsets.first);
@@ -117,9 +116,9 @@ uint256 Validator::computeMerkleHash(const Block &block){
 
     //fill hashes for first round
     for(int i = 0; i < baseNoPadding; ++i){
-        const unsigned char* ptr = block.binBuffer.get();
-        ptr += transactions.at(i).beginEndOffsets.first;
-        uint64_t size = transactions.at(i).beginEndOffsets.second - transactions.at(i).beginEndOffsets.first;
+        const unsigned char* ptr = reinterpret_cast<const unsigned char*>(block.binBuffer.get());
+        ptr += transactions.at(i).GetOffsets().first;
+        uint64_t size = transactions.at(i).GetOffsets().second - transactions.at(i).GetOffsets().first;
         hashes[i] = HashX11<const unsigned char*>(ptr,size);
     }
 
@@ -130,7 +129,7 @@ uint256 Validator::computeMerkleHash(const Block &block){
     //actual computation
     while(actualSize != 1) {
         for(int i = 0, j=0; i < actualSize; i+=2,++j){
-            const uint256 sum = hashes[i] + hashes[i+1];
+            const uint256 sum; //hashes[i] + hashes[i+1];
             hashes[j] = HashX11<const uint256>(sum,sizeof(uint256));
         }
 

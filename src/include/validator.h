@@ -6,13 +6,15 @@
 #include <block.h>
 #include <blockchain.h>
 #include <transaction.h>
-
+#include "validatortestclass.h"
 
 class Validator
 {
 public:
     static bool validateBlockChain(const Blockchain &chain);
     static bool validateBlock(const Block &head, const Block &predecessor);
+
+    friend class ValidatorTestClass;
 
 private:
 
@@ -31,5 +33,4 @@ private:
 
     static uint256 hashBlock(const Block &block);
     static uint256 computeMerkleHash(const Block &block);
-
 };

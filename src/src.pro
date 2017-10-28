@@ -5,7 +5,7 @@ QMAKE_CXXFLAGS += -std=c++11
 TARGET = parser
 TEMPLATE = app
 
-INCLUDEPATH += include/ include/third/ include/third/crypto include/Exceptions/
+INCLUDEPATH += include/ include/third/ include/third/crypto include/Exceptions/ ../tests/
 
 HEADERS += $$files(include/*.h) \
            $$files(include/third/*.h) \

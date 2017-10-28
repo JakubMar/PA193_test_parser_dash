@@ -6,6 +6,7 @@
 #include <string>
 #include "hash.h"
 #include "blockchain.h"
+#include "validator.h"
 
 
 TEST_CASE("Hash tests")
@@ -455,6 +456,8 @@ TEST_CASE("Transaction parse tests")
             0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00, 0x00, 0x00
         };
 
+        uint32_t globalOffSet = 0;
+
         REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet), InvalidTransactionSizeException);
     }
 
@@ -470,6 +473,8 @@ TEST_CASE("Transaction parse tests")
             0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
             0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00, 0x00, 0x00
         };
+
+        uint32_t globalOffSet = 0;
 
         REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet), InvalidTransactionSizeException);
     }

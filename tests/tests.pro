@@ -16,7 +16,8 @@ INCLUDEPATH += ../src/include/ ../src/include/third/ ../src/include/third/crypto
 
 
 SOURCES += main.cpp
-HEADERS += catch.hpp
+HEADERS += catch.hpp \
+    validatortestclass.h
 
 CONFIG(debug, debug|release) {
     DESTDIR = ../build/debug/tests

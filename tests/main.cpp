@@ -55,15 +55,18 @@ TEST_CASE("Block tests")
         uint32_t expectedNonce = 128987;
         uint32_t expectedSize = 186;
 
-//        Block block(reinterpret_cast<const char*>(test_block), 186);
+        std::unique_ptr<char[]> binBuffer = std::unique_ptr<char[]>(new char[186]);
+        memcpy(binBuffer.get(), test_block, 186);
 
-//        REQUIRE(block.nVersion == expectedVersion);
-//        REQUIRE(block.hashPrevBlock.ToString() == expectedHashPrevBlock);
-//        REQUIRE(block.hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-//        REQUIRE(block.nTime == expectedTime);
-//        REQUIRE(block.nBits == expectedBits);
-//        REQUIRE(block.nNonce == expectedNonce);
-//        REQUIRE(block.nSize == expectedSize);
+        Block block(std::move(binBuffer), 186);
+
+        REQUIRE(block.nVersion == expectedVersion);
+        REQUIRE(block.hashPrevBlock.ToString() == expectedHashPrevBlock);
+        REQUIRE(block.hashMerkleRoot.ToString() == expectedHashMerkleRoot);
+        REQUIRE(block.nTime == expectedTime);
+        REQUIRE(block.nBits == expectedBits);
+        REQUIRE(block.nNonce == expectedNonce);
+        REQUIRE(block.nSize == expectedSize);
     }
 }
 
@@ -558,16 +561,16 @@ TEST_CASE("Validator tests")
             };
 
 
-//            Block head = TestHelper::CreateEmptyBlockObject();
-//            Block predecessor = TestHelper::CreateEmptyBlockObject();
+            Block head = TestHelper::CreateEmptyBlockObject();
+            Block predecessor = TestHelper::CreateEmptyBlockObject();
 
-//            predecessor.binBuffer = (reinterpret_cast<const char*>(test_block));
-//            predecessor.beginEndOffsets.first = 0;
-//            predecessor.beginEndOffsets.second = 80;
+            memcpy(predecessor.binBuffer.get(), test_block, 80);
+            predecessor.beginEndOffsets.first = 0;
+            predecessor.beginEndOffsets.second = 80;
 
-//            head.hashPrevBlock.SetHex("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
+            head.hashPrevBlock.SetHex("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
 
-//            REQUIRE(TestHelper::verifyPreviousBlocHash(head, predecessor) == true);
+            REQUIRE(TestHelper::verifyPreviousBlocHash(head, predecessor) == true);
         }
 
 

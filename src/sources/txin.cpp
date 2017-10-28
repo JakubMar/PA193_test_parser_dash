@@ -32,7 +32,7 @@ TxIn::TxIn(const char *buffer, uint32_t &globalOffset)
 }
 
 
-const uint32_t TxIn::GetSeqNumber() const
+uint32_t TxIn::GetSeqNumber() const
 {
     return seqNumber;
 }

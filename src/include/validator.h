@@ -6,7 +6,6 @@
 #include <block.h>
 #include <blockchain.h>
 #include <transaction.h>
-#include "validatortestclass.h"
 
 class Validator
 {
@@ -14,7 +13,7 @@ public:
     static bool validateBlockChain(const Blockchain &chain);
     static bool validateBlock(const Block &head, const Block &predecessor);
 
-    friend class ValidatorTestClass;
+    friend class TestHelper;
 
 private:
 

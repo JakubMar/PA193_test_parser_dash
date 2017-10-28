@@ -18,7 +18,7 @@ TxOut::TxOut(const char *buffer, uint32_t& globalOffset)
 }
 
 
-const uint64_t TxOut::GetValue() const
+uint64_t TxOut::GetValue() const
 {
     return value;
 }

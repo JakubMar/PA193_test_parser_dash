@@ -70,8 +70,8 @@ bool Validator::timestampNotTooNew(const Block &block){
     return (blockTime-twoHoursInSeconds)<currentTime;
 }
 bool Validator::verifyPreviousBlocHash(const Block &head, const Block &predecessor){
-    uint256 predecessorHash = hashBlock(predecessor);
 
+    uint256 predecessorHash = hashBlock(predecessor);
 
     return predecessorHash == head.hashPrevBlock;
 }
@@ -130,7 +130,7 @@ uint256 Validator::computeMerkleHash(const Block &block){
     while(actualSize != 1) {
         for(int i = 0, j=0; i < actualSize; i+=2,++j){
             const uint256 sum; //hashes[i] + hashes[i+1];
-            hashes[j] = HashX11<const uint256>(sum,sizeof(uint256));
+          //  hashes[j] = HashX11<const uint256>(sum,sizeof(uint256));
         }
 
         actualSize = actualSize/2;

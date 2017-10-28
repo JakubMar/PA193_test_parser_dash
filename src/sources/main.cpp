@@ -5,8 +5,6 @@
 
 using namespace std;
 
-
-
 int main()
 {
     std::cout << "Starting main" << std::endl;

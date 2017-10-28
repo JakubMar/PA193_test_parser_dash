@@ -1,5 +1,35 @@
 #include "transaction.h"
 
+void Transaction::setVersion(const uint32_t &value)
+{
+    version = value;
+}
+
+
+void Transaction::setInTrans(const std::vector<TxIn> &value)
+{
+    inTrans = value;
+}
+
+
+void Transaction::setOutTrans(const std::vector<TxOut> &value)
+{
+    outTrans = value;
+}
+
+
+void Transaction::setLockTime(const uint32_t &value)
+{
+    lockTime = value;
+}
+
+
+void Transaction::setBeginEndOffsets(const offsets &value)
+{
+    beginEndOffsets = value;
+}
+
+
 Transaction::Transaction(const char *buffer, uint32_t &globalOffset) : beginEndOffsets(offsets(0,0))
 {
     uint32_t localOffset = 0;
@@ -35,7 +65,7 @@ const offsets Transaction::GetOffsets() const
 }
 
 
-const uint32_t Transaction::GetVersion() const
+uint32_t Transaction::GetVersion() const
 {
     return version;
 }
@@ -53,7 +83,7 @@ const std::vector<TxOut>& Transaction::GetOutputs() const
 }
 
 
-const uint32_t Transaction::GetLockTime() const
+uint32_t Transaction::GetLockTime() const
 {
     return lockTime;
 }

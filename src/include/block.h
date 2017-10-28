@@ -21,6 +21,10 @@ public:
     std::unique_ptr<char[]> binBuffer;
 
     Block(std::unique_ptr<char[]> buffer, uint32_t size);
+    friend class TestHelper;
+
+private:
+    Block() {}
 };
 
 std::ostream& operator<< (std::ostream& stream, const Block& block);

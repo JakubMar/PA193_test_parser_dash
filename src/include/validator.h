@@ -33,3 +33,5 @@ private:
     static uint256 hashBlock(const Block &block);
     static uint256 computeMerkleHash(const Block &block);
 };
+
+

@@ -16,7 +16,8 @@ INCLUDEPATH += ../src/include/ ../src/include/third/ ../src/include/third/crypto
 
 
 SOURCES += main.cpp
-HEADERS += catch.hpp
+HEADERS += catch.hpp \
+    testhelper.h
 
 CONFIG(debug, debug|release) {
     DESTDIR = ../build/debug/tests
@@ -37,7 +38,8 @@ LIBS +=     ../build/debug/src/.obj/cubehash.o    \
             ../build/debug/src/.obj/blockchain.o  \
             ../build/debug/src/.obj/transaction.o \
             ../build/debug/src/.obj/txin.o        \
-            ../build/debug/src/.obj/txout.o
+            ../build/debug/src/.obj/txout.o       \
+            ../build/debug/src/.obj/validator.o
 
 
 } else {
@@ -59,7 +61,8 @@ LIBS +=     ../build/debug/src/.obj/cubehash.o    \
             ../build/release/src/.obj/blockchain.o  \
             ../build/release/src/.obj/transaction.o \
             ../build/release/src/.obj/txin.o        \
-            ../build/release/src/.obj/txout.o
+            ../build/release/src/.obj/txout.o       \
+            ../build/release/src/.obj/validator.o
 }
 
 OBJECTS_DIR = $$DESTDIR/.obj

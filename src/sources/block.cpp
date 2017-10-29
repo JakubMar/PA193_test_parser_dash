@@ -45,12 +45,13 @@ Block::Block(std::unique_ptr<char[]> buffer, uint32_t size) : nSize(size)
 
     headerOffsets = offsets(0,offset);
 
-    // possible out-of-bounds read ?
+    // Transactions
     varInt countTx = ParseVarLength(binBuffer.get()+offset, nSize - offset);
     offset += countTx.second;
+    size_t unread_size = nSize - offset;
     for(size_t i = 0; i < countTx.first; ++i)
     {
-        nTx.emplace_back(Transaction(binBuffer.get()+offset, offset, nSize - offset));
+        nTx.emplace_back(Transaction(binBuffer.get()+offset, offset, unread_size));
     }
 
 }

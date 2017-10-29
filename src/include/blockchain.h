@@ -23,7 +23,7 @@ private:
 
 public:
     
-    const std::vector<Block> &getBlocks();
+    const std::vector<Block> &getBlocks() const;
     
     Blockchain(std::string fileName);
 

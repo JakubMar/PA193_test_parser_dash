@@ -1,25 +1,25 @@
 #include "txout.h"
 #include "invalidtransactionsizeexcepion.h"
+#include "invalidscriptsizeexcepion.h"
 
 TxOut::TxOut(const char *buffer, uint32_t& globalOffset, size_t& unread_size)
 {
     //VALUE
     if(unread_size < VALUE_SIZE)
-        throw InvalidTransactionSizeException("TxOut1");
+        throw InvalidTransactionSizeException("TxOut: invalid read of Value");
     uint32_t localOffset = 0;
     value = ParseUint64(buffer);
     localOffset += VALUE_SIZE;
     unread_size -= VALUE_SIZE;
 
     //SCRIPT
-    varInt scriptLen = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer), unread_size);
+    varInt scriptLen = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer + localOffset), unread_size);
     localOffset += scriptLen.second;
     unread_size -= scriptLen.second;
 
     if(unread_size < scriptLen.first)
     {
-        std::cerr << "unread: " << unread_size << " scrptlen: " << scriptLen.first << std::endl; ////////////////debug print
-        throw InvalidTransactionSizeException("TxOut2");
+        throw InvalidScriptSizeException();
     }
 
 //    std::unique_ptr<char[]> tmpScript(new char[scriptLen.first]);

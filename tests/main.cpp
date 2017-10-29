@@ -119,12 +119,12 @@ TEST_CASE("Blockchain tests")
         REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
         REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
         REQUIRE(chain.getBlocks()[0].nTx.size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs()[0].GetValue() == 500);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getVersion() == expectedTransactionVersion);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getLockTime() == expectedLockTime);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs()[0].GetValue() == 50000000000);
     }
 
 
@@ -181,18 +181,18 @@ TEST_CASE("Blockchain tests")
         REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
         REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
         REQUIRE(chain.getBlocks()[0].nTx.size() == 2);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs()[0].GetValue() == 500);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetOutputs()[0].GetValue() == 500);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getVersion() == expectedTransactionVersion);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getLockTime() == expectedLockTime);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs()[0].GetValue() == 50000000000);
+        REQUIRE(chain.getBlocks()[0].nTx[1].getVersion() == expectedTransactionVersion);
+        REQUIRE(chain.getBlocks()[0].nTx[1].getLockTime() == expectedLockTime);
+        REQUIRE(chain.getBlocks()[0].nTx[1].getInputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[1].getOutputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[1].getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(chain.getBlocks()[0].nTx[1].getOutputs()[0].GetValue() == 50000000000);
     }
 
 
@@ -256,12 +256,12 @@ TEST_CASE("Blockchain tests")
         REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
         REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
         REQUIRE(chain.getBlocks()[0].nTx.size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs()[0].GetValue() == 500);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getVersion() == expectedTransactionVersion);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getLockTime() == expectedLockTime);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs().size() == 1);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs()[0].GetValue() == 50000000000);
 
         REQUIRE(chain.getBlocks()[1].nVersion == expectedVersion);
         REQUIRE(chain.getBlocks()[1].hashPrevBlock.ToString() == expectedHashPrevBlock);
@@ -271,12 +271,12 @@ TEST_CASE("Blockchain tests")
         REQUIRE(chain.getBlocks()[1].nNonce == expectedNonce);
         REQUIRE(chain.getBlocks()[1].nSize == expectedSize);
         REQUIRE(chain.getBlocks()[1].nTx.size() == 1);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetOutputs()[0].GetValue() == 500);
+        REQUIRE(chain.getBlocks()[1].nTx[0].getVersion() == expectedTransactionVersion);
+        REQUIRE(chain.getBlocks()[1].nTx[0].getLockTime() == expectedLockTime);
+        REQUIRE(chain.getBlocks()[1].nTx[0].getInputs().size() == 1);
+        REQUIRE(chain.getBlocks()[1].nTx[0].getOutputs().size() == 1);
+        REQUIRE(chain.getBlocks()[1].nTx[0].getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(chain.getBlocks()[1].nTx[0].getOutputs()[0].GetValue() == 50000000000);
     }
 
 
@@ -439,21 +439,21 @@ TEST_CASE("Transaction parse tests")
         size_t unread = sizeof(test_transaction);
         Transaction transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet, unread);
 
-        REQUIRE(transaction.GetVersion() == expectedTransactionVersion);
-        REQUIRE(transaction.GetLockTime() == expectedLockTime);
-        REQUIRE(transaction.GetInputs().size() == 1);
-        REQUIRE(transaction.GetOutputs().size() == 1);
-        REQUIRE(transaction.GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(transaction.GetOutputs()[0].GetValue() == 500);
+        REQUIRE(transaction.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction.getLockTime() == expectedLockTime);
+        REQUIRE(transaction.getInputs().size() == 1);
+        REQUIRE(transaction.getOutputs().size() == 1);
+        REQUIRE(transaction.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction.getOutputs()[0].GetValue() == 50000000000);
     }
 
 
     SECTION("Transaction with invalid length of input")
     {
         const unsigned char test_transaction[] = {
-         /*0x01,*/0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         /*0x01,*/0x01, 0x00, 0x00, 0x00, 0x02, /* <- TxIn count 01->02*/  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0B, /* <- length*/ 0x51, 0x01, 0x01, 0x06, 0x2F,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0A, 0x51, 0x01, 0x01, 0x06, 0x2F,
             0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00,
             0x00, 0x00, 0x23, 0x21, 0x03, 0xA6, 0x98, 0x50, 0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8,
             0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
@@ -579,10 +579,11 @@ TEST_CASE("Simple validator tests")
 
             Block head = TestHelper::CreateEmptyBlockObject();
             Block predecessor = TestHelper::CreateEmptyBlockObject();
+            predecessor.binBuffer = std::unique_ptr<char[]>(new char[80]);
 
             memcpy(predecessor.binBuffer.get(), test_block, 80);
-            predecessor.beginEndOffsets.first = 0;
-            predecessor.beginEndOffsets.second = 80;
+            predecessor.headerOffsets.first = 0;
+            predecessor.headerOffsets.second = 80;
 
             head.hashPrevBlock.SetHex("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
 

@@ -119,8 +119,8 @@ uint256 Validator::computeMerkleHash(const Block &block){
     //fill hashes for first round
     for(int i = 0; i < baseNoPadding; ++i){
         const unsigned char* ptr = reinterpret_cast<const unsigned char*>(block.binBuffer.get());
-        ptr += transactions.at(i).GetOffsets().first;
-        uint64_t size = transactions.at(i).GetOffsets().second - transactions.at(i).GetOffsets().first;
+        ptr += transactions.at(i).getOffsets().first;
+        uint64_t size = transactions.at(i).getOffsets().second - transactions.at(i).getOffsets().first;
         hashes[i] = HashX11<const unsigned char*>(ptr,size);
     }
 

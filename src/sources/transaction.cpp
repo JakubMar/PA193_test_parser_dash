@@ -1,6 +1,6 @@
 #include "transaction.h"
 #include "invalidtransactionsizeexcepion.h"
-
+#include <iostream>
 
 Transaction::Transaction(const char *buffer, uint32_t &globalOffset, size_t &unread_size) : beginEndOffsets(offsets(0,0))
 {
@@ -19,7 +19,6 @@ Transaction::Transaction(const char *buffer, uint32_t &globalOffset, size_t &unr
     varInt txInCount = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer + localOffset), unread_size);
     localOffset += txInCount.second;
     unread_size -= txInCount.second;
-
     for(size_t i = 0; i < txInCount.first; ++i)
     {
         inTrans.emplace_back(TxIn(buffer+localOffset, localOffset, unread_size));
@@ -40,7 +39,7 @@ Transaction::Transaction(const char *buffer, uint32_t &globalOffset, size_t &unr
     {
         throw InvalidTransactionSizeException("Invalid read of Time");
     }
-    lockTime = ParseUint32(buffer);
+    lockTime = ParseUint32(buffer+localOffset);
     localOffset += TIME_SIZE;
     unread_size -= TIME_SIZE;
 
@@ -50,27 +49,27 @@ Transaction::Transaction(const char *buffer, uint32_t &globalOffset, size_t &unr
 }
 
 
-const offsets Transaction::GetOffsets() const
+const offsets Transaction::getOffsets() const
 {
     return beginEndOffsets;
 }
 
-uint32_t Transaction::GetVersion() const
+uint32_t Transaction::getVersion() const
 {
     return version;
 }
 
-const std::vector<TxIn>& Transaction::GetInputs() const
+const std::vector<TxIn>& Transaction::getInputs() const
 {
     return inTrans;
 }
 
-const std::vector<TxOut>& Transaction::GetOutputs() const
+const std::vector<TxOut>& Transaction::getOutputs() const
 {
     return outTrans;
 }
 
-uint32_t Transaction::GetLockTime() const
+uint32_t Transaction::getLockTime() const
 {
     return lockTime;
 }

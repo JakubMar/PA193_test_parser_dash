@@ -59,7 +59,6 @@ TEST_CASE("Block tests")
         memcpy(binBuffer.get(), test_block, 186);
 
         Block block(std::move(binBuffer), 186);
-
         REQUIRE(block.nVersion == expectedVersion);
         REQUIRE(block.hashPrevBlock.ToString() == expectedHashPrevBlock);
         REQUIRE(block.hashMerkleRoot.ToString() == expectedHashMerkleRoot);
@@ -375,7 +374,7 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0x57 };
 
         uint8_t expectedValue = 0x57;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 1);
 
         REQUIRE(expectedValue == actualValue.first);
         REQUIRE(actualValue.second == 1); //1 byte
@@ -387,10 +386,10 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0xFD, 0xFC, 0x8A };
 
         uint16_t expectedValue = 0x8AFC;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 3);
 
         REQUIRE(expectedValue == actualValue.first);
-        REQUIRE(actualValue.second == 2); //2 bytes
+        REQUIRE(actualValue.second == 3); //3 bytes
     }
 
 
@@ -399,10 +398,10 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0xFE, 0xFF, 0xFF, 0xFF, 0xFF };
 
         uint32_t expectedValue = 0xFFFFFFFF;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 5);
 
         REQUIRE(expectedValue == actualValue.first);
-        REQUIRE(actualValue.second == 4); //4 bytes
+        REQUIRE(actualValue.second == 5); //5 bytes
     }
 
 
@@ -411,10 +410,10 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0xFF, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00};
 
         uint64_t expectedValue = 0x100000000;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 9);
 
         REQUIRE(expectedValue == actualValue.first);
-        REQUIRE(actualValue.second == 8); //8 bytes
+        REQUIRE(actualValue.second == 9); //9 bytes
     }
 }
 
@@ -437,7 +436,8 @@ TEST_CASE("Transaction parse tests")
         uint32_t expectedLockTime = 0;
         uint32_t globalOffSet = 0;
 
-        Transaction transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet);
+        size_t unread = sizeof(test_transaction);
+        Transaction transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet, unread);
 
         REQUIRE(transaction.GetVersion() == expectedTransactionVersion);
         REQUIRE(transaction.GetLockTime() == expectedLockTime);
@@ -461,8 +461,8 @@ TEST_CASE("Transaction parse tests")
         };
 
         uint32_t globalOffSet = 0;
-
-        REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet), InvalidTransactionSizeException);
+        size_t unread = sizeof(test_transaction);
+        REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet, unread), InvalidTransactionSizeException);
     }
 
 
@@ -479,8 +479,8 @@ TEST_CASE("Transaction parse tests")
         };
 
         uint32_t globalOffSet = 0;
-
-        REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet), InvalidTransactionSizeException);
+        size_t unread = sizeof(test_transaction);
+        REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet, unread), InvalidTransactionSizeException);
     }
 }
 
@@ -555,10 +555,11 @@ TEST_CASE("Simple validator tests")
 
             Block head = TestHelper::CreateEmptyBlockObject();
             Block predecessor = TestHelper::CreateEmptyBlockObject();
+            predecessor.binBuffer = std::unique_ptr<char[]>(new char[80]);
 
             memcpy(predecessor.binBuffer.get(), test_block, 80);
-            predecessor.beginEndOffsets.first = 0;
-            predecessor.beginEndOffsets.second = 80;
+            predecessor.headerOffsets.first = 0;
+            predecessor.headerOffsets.second = 80;
 
             head.hashPrevBlock.SetHex("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
 

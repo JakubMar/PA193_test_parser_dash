@@ -53,10 +53,12 @@ bool Validator::validateTransactions(const Block &block){
     for(auto it = transactions.begin(); it != transactions.end(); ++it){
         if(!validateTransaction(*it)) return false;
     }
+    return true;
 }
 
 bool Validator::validateTransaction(const Transaction &transaction){
     //apply "tx" checks 2-4
+    return false;
 }
 
 bool Validator::timestampNotTooNew(const Block &block){
@@ -99,10 +101,10 @@ uint256 Validator::hashBlock(const Block &block){
 
     //this is a bit dirty trick
     const unsigned char* ptr = reinterpret_cast<const unsigned char*>(block.binBuffer.get());
-    ptr += block.beginEndOffsets.first;
+    ptr += block.headerOffsets.first;
 
     //correct hashing is strongly dependent on correct offsets - otherwise it all goes bye bye
-    return HashX11<const unsigned char*>(ptr,block.beginEndOffsets.second-block.beginEndOffsets.first);
+    return HashX11<const unsigned char*>(ptr,block.headerOffsets.second-block.headerOffsets.first);
 }
 
 uint256 Validator::computeMerkleHash(const Block &block){

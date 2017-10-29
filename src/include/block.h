@@ -17,7 +17,7 @@ public:
     uint32_t nSize;
     std::vector<Transaction> nTx;
 
-    offsets beginEndOffsets;
+    offsets headerOffsets;
     std::unique_ptr<char[]> binBuffer;
 
     Block(std::unique_ptr<char[]> buffer, uint32_t size);

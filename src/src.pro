@@ -1,6 +1,6 @@
 CONFIG += c++11
 CONFIG += console  
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++14
 
 TARGET = parser
 TEMPLATE = app

@@ -1,7 +1,7 @@
 CONFIG += c++11     
 CONFIG += console  
 CONFIG += testcase   
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++11
 
 TARGET = tests
 TEMPLATE = app

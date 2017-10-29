@@ -14,6 +14,6 @@ private:
     offsets beginEndOffsets;
 
 public:
-    Transaction(const char* buffer, uint32_t& globalOffset);
+    Transaction(const char* buffer, uint32_t& globalOffset, uint32_t unread_size);
     friend std::ostream& operator<<(std::ostream& stream, const Transaction& t);
 };

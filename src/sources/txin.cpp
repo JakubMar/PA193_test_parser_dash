@@ -1,30 +1,42 @@
 #include "txin.h"
-const uint32_t INDEX_SIZE = 4;
-const uint32_t SEQUENCE_NUM_SIZE = 4;
+#include "invalidtransactionsizeexcepion.h"
 
-TxIn::TxIn(const char *buffer, uint32_t &globalOffset)
+TxIn::TxIn(const char *buffer, uint32_t &globalOffset, size_t unread_size)
 {
     uint32_t localOff = 0;
 
     //HASH_PREV_TRANS
+    if(unread_size < HASH_SIZE)
+        throw InvalidTransactionSizeException();
     memcpy(&hashPrevTrans, buffer, HASH_SIZE);
     localOff += HASH_SIZE;
+    unread_size -= HASH_SIZE;
 
     //INDEX_PREV_TRANS
+    if(unread_size < INDEX_SIZE)
+        throw InvalidTransactionSizeException();
     indexPrevTrans = ParseUint32(buffer);
     localOff += INDEX_SIZE;
+    unread_size -= INDEX_SIZE;
 
     //SCRIPT
-    varInt scriptLen = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer));
+    varInt scriptLen = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer), unread_size);
     localOff += scriptLen.second;
-    //std::unique_ptr<char[]> tmpScript(new char[scriptLen.first]);
+    unread_size -= scriptLen.second;
 
-    //memcpy(tmpScript.get(), buffer + localOff, scriptLen.first);
+    if(unread_size < scriptLen.first)
+        throw InvalidTransactionSizeException();
 
-    //script = std::move(tmpScript);
-    localOff += scriptLen.second;
+    std::unique_ptr<char[]> tmpScript(new char[scriptLen.first]);
+    memcpy(tmpScript.get(), buffer + localOff, scriptLen.first);
+    script = std::move(tmpScript);
+
+    localOff += scriptLen.first;
+    unread_size -= scriptLen.first;
 
     //SEQUENCE NUMBER
+    if(unread_size < SEQUENCE_NUM_SIZE)
+        throw InvalidTransactionSizeException();
     seqNumber = ParseUint32(buffer);
     localOff += SEQUENCE_NUM_SIZE;
 

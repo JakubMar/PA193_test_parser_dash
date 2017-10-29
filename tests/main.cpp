@@ -276,7 +276,7 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0x57 };
 
         uint8_t expectedValue = 0x57;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 1);
 
         REQUIRE(expectedValue == actualValue.first);
         REQUIRE(actualValue.second == 1); //1 byte
@@ -288,10 +288,10 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0xFD, 0xFC, 0x8A };
 
         uint16_t expectedValue = 0x8AFC;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 3);
 
         REQUIRE(expectedValue == actualValue.first);
-        REQUIRE(actualValue.second == 2); //2 bytes
+        REQUIRE(actualValue.second == 3); //3 bytes
     }
 
 
@@ -300,10 +300,10 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0xFE, 0xFF, 0xFF, 0xFF, 0xFF };
 
         uint32_t expectedValue = 0xFFFFFFFF;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 5);
 
         REQUIRE(expectedValue == actualValue.first);
-        REQUIRE(actualValue.second == 4); //4 bytes
+        REQUIRE(actualValue.second == 5); //5 bytes
     }
 
 
@@ -312,10 +312,10 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0xFF, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00};
 
         uint64_t expectedValue = 0x100000000;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 9);
 
         REQUIRE(expectedValue == actualValue.first);
-        REQUIRE(actualValue.second == 8); //8 bytes
+        REQUIRE(actualValue.second == 9); //9 bytes
     }
 }
 

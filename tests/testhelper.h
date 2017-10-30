@@ -12,8 +12,8 @@ public:
 
 
     static Block CreateEmptyBlockObject(std::unique_ptr<char[]>& buffer, const uint256& merkle, const uint256& hashPrev,
-                                        offsets& BEOffsets, uint32_t& bits, uint32_t& nonce, uint32_t& size, uint32_t& time,
-                                        std::vector<Transaction>& trans, uint32_t& version)
+                                        const offsets& BEOffsets, const uint32_t& bits, const uint32_t& nonce, const uint32_t& size,
+                                        const uint32_t& time, const std::vector<Transaction>& trans, const uint32_t& version)
     {
         Block ret;
         ret.binBuffer = std::move(buffer);
@@ -37,8 +37,8 @@ public:
     }
 
 
-    static Transaction CreateTransactionObject(offsets& BEOffsets, std::vector<TxIn>& inputs, std::vector<TxOut>& outputs,
-                                                    uint32_t& lockTime, uint32_t& version)
+    static Transaction CreateTransactionObject(const offsets& BEOffsets, const std::vector<TxIn>& inputs, const std::vector<TxOut>& outputs,
+                                               const uint32_t& lockTime, const uint32_t& version)
     {
         Transaction ret;
         ret.beginEndOffsets = BEOffsets;
@@ -57,7 +57,7 @@ public:
     }
 
 
-    static TxIn CreateTxInObject(const uint256& hashPrev, const uint32_t& indexPrev, uint32_t& seqNumber)
+    static TxIn CreateTxInObject(const uint256& hashPrev, const uint32_t& indexPrev, const uint32_t& seqNumber)
     {
         TxIn ret;
         ret.hashPrevTrans = hashPrev;

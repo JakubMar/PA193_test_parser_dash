@@ -724,50 +724,135 @@ TEST_CASE("Advanced validator tests")
             Block testBlock = TestHelper::CreateEmptyBlockObject();
 
             // Transaction 1
-            Transaction transaction1 = TestHelper::CreateEmptyTransactionObject();;
-
-            transaction1.setLockTime(0);
-            transaction1.setVersion(1);
-
             std::vector<TxIn> inTrans1;
             std::vector<TxOut> outTrans1;
 
-            TxIn input11 = TestHelper::CreateEmptyTxInObject();
-            input11.setSeqNumber(1);
-
-            TxOut output11 = TestHelper::CreateEmptyTxOutObject();
-            output11.setValue(4700600000);
+            uint256 hash1;
+            hash1.SetHex("000000000000000000000000000000000000000000000000000000000000000");
+            TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 1);
+            TxOut output11 = TestHelper::CreateTxOutObject(4700600000);
 
             inTrans1.push_back(input11);
             outTrans1.push_back(output11);
 
-            transaction1.setInTrans(inTrans1);
-            transaction1.setOutTrans(outTrans1);
+            offsets offsets1;
+
+
+            Transaction transaction1 = TestHelper::CreateTransactionObject(offsets1, inTrans1, outTrans1, 0, 1);
 
             // Transaction 2
-            Transaction transaction2 = TestHelper::CreateEmptyTransactionObject();
-
-            transaction2.setLockTime(0);
-            transaction2.setVersion(1);
-
             std::vector<TxIn> inTrans2;
             std::vector<TxOut> outTrans2;
 
-            TxIn input21 = TestHelper::CreateEmptyTxInObject();
-            input21.setSeqNumber(1);
+            uint256 hash2;
+            hash2.SetHex("75169e03246d63dcb29c9b3f016c5ff5f18d9b693fc6ffc228b89fe63f0bdd5a");
 
-            TxOut output21 = TestHelper::CreateEmptyTxOutObject();
-            output21.setValue(4700600000);
+            TxIn input21 = TestHelper::CreateTxInObject(hash2, 1, 1);
+            TxOut output21 = TestHelper::CreateTxOutObject(1168957596);
+            TxOut output22 = TestHelper::CreateTxOutObject(2266265459);
 
             inTrans2.push_back(input21);
             outTrans2.push_back(output21);
+            outTrans2.push_back(output22);
 
-            transaction2.setInTrans(inTrans2);
-            transaction2.setOutTrans(outTrans2);
+            offsets offsets2;
 
+            Transaction transaction2 = TestHelper::CreateTransactionObject(offsets2, inTrans2, outTrans2, 0, 1);
 
+            // Transaction 3
+            std::vector<TxIn> inTrans3;
+            std::vector<TxOut> outTrans3;
 
+            uint256 hash3;
+            hash3.SetHex("421952c79f9148198f8acf4005d2bb85cde6e45eef2f94dd391e7b31857d4476");
 
+            TxIn input31 = TestHelper::CreateTxInObject(hash3, 1, 1);
+            TxOut output31 = TestHelper::CreateTxOutObject(209929743);
+            TxOut output32 = TestHelper::CreateTxOutObject(3034717752);
+
+            inTrans3.push_back(input31);
+            outTrans3.push_back(output31);
+            outTrans3.push_back(output32);
+
+            offsets offsets3;
+
+            Transaction transaction3 = TestHelper::CreateTransactionObject(offsets3, inTrans3, outTrans3, 0, 1);
+
+            // Transaction 4
+            std::vector<TxIn> inTrans4;
+            std::vector<TxOut> outTrans4;
+
+            uint256 hash4;
+            hash4.SetHex("e46418704a1b31a76ca0abf5410c8c8ec9a2016ecc433239a5069a3b8c2d8dd8");
+
+            TxIn input41 = TestHelper::CreateTxInObject(hash4, 1, 1);
+            TxOut output41 = TestHelper::CreateTxOutObject(3184825258);
+            TxOut output42 = TestHelper::CreateTxOutObject(119722702);
+
+            inTrans4.push_back(input41);
+            outTrans4.push_back(output41);
+            outTrans4.push_back(output42);
+
+            offsets offsets4;
+
+            Transaction transaction4 = TestHelper::CreateTransactionObject(offsets4, inTrans4, outTrans4, 0, 1);
+
+            // Transaction 5
+            std::vector<TxIn> inTrans5;
+            std::vector<TxOut> outTrans5;
+
+            uint256 hash5;
+            hash5.SetHex("80797eeca7a90f37df4f49ff3163364d7763687b576040c625d9841330fd7204");
+
+            TxIn input51 = TestHelper::CreateTxInObject(hash5, 1, 1);
+            TxOut output51 = TestHelper::CreateTxOutObject(188787208);
+            TxOut output52 = TestHelper::CreateTxOutObject(3230886935);
+
+            inTrans5.push_back(input51);
+            outTrans5.push_back(output51);
+            outTrans5.push_back(output52);
+
+            offsets offsets5;
+
+            Transaction transaction5 = TestHelper::CreateTransactionObject(offsets5, inTrans5, outTrans5, 0, 1);
+
+            // Transaction 6
+            std::vector<TxIn> inTrans6;
+            std::vector<TxOut> outTrans6;
+
+            uint256 hash6;
+            hash6.SetHex("4d7350a1ee7724410fff167ceeada52e3a953af090b0f3252296afd03193461c");
+
+            TxIn input61 = TestHelper::CreateTxInObject(hash6, 1, 1);
+            TxOut output61 = TestHelper::CreateTxOutObject(3219100485);
+            TxOut output62 = TestHelper::CreateTxOutObject(176864274);
+
+            inTrans6.push_back(input61);
+            outTrans6.push_back(output61);
+            outTrans6.push_back(output62);
+
+            offsets offsets6;
+
+            Transaction transaction6 = TestHelper::CreateTransactionObject(offsets6, inTrans6, outTrans6, 0, 1);
+
+            // Transaction 7
+            std::vector<TxIn> inTrans7;
+            std::vector<TxOut> outTrans7;
+
+            uint256 hash7;
+            hash7.SetHex("f5fabbfd993b45dc530faad934ed9189724c07fbf758a8685ba8284ad1549f9e");
+
+            TxIn input71 = TestHelper::CreateTxInObject(hash7, 1, 1);
+            TxOut output71 = TestHelper::CreateTxOutObject(229440514);
+            TxOut output72 = TestHelper::CreateTxOutObject(2749798044);
+
+            inTrans7.push_back(input71);
+            outTrans7.push_back(output71);
+            outTrans7.push_back(output72);
+
+            offsets offsets7;
+
+            Transaction transaction7 = TestHelper::CreateTransactionObject(offsets7, inTrans7, outTrans7, 0, 1);
 
            // REQUIRE(TestHelper::validateTransactions(testBlock) == false);
         }

@@ -11,7 +11,7 @@ public:
     }
 
 
-    static Block CreateEmptyBlockObject(std::unique_ptr<char[]>& buffer, const uint256& merkle, const uint256& hashPrev,
+    static Block CreateBlockObject(std::unique_ptr<char[]>& buffer, const uint256& merkle, const uint256& hashPrev,
                                         const offsets& BEOffsets, const uint32_t& bits, const uint32_t& nonce, const uint32_t& size,
                                         const uint32_t& time, const std::vector<Transaction>& trans, const uint32_t& version)
     {

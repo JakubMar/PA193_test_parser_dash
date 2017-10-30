@@ -1,5 +1,6 @@
 #include "transaction.h"
 #include "invalidtransactionsizeexcepion.h"
+#include <ctime>
 #include <iostream>
 
 Transaction::Transaction(const char *buffer, uint32_t &globalOffset, size_t &unread_size) : beginEndOffsets(offsets(0,0))
@@ -101,18 +102,21 @@ void Transaction::setBeginEndOffsets(const offsets &value)
 
 std::ostream& operator<<(std::ostream& stream, const Transaction& t)
 {
-    stream << "-------TRANSACTION-------: " << std::endl;
-    stream << "TxIn:" << std::endl;
+    stream << "  -------TRANSACTION-------: " << std::endl;
+    stream << "  Version: " << t.version << std::endl;
+    stream << "  TxIn(s):" << std::endl;
     for(auto& it : t.inTrans)
     {
-        stream << "/t" << it << std::endl;
+        stream << "\t" << it << std::endl;
     }
 
-    stream << "TxOut:" << std::endl;
+    stream << "  TxOut(s):" << std::endl;
     for(auto& it : t.outTrans)
     {
-        stream << "/t" << it << std::endl;
+        stream << "\t" << it << std::endl;
     }
+    std::time_t time = t.lockTime;
+    stream << "  Time: " << std::asctime(std::localtime(&time));
 
     return stream;
 }

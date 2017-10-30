@@ -30,6 +30,7 @@ const uint32_t SEQUENCE_NUM_SIZE = 4;
 
 using varInt = std::pair<uint64_t,uint8_t>;
 using offsets = std::pair<uint64_t,uint64_t>;
+using validStat = std::pair<bool, std::string>;
 
 inline uint32_t ParseUint32(const char* array)
 {

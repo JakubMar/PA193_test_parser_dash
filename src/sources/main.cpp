@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 
-    std::string fileName = "./two_blocks.bin";
+    std::string fileName = "./two_blocks.txt";
 
     try
     {

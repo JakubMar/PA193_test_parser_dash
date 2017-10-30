@@ -729,7 +729,7 @@ TEST_CASE("Advanced validator tests")
 
             uint256 hash1;
             hash1.SetHex("000000000000000000000000000000000000000000000000000000000000000");
-            TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 1);
+            TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 0);
             TxOut output11 = TestHelper::CreateTxOutObject(4700600000);
 
             inTrans1.push_back(input11);
@@ -747,7 +747,7 @@ TEST_CASE("Advanced validator tests")
             uint256 hash2;
             hash2.SetHex("75169e03246d63dcb29c9b3f016c5ff5f18d9b693fc6ffc228b89fe63f0bdd5a");
 
-            TxIn input21 = TestHelper::CreateTxInObject(hash2, 1, 1);
+            TxIn input21 = TestHelper::CreateTxInObject(hash2, 1, 4294967295);
             TxOut output21 = TestHelper::CreateTxOutObject(1168957596);
             TxOut output22 = TestHelper::CreateTxOutObject(2266265459);
 
@@ -766,7 +766,7 @@ TEST_CASE("Advanced validator tests")
             uint256 hash3;
             hash3.SetHex("421952c79f9148198f8acf4005d2bb85cde6e45eef2f94dd391e7b31857d4476");
 
-            TxIn input31 = TestHelper::CreateTxInObject(hash3, 1, 1);
+            TxIn input31 = TestHelper::CreateTxInObject(hash3, 1, 4294967295);
             TxOut output31 = TestHelper::CreateTxOutObject(209929743);
             TxOut output32 = TestHelper::CreateTxOutObject(3034717752);
 
@@ -785,7 +785,7 @@ TEST_CASE("Advanced validator tests")
             uint256 hash4;
             hash4.SetHex("e46418704a1b31a76ca0abf5410c8c8ec9a2016ecc433239a5069a3b8c2d8dd8");
 
-            TxIn input41 = TestHelper::CreateTxInObject(hash4, 1, 1);
+            TxIn input41 = TestHelper::CreateTxInObject(hash4, 1, 4294967295);
             TxOut output41 = TestHelper::CreateTxOutObject(3184825258);
             TxOut output42 = TestHelper::CreateTxOutObject(119722702);
 
@@ -804,7 +804,7 @@ TEST_CASE("Advanced validator tests")
             uint256 hash5;
             hash5.SetHex("80797eeca7a90f37df4f49ff3163364d7763687b576040c625d9841330fd7204");
 
-            TxIn input51 = TestHelper::CreateTxInObject(hash5, 1, 1);
+            TxIn input51 = TestHelper::CreateTxInObject(hash5, 0, 4294967295);
             TxOut output51 = TestHelper::CreateTxOutObject(188787208);
             TxOut output52 = TestHelper::CreateTxOutObject(3230886935);
 
@@ -823,7 +823,7 @@ TEST_CASE("Advanced validator tests")
             uint256 hash6;
             hash6.SetHex("4d7350a1ee7724410fff167ceeada52e3a953af090b0f3252296afd03193461c");
 
-            TxIn input61 = TestHelper::CreateTxInObject(hash6, 1, 1);
+            TxIn input61 = TestHelper::CreateTxInObject(hash6, 1, 4294967295);
             TxOut output61 = TestHelper::CreateTxOutObject(3219100485);
             TxOut output62 = TestHelper::CreateTxOutObject(176864274);
 
@@ -842,7 +842,7 @@ TEST_CASE("Advanced validator tests")
             uint256 hash7;
             hash7.SetHex("f5fabbfd993b45dc530faad934ed9189724c07fbf758a8685ba8284ad1549f9e");
 
-            TxIn input71 = TestHelper::CreateTxInObject(hash7, 1, 1);
+            TxIn input71 = TestHelper::CreateTxInObject(hash7, 0, 4294967295);
             TxOut output71 = TestHelper::CreateTxOutObject(229440514);
             TxOut output72 = TestHelper::CreateTxOutObject(2749798044);
 

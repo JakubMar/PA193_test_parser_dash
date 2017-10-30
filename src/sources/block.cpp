@@ -64,7 +64,7 @@ std::ostream& operator<< (std::ostream& stream, const Block& block)
     {
         stream << "Size: " << block.nSize << std::endl;
         stream << "Version: " << block.nVersion << std::endl;
-        stream << "Hash of the previous block: " << block.hashPrevBlock.GetHex() << std::endl;
+        stream << "Prev block hash: " << block.hashPrevBlock.GetHex() << std::endl;
         stream << "Merkle root: " << block.hashMerkleRoot.GetHex() << std::endl;
         std::time_t time = block.nTime;
         stream << "Time: " << std::asctime(std::localtime(&time));

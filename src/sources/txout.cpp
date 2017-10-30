@@ -2,6 +2,11 @@
 #include "invalidtransactionsizeexcepion.h"
 #include "invalidscriptsizeexcepion.h"
 
+void TxOut::setValue(const uint64_t &value)
+{
+    this->value = value;
+}
+
 TxOut::TxOut(const char *buffer, uint32_t& globalOffset, size_t& unread_size)
 {
     //VALUE

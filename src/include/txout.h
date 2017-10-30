@@ -16,6 +16,8 @@ public:
     friend std::ostream& operator<< (std::ostream& stream, const TxOut& tout);
     friend class TestHelper;
 
+    void setValue(const uint64_t &value);
+
 private:
     TxOut() {}
 };

@@ -721,20 +721,55 @@ TEST_CASE("Advanced validator tests")
             };
 
 
-
-
-
-
-
-
-
-
-
-
-
             Block testBlock = TestHelper::CreateEmptyBlockObject();
 
-            REQUIRE(TestHelper::validateTransactions(testBlock) == false);
+            // Transaction 1
+            Transaction transaction1 = TestHelper::CreateEmptyTransactionObject();;
+
+            transaction1.setLockTime(0);
+            transaction1.setVersion(1);
+
+            std::vector<TxIn> inTrans1;
+            std::vector<TxOut> outTrans1;
+
+            TxIn input11 = TestHelper::CreateEmptyTxInObject();
+            input11.setSeqNumber(1);
+
+            TxOut output11 = TestHelper::CreateEmptyTxOutObject();
+            output11.setValue(4700600000);
+
+            inTrans1.push_back(input11);
+            outTrans1.push_back(output11);
+
+            transaction1.setInTrans(inTrans1);
+            transaction1.setOutTrans(outTrans1);
+
+            // Transaction 2
+            Transaction transaction2 = TestHelper::CreateEmptyTransactionObject();
+
+            transaction2.setLockTime(0);
+            transaction2.setVersion(1);
+
+            std::vector<TxIn> inTrans2;
+            std::vector<TxOut> outTrans2;
+
+            TxIn input21 = TestHelper::CreateEmptyTxInObject();
+            input21.setSeqNumber(1);
+
+            TxOut output21 = TestHelper::CreateEmptyTxOutObject();
+            output21.setValue(4700600000);
+
+            inTrans2.push_back(input21);
+            outTrans2.push_back(output21);
+
+            transaction2.setInTrans(inTrans2);
+            transaction2.setOutTrans(outTrans2);
+
+
+
+
+
+           // REQUIRE(TestHelper::validateTransactions(testBlock) == false);
         }
 
 

@@ -10,9 +10,44 @@ public:
         return Block();
     }
 
+
+    static Block CreateBlockObject(std::unique_ptr<char[]>& buffer, const uint256& merkle, const uint256& hashPrev,
+                                        const offsets& BEOffsets, const uint32_t& bits, const uint32_t& nonce, const uint32_t& size,
+                                        const uint32_t& time, const std::vector<Transaction>& trans, const uint32_t& version)
+    {
+        Block ret;
+        ret.binBuffer = std::move(buffer);
+        ret.hashMerkleRoot = merkle;
+        ret.hashPrevBlock = hashPrev;
+        ret.headerOffsets = BEOffsets;
+        ret.nBits = bits;
+        ret.nNonce = nonce;
+        ret.nSize = size;
+        ret.nTime = time;
+        ret.nTx = trans;
+        ret.nVersion = version;
+
+        return ret;
+    }
+
+
     static Transaction CreateEmptyTransactionObject()
     {
         return Transaction();
+    }
+
+
+    static Transaction CreateTransactionObject(const offsets& BEOffsets, const std::vector<TxIn>& inputs, const std::vector<TxOut>& outputs,
+                                               const uint32_t& lockTime, const uint32_t& version)
+    {
+        Transaction ret;
+        ret.beginEndOffsets = BEOffsets;
+        ret.inTrans = inputs;
+        ret.lockTime = lockTime;
+        ret.outTrans = outputs;
+        ret.version = version;
+
+        return ret;
     }
 
 
@@ -22,9 +57,29 @@ public:
     }
 
 
+    static TxIn CreateTxInObject(const uint256& hashPrev, const uint32_t& indexPrev, const uint32_t& seqNumber)
+    {
+        TxIn ret;
+        ret.hashPrevTrans = hashPrev;
+        ret.indexPrevTrans = indexPrev;
+        ret.seqNumber = seqNumber;
+
+        return ret;
+    }
+
+
     static TxOut CreateEmptyTxOutObject()
     {
         return TxOut();
+    }
+
+
+    static TxOut CreateTxOutObject(const uint64_t& value)
+    {
+        TxOut ret;
+        ret.value = value;
+
+        return ret;
     }
 
 

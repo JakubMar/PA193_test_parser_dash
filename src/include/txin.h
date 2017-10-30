@@ -17,6 +17,10 @@ public:
     friend std::ostream& operator<< (std::ostream& stream, const TxIn& tin);
     friend class TestHelper;
 
+    void setHashPrevTrans(const uint256 &value);
+    void setIndexPrevTrans(const uint32_t &value);
+    void setSeqNumber(const uint32_t &value);
+
 private:
     TxIn() {}
 };

@@ -592,7 +592,7 @@ TEST_CASE("Simple validator tests")
     }
 }
 
-TEST_CASE("Advanced validator tests")
+TEST_CASE("Advanced tests")
 {
     const unsigned char block_part1[] = {
         0x02, 0x00, 0x00, 0x00, 0x0F, 0x91, 0x20, 0x0D, 0xEB, 0xB2, 0x37, 0xE7, 0x07, 0xCE, 0x8E, 0x4F,
@@ -879,7 +879,7 @@ TEST_CASE("Advanced validator tests")
     {
         SECTION("Correct pair of blocks")
         {
-            REQUIRE(TestHelper::validateBlock(testBlock, testBlock) == false);
+
         }
 
 
@@ -933,6 +933,53 @@ TEST_CASE("Advanced validator tests")
 
         }
     }
+
+
+    SECTION("Parser test")
+    {
+        SECTION("Correct pair of blocks")
+        {
+            const std::string FILE_NAME =  "../../../../PA193_test_parser_dash/blockchainAdvancedTest.bin";
+
+            Blockchain chain(FILE_NAME);
+            chain.parseFile();
+
+            const Block& secondBlock = chain.getBlocks()[1];
+
+            std::string expectedHashMerkleRoot = "33f2d169f3e0c651b36b79a0d5b2030a75eb1a2d6bf21ef289a0c74b6556dee0";
+            std::string expectedHashPrevBlock = "000000003ed80c7dce5cdde42894e977420fb3d04f8ece07e737b2eb0d20910f";
+
+        
+            offsets offsetBlock;
+            offsetBlock.first = 0;
+            offsetBlock.second = 80;
+        
+            Block testBlock = TestHelper::CreateBlockObject(binBuffer, merkle, previousHash, offsetBlock, 474114432, 81630126,
+                                                            1562, 1390273084, trans, 2);
+
+            REQUIRE(secondBlock.nVersion == 2);
+            REQUIRE(secondBlock.hashPrevBlock.ToString() == expectedHashPrevBlock);
+            REQUIRE(secondBlock.hashMerkleRoot.ToString() == expectedHashMerkleRoot);
+            REQUIRE(secondBlock.nTime == 1390273084);
+            REQUIRE(secondBlock.nBits == 474114432);
+            REQUIRE(secondBlock.nNonce == 81630126);
+            REQUIRE(secondBlock.nSize == 1562);
+            REQUIRE(secondBlock.nTx.size() == 7);
+            REQUIRE(secondBlock.nTx[6].getVersion() == 1);
+            REQUIRE(secondBlock.nTx[4].getLockTime() == 0);
+            REQUIRE(secondBlock.nTx[3].getInputs().size() == 1);
+            REQUIRE(secondBlock.nTx[2].getOutputs().size() == 2);
+            REQUIRE(secondBlock.nTx[1].getInputs()[0].GetSeqNumber() == 4294967295);
+            REQUIRE(secondBlock.nTx[5].getOutputs()[1].GetValue() == 176864274);
+        }
+
+
+        SECTION("Twice the same block")
+        {
+            REQUIRE(TestHelper::validateBlock(testBlock, testBlock) == false);
+        }
+    }
+
 }
 
 

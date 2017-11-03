@@ -59,13 +59,13 @@ TEST_CASE("Block tests")
         memcpy(binBuffer.get(), test_block, 186);
 
         Block block(std::move(binBuffer), 186);
-        REQUIRE(block.nVersion == expectedVersion);
-        REQUIRE(block.hashPrevBlock.ToString() == expectedHashPrevBlock);
-        REQUIRE(block.hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-        REQUIRE(block.nTime == expectedTime);
-        REQUIRE(block.nBits == expectedBits);
-        REQUIRE(block.nNonce == expectedNonce);
-        REQUIRE(block.nSize == expectedSize);
+        REQUIRE(block.getVersion() == expectedVersion);
+        REQUIRE(block.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(block.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(block.getTime() == expectedTime);
+        REQUIRE(block.getBits() == expectedBits);
+        REQUIRE(block.getNonce() == expectedNonce);
+        REQUIRE(block.getSize() == expectedSize);
     }
 }
 
@@ -111,20 +111,23 @@ TEST_CASE("Blockchain tests")
         uint32_t expectedTransactionVersion = 1;
         uint32_t expectedLockTime = 0;
 
-        REQUIRE(chain.getBlocks()[0].nVersion == expectedBlockVersion);
-        REQUIRE(chain.getBlocks()[0].hashPrevBlock.ToString() == expectedHashPrevBlock);
-        REQUIRE(chain.getBlocks()[0].hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-        REQUIRE(chain.getBlocks()[0].nTime == expectedTime);
-        REQUIRE(chain.getBlocks()[0].nBits == expectedBits);
-        REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
-        REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
-        REQUIRE(chain.getBlocks()[0].nTx.size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs()[0].GetValue() == 50000000000);
+        const Block& block = chain.getBlocks()[0];
+        Transaction transaction = block.getTx()[0];
+
+        REQUIRE(block.getVersion() == expectedBlockVersion);
+        REQUIRE(block.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(block.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(block.getTime() == expectedTime);
+        REQUIRE(block.getBits() == expectedBits);
+        REQUIRE(block.getNonce() == expectedNonce);
+        REQUIRE(block.getSize() == expectedSize);
+        REQUIRE(block.getTx().size() == 1);
+        REQUIRE(transaction.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction.getLockTime() == expectedLockTime);
+        REQUIRE(transaction.getInputs().size() == 1);
+        REQUIRE(transaction.getOutputs().size() == 1);
+        REQUIRE(transaction.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction.getOutputs()[0].GetValue() == 50000000000);
     }
 
 
@@ -173,26 +176,30 @@ TEST_CASE("Blockchain tests")
         uint32_t expectedTransactionVersion = 1;
         uint32_t expectedLockTime = 0;
 
-        REQUIRE(chain.getBlocks()[0].nVersion == expectedBlockVersion);
-        REQUIRE(chain.getBlocks()[0].hashPrevBlock.ToString() == expectedHashPrevBlock);
-        REQUIRE(chain.getBlocks()[0].hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-        REQUIRE(chain.getBlocks()[0].nTime == expectedTime);
-        REQUIRE(chain.getBlocks()[0].nBits == expectedBits);
-        REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
-        REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
-        REQUIRE(chain.getBlocks()[0].nTx.size() == 2);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs()[0].GetValue() == 50000000000);
-        REQUIRE(chain.getBlocks()[0].nTx[1].getVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[1].getLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[1].getInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[1].getOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[1].getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[1].getOutputs()[0].GetValue() == 50000000000);
+        const Block& block = chain.getBlocks()[0];
+        Transaction transaction1 = block.getTx()[0];
+        Transaction transaction2 = block.getTx()[0];
+
+        REQUIRE(block.getVersion() == expectedBlockVersion);
+        REQUIRE(block.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(block.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(block.getTime() == expectedTime);
+        REQUIRE(block.getBits() == expectedBits);
+        REQUIRE(block.getNonce() == expectedNonce);
+        REQUIRE(block.getSize() == expectedSize);
+        REQUIRE(block.getTx().size() == 2);
+        REQUIRE(transaction1.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction1.getLockTime() == expectedLockTime);
+        REQUIRE(transaction1.getInputs().size() == 1);
+        REQUIRE(transaction1.getOutputs().size() == 1);
+        REQUIRE(transaction1.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction1.getOutputs()[0].GetValue() == 50000000000);
+        REQUIRE(transaction2.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction2.getLockTime() == expectedLockTime);
+        REQUIRE(transaction2.getInputs().size() == 1);
+        REQUIRE(transaction2.getOutputs().size() == 1);
+        REQUIRE(transaction2.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction2.getOutputs()[0].GetValue() == 50000000000);
     }
 
 
@@ -248,35 +255,42 @@ TEST_CASE("Blockchain tests")
         uint32_t expectedTransactionVersion = 1;
         uint32_t expectedLockTime = 0;
 
-        REQUIRE(chain.getBlocks()[0].nVersion == expectedVersion);
-        REQUIRE(chain.getBlocks()[0].hashPrevBlock.ToString() == expectedHashPrevBlock);
-        REQUIRE(chain.getBlocks()[0].hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-        REQUIRE(chain.getBlocks()[0].nTime == expectedTime);
-        REQUIRE(chain.getBlocks()[0].nBits == expectedBits);
-        REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
-        REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
-        REQUIRE(chain.getBlocks()[0].nTx.size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[0].getOutputs()[0].GetValue() == 50000000000);
+        const Block& block1 = chain.getBlocks()[0];
+        const Block& block2 = chain.getBlocks()[1];
+        Transaction transaction1 = block1.getTx()[0];
+        Transaction transaction2 = block2.getTx()[0];
 
-        REQUIRE(chain.getBlocks()[1].nVersion == expectedVersion);
-        REQUIRE(chain.getBlocks()[1].hashPrevBlock.ToString() == expectedHashPrevBlock);
-        REQUIRE(chain.getBlocks()[1].hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-        REQUIRE(chain.getBlocks()[1].nTime == expectedTime);
-        REQUIRE(chain.getBlocks()[1].nBits == expectedBits);
-        REQUIRE(chain.getBlocks()[1].nNonce == expectedNonce);
-        REQUIRE(chain.getBlocks()[1].nSize == expectedSize);
-        REQUIRE(chain.getBlocks()[1].nTx.size() == 1);
-        REQUIRE(chain.getBlocks()[1].nTx[0].getVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[1].nTx[0].getLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[1].nTx[0].getInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[1].nTx[0].getOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[1].nTx[0].getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[1].nTx[0].getOutputs()[0].GetValue() == 50000000000);
+        REQUIRE(block1.getVersion() == expectedVersion);
+        REQUIRE(block1.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(block1.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(block1.getTime() == expectedTime);
+        REQUIRE(block1.getBits() == expectedBits);
+        REQUIRE(block1.getNonce() == expectedNonce);
+        REQUIRE(block1.getSize() == expectedSize);
+        REQUIRE(block1.getTx().size() == 1);
+
+        REQUIRE(block2.getVersion() == expectedVersion);
+        REQUIRE(block2.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(block2.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(block2.getTime() == expectedTime);
+        REQUIRE(block2.getBits() == expectedBits);
+        REQUIRE(block2.getNonce() == expectedNonce);
+        REQUIRE(block2.getSize() == expectedSize);
+        REQUIRE(block2.getTx().size() == 1);
+
+        REQUIRE(transaction1.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction1.getLockTime() == expectedLockTime);
+        REQUIRE(transaction1.getInputs().size() == 1);
+        REQUIRE(transaction1.getOutputs().size() == 1);
+        REQUIRE(transaction1.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction1.getOutputs()[0].GetValue() == 50000000000);
+
+        REQUIRE(transaction2.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction2.getLockTime() == expectedLockTime);
+        REQUIRE(transaction2.getInputs().size() == 1);
+        REQUIRE(transaction2.getOutputs().size() == 1);
+        REQUIRE(transaction2.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction2.getOutputs()[0].GetValue() == 50000000000);
     }
 
 
@@ -522,7 +536,7 @@ TEST_CASE("Simple validator tests")
         SECTION("Valid timestamp")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
-            testBlock.nTime = 1390103681;
+            TestHelper::setBlockTime(testBlock, 1390103681);
 
             REQUIRE(TestHelper::timestampNotTooNew(testBlock) == true);
         }
@@ -534,7 +548,7 @@ TEST_CASE("Simple validator tests")
             uint32_t currentTime = static_cast<uint32_t>(time(NULL));
 
             Block testBlock = TestHelper::CreateEmptyBlockObject();
-            testBlock.nTime = currentTime + twoHoursAndOneSecond;
+            TestHelper::setBlockTime(testBlock, currentTime + twoHoursAndOneSecond);
 
             REQUIRE(TestHelper::timestampNotTooNew(testBlock) == false);
         }
@@ -555,15 +569,25 @@ TEST_CASE("Simple validator tests")
 
             Block head = TestHelper::CreateEmptyBlockObject();
             Block predecessor = TestHelper::CreateEmptyBlockObject();
-            predecessor.binBuffer = std::unique_ptr<char[]>(new char[80]);
 
-            memcpy(predecessor.binBuffer.get(), test_block, 80);
-            predecessor.headerOffsets.first = 0;
-            predecessor.headerOffsets.second = 80;
+            std::unique_ptr<char[]> binBuffer = std::unique_ptr<char[]>(new char[80]);
 
-            head.hashPrevBlock.SetHex("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
+            TestHelper::setBlockBinBuffer(predecessor, std::move(binBuffer));
 
-            REQUIRE(TestHelper::verifyPreviousBlocHash(head, predecessor) == true);
+            memcpy(predecessor.getBinBufferData(), test_block, 80);
+
+            offsets offset;
+            offset.first = 0;
+            offset.second = 80;
+
+            TestHelper::setBlockOffsets(predecessor, offset);
+
+            uint256 prevHash;
+            prevHash.SetHex("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
+
+            TestHelper::setBlockPrevhash(head, prevHash);
+
+            REQUIRE(TestHelper::verifyPreviousBlockHash(head, predecessor) == true);
         }
 
 
@@ -579,15 +603,25 @@ TEST_CASE("Simple validator tests")
 
             Block head = TestHelper::CreateEmptyBlockObject();
             Block predecessor = TestHelper::CreateEmptyBlockObject();
-            predecessor.binBuffer = std::unique_ptr<char[]>(new char[80]);
 
-            memcpy(predecessor.binBuffer.get(), test_block, 80);
-            predecessor.headerOffsets.first = 0;
-            predecessor.headerOffsets.second = 80;
+            std::unique_ptr<char[]> binBuffer = std::unique_ptr<char[]>(new char[80]);
 
-            head.hashPrevBlock.SetHex("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
+            TestHelper::setBlockBinBuffer(predecessor, std::move(binBuffer));
 
-            REQUIRE(TestHelper::verifyPreviousBlocHash(head, predecessor) == false);
+            memcpy(predecessor.getBinBufferData(), test_block, 80);
+
+            offsets offset;
+            offset.first = 0;
+            offset.second = 80;
+
+            TestHelper::setBlockOffsets(predecessor, offset);
+
+            uint256 prevHash;
+            prevHash.SetHex("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
+
+            TestHelper::setBlockPrevhash(head, prevHash);
+
+            REQUIRE(TestHelper::verifyPreviousBlockHash(head, predecessor) == false);
         }
     }
 }
@@ -957,20 +991,20 @@ TEST_CASE("Advanced tests")
             Block testBlock = TestHelper::CreateBlockObject(binBuffer, merkle, previousHash, offsetBlock, 474114432, 81630126,
                                                             1562, 1390273084, trans, 2);
 
-            REQUIRE(secondBlock.nVersion == 2);
-            REQUIRE(secondBlock.hashPrevBlock.ToString() == expectedHashPrevBlock);
-            REQUIRE(secondBlock.hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-            REQUIRE(secondBlock.nTime == 1390273084);
-            REQUIRE(secondBlock.nBits == 474114432);
-            REQUIRE(secondBlock.nNonce == 81630126);
-            REQUIRE(secondBlock.nSize == 1562);
-            REQUIRE(secondBlock.nTx.size() == 7);
-            REQUIRE(secondBlock.nTx[6].getVersion() == 1);
-            REQUIRE(secondBlock.nTx[4].getLockTime() == 0);
-            REQUIRE(secondBlock.nTx[3].getInputs().size() == 1);
-            REQUIRE(secondBlock.nTx[2].getOutputs().size() == 2);
-            REQUIRE(secondBlock.nTx[1].getInputs()[0].GetSeqNumber() == 4294967295);
-            REQUIRE(secondBlock.nTx[5].getOutputs()[1].GetValue() == 176864274);
+            REQUIRE(secondBlock.getVersion() == 2);
+            REQUIRE(secondBlock.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+            REQUIRE(secondBlock.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+            REQUIRE(secondBlock.getTime() == 1390273084);
+            REQUIRE(secondBlock.getBits() == 474114432);
+            REQUIRE(secondBlock.getNonce() == 81630126);
+            REQUIRE(secondBlock.getSize() == 1562);
+            REQUIRE(secondBlock.getTx().size() == 7);
+            REQUIRE(secondBlock.getTx()[6].getVersion() == 1);
+            REQUIRE(secondBlock.getTx()[4].getLockTime() == 0);
+            REQUIRE(secondBlock.getTx()[3].getInputs().size() == 1);
+            REQUIRE(secondBlock.getTx()[2].getOutputs().size() == 2);
+            REQUIRE(secondBlock.getTx()[1].getInputs()[0].GetSeqNumber() == 4294967295);
+            REQUIRE(secondBlock.getTx()[5].getOutputs()[1].GetValue() == 176864274);
         }
 
 

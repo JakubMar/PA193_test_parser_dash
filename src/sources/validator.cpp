@@ -31,7 +31,7 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor){
 
 bool Validator::validateTransactions(const Block &block){
 
-    const std::vector<Transaction> &transactions = block.nTx;
+    const std::vector<Transaction> &transactions = block.tx;
 
     //transaction list nonempty
     if (!transactionListNonempty(transactions)) return false;
@@ -67,7 +67,7 @@ bool Validator::timestampNotTooNew(const Block &block){
 
     uint32_t currentTime = static_cast<uint32_t>(time(NULL));
 
-    uint32_t blockTime = block.nTime;
+    uint32_t blockTime = block.time;
 
     return (blockTime-twoHoursInSeconds)<currentTime;
 }
@@ -108,7 +108,7 @@ uint256 Validator::hashBlock(const Block &block){
 }
 
 uint256 Validator::computeMerkleHash(const Block &block){
-    const std::vector<Transaction> &transactions = block.nTx;
+    const std::vector<Transaction> &transactions = block.tx;
     int baseNoPadding = transactions.size();
     int actualSize = baseNoPadding + baseNoPadding%2;
     uint256 hashes[actualSize];

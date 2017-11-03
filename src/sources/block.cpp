@@ -3,58 +3,103 @@
 #include <string>
 #include <ostream>
 
-Block::Block(std::unique_ptr<char[]> buffer, uint32_t size) : nSize(size)
+Block::Block(std::unique_ptr<char[]> buffer, uint32_t size) : size(size)
 {
     binBuffer = std::move(buffer);
     uint32_t offset = 0;
 
     // VERSION
-    if(nSize < VERSION_SIZE)
+    if(size < VERSION_SIZE)
         throw InvalidBlockSizeException();
-    nVersion = ParseUint32(binBuffer.get());
+    version = ParseUint32(binBuffer.get());
     offset += VERSION_SIZE;
 
     // HASH
-    if(nSize - offset < HASH_SIZE)
+    if(size - offset < HASH_SIZE)
         throw InvalidBlockSizeException();
     memcpy(&hashPrevBlock, binBuffer.get() + offset, HASH_SIZE);
     offset += HASH_SIZE;
 
     // MERKLE_ROOT
-    if(nSize - offset < MERKLE_ROOT_SIZE)
+    if(size - offset < MERKLE_ROOT_SIZE)
         throw InvalidBlockSizeException();
     memcpy(&hashMerkleRoot, binBuffer.get() + offset, MERKLE_ROOT_SIZE);
     offset += MERKLE_ROOT_SIZE;
 
     // TIME
-    if(nSize - offset < TIME_SIZE)
+    if(size - offset < TIME_SIZE)
         throw InvalidBlockSizeException();
-    nTime = ParseUint32(binBuffer.get() + offset);
+    time = ParseUint32(binBuffer.get() + offset);
     offset += TIME_SIZE;
 
     // BITS
-    if(nSize - offset < BITS_SIZE)
+    if(size - offset < BITS_SIZE)
         throw InvalidBlockSizeException();
-    nBits =  ParseUint32(binBuffer.get() + offset);
+    bits =  ParseUint32(binBuffer.get() + offset);
     offset += BITS_SIZE;
 
     // NONCE
-    if(nSize - offset < NONCE_SIZE)
+    if(size - offset < NONCE_SIZE)
         throw InvalidBlockSizeException();
-    nNonce = ParseUint32(binBuffer.get() + offset);
+    nonce = ParseUint32(binBuffer.get() + offset);
     offset += NONCE_SIZE;
 
     headerOffsets = offsets(0,offset);
 
     // Transactions
-    varInt countTx = ParseVarLength(binBuffer.get()+offset, nSize - offset);
+    varInt countTx = ParseVarLength(binBuffer.get()+offset, size - offset);
     offset += countTx.second;
-    size_t unread_size = nSize - offset;
+    size_t unread_size = size - offset;
     for(size_t i = 0; i < countTx.first; ++i)
     {
-        nTx.emplace_back(Transaction(binBuffer.get()+offset, offset, unread_size));
+        tx.emplace_back(Transaction(binBuffer.get()+offset, offset, unread_size));
     }
 
+}
+
+int32_t Block::getVersion() const
+{
+    return version;
+}
+
+uint256 Block::getHashPrevBlock() const
+{
+    return hashPrevBlock;
+}
+
+uint256 Block::getHashMerkleRoot() const
+{
+    return hashMerkleRoot;
+}
+
+uint32_t Block::getTime() const
+{
+    return time;
+}
+
+uint32_t Block::getBits() const
+{
+    return bits;
+}
+
+uint32_t Block::getNonce() const
+{
+    return nonce;
+}
+
+uint32_t Block::getSize() const
+{
+    return size;
+}
+
+std::vector<Transaction> Block::getTx() const
+{
+    return tx;
+}
+
+char* Block::getBinBufferData() const
+{
+    return binBuffer.get();
 }
 
 std::ostream& operator<< (std::ostream& stream, const Block& block)
@@ -62,15 +107,15 @@ std::ostream& operator<< (std::ostream& stream, const Block& block)
     stream << "----------BLOCK----------: " << std::endl;
     if(block.isValid.first)
     {
-        stream << "Size: " << block.nSize << std::endl;
-        stream << "Version: " << block.nVersion << std::endl;
+        stream << "Size: " << block.size << std::endl;
+        stream << "Version: " << block.version << std::endl;
         stream << "Prev block hash: " << block.hashPrevBlock.GetHex() << std::endl;
         stream << "Merkle root: " << block.hashMerkleRoot.GetHex() << std::endl;
-        std::time_t time = block.nTime;
+        std::time_t time = block.time;
         stream << "Time: " << std::asctime(std::localtime(&time));
-        stream << "Bits: " << std::hex << block.nBits << std::endl;
-        stream << "Nonce: " << std::dec << block.nNonce << std::endl;
-        for(auto& it : block.nTx)
+        stream << "Bits: " << std::hex << block.bits << std::endl;
+        stream << "Nonce: " << std::dec << block.nonce << std::endl;
+        for(auto& it : block.tx)
         {
             stream << it << std::endl;
         }

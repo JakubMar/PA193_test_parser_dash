@@ -20,12 +20,12 @@ public:
         ret.hashMerkleRoot = merkle;
         ret.hashPrevBlock = hashPrev;
         ret.headerOffsets = BEOffsets;
-        ret.nBits = bits;
-        ret.nNonce = nonce;
-        ret.nSize = size;
-        ret.nTime = time;
-        ret.nTx = trans;
-        ret.nVersion = version;
+        ret.bits = bits;
+        ret.nonce = nonce;
+        ret.size = size;
+        ret.time = time;
+        ret.tx = trans;
+        ret.version = version;
 
         return ret;
     }
@@ -107,7 +107,7 @@ public:
     }
 
 
-    static bool verifyPreviousBlocHash(const Block &head, const Block &predecessor)
+    static bool verifyPreviousBlockHash(const Block &head, const Block &predecessor)
     {
         return Validator::verifyPreviousBlocHash(head, predecessor);
     }
@@ -158,6 +158,35 @@ public:
     static uint256 computeMerkleHash(const Block &block)
     {
         return Validator::computeMerkleHash(block);
+    }
+
+
+    static void setBlockTime(Block &block, const uint32_t &time)
+    {
+        block.time = time;
+    }
+
+    static void setBlockPrevhash(Block &block, const uint256 &hash)
+    {
+        block.hashPrevBlock = hash;
+    }
+
+
+    static void setBlockMerkelRot(Block &block, const uint256 &root)
+    {
+        block.hashMerkleRoot = root;
+    }
+
+
+    static void setBlockOffsets(Block &block, const offsets &offset)
+    {
+        block.headerOffsets = offset;
+    }
+
+
+    static void setBlockBinBuffer(Block &block, std::unique_ptr<char[]> buffer)
+    {
+        block.binBuffer = std::move(buffer);
     }
 };
 

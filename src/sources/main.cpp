@@ -18,7 +18,7 @@ int main()
         do
         {
             notEnd = chain->parseFile();
-            for(i; i < chain->getBlocks().size(); ++i)
+            for(; i < chain->getBlocks().size(); ++i)
             {
                cout << std::endl << chain->getBlocks()[i];
             }

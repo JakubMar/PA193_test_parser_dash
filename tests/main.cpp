@@ -973,7 +973,7 @@ TEST_CASE("Advanced tests")
     {
         SECTION("Correct pair of blocks")
         {
-            const std::string FILE_NAME =  "../../../../PA193_test_parser_dash/blockchainAdvancedTest.bin";
+            const std::string FILE_NAME =  "./blockchainAdvancedTest.bin";
 
             Blockchain chain(FILE_NAME);
             chain.parseFile();

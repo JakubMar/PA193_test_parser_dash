@@ -104,7 +104,7 @@ char* Block::getBinBufferData() const
 
 validStat& Block::getValidStat() const
 {
-    return validStat;
+    return isValid;
 }
 
 std::ostream& operator<< (std::ostream& stream, const Block& block)

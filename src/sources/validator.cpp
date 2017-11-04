@@ -21,7 +21,8 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor){
     if(!satisfyProofOfWork(head)) return false;
 
     //time stamp not more than 2 hours in future
-    if (!timestampNotTooNew(head)) return false;
+    uint32_t currentTime = static_cast<uint32_t>(time(NULL));
+    if (!timestampNotTooNew(head,currentTime)) return false;
 
     //Verify Merkle hash
     if(!verifyMerkleHash(head)) return false;
@@ -61,15 +62,13 @@ bool Validator::validateTransaction(const Transaction &transaction){
     return false;
 }
 
-bool Validator::timestampNotTooNew(const Block &block){
+bool Validator::timestampNotTooNew(const Block &block,uint32_t timestamp){
 
     const uint32_t twoHoursInSeconds = 2*60*60;
 
-    uint32_t currentTime = static_cast<uint32_t>(time(NULL));
-
     uint32_t blockTime = block.time;
 
-    return (blockTime-twoHoursInSeconds)<currentTime;
+    return (blockTime-twoHoursInSeconds)<timestamp;
 }
 bool Validator::verifyPreviousBlocHash(const Block &head, const Block &predecessor){
 

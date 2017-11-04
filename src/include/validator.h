@@ -18,7 +18,7 @@ public:
 private:
 
     static bool validateTransactions(const Block &block);
-    static bool timestampNotTooNew(const Block &block);
+    static bool timestampNotTooNew(const Block &block, uint32_t timestamp);
     static bool verifyPreviousBlocHash(const Block &head, const Block &predecessor);
     static bool verifyMerkleHash(const Block &block);
     static bool satisfyProofOfWork(const Block &block); //TODO

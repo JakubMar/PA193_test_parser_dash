@@ -103,7 +103,8 @@ public:
 
     static bool timestampNotTooNew(const Block &block)
     {
-        return Validator::timestampNotTooNew(block);
+        uint32_t currentTime = static_cast<uint32_t>(time(NULL));
+        return Validator::timestampNotTooNew(block,currentTime);
     }
 
 

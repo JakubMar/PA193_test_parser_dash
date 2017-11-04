@@ -31,5 +31,5 @@ private:
     static bool isCoinbaseCorrectScriptSigLen(const Transaction &transaction); //TODO
 
     static uint256 hashBlock(const Block &block);
-    static uint256 computeMerkleHash(const Block &block);
+    static uint256 computeMerkleHash(const Block &block); //TODO
 };

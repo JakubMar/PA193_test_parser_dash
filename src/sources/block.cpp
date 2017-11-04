@@ -102,6 +102,11 @@ char* Block::getBinBufferData() const
     return binBuffer.get();
 }
 
+validStat& Block::getValidStat() const
+{
+    return validStat;
+}
+
 std::ostream& operator<< (std::ostream& stream, const Block& block)
 {
     stream << "----------BLOCK----------: " << std::endl;

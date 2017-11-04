@@ -30,6 +30,8 @@ private:
     static bool isCoinbase(const Transaction &transaction); //TODO
     static bool isCoinbaseCorrectScriptSigLen(const Transaction &transaction); //TODO
 
+    static bool setIsValidBlockAttribute(const Block& block, bool result, const char* message);
+
     static uint256 hashBlock(const Block &block);
     static uint256 computeMerkleHash(const Block &block); //TODO
 };

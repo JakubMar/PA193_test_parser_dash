@@ -19,19 +19,20 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor){
     if (head == nullptr) throw new invalid_argument("block to be validated is null");
 
     //previous block header hash
-    if(!verifyPreviousBlocHash(head,predecessor)) return false;
+    if(!verifyPreviousBlocHash(head,predecessor))
+        return setIsValidBlockAttribute(head,false, "Invalid previous block hash");
 
     //block hash proof of work
-    if(!satisfyProofOfWork(head)) return false;
+    if(!satisfyProofOfWork(head)) return setIsValidBlockAttribute(head,false, "Invalid proof of work");
 
     //time stamp not more than 2 hours in future
     uint32_t currentTime = static_cast<uint32_t>(time(NULL));
-    if (!timestampNotTooNew(head,currentTime)) return false;
+    if (!timestampNotTooNew(head,currentTime)) return setIsValidBlockAttribute(head,false, "Invalid timestamp");
 
     //Verify Merkle hash
-    if(!verifyMerkleHash(head)) return false;
+    if(!verifyMerkleHash(head)) return setIsValidBlockAttribute(head,false, "Invalid merkle root hash");
 
-    return true;
+    return validateTransactions(head);
 }
 
 bool Validator::validateTransactions(const Block &block){
@@ -39,26 +40,26 @@ bool Validator::validateTransactions(const Block &block){
     const std::vector<Transaction> &transactions = block.tx;
 
     //transaction list nonempty
-    if (!transactionListNonempty(transactions)) return false;
+    if (!transactionListNonempty(transactions)) return setIsValidBlockAttribute(block,false, "Empty transaction list");
 
     //first transaction coinbase
-    if(!isCoinbase(transactions.at(0))) return false;
+    if(!isCoinbase(transactions.at(0))) return setIsValidBlockAttribute(block,false, "First transaction is not coinbase");
 
     //other transactions not coinbase
     for(auto it = (++transactions.begin()); it != transactions.end(); ++it){
-        if(isCoinbase(*it)) return false;
+        if(isCoinbase(*it)) return setIsValidBlockAttribute(block,false, "Transaction other then first is coinbase");
     }
 
 
     //For the coinbase (first) transaction, scriptSig length must be 2-100
-    if(!isCoinbaseCorrectScriptSigLen(transactions.at(0))) return false;
+    if(!isCoinbaseCorrectScriptSigLen(transactions.at(0))) return setIsValidBlockAttribute(block,false, "Coinbase script is wrong length");
 
 
     //validate all transactions
     for(auto it = transactions.begin(); it != transactions.end(); ++it){
-        if(!validateTransaction(*it)) return false;
+        if(!validateTransaction(*it)) return setIsValidBlockAttribute(block,false, "Some of the transactions not valid");
     }
-    return true;
+    return setIsValidBlockAttribute(block,true, "all good");
 }
 
 bool Validator::validateTransaction(const Transaction &transaction){
@@ -103,7 +104,6 @@ bool Validator::isCoinbaseCorrectScriptSigLen(const Transaction &transaction){
 
 uint256 Validator::hashBlock(const Block &block){
 
-    //this is a bit dirty trick
     const unsigned char* ptr = reinterpret_cast<const unsigned char*>(block.binBuffer.get());
     ptr += block.headerOffsets.first;
 
@@ -147,6 +147,14 @@ uint256 Validator::computeMerkleHash(const Block &block){
     }
 
     return hashes[0];
+}
+
+bool Validator::setIsValidBlockAttribute(const Block& block, bool result, const char* message){
+    validStat &stat = block.getValidStat();
+    stat.first = result;
+    stat.second = message;
+
+    return result;
 }
 
 

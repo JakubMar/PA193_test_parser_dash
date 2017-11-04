@@ -19,6 +19,7 @@ public:
     uint32_t getSize() const;
     std::vector<Transaction> getTx() const;
     char* getBinBufferData() const;
+    validStat& getValidStat() const;
 
     friend class TestHelper;
     friend std::ostream& operator<< (std::ostream& stream, const Block& block_);
@@ -38,7 +39,7 @@ private:
     offsets headerOffsets;
     std::unique_ptr<char[]> binBuffer;
 
-    validStat isValid{true, "unknown reason"};
+    mutable validStat isValid{false, "unknown reason"};
 
     Block() {}
 };

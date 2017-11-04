@@ -1,11 +1,13 @@
 #include "validator.h"
 
+#include <exception>
+
 bool Validator::validateBlockChain(const Blockchain &chain){
 
     const std::vector<Block> &blocks = chain.getBlocks();
 
+    if(!validateBlock(*blocks.begin(),nullptr)) return false;
     for(auto it = ++blocks.begin(); it < blocks.end(); ++it) {
-        //first block is not validated at all in this construction
         if(!validateBlock(*it,*(it-1))) return false;
     }
 
@@ -13,6 +15,8 @@ bool Validator::validateBlockChain(const Blockchain &chain){
 }
 
 bool Validator::validateBlock(const Block &head, const Block &predecessor){
+
+    if (head == nullptr) throw new invalid_argument("block to be validated is null");
 
     //previous block header hash
     if(!verifyPreviousBlocHash(head,predecessor)) return false;
@@ -72,8 +76,9 @@ bool Validator::timestampNotTooNew(const Block &block,uint32_t timestamp){
 }
 bool Validator::verifyPreviousBlocHash(const Block &head, const Block &predecessor){
 
-    uint256 predecessorHash = hashBlock(predecessor);
+    if(predecessor == nullptr) return true; //implicitly true if no predecessor provided
 
+    uint256 predecessorHash = hashBlock(predecessor);
     return predecessorHash == head.hashPrevBlock;
 }
 bool Validator::verifyMerkleHash(const Block &block){

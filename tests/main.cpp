@@ -55,15 +55,17 @@ TEST_CASE("Block tests")
         uint32_t expectedNonce = 128987;
         uint32_t expectedSize = 186;
 
-//        Block block(reinterpret_cast<const char*>(test_block), 186);
+        std::unique_ptr<char[]> binBuffer = std::unique_ptr<char[]>(new char[186]);
+        memcpy(binBuffer.get(), test_block, 186);
 
-//        REQUIRE(block.nVersion == expectedVersion);
-//        REQUIRE(block.hashPrevBlock.ToString() == expectedHashPrevBlock);
-//        REQUIRE(block.hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-//        REQUIRE(block.nTime == expectedTime);
-//        REQUIRE(block.nBits == expectedBits);
-//        REQUIRE(block.nNonce == expectedNonce);
-//        REQUIRE(block.nSize == expectedSize);
+        Block block(std::move(binBuffer), 186);
+        REQUIRE(block.getVersion() == expectedVersion);
+        REQUIRE(block.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(block.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(block.getTime() == expectedTime);
+        REQUIRE(block.getBits() == expectedBits);
+        REQUIRE(block.getNonce() == expectedNonce);
+        REQUIRE(block.getSize() == expectedSize);
     }
 }
 
@@ -109,20 +111,23 @@ TEST_CASE("Blockchain tests")
         uint32_t expectedTransactionVersion = 1;
         uint32_t expectedLockTime = 0;
 
-        REQUIRE(chain.getBlocks()[0].nVersion == expectedBlockVersion);
-        REQUIRE(chain.getBlocks()[0].hashPrevBlock.ToString() == expectedHashPrevBlock);
-        REQUIRE(chain.getBlocks()[0].hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-        REQUIRE(chain.getBlocks()[0].nTime == expectedTime);
-        REQUIRE(chain.getBlocks()[0].nBits == expectedBits);
-        REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
-        REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
-        REQUIRE(chain.getBlocks()[0].nTx.size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs()[0].GetValue() == 500);
+        const Block& block = chain.getBlocks()[0];
+        Transaction transaction = block.getTx()[0];
+
+        REQUIRE(block.getVersion() == expectedBlockVersion);
+        REQUIRE(block.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(block.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(block.getTime() == expectedTime);
+        REQUIRE(block.getBits() == expectedBits);
+        REQUIRE(block.getNonce() == expectedNonce);
+        REQUIRE(block.getSize() == expectedSize);
+        REQUIRE(block.getTx().size() == 1);
+        REQUIRE(transaction.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction.getLockTime() == expectedLockTime);
+        REQUIRE(transaction.getInputs().size() == 1);
+        REQUIRE(transaction.getOutputs().size() == 1);
+        REQUIRE(transaction.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction.getOutputs()[0].GetValue() == 50000000000);
     }
 
 
@@ -171,26 +176,30 @@ TEST_CASE("Blockchain tests")
         uint32_t expectedTransactionVersion = 1;
         uint32_t expectedLockTime = 0;
 
-        REQUIRE(chain.getBlocks()[0].nVersion == expectedBlockVersion);
-        REQUIRE(chain.getBlocks()[0].hashPrevBlock.ToString() == expectedHashPrevBlock);
-        REQUIRE(chain.getBlocks()[0].hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-        REQUIRE(chain.getBlocks()[0].nTime == expectedTime);
-        REQUIRE(chain.getBlocks()[0].nBits == expectedBits);
-        REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
-        REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
-        REQUIRE(chain.getBlocks()[0].nTx.size() == 2);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs()[0].GetValue() == 500);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[1].GetOutputs()[0].GetValue() == 500);
+        const Block& block = chain.getBlocks()[0];
+        Transaction transaction1 = block.getTx()[0];
+        Transaction transaction2 = block.getTx()[0];
+
+        REQUIRE(block.getVersion() == expectedBlockVersion);
+        REQUIRE(block.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(block.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(block.getTime() == expectedTime);
+        REQUIRE(block.getBits() == expectedBits);
+        REQUIRE(block.getNonce() == expectedNonce);
+        REQUIRE(block.getSize() == expectedSize);
+        REQUIRE(block.getTx().size() == 2);
+        REQUIRE(transaction1.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction1.getLockTime() == expectedLockTime);
+        REQUIRE(transaction1.getInputs().size() == 1);
+        REQUIRE(transaction1.getOutputs().size() == 1);
+        REQUIRE(transaction1.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction1.getOutputs()[0].GetValue() == 50000000000);
+        REQUIRE(transaction2.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction2.getLockTime() == expectedLockTime);
+        REQUIRE(transaction2.getInputs().size() == 1);
+        REQUIRE(transaction2.getOutputs().size() == 1);
+        REQUIRE(transaction2.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction2.getOutputs()[0].GetValue() == 50000000000);
     }
 
 
@@ -246,35 +255,42 @@ TEST_CASE("Blockchain tests")
         uint32_t expectedTransactionVersion = 1;
         uint32_t expectedLockTime = 0;
 
-        REQUIRE(chain.getBlocks()[0].nVersion == expectedVersion);
-        REQUIRE(chain.getBlocks()[0].hashPrevBlock.ToString() == expectedHashPrevBlock);
-        REQUIRE(chain.getBlocks()[0].hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-        REQUIRE(chain.getBlocks()[0].nTime == expectedTime);
-        REQUIRE(chain.getBlocks()[0].nBits == expectedBits);
-        REQUIRE(chain.getBlocks()[0].nNonce == expectedNonce);
-        REQUIRE(chain.getBlocks()[0].nSize == expectedSize);
-        REQUIRE(chain.getBlocks()[0].nTx.size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[0].nTx[0].GetOutputs()[0].GetValue() == 500);
+        const Block& block1 = chain.getBlocks()[0];
+        const Block& block2 = chain.getBlocks()[1];
+        Transaction transaction1 = block1.getTx()[0];
+        Transaction transaction2 = block2.getTx()[0];
 
-        REQUIRE(chain.getBlocks()[1].nVersion == expectedVersion);
-        REQUIRE(chain.getBlocks()[1].hashPrevBlock.ToString() == expectedHashPrevBlock);
-        REQUIRE(chain.getBlocks()[1].hashMerkleRoot.ToString() == expectedHashMerkleRoot);
-        REQUIRE(chain.getBlocks()[1].nTime == expectedTime);
-        REQUIRE(chain.getBlocks()[1].nBits == expectedBits);
-        REQUIRE(chain.getBlocks()[1].nNonce == expectedNonce);
-        REQUIRE(chain.getBlocks()[1].nSize == expectedSize);
-        REQUIRE(chain.getBlocks()[1].nTx.size() == 1);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetVersion() == expectedTransactionVersion);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetLockTime() == expectedLockTime);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetInputs().size() == 1);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetOutputs().size() == 1);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(chain.getBlocks()[1].nTx[0].GetOutputs()[0].GetValue() == 500);
+        REQUIRE(block1.getVersion() == expectedVersion);
+        REQUIRE(block1.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(block1.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(block1.getTime() == expectedTime);
+        REQUIRE(block1.getBits() == expectedBits);
+        REQUIRE(block1.getNonce() == expectedNonce);
+        REQUIRE(block1.getSize() == expectedSize);
+        REQUIRE(block1.getTx().size() == 1);
+
+        REQUIRE(block2.getVersion() == expectedVersion);
+        REQUIRE(block2.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(block2.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(block2.getTime() == expectedTime);
+        REQUIRE(block2.getBits() == expectedBits);
+        REQUIRE(block2.getNonce() == expectedNonce);
+        REQUIRE(block2.getSize() == expectedSize);
+        REQUIRE(block2.getTx().size() == 1);
+
+        REQUIRE(transaction1.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction1.getLockTime() == expectedLockTime);
+        REQUIRE(transaction1.getInputs().size() == 1);
+        REQUIRE(transaction1.getOutputs().size() == 1);
+        REQUIRE(transaction1.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction1.getOutputs()[0].GetValue() == 50000000000);
+
+        REQUIRE(transaction2.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction2.getLockTime() == expectedLockTime);
+        REQUIRE(transaction2.getInputs().size() == 1);
+        REQUIRE(transaction2.getOutputs().size() == 1);
+        REQUIRE(transaction2.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction2.getOutputs()[0].GetValue() == 50000000000);
     }
 
 
@@ -372,7 +388,7 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0x57 };
 
         uint8_t expectedValue = 0x57;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 1);
 
         REQUIRE(expectedValue == actualValue.first);
         REQUIRE(actualValue.second == 1); //1 byte
@@ -384,10 +400,10 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0xFD, 0xFC, 0x8A };
 
         uint16_t expectedValue = 0x8AFC;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 3);
 
         REQUIRE(expectedValue == actualValue.first);
-        REQUIRE(actualValue.second == 2); //2 bytes
+        REQUIRE(actualValue.second == 3); //3 bytes
     }
 
 
@@ -396,10 +412,10 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0xFE, 0xFF, 0xFF, 0xFF, 0xFF };
 
         uint32_t expectedValue = 0xFFFFFFFF;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 5);
 
         REQUIRE(expectedValue == actualValue.first);
-        REQUIRE(actualValue.second == 4); //4 bytes
+        REQUIRE(actualValue.second == 5); //5 bytes
     }
 
 
@@ -408,10 +424,10 @@ TEST_CASE("ParseVarLength tests")
         const unsigned char len_buffer[] = { 0xFF, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00};
 
         uint64_t expectedValue = 0x100000000;
-        varInt actualValue = ParseVarLength(len_buffer);
+        varInt actualValue = ParseVarLength(len_buffer, 9);
 
         REQUIRE(expectedValue == actualValue.first);
-        REQUIRE(actualValue.second == 8); //8 bytes
+        REQUIRE(actualValue.second == 9); //9 bytes
     }
 }
 
@@ -434,23 +450,24 @@ TEST_CASE("Transaction parse tests")
         uint32_t expectedLockTime = 0;
         uint32_t globalOffSet = 0;
 
-        Transaction transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet);
+        size_t unread = sizeof(test_transaction);
+        Transaction transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet, unread);
 
-        REQUIRE(transaction.GetVersion() == expectedTransactionVersion);
-        REQUIRE(transaction.GetLockTime() == expectedLockTime);
-        REQUIRE(transaction.GetInputs().size() == 1);
-        REQUIRE(transaction.GetOutputs().size() == 1);
-        REQUIRE(transaction.GetInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(transaction.GetOutputs()[0].GetValue() == 500);
+        REQUIRE(transaction.getVersion() == expectedTransactionVersion);
+        REQUIRE(transaction.getLockTime() == expectedLockTime);
+        REQUIRE(transaction.getInputs().size() == 1);
+        REQUIRE(transaction.getOutputs().size() == 1);
+        REQUIRE(transaction.getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(transaction.getOutputs()[0].GetValue() == 50000000000);
     }
 
 
     SECTION("Transaction with invalid length of input")
     {
         const unsigned char test_transaction[] = {
-         /*0x01,*/0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         /*0x01,*/0x01, 0x00, 0x00, 0x00, 0x02, /* <- TxIn count 01->02*/  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0B, /* <- length*/ 0x51, 0x01, 0x01, 0x06, 0x2F,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0A, 0x51, 0x01, 0x01, 0x06, 0x2F,
             0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00,
             0x00, 0x00, 0x23, 0x21, 0x03, 0xA6, 0x98, 0x50, 0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8,
             0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
@@ -458,8 +475,8 @@ TEST_CASE("Transaction parse tests")
         };
 
         uint32_t globalOffSet = 0;
-
-        REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet), InvalidTransactionSizeException);
+        size_t unread = sizeof(test_transaction);
+        REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet, unread), InvalidTransactionSizeException);
     }
 
 
@@ -476,13 +493,13 @@ TEST_CASE("Transaction parse tests")
         };
 
         uint32_t globalOffSet = 0;
-
-        REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet), InvalidTransactionSizeException);
+        size_t unread = sizeof(test_transaction);
+        REQUIRE_THROWS_AS(Transaction(reinterpret_cast<const char*>(test_transaction), globalOffSet, unread), InvalidTransactionSizeException);
     }
 }
 
 
-TEST_CASE("Validator tests")
+TEST_CASE("Simple validator tests")
 {
     SECTION("validateTransactions() tests")
     {
@@ -519,7 +536,7 @@ TEST_CASE("Validator tests")
         SECTION("Valid timestamp")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
-            testBlock.nTime = 1390103681;
+            TestHelper::setBlockTime(testBlock, 1390103681);
 
             REQUIRE(TestHelper::timestampNotTooNew(testBlock) == true);
         }
@@ -531,7 +548,7 @@ TEST_CASE("Validator tests")
             uint32_t currentTime = static_cast<uint32_t>(time(NULL));
 
             Block testBlock = TestHelper::CreateEmptyBlockObject();
-            testBlock.nTime = currentTime + twoHoursAndOneSecond;
+            TestHelper::setBlockTime(testBlock, currentTime + twoHoursAndOneSecond);
 
             REQUIRE(TestHelper::timestampNotTooNew(testBlock) == false);
         }
@@ -547,42 +564,457 @@ TEST_CASE("Validator tests")
                 0x55, 0x33, 0x73, 0x9C, 0x37, 0xE6, 0x22, 0x9B, 0xC1, 0xAD, 0xCA, 0xB3, 0x85, 0x14, 0x0B, 0x59,
                 0xFD, 0x0F, 0x00, 0x00, 0xA7, 0x1C, 0x1A, 0xAD, 0xE4, 0x4B, 0xF8, 0x42, 0x5B, 0xEC, 0x0D, 0xEB,
                 0x61, 0x1C, 0x20, 0xB1, 0x6D, 0xA3, 0x44, 0x28, 0x18, 0xEF, 0x20, 0x48, 0x9C, 0xA1, 0xE2, 0x51,
-                0x2B, 0xE4, 0x3E, 0xEF, 0x81, 0x4C, 0xDB, 0x52, 0xF0, 0xFF, 0x0F, 0x1E, 0xDB, 0xF7, 0x01, 0x00,
-                0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0A, 0x51, 0x01, 0x01, 0x06, 0x2F,
-                0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00,
-                0x00, 0x00, 0x23, 0x21, 0x03, 0xA6, 0x98, 0x50, 0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8,
-                0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
-                0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00, 0x00, 0x00
+                0x2B, 0xE4, 0x3E, 0xEF, 0x81, 0x4C, 0xDB, 0x52, 0xF0, 0xFF, 0x0F, 0x1E, 0xDB, 0xF7, 0x01, 0x00
             };
 
+            Block head = TestHelper::CreateEmptyBlockObject();
+            Block predecessor = TestHelper::CreateEmptyBlockObject();
 
-//            Block head = TestHelper::CreateEmptyBlockObject();
-//            Block predecessor = TestHelper::CreateEmptyBlockObject();
+            std::unique_ptr<char[]> binBuffer = std::unique_ptr<char[]>(new char[80]);
 
-//            predecessor.binBuffer = (reinterpret_cast<const char*>(test_block));
-//            predecessor.beginEndOffsets.first = 0;
-//            predecessor.beginEndOffsets.second = 80;
+            TestHelper::setBlockBinBuffer(predecessor, std::move(binBuffer));
 
-//            head.hashPrevBlock.SetHex("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
+            memcpy(predecessor.getBinBufferData(), test_block, 80);
 
-//            REQUIRE(TestHelper::verifyPreviousBlocHash(head, predecessor) == true);
+            offsets offset;
+            offset.first = 0;
+            offset.second = 80;
+
+            TestHelper::setBlockOffsets(predecessor, offset);
+
+            uint256 prevHash;
+            prevHash.SetHex("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
+
+            TestHelper::setBlockPrevhash(head, prevHash);
+
+            REQUIRE(TestHelper::verifyPreviousBlockHash(head, predecessor) == true);
+        }
+
+
+        SECTION("Invalid previous block hash")
+        {
+            const unsigned char test_block[] = {
+                0x00, 0x00, 0x00, 0x00, 0xB6, 0x7A, 0x40, 0xF3, 0xCD, 0x58, 0x04, 0x43, 0x7A, 0x10, 0x8F, 0x10,
+                0x55, 0x33, 0x73, 0x9C, 0x37, 0xE6, 0x22, 0x9B, 0xC1, 0xAD, 0xCA, 0xB3, 0x85, 0x14, 0x0B, 0x59,
+                0xFD, 0x0F, 0x00, 0x00, 0xA7, 0x1C, 0x1A, 0xAD, 0xE4, 0x4B, 0xF8, 0x42, 0x5B, 0xEC, 0x0D, 0xEB,
+                0x61, 0x1C, 0x20, 0xB1, 0x6D, 0xA3, 0x44, 0x28, 0x18, 0xEF, 0x20, 0x48, 0x9C, 0xA1, 0xE2, 0x51,
+                0x2B, 0xE4, 0x3E, 0xEF, 0x81, 0x4C, 0xDB, 0x52, 0xF0, 0xFF, 0x0F, 0x1E, 0xDB, 0xF7, 0x01, 0x00
+            };
+
+            Block head = TestHelper::CreateEmptyBlockObject();
+            Block predecessor = TestHelper::CreateEmptyBlockObject();
+
+            std::unique_ptr<char[]> binBuffer = std::unique_ptr<char[]>(new char[80]);
+
+            TestHelper::setBlockBinBuffer(predecessor, std::move(binBuffer));
+
+            memcpy(predecessor.getBinBufferData(), test_block, 80);
+
+            offsets offset;
+            offset.first = 0;
+            offset.second = 80;
+
+            TestHelper::setBlockOffsets(predecessor, offset);
+
+            uint256 prevHash;
+            prevHash.SetHex("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
+
+            TestHelper::setBlockPrevhash(head, prevHash);
+
+            REQUIRE(TestHelper::verifyPreviousBlockHash(head, predecessor) == false);
+        }
+    }
+}
+
+TEST_CASE("Advanced tests")
+{
+    const unsigned char block_part1[] = {
+        0x02, 0x00, 0x00, 0x00, 0x0F, 0x91, 0x20, 0x0D, 0xEB, 0xB2, 0x37, 0xE7, 0x07, 0xCE, 0x8E, 0x4F,
+        0xD0, 0xB3, 0x0F, 0x42, 0x77, 0xE9, 0x94, 0x28, 0xE4, 0xDD, 0x5C, 0xCE, 0x7D, 0x0C, 0xD8, 0x3E,
+        0x00, 0x00, 0x00, 0x00, 0xE0, 0xDE, 0x56, 0x65, 0x4B, 0xC7, 0xA0, 0x89, 0xF2, 0x1E, 0xF2, 0x6B,
+        0x2D, 0x1A, 0xEB, 0x75, 0x0A, 0x03, 0xB2, 0xD5, 0xA0, 0x79, 0x6B, 0xB3, 0x51, 0xC6, 0xE0, 0xF3,
+        0x69, 0xD1, 0xF2, 0x33, 0x3C, 0xE2, 0xDD, 0x52, 0x80, 0x69, 0x42, 0x1C, 0xAE, 0x93, 0xDD, 0x04,
+        0x07, // trans1 begin
+        0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x29, 0x02, 0x9A, 0x13, 0x06, 0x2F, 0x50,
+        0x32, 0x53, 0x48, 0x2F, 0x04, 0x36, 0xE2, 0xDD, 0x52, 0x08, 0xF8, 0x00, 0x01, 0xAD, 0x00, 0x00,
+        0x00, 0x00, 0x10, 0x2F, 0x53, 0x6D, 0x61, 0x6C, 0x6C, 0x54, 0x69, 0x6D, 0x65, 0x50, 0x6F, 0x6F,
+        0x6C, 0x73, 0x2F, 0x00, 0x00, 0x00, 0x00, 0x01, 0xC0, 0x76, 0x2D, 0x18, 0x01, 0x00, 0x00, 0x00,
+        0x19, 0x76, 0xA9, 0x14, 0xD9, 0x59, 0x63, 0x1C, 0x0D, 0x86, 0xFD, 0x1E, 0x1E, 0xDA, 0x47, 0x21,
+        0x18, 0x91, 0x19, 0x23, 0xDC, 0x2E, 0x0F, 0x0F, 0x88, 0xAC, 0x00, 0x00, 0x00, 0x00, // tr2
+        0x01, 0x00, 0x00, 0x00, 0x01, 0x5A, 0xDD, 0x0B, 0x3F, 0xE6, 0x9F, 0xB8, 0x28, 0xC2, 0xFF, 0xC6,
+        0x3F, 0x69, 0x9B, 0x8D, 0xF1, 0xF5, 0x5F, 0x6C, 0x01, 0x3F, 0x9B, 0x9C, 0xB2, 0xDC, 0x63, 0x6D,
+        0x24, 0x03, 0x9E, 0x16, 0x75, 0x01, 0x00, 0x00, 0x00, 0x6B, 0x48, 0x30, 0x45, 0x02, 0x20, 0x24,
+        0x95, 0x0E, 0xA6, 0x84, 0x10, 0x52, 0x0E, 0x4B, 0xFF, 0xD3, 0x28, 0x9C, 0x86, 0x90, 0x70, 0xEA,
+        0x65, 0x0A, 0x11, 0x40, 0x5E, 0x5F, 0x64, 0xAE, 0x82, 0x88, 0xA2, 0xCA, 0x8E, 0x0D, 0xC2, 0x02,
+        0x21, 0x00, 0xEA, 0x81, 0xA6, 0xAF, 0x3B, 0x1C, 0x28, 0x00, 0xF6, 0x3F, 0x04, 0x21, 0xE6, 0x57,
+        0xDC, 0x77, 0x7B, 0xCF, 0xAC, 0x4D, 0x83, 0xAE, 0xB1, 0x4D, 0x68, 0x1F, 0xEF, 0x58, 0x5E, 0x36,
+        0x17, 0xEE, 0x01, 0x21, 0x03, 0x67, 0x14, 0x5C, 0x75, 0x0B, 0xFC, 0x43, 0x8F, 0x3A, 0xB7, 0x75,
+        0x1A, 0xF5, 0xD2, 0x44, 0x97, 0x6F, 0xA5, 0x97, 0xF7, 0x5E, 0xE8, 0x59, 0xB0, 0x7B, 0x4C, 0xF6,
+        0xF6, 0x37, 0xFD, 0xF7, 0xB7, 0xFF, 0xFF, 0xFF, 0xFF, 0x02, 0x9C, 0xE0, 0xAC, 0x45, 0x00, 0x00,
+        0x00, 0x00, 0x19, 0x76, 0xA9, 0x14, 0x6F, 0xCE, 0x11, 0x11, 0xC0, 0xA7, 0xCD, 0x68, 0xD3, 0x52,
+        0x65, 0x99, 0xBF, 0x19, 0x9A, 0xAE, 0x2E, 0xFD, 0x1A, 0xB8, 0x88, 0xAC, 0x73, 0x77, 0x14, 0x87,
+        0x00, 0x00, 0x00, 0x00, 0x19, 0x76, 0xA9, 0x14, 0x50, 0xF8, 0x37, 0x7D, 0x81, 0x7F, 0x66, 0xF8,
+        0x08, 0xCA, 0xCA, 0x52, 0x68, 0xBA, 0x4D, 0x58, 0x4D, 0x07, 0x07, 0x8A, 0x88, 0xAC, 0x00, 0x00,
+        0x00, 0x00, // tr3
+        0x01, 0x00, 0x00, 0x00, 0x01, 0x76, 0x44, 0x7D, 0x85, 0x31, 0x7B, 0x1E, 0x39, 0xDD, 0x94, 0x2F,
+        0xEF, 0x5E, 0xE4, 0xE6, 0xCD, 0x85, 0xBB, 0xD2, 0x05, 0x40, 0xCF, 0x8A, 0x8F, 0x19, 0x48, 0x91,
+        0x9F, 0xC7, 0x52, 0x19, 0x42, 0x01, 0x00, 0x00, 0x00, 0x6A, 0x47, 0x30, 0x44, 0x02, 0x20, 0x2B,
+        0x7E, 0x72, 0x3B, 0x04, 0xDE, 0x01, 0x84, 0x1F, 0xFB, 0x5F, 0xEC, 0x84, 0x91, 0x69, 0x95, 0x9B,
+        0x6E, 0x83, 0xF7, 0x5A, 0xFB, 0xDC, 0xC4, 0xDE, 0xE2, 0x6A, 0x51, 0xEF, 0xDF, 0xBB, 0x88, 0x02,
+        0x20, 0x41, 0xC3, 0x67, 0xD3, 0x51, 0x34, 0x23, 0xFA, 0x92, 0x49, 0xD3, 0x28, 0x05, 0x09, 0x97,
+        0xB5, 0x1F, 0xB1, 0xFC, 0xB8, 0xED, 0x1F, 0xC4, 0x46, 0x41, 0x13, 0xB4, 0xD3, 0xFF, 0x7E, 0xCB,
+        0xA6, 0x01, 0x21, 0x02, 0x4A, 0xFF, 0x58, 0x0C, 0x0F, 0x26, 0xF5, 0x16, 0x85, 0xE9, 0x44, 0x2C,
+        0xF7, 0x3F, 0x89, 0x72, 0x4C, 0xDE, 0x38, 0x67, 0x7F, 0x48, 0x31, 0x29, 0xC6, 0xB8, 0xF9, 0x43,
+        0xA9, 0xBC, 0xB7, 0xF0, 0xFF, 0xFF, 0xFF, 0xFF, 0x02, 0x0F, 0x46, 0x83, 0x0C, 0x00, 0x00, 0x00,
+        0x00, 0x19, 0x76, 0xA9, 0x14, 0x3A, 0x8C, 0x1A, 0x7B, 0x8A, 0xEA, 0xE8, 0xC6, 0x09, 0x65, 0xE1,
+        0x1E, 0x03, 0x88, 0xF8, 0x3F, 0x63, 0x01, 0x59, 0xEB, 0x88, 0xAC, 0x38, 0x1E, 0xE2, 0xB4, 0x00,
+        0x00, 0x00, 0x00, 0x19, 0x76, 0xA9, 0x14, 0xB1, 0x8D, 0x2E, 0x7E, 0xB4, 0x82, 0x59, 0x1D, 0xA5,
+        0xDD, 0xBE, 0x93, 0x0A, 0xA6, 0x1F, 0xA4, 0x04, 0x2F, 0x82, 0xD7, 0x88, 0xAC, 0x00, 0x00, 0x00,
+        0x00, // tra4
+        0x01, 0x00, 0x00, 0x00, 0x01, 0xD8, 0x8D, 0x2D, 0x8C, 0x3B, 0x9A, 0x06, 0xA5, 0x39, 0x32, 0x43,
+        0xCC, 0x6E, 0x01, 0xA2, 0xC9, 0x8E, 0x8C, 0x0C, 0x41, 0xF5, 0xAB, 0xA0, 0x6C, 0xA7, 0x31, 0x1B,
+        0x4A, 0x70, 0x18, 0x64, 0xE4, 0x01, 0x00, 0x00, 0x00, 0x6A, 0x47, 0x30, 0x44, 0x02, 0x20, 0x28,
+        0x97, 0x7F, 0x23, 0x01, 0x8E, 0xF0, 0x65, 0x74, 0x80, 0xD2, 0xC8, 0xB2, 0x57, 0xEE, 0xAE, 0xF2,
+        0x68, 0x77, 0xD8, 0x46, 0x59, 0xD0, 0xF3, 0x0C, 0x80, 0xBF, 0x95, 0x65, 0x7C, 0xFF, 0x1F, 0x02,
+        0x20, 0x4E, 0xCF, 0xF0, 0xBD, 0x9D, 0x2C, 0xCB, 0xBA, 0xF9, 0x15, 0x41, 0x45, 0x4E, 0xD6, 0xCE,
+        0xC5, 0x52, 0x8D, 0x9F, 0xF1, 0x9E, 0xAC, 0x91, 0x58, 0x05, 0xB4, 0xEF, 0xCB, 0xEF, 0xB3, 0xB1,
+        0x94, 0x01, 0x21, 0x03, 0xDD, 0x6D, 0x63, 0x19, 0xC4, 0x71, 0x70, 0xF5, 0x66, 0x5E, 0xC6, 0xC6,
+        0xD2, 0x22, 0x88, 0xD1, 0x9D, 0xC5, 0x49, 0x16, 0x77, 0x72, 0x96, 0xDA, 0xF3, 0x75, 0x50, 0x9D,
+        0x5D, 0xE9, 0xEC, 0x62, 0xFF, 0xFF, 0xFF, 0xFF, 0x02, 0xAA, 0x93, 0xD4, 0xBD, 0x00, 0x00, 0x00,
+        0x00, 0x19, 0x76, 0xA9, 0x14, 0x66, 0xFA, 0xDD, 0x34, 0x64, 0x49, 0x39, 0xD7, 0x3E, 0x85, 0xD0,
+        0x11, 0xF5, 0x71, 0x78, 0xF3, 0xD6, 0x7D, 0x54, 0x9E, 0x88, 0xAC, 0xCE, 0xD2, 0x22, 0x07, 0x00,
+        0x00, 0x00, 0x00, 0x19, 0x76, 0xA9, 0x14, 0xCF, 0x31, 0x71, 0xF8, 0x3A, 0xDC, 0x42, 0x52, 0xDD,
+        0x2C, 0x0E, 0x7D, 0xB6, 0x65, 0x2E, 0x3A, 0x37, 0x5E, 0x89, 0x07, 0x88, 0xAC, 0x00, 0x00, 0x00,
+        0x00,
+    };
+
+
+    const unsigned char block_part2[] = { //tr5
+        0x01, 0x00, 0x00, 0x00, 0x01, 0x04, 0x72, 0xFD, 0x30, 0x13, 0x84, 0xD9, 0x25, 0xC6, 0x40, 0x60,
+        0x57, 0x7B, 0x68, 0x63, 0x77, 0x4D, 0x36, 0x63, 0x31, 0xFF, 0x49, 0x4F, 0xDF, 0x37, 0x0F, 0xA9,
+        0xA7, 0xEC, 0x7E, 0x79, 0x80, 0x00, 0x00, 0x00, 0x00, 0x6B, 0x48, 0x30, 0x45, 0x02, 0x20, 0x0C,
+        0x85, 0x67, 0x22, 0x03, 0x07, 0x90, 0x7B, 0x31, 0xC2, 0xF2, 0x91, 0x77, 0x5A, 0x2C, 0xF3, 0xC1,
+        0xB9, 0x7B, 0x14, 0xE3, 0xCA, 0x52, 0xF4, 0x4E, 0xE9, 0xAD, 0xFD, 0xDA, 0x26, 0x49, 0x87, 0x02,
+        0x21, 0x00, 0xD1, 0x3C, 0x36, 0xF3, 0xB1, 0x0D, 0x38, 0x08, 0xC3, 0x40, 0x03, 0x9B, 0x3B, 0xEE,
+        0xF1, 0x67, 0xD8, 0x7D, 0x44, 0x74, 0xFD, 0x74, 0x32, 0xDE, 0xF8, 0x3C, 0x46, 0x61, 0xDF, 0xF1,
+        0xCC, 0xB8, 0x01, 0x21, 0x02, 0xB8, 0x24, 0x8D, 0xBF, 0x4F, 0x69, 0x28, 0xAA, 0x54, 0x78, 0x01,
+        0x5E, 0x1D, 0x91, 0x59, 0xFF, 0xCB, 0xDE, 0x81, 0x5E, 0x7E, 0xD0, 0xAA, 0xCE, 0xEC, 0x64, 0x92,
+        0x83, 0x7C, 0x9F, 0x93, 0x2B, 0xFF, 0xFF, 0xFF, 0xFF, 0x02, 0x08, 0xAA, 0x40, 0x0B, 0x00, 0x00,
+        0x00, 0x00, 0x19, 0x76, 0xA9, 0x14, 0x3E, 0xF1, 0x90, 0x6B, 0x08, 0x2D, 0x16, 0xF8, 0x2C, 0x48,
+        0xB7, 0x76, 0xFC, 0xAB, 0x61, 0x3B, 0xEA, 0xBE, 0x12, 0xD5, 0x88, 0xAC, 0x17, 0x6C, 0x93, 0xC0,
+        0x00, 0x00, 0x00, 0x00, 0x19, 0x76, 0xA9, 0x14, 0x69, 0x24, 0xA5, 0x81, 0x40, 0xA5, 0x0C, 0xBD,
+        0xD0, 0x1D, 0xE3, 0x7F, 0x57, 0x77, 0xC2, 0x13, 0xDF, 0x6F, 0x5B, 0x6D, 0x88, 0xAC, 0x00, 0x00,
+        0x00, 0x00, // tr6
+        0x01, 0x00, 0x00, 0x00, 0x01, 0x1C, 0x46, 0x93, 0x31, 0xD0, 0xAF, 0x96, 0x22, 0x25, 0xF3, 0xB0,
+        0x90, 0xF0, 0x3A, 0x95, 0x3A, 0x2E, 0xA5, 0xAD, 0xEE, 0x7C, 0x16, 0xFF, 0x0F, 0x41, 0x24, 0x77,
+        0xEE, 0xA1, 0x50, 0x73, 0x4D, 0x01, 0x00, 0x00, 0x00, 0x6B, 0x48, 0x30, 0x45, 0x02, 0x21, 0x00,
+        0xE7, 0x1C, 0x43, 0x6A, 0xA1, 0x41, 0x2C, 0x22, 0xD2, 0x8A, 0xB4, 0x8A, 0x63, 0xF8, 0xE5, 0x33,
+        0xB4, 0x72, 0x2B, 0x03, 0x1B, 0x4C, 0x8A, 0x72, 0xBF, 0x26, 0x96, 0x5A, 0xE1, 0x62, 0x93, 0xD5,
+        0x02, 0x20, 0x5E, 0xB7, 0xDA, 0x3D, 0xA2, 0xF8, 0x33, 0xD9, 0x36, 0x7D, 0x16, 0x36, 0x9D, 0xEF,
+        0xFA, 0x32, 0x10, 0x22, 0xA5, 0xE3, 0x00, 0xB8, 0x00, 0x79, 0x8A, 0x1B, 0x7F, 0x1F, 0x47, 0xBC,
+        0x8B, 0xF4, 0x01, 0x21, 0x03, 0xF1, 0x2F, 0x27, 0x35, 0x7A, 0x3C, 0xB1, 0x7D, 0xFF, 0x7B, 0x2D,
+        0x92, 0xF5, 0xB4, 0x76, 0x6E, 0x5A, 0x8E, 0xCE, 0x98, 0xCE, 0xB0, 0x3A, 0xF4, 0x16, 0xE8, 0x9E,
+        0xE4, 0x95, 0xD8, 0x22, 0x98, 0xFF, 0xFF, 0xFF, 0xFF, 0x02, 0x45, 0x93, 0xDF, 0xBF, 0x00, 0x00,
+        0x00, 0x00, 0x19, 0x76, 0xA9, 0x14, 0xAA, 0x52, 0x9A, 0x97, 0x2F, 0x78, 0x44, 0x8F, 0xF9, 0xF2,
+        0xFC, 0xE3, 0x33, 0x48, 0xA2, 0xF4, 0x69, 0x4E, 0xE5, 0xEE, 0x88, 0xAC, 0x12, 0xBC, 0x8A, 0x0A,
+        0x00, 0x00, 0x00, 0x00, 0x19, 0x76, 0xA9, 0x14, 0xD1, 0x3D, 0xC2, 0x6E, 0x7A, 0x34, 0x74, 0xD6,
+        0x45, 0x7D, 0x02, 0xFF, 0x59, 0x75, 0xF1, 0x6D, 0x2D, 0x31, 0xAD, 0x10, 0x88, 0xAC, 0x00, 0x00,
+        0x00, 0x00, // tr7
+        0x01, 0x00, 0x00, 0x00, 0x01, 0x9E, 0x9F, 0x54, 0xD1, 0x4A, 0x28, 0xA8, 0x5B, 0x68, 0xA8, 0x58,
+        0xF7, 0xFB, 0x07, 0x4C, 0x72, 0x89, 0x91, 0xED, 0x34, 0xD9, 0xAA, 0x0F, 0x53, 0xDC, 0x45, 0x3B,
+        0x99, 0xFD, 0xBB, 0xFA, 0xF5, 0x00, 0x00, 0x00, 0x00, 0x6C, 0x49, 0x30, 0x46, 0x02, 0x21, 0x00,
+        0xEC, 0x8F, 0x0E, 0x56, 0xB8, 0x57, 0x8B, 0xE8, 0x3E, 0x37, 0xF4, 0x3B, 0xCE, 0xAC, 0x1F, 0x5E,
+        0x48, 0xD5, 0x9D, 0x37, 0x8F, 0x7B, 0x03, 0x17, 0x83, 0xE3, 0x5F, 0x70, 0x6D, 0x24, 0x72, 0x7C,
+        0x02, 0x21, 0x00, 0xA5, 0x4E, 0xF5, 0xFC, 0xB8, 0xC5, 0x29, 0xD2, 0xEC, 0xC5, 0x5E, 0x4B, 0xF9,
+        0xF9, 0xCE, 0xD2, 0xBD, 0x56, 0xD9, 0x8A, 0xEE, 0x91, 0x45, 0xD2, 0x71, 0xBF, 0x8A, 0x8C, 0xA0,
+        0xDA, 0x6C, 0xCE, 0x01, 0x21, 0x03, 0xB7, 0x94, 0x0E, 0xE4, 0x04, 0x4C, 0xD0, 0xBD, 0xF0, 0x91,
+        0xBC, 0xC0, 0x6F, 0x56, 0x0C, 0x23, 0x64, 0x7A, 0xE6, 0xFE, 0xD2, 0x5C, 0xE2, 0x7F, 0xB9, 0xDE,
+        0x09, 0x37, 0x05, 0x14, 0xA5, 0x6F, 0xFF, 0xFF, 0xFF, 0xFF, 0x02, 0x02, 0xFC, 0xAC, 0x0D, 0x00,
+        0x00, 0x00, 0x00, 0x19, 0x76, 0xA9, 0x14, 0x86, 0x22, 0x50, 0x11, 0x3A, 0xAA, 0x31, 0x23, 0x2B,
+        0xEE, 0x86, 0x12, 0x11, 0x5B, 0x2A, 0x46, 0xA8, 0xC9, 0x78, 0xD4, 0x88, 0xAC, 0x9C, 0x96, 0xE6,
+        0xA3, 0x00, 0x00, 0x00, 0x00, 0x19, 0x76, 0xA9, 0x14, 0x77, 0xCF, 0xF7, 0x74, 0xF9, 0xAF, 0x09,
+        0x34, 0x1F, 0xBD, 0x01, 0x37, 0x1A, 0xC2, 0xA6, 0xB3, 0xC8, 0x85, 0xBB, 0x54, 0x88, 0xAC, 0x00,
+        0x00, 0x00, 0x00,
+    };
+
+    // Transaction 1
+    std::vector<TxIn> inTrans1;
+    std::vector<TxOut> outTrans1;
+
+    uint256 hash1;
+    hash1.SetHex("000000000000000000000000000000000000000000000000000000000000000");
+    TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 0);
+    TxOut output11 = TestHelper::CreateTxOutObject(4700600000);
+
+    inTrans1.push_back(input11);
+    outTrans1.push_back(output11);
+
+    offsets offsets1;
+    offsets1.first = 81;
+    offsets1.second = 207;
+
+    Transaction transaction1 = TestHelper::CreateTransactionObject(offsets1, inTrans1, outTrans1, 0, 1);
+
+    // Transaction 2
+    std::vector<TxIn> inTrans2;
+    std::vector<TxOut> outTrans2;
+
+    uint256 hash2;
+    hash2.SetHex("75169e03246d63dcb29c9b3f016c5ff5f18d9b693fc6ffc228b89fe63f0bdd5a");
+
+    TxIn input21 = TestHelper::CreateTxInObject(hash2, 1, 4294967295);
+    TxOut output21 = TestHelper::CreateTxOutObject(1168957596);
+    TxOut output22 = TestHelper::CreateTxOutObject(2266265459);
+
+    inTrans2.push_back(input21);
+    outTrans2.push_back(output21);
+    outTrans2.push_back(output22);
+
+    offsets offsets2;
+    offsets2.first = 207;
+    offsets2.second = 433;
+
+    Transaction transaction2 = TestHelper::CreateTransactionObject(offsets2, inTrans2, outTrans2, 0, 1);
+
+    // Transaction 3
+    std::vector<TxIn> inTrans3;
+    std::vector<TxOut> outTrans3;
+
+    uint256 hash3;
+    hash3.SetHex("421952c79f9148198f8acf4005d2bb85cde6e45eef2f94dd391e7b31857d4476");
+
+    TxIn input31 = TestHelper::CreateTxInObject(hash3, 1, 4294967295);
+    TxOut output31 = TestHelper::CreateTxOutObject(209929743);
+    TxOut output32 = TestHelper::CreateTxOutObject(3034717752);
+
+    inTrans3.push_back(input31);
+    outTrans3.push_back(output31);
+    outTrans3.push_back(output32);
+
+    offsets offsets3;
+    offsets3.first = 433;
+    offsets3.second = 658;
+
+    Transaction transaction3 = TestHelper::CreateTransactionObject(offsets3, inTrans3, outTrans3, 0, 1);
+
+    // Transaction 4
+    std::vector<TxIn> inTrans4;
+    std::vector<TxOut> outTrans4;
+
+    uint256 hash4;
+    hash4.SetHex("e46418704a1b31a76ca0abf5410c8c8ec9a2016ecc433239a5069a3b8c2d8dd8");
+
+    TxIn input41 = TestHelper::CreateTxInObject(hash4, 1, 4294967295);
+    TxOut output41 = TestHelper::CreateTxOutObject(3184825258);
+    TxOut output42 = TestHelper::CreateTxOutObject(119722702);
+
+    inTrans4.push_back(input41);
+    outTrans4.push_back(output41);
+    outTrans4.push_back(output42);
+
+    offsets offsets4;
+    offsets4.first = 658;
+    offsets4.second = 883;
+
+    Transaction transaction4 = TestHelper::CreateTransactionObject(offsets4, inTrans4, outTrans4, 0, 1);
+
+    // Transaction 5
+    std::vector<TxIn> inTrans5;
+    std::vector<TxOut> outTrans5;
+
+    uint256 hash5;
+    hash5.SetHex("80797eeca7a90f37df4f49ff3163364d7763687b576040c625d9841330fd7204");
+
+    TxIn input51 = TestHelper::CreateTxInObject(hash5, 0, 4294967295);
+    TxOut output51 = TestHelper::CreateTxOutObject(188787208);
+    TxOut output52 = TestHelper::CreateTxOutObject(3230886935);
+
+    inTrans5.push_back(input51);
+    outTrans5.push_back(output51);
+    outTrans5.push_back(output52);
+
+    offsets offsets5;
+    offsets5.first = 883;
+    offsets5.second = 1109;
+
+    Transaction transaction5 = TestHelper::CreateTransactionObject(offsets5, inTrans5, outTrans5, 0, 1);
+
+    // Transaction 6
+    std::vector<TxIn> inTrans6;
+    std::vector<TxOut> outTrans6;
+
+    uint256 hash6;
+    hash6.SetHex("4d7350a1ee7724410fff167ceeada52e3a953af090b0f3252296afd03193461c");
+
+    TxIn input61 = TestHelper::CreateTxInObject(hash6, 1, 4294967295);
+    TxOut output61 = TestHelper::CreateTxOutObject(3219100485);
+    TxOut output62 = TestHelper::CreateTxOutObject(176864274);
+
+    inTrans6.push_back(input61);
+    outTrans6.push_back(output61);
+    outTrans6.push_back(output62);
+
+    offsets offsets6;
+    offsets6.first = 1109;
+    offsets6.second = 1335;
+
+    Transaction transaction6 = TestHelper::CreateTransactionObject(offsets6, inTrans6, outTrans6, 0, 1);
+
+    // Transaction 7
+    std::vector<TxIn> inTrans7;
+    std::vector<TxOut> outTrans7;
+
+    uint256 hash7;
+    hash7.SetHex("f5fabbfd993b45dc530faad934ed9189724c07fbf758a8685ba8284ad1549f9e");
+
+    TxIn input71 = TestHelper::CreateTxInObject(hash7, 0, 4294967295);
+    TxOut output71 = TestHelper::CreateTxOutObject(229440514);
+    TxOut output72 = TestHelper::CreateTxOutObject(2749798044);
+
+    inTrans7.push_back(input71);
+    outTrans7.push_back(output71);
+    outTrans7.push_back(output72);
+
+    offsets offsets7;
+    offsets7.first = 1335;
+    offsets7.second = 1562;
+
+    Transaction transaction7 = TestHelper::CreateTransactionObject(offsets7, inTrans7, outTrans7, 0, 1);
+
+    std::unique_ptr<char[]> binBuffer = std::unique_ptr<char[]>(new char[1562]);
+    memcpy(binBuffer.get(), block_part1, sizeof(block_part1));
+    memcpy(binBuffer.get() + sizeof(block_part1), block_part2, sizeof(block_part2));
+
+    std::vector<Transaction> trans;
+    trans.push_back(transaction1);
+    trans.push_back(transaction2);
+    trans.push_back(transaction3);
+    trans.push_back(transaction4);
+    trans.push_back(transaction5);
+    trans.push_back(transaction6);
+    trans.push_back(transaction7);
+
+    uint256 merkle;
+    merkle.SetHex("33f2d169f3e0c651b36b79a0d5b2030a75eb1a2d6bf21ef289a0c74b6556dee0");
+
+    uint256 previousHash;
+    previousHash.SetHex("000000003ed80c7dce5cdde42894e977420fb3d04f8ece07e737b2eb0d20910f");
+
+    offsets offsetBlock;
+    offsetBlock.first = 0;
+    offsetBlock.second = 80;
+
+    Block testBlock = TestHelper::CreateBlockObject(binBuffer, merkle, previousHash, offsetBlock, 474114432, 81630126,
+                                                    1562, 1390273084, trans, 2);
+
+    SECTION("validateBlock() tests")
+    {
+        SECTION("Correct pair of blocks")
+        {
+
+        }
+
+
+        SECTION("Twice the same block")
+        {
+            REQUIRE(TestHelper::validateBlock(testBlock, testBlock) == false);
+        }
+    }
+
+
+    SECTION("validateTransactions() tests")
+    {
+        SECTION("Correct transactions")
+        {
+            REQUIRE(TestHelper::validateTransactions(testBlock) == true);
+        }
+
+
+        SECTION("Block without first transactions containing two inputs")
+        {
+
+        }
+    }
+
+
+    SECTION("timesamp tests")
+    {
+        SECTION("Valid timestamp")
+        {
+
         }
 
 
         SECTION("Invalid timestamp")
         {
-            const uint32_t twoHoursAndOneSecond = 2*60*60 + 1;
-            uint32_t currentTime = static_cast<uint32_t>(time(NULL));
 
-            Block testBlock = TestHelper::CreateEmptyBlockObject();
-            testBlock.nTime = currentTime + twoHoursAndOneSecond;
+        }
+    }
 
-            REQUIRE(TestHelper::timestampNotTooNew(testBlock) == false);
+
+    SECTION("Previous hash tests")
+    {
+        SECTION("Valid previous hash")
+        {
+
+        }
+
+
+        SECTION("Invalid previous block hash")
+        {
+
+        }
+    }
+
+
+    SECTION("Parser test")
+    {
+        SECTION("Correct pair of blocks")
+        {
+            const std::string FILE_NAME =  "./blockchainAdvancedTest.bin";
+
+            Blockchain chain(FILE_NAME);
+            chain.parseFile();
+
+            const Block& secondBlock = chain.getBlocks()[1];
+
+            std::string expectedHashMerkleRoot = "33f2d169f3e0c651b36b79a0d5b2030a75eb1a2d6bf21ef289a0c74b6556dee0";
+            std::string expectedHashPrevBlock = "000000003ed80c7dce5cdde42894e977420fb3d04f8ece07e737b2eb0d20910f";
+
+        
+            offsets offsetBlock;
+            offsetBlock.first = 0;
+            offsetBlock.second = 80;
+        
+            Block testBlock = TestHelper::CreateBlockObject(binBuffer, merkle, previousHash, offsetBlock, 474114432, 81630126,
+                                                            1562, 1390273084, trans, 2);
+
+            REQUIRE(secondBlock.getVersion() == 2);
+            REQUIRE(secondBlock.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+            REQUIRE(secondBlock.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+            REQUIRE(secondBlock.getTime() == 1390273084);
+            REQUIRE(secondBlock.getBits() == 474114432);
+            REQUIRE(secondBlock.getNonce() == 81630126);
+            REQUIRE(secondBlock.getSize() == 1562);
+            REQUIRE(secondBlock.getTx().size() == 7);
+            REQUIRE(secondBlock.getTx()[6].getVersion() == 1);
+            REQUIRE(secondBlock.getTx()[4].getLockTime() == 0);
+            REQUIRE(secondBlock.getTx()[3].getInputs().size() == 1);
+            REQUIRE(secondBlock.getTx()[2].getOutputs().size() == 2);
+            REQUIRE(secondBlock.getTx()[1].getInputs()[0].GetSeqNumber() == 4294967295);
+            REQUIRE(secondBlock.getTx()[5].getOutputs()[1].GetValue() == 176864274);
+        }
+
+
+        SECTION("Twice the same block")
+        {
+            REQUIRE(TestHelper::validateBlock(testBlock, testBlock) == false);
         }
     }
 
 }
+
 
 #endif // CATCH_CONFIG_MAIN

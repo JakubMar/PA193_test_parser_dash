@@ -16,9 +16,13 @@ const std::vector<Block>& Blockchain::getBlocks() const
     return nBlocks;
 }
 
-void Blockchain::parseFile()
+bool Blockchain::parseFile()
 {
     unsigned int numberOfBlocks = 0;
+    if(nBlocks.size() > 1)
+    {
+        nBlocks.erase(nBlocks.begin(), nBlocks.end() - 1);
+    }
 
     while(numberOfBlocks < MAX_NUMBER_OF_BLOCKS && !srcFile.eof())
     {
@@ -26,7 +30,7 @@ void Blockchain::parseFile()
 
         if(srcFile.eof())
         {
-            break;
+            return false;
         }
 
         uint32_t block_size = ReadBlockSize(srcFile);
@@ -36,6 +40,7 @@ void Blockchain::parseFile()
 
         ++numberOfBlocks;
     }
+    return !srcFile.eof();
 }
 
 void Blockchain::ReadMagicNumber(std::ifstream& file)
@@ -48,7 +53,6 @@ void Blockchain::ReadMagicNumber(std::ifstream& file)
     {
         if(file.eof() && file.gcount() == 0)
         {
-            std::cout << "All blocks were succesfuly parsed " << std::endl;
             return;
         }
 
@@ -59,8 +63,6 @@ void Blockchain::ReadMagicNumber(std::ifstream& file)
     {
         throw MagicNumberException();
     }
-
-    std::cout << "Magic word found, parsing another block" << std::endl;
 }
 
 
@@ -79,7 +81,6 @@ uint32_t Blockchain::ReadBlockSize(std::ifstream& file)
         throw InvalidBlockSizeException();
     }
 
-    std::cout << "Block size: " << block_size  << std::endl;
 
     return block_size;
 }

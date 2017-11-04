@@ -7,15 +7,23 @@ using namespace std;
 
 int main()
 {
-    std::cout << "Starting main" << std::endl;
-    std::unique_ptr<Blockchain> chain;
+
+    std::string fileName = "./two_blocks.txt";
 
     try
     {
-        std::string fileName = "./blocks.bin";
-        std::unique_ptr<Blockchain> tmpChain(new Blockchain(fileName));
-        tmpChain->parseFile();
-        chain = std::move(tmpChain);
+        std::unique_ptr<Blockchain> chain(new Blockchain(fileName));
+        unsigned int i = 0;
+        bool notEnd;
+        do
+        {
+            notEnd = chain->parseFile();
+            for(; i < chain->getBlocks().size(); ++i)
+            {
+               cout << std::endl << chain->getBlocks()[i];
+            }
+            i = 1;
+        } while(notEnd);
     }
     catch(ParserException& ex)
     {
@@ -23,10 +31,7 @@ int main()
         return 1;
     }
 
-    for(unsigned int i = 0; i < chain->getBlocks().size(); ++i)
-    {
-       cout << chain->getBlocks()[i];
-    }
+
 
     return 0;
 }

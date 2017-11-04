@@ -27,6 +27,6 @@ public:
     
     Blockchain(std::string fileName);
 
-    void parseFile();
+    bool parseFile();
     
 };

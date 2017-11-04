@@ -31,7 +31,7 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor){
 
 bool Validator::validateTransactions(const Block &block){
 
-    const std::vector<Transaction> &transactions = block.nTx;
+    const std::vector<Transaction> &transactions = block.tx;
 
     //transaction list nonempty
     if (!transactionListNonempty(transactions)) return false;
@@ -53,10 +53,12 @@ bool Validator::validateTransactions(const Block &block){
     for(auto it = transactions.begin(); it != transactions.end(); ++it){
         if(!validateTransaction(*it)) return false;
     }
+    return true;
 }
 
 bool Validator::validateTransaction(const Transaction &transaction){
     //apply "tx" checks 2-4
+    return false;
 }
 
 bool Validator::timestampNotTooNew(const Block &block){
@@ -65,7 +67,7 @@ bool Validator::timestampNotTooNew(const Block &block){
 
     uint32_t currentTime = static_cast<uint32_t>(time(NULL));
 
-    uint32_t blockTime = block.nTime;
+    uint32_t blockTime = block.time;
 
     return (blockTime-twoHoursInSeconds)<currentTime;
 }
@@ -99,14 +101,14 @@ uint256 Validator::hashBlock(const Block &block){
 
     //this is a bit dirty trick
     const unsigned char* ptr = reinterpret_cast<const unsigned char*>(block.binBuffer.get());
-    ptr += block.beginEndOffsets.first;
+    ptr += block.headerOffsets.first;
 
     //correct hashing is strongly dependent on correct offsets - otherwise it all goes bye bye
-    return HashX11<const unsigned char*>(ptr,block.beginEndOffsets.second-block.beginEndOffsets.first);
+    return HashX11<const unsigned char*>(ptr,block.headerOffsets.second-block.headerOffsets.first);
 }
 
 uint256 Validator::computeMerkleHash(const Block &block){
-    const std::vector<Transaction> &transactions = block.nTx;
+    const std::vector<Transaction> &transactions = block.tx;
     int baseNoPadding = transactions.size();
     int actualSize = baseNoPadding + baseNoPadding%2;
     uint256 hashes[actualSize];
@@ -117,8 +119,8 @@ uint256 Validator::computeMerkleHash(const Block &block){
     //fill hashes for first round
     for(int i = 0; i < baseNoPadding; ++i){
         const unsigned char* ptr = reinterpret_cast<const unsigned char*>(block.binBuffer.get());
-        ptr += transactions.at(i).GetOffsets().first;
-        uint64_t size = transactions.at(i).GetOffsets().second - transactions.at(i).GetOffsets().first;
+        ptr += transactions.at(i).getOffsets().first;
+        uint64_t size = transactions.at(i).getOffsets().second - transactions.at(i).getOffsets().first;
         hashes[i] = HashX11<const unsigned char*>(ptr,size);
     }
 

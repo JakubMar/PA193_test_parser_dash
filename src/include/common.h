@@ -62,19 +62,19 @@ inline varInt ParseVarLength(const unsigned char* array, size_t size)
     {
     case 0xFD:
     {
-        if(size < 2)
+        if(size < 3)
             throw InvalidVarLengthException();
         return varInt((*reinterpret_cast<const uint16_t*>(&array[1])), 3);
     }
     case 0xFE:
     {
-        if(size < 4)
+        if(size < 5)
             throw InvalidVarLengthException();
         return varInt(*reinterpret_cast<const uint32_t*>(&array[1]),5);
     }
     case 0xFF:
     {
-        if(size < 8)
+        if(size < 9)
             throw InvalidVarLengthException();
         return varInt(*reinterpret_cast<const uint64_t*>(&array[1]), 9);
     }

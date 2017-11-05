@@ -21,6 +21,8 @@ private:
 
     std::unique_ptr<char[]> ReadBlockContent(std::ifstream& file, uint32_t block_size);
 
+    Blockchain() {}
+
 public:
     
     const std::vector<Block> &getBlocks() const;
@@ -28,5 +30,7 @@ public:
     Blockchain(std::string fileName);
 
     bool parseFile();
+
+    friend class TestHelper;
     
 };

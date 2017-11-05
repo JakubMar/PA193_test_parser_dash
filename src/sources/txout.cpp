@@ -17,19 +17,15 @@ TxOut::TxOut(const char *buffer, uint32_t& globalOffset, size_t& unread_size)
     localOffset += VALUE_SIZE;
     unread_size -= VALUE_SIZE;
 
-    //SCRIPT
+    //SCRIPT OFFSETS
     varInt scriptLen = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer + localOffset), unread_size);
     localOffset += scriptLen.second;
     unread_size -= scriptLen.second;
-
     if(unread_size < scriptLen.first)
     {
         throw InvalidScriptSizeException();
     }
-
-//    std::unique_ptr<char[]> tmpScript(new char[scriptLen.first]);
-//    memcpy(tmpScript.get(), buffer + localOffset, scriptLen.first);
-//    script = std::move(tmpScript);
+    scriptOffsets = offsets(localOffset, localOffset + scriptLen.first);
 
     localOffset += scriptLen.first;
     unread_size -= scriptLen.first;

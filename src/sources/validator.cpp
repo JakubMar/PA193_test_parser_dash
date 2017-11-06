@@ -121,9 +121,9 @@ bool Validator::isCoinbase(const Transaction &transaction){
     return true;
 }
 bool Validator::isCoinbaseCorrectScriptSigLen(const Transaction &transaction){
-    offsets offs = transaction.getOffsets();
+    /*offsets offs = transaction.getOffsets();
     uint64_t size = offs.second - offs.first;
-    if(size < 2 || size > 100) return false;
+    if(size < 2 || size > 100) return false;*/
     return true;
 }
 

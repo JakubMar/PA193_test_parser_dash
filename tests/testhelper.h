@@ -226,31 +226,5 @@ public:
     {
         trans.beginEndOffsets = value;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 };
 

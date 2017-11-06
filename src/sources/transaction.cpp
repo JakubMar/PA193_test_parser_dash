@@ -45,7 +45,7 @@ Transaction::Transaction(const char *buffer, uint32_t &globalOffset, size_t &unr
     unread_size -= TIME_SIZE;
 
     //Begin_End_Offsets
-    beginEndOffsets = offsets(globalOffset, localOffset);
+    beginEndOffsets = offsets(globalOffset, globalOffset + localOffset);
     globalOffset += localOffset;
 }
 

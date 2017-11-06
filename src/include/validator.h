@@ -10,7 +10,7 @@
 class Validator
 {
 public:
-    static bool validateBlockChain(const Blockchain &chain);
+    bool validateBlockChain(const Blockchain &chain);
     static bool validateBlock(const Block &head, const Block &predecessor);
 
     friend class TestHelper;

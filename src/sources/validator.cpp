@@ -5,9 +5,12 @@
 bool Validator::validateBlockChain(const Blockchain &chain){
 
     const std::vector<Block> &blocks = chain.getBlocks();
+    std::cout << "lalala " << blocks.size() << std::endl;
+    std::cout << blocks[0].getValidStat().second << std::endl;
 
     //if(!validateBlock(*blocks.begin(),nullptr)) return false;
     for(auto it = ++blocks.begin(); it < blocks.end(); ++it) {
+        std::cout << "bububu" << std::endl;
         if(!validateBlock(*it,*(it-1))) return false;
     }
 

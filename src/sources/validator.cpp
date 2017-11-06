@@ -176,7 +176,7 @@ uint256 Validator::computeMerkleHash(const Block &block){
         }
 
         actualSize = actualSize/2;
-        if(actualSize%2 != 0){
+        if(actualSize > 1 && actualSize%2 != 0){
             hashes[actualSize] = hashes[actualSize-1];
             ++actualSize;
         }

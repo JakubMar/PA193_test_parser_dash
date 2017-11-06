@@ -2,6 +2,7 @@
 #include "sha256.h"
 
 #include <exception>
+#include  <iomanip>
 
 bool Validator::validateBlockChain(const Blockchain &chain){
 
@@ -217,6 +218,8 @@ uint256 Validator::computeMerkleHash(const Block &block){
         const unsigned char* ptr = reinterpret_cast<const unsigned char*>(block.binBuffer.get());
         uint64_t first = (transactions.at(i).getOffsets().first);
         ptr += first;
+        //int posun = 5;
+        //ptr += posun;
         uint64_t size = transactions.at(i).getOffsets().second - first;
         unsigned char tmpHash[32];
         {
@@ -234,7 +237,7 @@ uint256 Validator::computeMerkleHash(const Block &block){
         //hashes[i] = HashX11<const unsigned char*>(ptr,size);
         std::cout << "Initial hash: ";
         for(int j = 0; j <32; ++j){
-            std::cout << std::hex << (int) hashes[i][j] << std::dec;
+            std::cout << std::setfill('0') << std::setw(2) << std::hex << (int) hashes[i][j] << std::dec;
         }
         std::cout << std::endl;
     }
@@ -246,7 +249,7 @@ uint256 Validator::computeMerkleHash(const Block &block){
     }
 
     //actual computation
-    while(actualSize != 1) {
+    while(actualSize != 1 && baseNoPadding != 1) {
         std::cout << "Next round" << std::endl;
         for(int i = 0, j=0; i < actualSize; i+=2,++j){
             unsigned char concat[64];

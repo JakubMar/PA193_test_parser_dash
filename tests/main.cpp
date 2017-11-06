@@ -581,7 +581,7 @@ TEST_CASE("Simple validator tests")
             inTrans.push_back(TestHelper::CreateEmptyTxInObject());
             inTrans.push_back(TestHelper::CreateEmptyTxInObject());
 
-            transaction.setInTrans(inTrans);
+            TestHelper::setTransactionInTrans(transaction, inTrans);
 
             std::vector<Transaction> trans;
             trans.push_back(transaction);
@@ -602,7 +602,7 @@ TEST_CASE("Simple validator tests")
             inTrans.push_back(TestHelper::CreateEmptyTxInObject());
             inTrans.push_back(TestHelper::CreateEmptyTxInObject());
 
-            transaction.setInTrans(inTrans);
+            TestHelper::setTransactionInTrans(transaction, inTrans);
 
             std::vector<Transaction> trans;
             trans.push_back(transaction);
@@ -1169,7 +1169,7 @@ TEST_CASE("Advanced tests")
     {
         SECTION("Correct block with 7 transaction")
         {
-            //REQUIRE(TestHelper::verifyMerkleHash(testBlock) == true);
+            REQUIRE(TestHelper::verifyMerkleHash(testBlock) == true);
         }
 
 

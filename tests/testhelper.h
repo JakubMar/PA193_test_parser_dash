@@ -84,7 +84,7 @@ public:
     }
 
 
-    static bool validateBlockChain(const Blockchain &chain)
+    static bool validateBlockChain(Blockchain &chain)
     {
         return Validator::validateBlockChain(chain);
     }
@@ -196,5 +196,61 @@ public:
     {
         block.tx = tx;
     }
+
+
+    static void setTransactionVersion(Transaction &trans, const uint32_t &value)
+    {
+        trans.version = value;
+    }
+
+
+    static void setTransactionInTrans(Transaction &trans, const std::vector<TxIn> &value)
+    {
+        trans.inTrans = value;
+    }
+
+
+    static void setTransactionOutTrans(Transaction &trans, const std::vector<TxOut> &value)
+    {
+        trans.outTrans = value;
+    }
+
+
+    static void setTransactionLockTime(Transaction &trans, const uint32_t &value)
+    {
+        trans.lockTime = value;
+    }
+
+
+    static void setTransactionBeginEndOffsets(Transaction &trans, const offsets &value)
+    {
+        trans.beginEndOffsets = value;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
 

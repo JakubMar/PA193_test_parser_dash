@@ -75,31 +75,6 @@ uint32_t Transaction::getLockTime() const
     return lockTime;
 }
 
-void Transaction::setVersion(const uint32_t &value)
-{
-    version = value;
-}
-
-void Transaction::setInTrans(const std::vector<TxIn> &value)
-{
-    inTrans = value;
-}
-
-void Transaction::setOutTrans(const std::vector<TxOut> &value)
-{
-    outTrans = value;
-}
-
-void Transaction::setLockTime(const uint32_t &value)
-{
-    lockTime = value;
-}
-
-void Transaction::setBeginEndOffsets(const offsets &value)
-{
-    beginEndOffsets = value;
-}
-
 std::ostream& operator<<(std::ostream& stream, const Transaction& t)
 {
     stream << "  -------TRANSACTION-------: " << std::endl;

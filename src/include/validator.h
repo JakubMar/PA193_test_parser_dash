@@ -27,13 +27,13 @@ private:
     static bool validateTransaction(const Transaction &transaction); //TODO
     static bool transactionListNonempty(const std::vector<Transaction> &tx);
 
-    static bool isCoinbase(const Transaction &transaction); //TODO
+    static bool isCoinbase(const Transaction &transaction);
     static bool isCoinbaseCorrectScriptSigLen(const Transaction &transaction); //TODO
 
     static bool setIsValidBlockAttribute(const Block& block, bool result, const char* message);
 
     static uint256 hashBlock(const Block &block);
-    static uint256 computeMerkleHash(const Block &block); //TODO
+    static uint256 computeMerkleHash(const Block &block);
 };
 
 

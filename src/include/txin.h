@@ -13,6 +13,7 @@ private:
 public:
     TxIn(const char* buffer, uint32_t& globalOffset, size_t& unread_size);
     uint32_t GetSeqNumber() const;
+    uint256 GetHashPrevTrans() const;
 
     friend std::ostream& operator<< (std::ostream& stream, const TxIn& tin);
     friend class TestHelper;

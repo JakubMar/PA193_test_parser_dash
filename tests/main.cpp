@@ -294,6 +294,65 @@ TEST_CASE("Blockchain tests")
     }
 
 
+    SECTION("Correct pair of blocks with multiple transactions")
+    {
+        const std::string FILE_NAME =  "./blockchainAdvancedTest.bin";
+
+        Blockchain chain(FILE_NAME);
+        chain.parseFile();
+
+        const Block& secondBlock = chain.getBlocks()[1];
+
+        std::string expectedHashMerkleRoot = "33f2d169f3e0c651b36b79a0d5b2030a75eb1a2d6bf21ef289a0c74b6556dee0";
+        std::string expectedHashPrevBlock = "000000003ed80c7dce5cdde42894e977420fb3d04f8ece07e737b2eb0d20910f";
+
+        REQUIRE(secondBlock.getVersion() == 2);
+        REQUIRE(secondBlock.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(secondBlock.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(secondBlock.getTime() == 1390273084);
+        REQUIRE(secondBlock.getBits() == 474114432);
+        REQUIRE(secondBlock.getNonce() == 81630126);
+        REQUIRE(secondBlock.getSize() == 1562);
+        REQUIRE(secondBlock.getTx().size() == 7);
+        REQUIRE(secondBlock.getTx()[6].getVersion() == 1);
+        REQUIRE(secondBlock.getTx()[4].getLockTime() == 0);
+        REQUIRE(secondBlock.getTx()[3].getInputs().size() == 1);
+        REQUIRE(secondBlock.getTx()[2].getOutputs().size() == 2);
+        REQUIRE(secondBlock.getTx()[1].getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(secondBlock.getTx()[5].getOutputs()[1].GetValue() == 176864274);
+    }
+
+
+    SECTION("Parse file with many blocks")
+    {
+        const std::string FILE_NAME =  "./blockchainBigTest.bin";
+
+        Blockchain chain(FILE_NAME);
+        chain.parseFile();
+
+        const Block& fourthBlock = chain.getBlocks()[3];
+
+        std::string expectedHashMerkleRoot = "33f2d169f3e0c651b36b79a0d5b2030a75eb1a2d6bf21ef289a0c74b6556dee0";
+        std::string expectedHashPrevBlock = "000000003ed80c7dce5cdde42894e977420fb3d04f8ece07e737b2eb0d20910f";
+
+        REQUIRE(chain.getBlocks().size() == 5);
+        REQUIRE(fourthBlock.getVersion() == 2);
+        REQUIRE(fourthBlock.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+        REQUIRE(fourthBlock.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+        REQUIRE(fourthBlock.getTime() == 1390273084);
+        REQUIRE(fourthBlock.getBits() == 474114432);
+        REQUIRE(fourthBlock.getNonce() == 81630126);
+        REQUIRE(fourthBlock.getSize() == 1562);
+        REQUIRE(fourthBlock.getTx().size() == 7);
+        REQUIRE(fourthBlock.getTx()[6].getVersion() == 1);
+        REQUIRE(fourthBlock.getTx()[4].getLockTime() == 0);
+        REQUIRE(fourthBlock.getTx()[3].getInputs().size() == 1);
+        REQUIRE(fourthBlock.getTx()[2].getOutputs().size() == 2);
+        REQUIRE(fourthBlock.getTx()[1].getInputs()[0].GetSeqNumber() == 4294967295);
+        REQUIRE(fourthBlock.getTx()[5].getOutputs()[1].GetValue() == 176864274);
+    }
+
+
     SECTION("Magic number cannot be read") {
 
         const unsigned char test_blocks[] = {
@@ -511,7 +570,7 @@ TEST_CASE("Simple validator tests")
         }
 
 
-        SECTION("Block without frist transactions containing two inputs")
+        SECTION("Block without first transactions containing two inputs")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
 
@@ -524,10 +583,173 @@ TEST_CASE("Simple validator tests")
 
             transaction.setInTrans(inTrans);
 
+            std::vector<Transaction> trans;
+            trans.push_back(transaction);
+            TestHelper::setBlockTx(testBlock, trans);
+
             REQUIRE(TestHelper::validateTransactions(testBlock) == false);
         }
 
-        // TODO: test hash, n, valid transactions
+
+        SECTION("Block without first transactions containing two inputs")
+        {
+            Block testBlock = TestHelper::CreateEmptyBlockObject();
+
+            Transaction transaction = TestHelper::CreateEmptyTransactionObject();;
+
+            std::vector<TxIn> inTrans;
+
+            inTrans.push_back(TestHelper::CreateEmptyTxInObject());
+            inTrans.push_back(TestHelper::CreateEmptyTxInObject());
+
+            transaction.setInTrans(inTrans);
+
+            std::vector<Transaction> trans;
+            trans.push_back(transaction);
+            TestHelper::setBlockTx(testBlock, trans);
+
+            REQUIRE(TestHelper::validateTransactions(testBlock) == false);
+        }
+
+
+        SECTION("Block without first transaction's hash not equal to 0")
+        {
+            Block testBlock = TestHelper::CreateEmptyBlockObject();
+
+            std::vector<TxIn> inTrans1;
+            std::vector<TxOut> outTrans1;
+
+            uint256 hash1;
+            hash1.SetHex("000000000000000000000000000010000000000000000000000000000000000");
+            TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 0);
+            TxOut output11 = TestHelper::CreateTxOutObject(4700600000);
+
+            inTrans1.push_back(input11);
+            outTrans1.push_back(output11);
+
+            offsets offsets1;
+            offsets1.first = 81;
+            offsets1.second = 207;
+
+            Transaction transaction = TestHelper::CreateTransactionObject(offsets1, inTrans1, outTrans1, 0, 1);
+
+            std::vector<Transaction> trans;
+            trans.push_back(transaction);
+            TestHelper::setBlockTx(testBlock, trans);
+
+            REQUIRE(TestHelper::validateTransactions(testBlock) == false);
+        }
+
+
+        SECTION("Block with valid coinbase transaction")
+        {
+            Block testBlock = TestHelper::CreateEmptyBlockObject();
+
+            std::vector<TxIn> inTrans1;
+            std::vector<TxOut> outTrans1;
+
+            uint256 hash1;
+            hash1.SetHex("000000000000000000000000000000000000000000000000000000000000000");
+            TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 0);
+            TxOut output11 = TestHelper::CreateTxOutObject(4700600000);
+
+            inTrans1.push_back(input11);
+            outTrans1.push_back(output11);
+
+            offsets offsets1;
+            offsets1.first = 81;
+            offsets1.second = 207;
+
+            Transaction transaction = TestHelper::CreateTransactionObject(offsets1, inTrans1, outTrans1, 0, 1);
+
+            std::vector<Transaction> trans;
+            trans.push_back(transaction);
+            TestHelper::setBlockTx(testBlock, trans);
+
+            REQUIRE(TestHelper::validateTransactions(testBlock) == true);
+        }
+
+
+        SECTION("Block with second transaction's hash equal to 0")
+        {
+            Block testBlock = TestHelper::CreateEmptyBlockObject();
+
+            std::vector<TxIn> inTrans1;
+            std::vector<TxOut> outTrans1;
+
+            uint256 hash1;
+            hash1.SetHex("000000000000000000000000000000000000000000000000000000000000000");
+            TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 0);
+            TxOut output11 = TestHelper::CreateTxOutObject(4700600000);
+
+            inTrans1.push_back(input11);
+            outTrans1.push_back(output11);
+
+            offsets offsets1;
+            offsets1.first = 81;
+            offsets1.second = 207;
+
+            Transaction transaction = TestHelper::CreateTransactionObject(offsets1, inTrans1, outTrans1, 0, 1);
+            Transaction transaction2 = TestHelper::CreateTransactionObject(offsets1, inTrans1, outTrans1, 0, 1);
+
+            std::vector<Transaction> trans;
+            trans.push_back(transaction);
+            trans.push_back(transaction2);
+            TestHelper::setBlockTx(testBlock, trans);
+
+            REQUIRE(TestHelper::validateTransactions(testBlock) == false);
+        }
+
+
+        SECTION("Block with transaction with empty input list")
+        {
+            Block testBlock = TestHelper::CreateEmptyBlockObject();
+
+            std::vector<TxIn> inTrans1;
+            std::vector<TxOut> outTrans1;
+
+            TxOut output11 = TestHelper::CreateTxOutObject(4700600000);
+            outTrans1.push_back(output11);
+
+            offsets offsets1;
+            offsets1.first = 81;
+            offsets1.second = 207;
+
+            Transaction transaction = TestHelper::CreateTransactionObject(offsets1, inTrans1, outTrans1, 0, 1);
+
+            std::vector<Transaction> trans;
+            trans.push_back(transaction);
+            TestHelper::setBlockTx(testBlock, trans);
+
+            REQUIRE(TestHelper::validateTransactions(testBlock) == false);
+        }
+
+
+        SECTION("Block with transaction with empty output list")
+        {
+            Block testBlock = TestHelper::CreateEmptyBlockObject();
+
+            std::vector<TxIn> inTrans1;
+            std::vector<TxOut> outTrans1;
+
+            uint256 hash1;
+            hash1.SetHex("000000000000000000000000000000000000000000000000000000000000000");
+            TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 0);
+
+            inTrans1.push_back(input11);
+
+            offsets offsets1;
+            offsets1.first = 81;
+            offsets1.second = 207;
+
+            Transaction transaction = TestHelper::CreateTransactionObject(offsets1, inTrans1, outTrans1, 0, 1);
+
+            std::vector<Transaction> trans;
+            trans.push_back(transaction);
+            TestHelper::setBlockTx(testBlock, trans);
+
+            REQUIRE(TestHelper::validateTransactions(testBlock) == false);
+        }
     }
 
 
@@ -909,11 +1131,30 @@ TEST_CASE("Advanced tests")
     Block testBlock = TestHelper::CreateBlockObject(binBuffer, merkle, previousHash, offsetBlock, 474114432, 81630126,
                                                     1562, 1390273084, trans, 2);
 
+    unsigned char secondBlockHeader[] = {
+        0x02, 0x00, 0x00, 0x00, 0x8C, 0xDB, 0x22, 0xE8, 0x97, 0xDE, 0xA7, 0xE6, 0xF1, 0xE3, 0xF3, 0x78,
+        0x95, 0x91, 0x73, 0x16, 0xEA, 0x84, 0x6D, 0xF4, 0xF6, 0xB3, 0x42, 0x58, 0xBE, 0xB5, 0xA9, 0x41,
+        0x00, 0x00, 0x00, 0x00, 0x57, 0x07, 0xE7, 0xBA, 0x87, 0x17, 0x84, 0xD5, 0xFE, 0x02, 0x70, 0x91,
+        0xC3, 0x9E, 0x54, 0x0B, 0x4A, 0xE5, 0x80, 0xBE, 0x19, 0x05, 0x37, 0x5C, 0xF7, 0x00, 0x28, 0xD3,
+        0xC7, 0xBF, 0x83, 0xBF, 0x8D, 0xE1, 0xDD, 0x52, 0x80, 0x69, 0x42, 0x1C, 0xC0, 0x1C, 0x55, 0x43,
+    };
+
+    std::unique_ptr<char[]> binBuffer2 = std::unique_ptr<char[]>(new char[80]);
+    memcpy(binBuffer2.get(), secondBlockHeader, sizeof(secondBlockHeader));
+
+    offsets headerOffsets;
+    headerOffsets.first = 0;
+    headerOffsets.second = 80;
+
+    Block predecessor = TestHelper::CreateEmptyBlockObject();
+    TestHelper::setBlockBinBuffer(predecessor, std::move(binBuffer2));
+    TestHelper::setBlockOffsets(predecessor, headerOffsets);
+
     SECTION("validateBlock() tests")
     {
         SECTION("Correct pair of blocks")
         {
-
+            REQUIRE(TestHelper::validateBlock(testBlock, predecessor) == true);
         }
 
 
@@ -924,96 +1165,82 @@ TEST_CASE("Advanced tests")
     }
 
 
-    SECTION("validateTransactions() tests")
+    SECTION("validateBlock() tests")
     {
-        SECTION("Correct transactions")
+        SECTION("Correct block with 7 transaction")
         {
-            REQUIRE(TestHelper::validateTransactions(testBlock) == true);
+            REQUIRE(TestHelper::verifyMerkleHash(testBlock) == true);
         }
 
 
-        SECTION("Block without first transactions containing two inputs")
+        SECTION("Incorrect block with 7 transaction")
         {
+            uint256 merkle;
+            merkle.SetHex("43f2d169f3e0c651b36b79a0d5b2030a75eb1a2d6bf21ef289a0c74b6556dee0");
+            TestHelper::setBlockMerkelRoot(testBlock, merkle);
+            REQUIRE(TestHelper::verifyMerkleHash(testBlock) == false);
+        }
 
+
+        SECTION("Correct block with one transaction")
+        {
+            const unsigned char test_block[] = {
+                0x02, 0x00, 0x00, 0x00, 0xB6, 0x7A, 0x40, 0xF3, 0xCD, 0x58, 0x04, 0x43, 0x7A, 0x10, 0x8F, 0x10,
+                0x55, 0x33, 0x73, 0x9C, 0x37, 0xE6, 0x22, 0x9B, 0xC1, 0xAD, 0xCA, 0xB3, 0x85, 0x14, 0x0B, 0x59,
+                0xFD, 0x0F, 0x00, 0x00, 0xA7, 0x1C, 0x1A, 0xAD, 0xE4, 0x4B, 0xF8, 0x42, 0x5B, 0xEC, 0x0D, 0xEB,
+                0x61, 0x1C, 0x20, 0xB1, 0x6D, 0xA3, 0x44, 0x28, 0x18, 0xEF, 0x20, 0x48, 0x9C, 0xA1, 0xE2, 0x51,
+                0x2B, 0xE4, 0x3E, 0xEF, 0x81, 0x4C, 0xDB, 0x52, 0xF0, 0xFF, 0x0F, 0x1E, 0xDB, 0xF7, 0x01, 0x00,
+                0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0A, 0x51, 0x01, 0x01, 0x06, 0x2F,
+                0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00,
+                0x00, 0x00, 0x23, 0x21, 0x03, 0xA6, 0x98, 0x50, 0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8,
+                0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
+                0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00, 0x00, 0x00
+            };
+
+            uint256 merkle;
+            merkle.SetHex("ef3ee42b51e2a19c4820ef182844a36db1201c61eb0dec5b42f84be4ad1a1ca7");
+
+            std::unique_ptr<char[]> binBuffer = std::unique_ptr<char[]>(new char[186]);
+            memcpy(binBuffer.get(), test_block, 186);
+
+            Block block(std::move(binBuffer), 186);
+            TestHelper::setBlockMerkelRoot(block, merkle);
+
+            REQUIRE(TestHelper::verifyMerkleHash(block) == true);
+        }
+
+
+        SECTION("Incorrect block with one transaction")
+        {
+            const unsigned char test_block[] = {
+                0x02, 0x00, 0x00, 0x00, 0xB6, 0x7A, 0x40, 0xF3, 0xCD, 0x58, 0x04, 0x43, 0x7A, 0x10, 0x8F, 0x10,
+                0x55, 0x33, 0x73, 0x9C, 0x37, 0xE6, 0x22, 0x9B, 0xC1, 0xAD, 0xCA, 0xB3, 0x85, 0x14, 0x0B, 0x59,
+                0xFD, 0x0F, 0x00, 0x00, 0xA7, 0x1C, 0x1A, 0xAD, 0xE4, 0x4B, 0xF8, 0x42, 0x5B, 0xEC, 0x0D, 0xEB,
+                0x61, 0x1C, 0x20, 0xB1, 0x6D, 0xA3, 0x44, 0x28, 0x18, 0xEF, 0x20, 0x48, 0x9C, 0xA1, 0xE2, 0x51,
+                0x2B, 0xE4, 0x3E, 0xEF, 0x81, 0x4C, 0xDB, 0x52, 0xF0, 0xFF, 0x0F, 0x1E, 0xDB, 0xF7, 0x01, 0x00,
+                0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0A, 0x51, 0x01, 0x01, 0x06, 0x2F,
+                0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00,
+                0x00, 0x00, 0x23, 0x21, 0x03, 0xA6, 0x98, 0x50, 0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8,
+                0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
+                0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00, 0x00, 0x00
+            };
+
+            uint256 merkle;
+            merkle.SetHex("af3ee42b51e2a19c4820ef182844a36db1201c61eb0dec5b42f84be4ad1a1ca7");
+
+            std::unique_ptr<char[]> binBuffer = std::unique_ptr<char[]>(new char[186]);
+            memcpy(binBuffer.get(), test_block, 186);
+
+            Block block(std::move(binBuffer), 186);
+            TestHelper::setBlockMerkelRoot(block, merkle);
+
+            REQUIRE(TestHelper::verifyMerkleHash(block) == false);
         }
     }
-
-
-    SECTION("timesamp tests")
-    {
-        SECTION("Valid timestamp")
-        {
-
-        }
-
-
-        SECTION("Invalid timestamp")
-        {
-
-        }
-    }
-
-
-    SECTION("Previous hash tests")
-    {
-        SECTION("Valid previous hash")
-        {
-
-        }
-
-
-        SECTION("Invalid previous block hash")
-        {
-
-        }
-    }
-
-
-    SECTION("Parser test")
-    {
-        SECTION("Correct pair of blocks")
-        {
-            const std::string FILE_NAME =  "./blockchainAdvancedTest.bin";
-
-            Blockchain chain(FILE_NAME);
-            chain.parseFile();
-
-            const Block& secondBlock = chain.getBlocks()[1];
-
-            std::string expectedHashMerkleRoot = "33f2d169f3e0c651b36b79a0d5b2030a75eb1a2d6bf21ef289a0c74b6556dee0";
-            std::string expectedHashPrevBlock = "000000003ed80c7dce5cdde42894e977420fb3d04f8ece07e737b2eb0d20910f";
-
-        
-            offsets offsetBlock;
-            offsetBlock.first = 0;
-            offsetBlock.second = 80;
-        
-            Block testBlock = TestHelper::CreateBlockObject(binBuffer, merkle, previousHash, offsetBlock, 474114432, 81630126,
-                                                            1562, 1390273084, trans, 2);
-
-            REQUIRE(secondBlock.getVersion() == 2);
-            REQUIRE(secondBlock.getHashPrevBlock().ToString() == expectedHashPrevBlock);
-            REQUIRE(secondBlock.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
-            REQUIRE(secondBlock.getTime() == 1390273084);
-            REQUIRE(secondBlock.getBits() == 474114432);
-            REQUIRE(secondBlock.getNonce() == 81630126);
-            REQUIRE(secondBlock.getSize() == 1562);
-            REQUIRE(secondBlock.getTx().size() == 7);
-            REQUIRE(secondBlock.getTx()[6].getVersion() == 1);
-            REQUIRE(secondBlock.getTx()[4].getLockTime() == 0);
-            REQUIRE(secondBlock.getTx()[3].getInputs().size() == 1);
-            REQUIRE(secondBlock.getTx()[2].getOutputs().size() == 2);
-            REQUIRE(secondBlock.getTx()[1].getInputs()[0].GetSeqNumber() == 4294967295);
-            REQUIRE(secondBlock.getTx()[5].getOutputs()[1].GetValue() == 176864274);
-        }
-
-
-        SECTION("Twice the same block")
-        {
-            REQUIRE(TestHelper::validateBlock(testBlock, testBlock) == false);
-        }
-    }
-
 }
 
 

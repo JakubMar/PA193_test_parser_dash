@@ -62,6 +62,10 @@ uint32_t TxIn::GetSeqNumber() const
     return seqNumber;
 }
 
+uint256 TxIn::GetHashPrevTrans() const{
+    return hashPrevTrans;
+}
+
 
 std::ostream& operator<< (std::ostream& stream, const TxIn& tin)
 {

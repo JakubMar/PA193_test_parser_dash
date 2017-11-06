@@ -5,13 +5,15 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char** argv)
 {
-    std::string fileName = "./two_blocks.txt";
+    if(argc < 2) return 1;
+
+    //std::string fileName = "./two_blocks.txt";
 
     try
     {
-        std::unique_ptr<Blockchain> chain(new Blockchain(fileName));
+        std::unique_ptr<Blockchain> chain(new Blockchain(argv[1]));
         Validator::validateBlockChain(*chain.get());
         unsigned int i = 0;
         bool notEnd;

@@ -23,7 +23,7 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor){
         return setIsValidBlockAttribute(head,false, "Invalid previous block hash");
 
     //block hash proof of work
-    if(!satisfyProofOfWork(head)) return setIsValidBlockAttribute(head,false, "Invalid proof of work");
+    //if(!satisfyProofOfWork(head)) return setIsValidBlockAttribute(head,false, "Invalid proof of work");
 
     //time stamp not more than 2 hours in future
     uint32_t currentTime = static_cast<uint32_t>(time(NULL));
@@ -63,8 +63,15 @@ bool Validator::validateTransactions(const Block &block){
 }
 
 bool Validator::validateTransaction(const Transaction &transaction){
-    //apply "tx" checks 2-4
-    return false;
+    //Make sure neither in or out lists are empty
+    if(transaction.getInputs().size() == 0 || transaction.getOutputs().size() == 0) return false;
+
+    //Size in bytes <= MAX_BLOCK_SIZE
+    uint64_t size =  transaction.getOffsets().second - transaction.getOffsets().first;
+    if(size > MAX_BLOCKFILE_SIZE) return false;
+
+    //Each output value, as well as the total, must be in legal money range - TODO
+    return true;
 }
 
 bool Validator::timestampNotTooNew(const Block &block,uint32_t timestamp){
@@ -96,10 +103,28 @@ bool Validator::transactionListNonempty(const std::vector<Transaction> &tx){
 }
 
 bool Validator::isCoinbase(const Transaction &transaction){
-    return false;
+    const std::vector<TxIn>& inputs = transaction.getInputs();
+
+    //coinbase has exactly one input
+    if(inputs.size() != 1) return false;
+
+    //hash of previous transaction of input is 0;
+    uint256 hashPrev = inputs.begin()->GetHashPrevTrans();
+    unsigned char *hashDataBegin = hashPrev.begin();
+    unsigned char* hashDataEnd = hashPrev.end();
+    for(hashDataBegin; hashDataBegin < hashDataEnd; ++hashDataBegin) {
+        if (*hashDataBegin != 0) return false;
+    }
+
+    //seq. num of coinbase == -1
+    //if(inputs.begin()->GetSeqNumber() != -1) return false; //this is in unsigned??
+    return true;
 }
 bool Validator::isCoinbaseCorrectScriptSigLen(const Transaction &transaction){
-    return false;
+    /*offsets offs = transaction.getOffsets();
+    uint64_t size = offs.second - offs.first;
+    if(size < 2 || size > 100) return false;*/
+    return true;
 }
 
 uint256 Validator::hashBlock(const Block &block){
@@ -135,12 +160,23 @@ uint256 Validator::computeMerkleHash(const Block &block){
     //actual computation
     while(actualSize != 1) {
         for(int i = 0, j=0; i < actualSize; i+=2,++j){
-            const uint256 sum; //hashes[i] + hashes[i+1];
-          //  hashes[j] = HashX11<const uint256>(sum,sizeof(uint256));
+            unsigned char* data1begin = hashes[i].begin();
+            unsigned char* data1end = hashes[i].end();
+            unsigned char* data2begin = hashes[i+1].begin();
+            unsigned char* data2end = hashes[i+1].end();
+            int tmpSize = (data1end-data1begin) + (data2end-data2begin);
+            unsigned char data[tmpSize];
+            for(int x = 0; data1begin < data1end; ++data1begin,++x){
+                data[x] = *data1begin;
+            }
+            for(int x = 0; data2begin < data2end; ++data2begin, ++x){
+                data[x] = *data2begin;
+            }
+            hashes[j] = HashX11<unsigned char*>(data,tmpSize);
         }
 
         actualSize = actualSize/2;
-        if(actualSize%2 != 0){
+        if(actualSize > 1 && actualSize%2 != 0){
             hashes[actualSize] = hashes[actualSize-1];
             ++actualSize;
         }

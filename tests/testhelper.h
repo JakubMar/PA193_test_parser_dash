@@ -5,6 +5,7 @@
 class TestHelper
 {
 public:
+
     static Block CreateEmptyBlockObject()
     {
         return Block();
@@ -173,7 +174,7 @@ public:
     }
 
 
-    static void setBlockMerkelRot(Block &block, const uint256 &root)
+    static void setBlockMerkelRoot(Block &block, const uint256 &root)
     {
         block.hashMerkleRoot = root;
     }
@@ -188,6 +189,12 @@ public:
     static void setBlockBinBuffer(Block &block, std::unique_ptr<char[]> buffer)
     {
         block.binBuffer = std::move(buffer);
+    }
+
+
+    static void setBlockTx(Block &block, const std::vector<Transaction> &tx)
+    {
+        block.tx = tx;
     }
 };
 

@@ -10,5 +10,6 @@ script:
   - qmake QMAKE_CXX=g++-4.8 QMAKE_C=gcc-4.8 PA193_test_parser_dash.pro
   - ./build_dir_tree.sh
   - cp ./blockchainAdvancedTest.bin ./build/release/tests/
+  - cp ./blockchainBigTest.bin ./build/release/tests/
   - make -j4
   - ./build/release/tests/tests

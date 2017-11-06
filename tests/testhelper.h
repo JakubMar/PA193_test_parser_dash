@@ -174,7 +174,7 @@ public:
     }
 
 
-    static void setBlockMerkelRot(Block &block, const uint256 &root)
+    static void setBlockMerkelRoot(Block &block, const uint256 &root)
     {
         block.hashMerkleRoot = root;
     }

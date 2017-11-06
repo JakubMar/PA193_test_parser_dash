@@ -30,7 +30,7 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor){
     if (!timestampNotTooNew(head,currentTime)) return setIsValidBlockAttribute(head,false, "Invalid timestamp");
 
     //Verify Merkle hash
-    if(!verifyMerkleHash(head)) return setIsValidBlockAttribute(head,false, "Invalid merkle root hash");
+    //if(!verifyMerkleHash(head)) return setIsValidBlockAttribute(head,false, "Invalid merkle root hash");
 
     return validateTransactions(head);
 }
@@ -112,12 +112,13 @@ bool Validator::isCoinbase(const Transaction &transaction){
     uint256 hashPrev = inputs.begin()->GetHashPrevTrans();
     unsigned char *hashDataBegin = hashPrev.begin();
     unsigned char* hashDataEnd = hashPrev.end();
+
     for(hashDataBegin; hashDataBegin < hashDataEnd; ++hashDataBegin) {
         if (*hashDataBegin != 0) return false;
     }
 
     //seq. num of coinbase == -1
-    //if(inputs.begin()->GetSeqNumber() != -1) return false; //this is in unsigned??
+    if(inputs.begin()->GetSeqNumber() != 4294967295) return false; //this is in unsigned??
     return true;
 }
 bool Validator::isCoinbaseCorrectScriptSigLen(const Transaction &transaction){
@@ -137,6 +138,8 @@ uint256 Validator::hashBlock(const Block &block){
 }
 
 uint256 Validator::computeMerkleHash(const Block &block){
+    std::cout << "Valid hash: " << block.hashMerkleRoot.ToString() << std::endl;
+
     const std::vector<Transaction> &transactions = block.tx;
     int baseNoPadding = transactions.size();
     int actualSize = baseNoPadding + baseNoPadding%2;
@@ -151,6 +154,7 @@ uint256 Validator::computeMerkleHash(const Block &block){
         ptr += transactions.at(i).getOffsets().first;
         uint64_t size = transactions.at(i).getOffsets().second - transactions.at(i).getOffsets().first;
         hashes[i] = HashX11<const unsigned char*>(ptr,size);
+        std::cout << "Generated hash: " << hashes[i].ToString() << std::endl;
     }
 
     if(baseNoPadding != actualSize){ // => one element more
@@ -166,13 +170,16 @@ uint256 Validator::computeMerkleHash(const Block &block){
             unsigned char* data2end = hashes[i+1].end();
             int tmpSize = (data1end-data1begin) + (data2end-data2begin);
             unsigned char data[tmpSize];
-            for(int x = 0; data1begin < data1end; ++data1begin,++x){
-                data[x] = *data1begin;
+            int offset = 0;
+            for(offset; data1begin < data1end; ++data1begin,++offset){
+                data[offset] = *data1begin;
             }
-            for(int x = 0; data2begin < data2end; ++data2begin, ++x){
-                data[x] = *data2begin;
+
+            for(offset; data2begin < data2end; ++data2begin, ++offset){
+                data[offset] = *data2begin;
             }
             hashes[j] = HashX11<unsigned char*>(data,tmpSize);
+            std::cout << "Generated hash: " << hashes[j].ToString() << std::endl;
         }
 
         actualSize = actualSize/2;
@@ -190,6 +197,7 @@ bool Validator::setIsValidBlockAttribute(const Block& block, bool result, const 
     stat.first = result;
     stat.second = message;
 
+    std::cout << block.getValidStat().second << std::endl;
     return result;
 }
 

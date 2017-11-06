@@ -15,6 +15,7 @@ public:
     uint32_t GetSeqNumber() const;
     uint256 GetHashPrevTrans() const;
 
+
     friend std::ostream& operator<< (std::ostream& stream, const TxIn& tin);
     friend class TestHelper;
 

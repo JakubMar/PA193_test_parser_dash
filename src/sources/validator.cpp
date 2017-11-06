@@ -135,8 +135,19 @@ uint256 Validator::computeMerkleHash(const Block &block){
     //actual computation
     while(actualSize != 1) {
         for(int i = 0, j=0; i < actualSize; i+=2,++j){
-            const uint256 sum; //hashes[i] + hashes[i+1];
-          //  hashes[j] = HashX11<const uint256>(sum,sizeof(uint256));
+            unsigned char* data1begin = hashes[i].begin();
+            unsigned char* data1end = hashes[i].end();
+            unsigned char* data2begin = hashes[i+1].begin();
+            unsigned char* data2end = hashes[i+1].end();
+            int tmpSize = (data1end-data1begin) + (data2end-data2begin);
+            unsigned char data[tmpSize];
+            for(int x = 0; data1begin < data1end; ++data1begin,++x){
+                data[x] = *data1begin;
+            }
+            for(int x = 0; data2begin < data2end; ++data2begin, ++x){
+                data[x] = *data2begin;
+            }
+            hashes[j] = HashX11<unsigned char*>(data,tmpSize);
         }
 
         actualSize = actualSize/2;

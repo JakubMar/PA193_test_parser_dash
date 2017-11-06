@@ -1140,8 +1140,13 @@ TEST_CASE("Advanced tests")
     std::unique_ptr<char[]> binBuffer2 = std::unique_ptr<char[]>(new char[80]);
     memcpy(binBuffer2.get(), secondBlockHeader, sizeof(secondBlockHeader));
 
+    offsets headerOffsets;
+    headerOffsets.first = 0;
+    headerOffsets.second = 80;
+
     Block predecessor = TestHelper::CreateEmptyBlockObject();
     TestHelper::setBlockBinBuffer(predecessor, std::move(binBuffer2));
+    TestHelper::setBlockOffsets(predecessor, headerOffsets);
 
     SECTION("validateBlock() tests")
     {

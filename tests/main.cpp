@@ -353,6 +353,46 @@ TEST_CASE("Blockchain tests")
     }
 
 
+    SECTION("Offset test")
+    {
+        const std::string FILE_NAME =  "./blockchainBigTest.bin";
+
+        Blockchain chain(FILE_NAME);
+        chain.parseFile();
+
+        const Block& block = chain.getBlocks()[3];
+
+        Transaction trans1 = block.getTx()[0];
+        Transaction trans2 = block.getTx()[1];
+        Transaction trans3 = block.getTx()[2];
+        Transaction trans4 = block.getTx()[3];
+        Transaction trans5 = block.getTx()[4];
+        Transaction trans6 = block.getTx()[5];
+        Transaction trans7 = block.getTx()[6];
+
+        REQUIRE(trans1.getOffsets().first == 81);
+        REQUIRE(trans1.getOffsets().second == 207);
+
+        REQUIRE(trans2.getOffsets().first == 207);
+        REQUIRE(trans2.getOffsets().second == 433);
+
+        REQUIRE(trans3.getOffsets().first == 433);
+        REQUIRE(trans3.getOffsets().second == 658);
+
+        REQUIRE(trans4.getOffsets().first == 658);
+        REQUIRE(trans4.getOffsets().second == 883);
+
+        REQUIRE(trans5.getOffsets().first == 883);
+        REQUIRE(trans5.getOffsets().second == 1109);
+
+        REQUIRE(trans6.getOffsets().first == 1109);
+        REQUIRE(trans6.getOffsets().second == 1335);
+
+        REQUIRE(trans7.getOffsets().first == 1335);
+        REQUIRE(trans7.getOffsets().second == 1562);
+    }
+
+
     SECTION("Magic number cannot be read") {
 
         const unsigned char test_blocks[] = {
@@ -581,7 +621,7 @@ TEST_CASE("Simple validator tests")
             inTrans.push_back(TestHelper::CreateEmptyTxInObject());
             inTrans.push_back(TestHelper::CreateEmptyTxInObject());
 
-            transaction.setInTrans(inTrans);
+            TestHelper::setTransactionInTrans(transaction, inTrans);
 
             std::vector<Transaction> trans;
             trans.push_back(transaction);
@@ -602,7 +642,7 @@ TEST_CASE("Simple validator tests")
             inTrans.push_back(TestHelper::CreateEmptyTxInObject());
             inTrans.push_back(TestHelper::CreateEmptyTxInObject());
 
-            transaction.setInTrans(inTrans);
+            TestHelper::setTransactionInTrans(transaction, inTrans);
 
             std::vector<Transaction> trans;
             trans.push_back(transaction);
@@ -967,7 +1007,7 @@ TEST_CASE("Advanced tests")
 
     uint256 hash1;
     hash1.SetHex("000000000000000000000000000000000000000000000000000000000000000");
-    TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 0);
+    TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 4294967295);
     TxOut output11 = TestHelper::CreateTxOutObject(4700600000);
 
     inTrans1.push_back(input11);
@@ -1169,7 +1209,7 @@ TEST_CASE("Advanced tests")
     {
         SECTION("Correct block with 7 transaction")
         {
-            //REQUIRE(TestHelper::verifyMerkleHash(testBlock) == true);
+            REQUIRE(TestHelper::verifyMerkleHash(testBlock) == true);
         }
 
 
@@ -1178,7 +1218,7 @@ TEST_CASE("Advanced tests")
             uint256 merkle;
             merkle.SetHex("43f2d169f3e0c651b36b79a0d5b2030a75eb1a2d6bf21ef289a0c74b6556dee0");
             TestHelper::setBlockMerkelRoot(testBlock, merkle);
-            //REQUIRE(TestHelper::verifyMerkleHash(testBlock) == false);
+            REQUIRE(TestHelper::verifyMerkleHash(testBlock) == false);
         }
 
 
@@ -1208,7 +1248,7 @@ TEST_CASE("Advanced tests")
             Block block(std::move(binBuffer), 186);
             TestHelper::setBlockMerkelRoot(block, merkle);
 
-            //REQUIRE(TestHelper::verifyMerkleHash(block) == true);
+            REQUIRE(TestHelper::verifyMerkleHash(block) == true);
         }
 
 
@@ -1238,7 +1278,7 @@ TEST_CASE("Advanced tests")
             Block block(std::move(binBuffer), 186);
             TestHelper::setBlockMerkelRoot(block, merkle);
 
-            //REQUIRE(TestHelper::verifyMerkleHash(block) == false);
+            REQUIRE(TestHelper::verifyMerkleHash(block) == false);
         }
     }
 }

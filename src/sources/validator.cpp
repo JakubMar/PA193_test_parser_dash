@@ -87,6 +87,8 @@ bool Validator::verifyPreviousBlocHash(const Block &head, const Block &predecess
     //if(predecessor == nullptr) return true; //implicitly true if no predecessor provided
 
     uint256 predecessorHash = hashBlock(predecessor);
+    std::cout << "Previous my hash:" << predecessorHash.ToString() << std::endl;
+    std::cout << "Previous original hash: " << head.hashPrevBlock.ToString() << std::endl;
     return predecessorHash == head.hashPrevBlock;
 }
 bool Validator::verifyMerkleHash(const Block &block){
@@ -137,6 +139,8 @@ uint256 Validator::hashBlock(const Block &block){
 }
 
 uint256 Validator::computeMerkleHash(const Block &block){
+    std::cout << "Valid hash: " << block.hashMerkleRoot.ToString() << std::endl;
+
     const std::vector<Transaction> &transactions = block.tx;
     int baseNoPadding = transactions.size();
     int actualSize = baseNoPadding + baseNoPadding%2;
@@ -151,6 +155,7 @@ uint256 Validator::computeMerkleHash(const Block &block){
         ptr += transactions.at(i).getOffsets().first;
         uint64_t size = transactions.at(i).getOffsets().second - transactions.at(i).getOffsets().first;
         hashes[i] = HashX11<const unsigned char*>(ptr,size);
+        std::cout << "Generated hash: " << hashes[i].ToString() << std::endl;
     }
 
     if(baseNoPadding != actualSize){ // => one element more
@@ -166,13 +171,16 @@ uint256 Validator::computeMerkleHash(const Block &block){
             unsigned char* data2end = hashes[i+1].end();
             int tmpSize = (data1end-data1begin) + (data2end-data2begin);
             unsigned char data[tmpSize];
-            for(int x = 0; data1begin < data1end; ++data1begin,++x){
-                data[x] = *data1begin;
+            int offset = 0;
+            for(offset; data1begin < data1end; ++data1begin,++offset){
+                data[offset] = *data1begin;
             }
-            for(int x = 0; data2begin < data2end; ++data2begin, ++x){
-                data[x] = *data2begin;
+
+            for(offset; data2begin < data2end; ++data2begin, ++offset){
+                data[offset] = *data2begin;
             }
             hashes[j] = HashX11<unsigned char*>(data,tmpSize);
+            std::cout << "Generated hash: " << hashes[j].ToString() << std::endl;
         }
 
         actualSize = actualSize/2;

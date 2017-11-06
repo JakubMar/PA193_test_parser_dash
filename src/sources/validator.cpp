@@ -211,7 +211,7 @@ uint256 Validator::computeMerkleHash(const Block &block){
     unsigned char hashes[actualSize][32];
 
     //what should merkle tree do on single transaction?
-    //I suppose hash itself twice and than hash sum as normaly
+    //use hash of that transaction as root
 
     //fill hashes for first round
     for(int i = 0; i < baseNoPadding; ++i){
@@ -236,7 +236,7 @@ uint256 Validator::computeMerkleHash(const Block &block){
         }
         //hashes[i] = HashX11<const unsigned char*>(ptr,size);
         std::cout << "Initial hash: ";
-        for(int j = 0; j <32; ++j){
+        for(int j = 31; j >=0; --j){
             std::cout << std::setfill('0') << std::setw(2) << std::hex << (int) hashes[i][j] << std::dec;
         }
         std::cout << std::endl;
@@ -258,8 +258,17 @@ uint256 Validator::computeMerkleHash(const Block &block){
                 concat[offset] = hashes[i][offset];
             }
             for(; offset < 64;++offset){
+                concat[offset] = hashes[i+1][offset-32];
+            }
+
+
+            /*int offset = 0;
+            for(offset = 31; offset >= 0;--offset){
                 concat[offset] = hashes[i+1][offset];
             }
+            for(offset = 63; offset >= 32;--offset){
+                concat[offset] = hashes[i][offset]-32;
+            }*/
 
             unsigned char tmpHash[32];
             {
@@ -277,8 +286,8 @@ uint256 Validator::computeMerkleHash(const Block &block){
 
             //hashes[j] = HashX11<unsigned char*>(data,tmpSize);
             std::cout << "Generated hash: ";
-            for(int q = 0; q <32; ++q){
-                std::cout << std::hex << (int) hashes[j][q] << std::dec;
+            for(int q = 31; q >=0; --q){
+                std::cout << std::setfill('0') << std::hex << (int) hashes[j][q] << std::dec;
             }
             std::cout << std::endl;
         }

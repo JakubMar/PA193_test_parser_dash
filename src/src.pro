@@ -9,6 +9,7 @@ INCLUDEPATH += include/ include/third/ include/third/crypto include/Exceptions/
 
 HEADERS += $$files(include/*.h) \
            $$files(include/third/*.h) \
+           $$files(include/third/*.hpp) \
            $$files(include/third/crypto/*.h) \
            $$files(include/Exceptions/*.h) \
              include/osx/endian.h \

@@ -967,7 +967,7 @@ TEST_CASE("Advanced tests")
 
     uint256 hash1;
     hash1.SetHex("000000000000000000000000000000000000000000000000000000000000000");
-    TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 0);
+    TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 4294967295);
     TxOut output11 = TestHelper::CreateTxOutObject(4700600000);
 
     inTrans1.push_back(input11);
@@ -1169,7 +1169,7 @@ TEST_CASE("Advanced tests")
     {
         SECTION("Correct block with 7 transaction")
         {
-            //REQUIRE(TestHelper::verifyMerkleHash(testBlock) == true);
+            REQUIRE(TestHelper::verifyMerkleHash(testBlock) == true);
         }
 
 
@@ -1178,7 +1178,7 @@ TEST_CASE("Advanced tests")
             uint256 merkle;
             merkle.SetHex("43f2d169f3e0c651b36b79a0d5b2030a75eb1a2d6bf21ef289a0c74b6556dee0");
             TestHelper::setBlockMerkelRoot(testBlock, merkle);
-            //REQUIRE(TestHelper::verifyMerkleHash(testBlock) == false);
+            REQUIRE(TestHelper::verifyMerkleHash(testBlock) == false);
         }
 
 
@@ -1208,7 +1208,7 @@ TEST_CASE("Advanced tests")
             Block block(std::move(binBuffer), 186);
             TestHelper::setBlockMerkelRoot(block, merkle);
 
-            //REQUIRE(TestHelper::verifyMerkleHash(block) == true);
+            REQUIRE(TestHelper::verifyMerkleHash(block) == true);
         }
 
 
@@ -1238,7 +1238,7 @@ TEST_CASE("Advanced tests")
             Block block(std::move(binBuffer), 186);
             TestHelper::setBlockMerkelRoot(block, merkle);
 
-            //REQUIRE(TestHelper::verifyMerkleHash(block) == false);
+            REQUIRE(TestHelper::verifyMerkleHash(block) == false);
         }
     }
 }

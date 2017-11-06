@@ -39,7 +39,8 @@ LIBS +=     ../build/debug/src/.obj/cubehash.o    \
             ../build/debug/src/.obj/transaction.o \
             ../build/debug/src/.obj/txin.o        \
             ../build/debug/src/.obj/txout.o       \
-            ../build/debug/src/.obj/validator.o
+            ../build/debug/src/.obj/validator.o   \
+            ../build/debug/src/.obj/sha256.o
 
 
 } else {
@@ -62,7 +63,8 @@ LIBS +=     ../build/debug/src/.obj/cubehash.o    \
             ../build/release/src/.obj/transaction.o \
             ../build/release/src/.obj/txin.o        \
             ../build/release/src/.obj/txout.o       \
-            ../build/release/src/.obj/validator.o
+            ../build/release/src/.obj/validator.o   \
+            ../build/release/src/.obj/sha256.o
 }
 
 OBJECTS_DIR = $$DESTDIR/.obj

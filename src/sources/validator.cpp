@@ -1,4 +1,5 @@
 #include "validator.h"
+#include "sha256.h"
 
 #include <exception>
 
@@ -139,11 +140,72 @@ uint256 Validator::hashBlock(const Block &block){
 
 uint256 Validator::computeMerkleHash(const Block &block){
     std::cout << "Valid hash: " << block.hashMerkleRoot.ToString() << std::endl;
+/*
+    std::vector<uint256> leaves;
+    const std::vector<Transaction> &transactions = block.tx;
+    for(auto it = transactions.begin(); it < transactions.end(); it++){
+        const unsigned char* ptr = reinterpret_cast<const unsigned char*>(block.binBuffer.get());
+        ptr += it->getOffsets().first;
+        uint64_t size = it->getOffsets().second - it->getOffsets().first;
+        leaves.push_back(HashX11<const unsigned char*>(ptr,size));
+    }
+
+    return ComputeMerkleRoot(leaves);
+    */
+
+
+
+
+    /*
+    std::cout << "Sha some fun" << std::endl;
+    unsigned char tmpHashX[6];
+    unsigned char tmpHashY[33];
+    {
+        SHA256_CTX ctx;
+        sha256_init(&ctx);
+        sha256_update(&ctx,tmpHashX,5);
+        sha256_final(&ctx,tmpHashY);
+    }
+    for(int j = 0; j <32; ++j){
+        std::cout << std::hex << (int) tmpHashY[j] << std::dec;
+    }
+    std::cout << std::endl << "Context reset" << std::endl;
+
+    //ctx = SHA256_CTX();
+    unsigned char tmpHash1[6] = "hello";
+    unsigned char tmpHash2[33];
+    unsigned char tmpHash3[33];
+    {
+        SHA256_CTX ctx;
+        sha256_init(&ctx);
+        sha256_update(&ctx,tmpHash1,5);
+        sha256_final(&ctx,tmpHash2);
+    }
+
+    {
+        SHA256_CTX ctx2;
+        sha256_init(&ctx2);
+        sha256_update(&ctx2,tmpHash2,32);
+        sha256_final(&ctx2,tmpHash3);
+    }
+
+
+    std::cout << "sha 1: " << std::endl;
+    for(int j = 0; j <32; ++j){
+        std::cout << std::hex << (int) tmpHash2[j] << std::dec;
+    }
+    std::cout << std::endl << "sha 2: " << std::endl;
+    for(int j = 0; j <32; ++j){
+        std::cout << std::hex << (int) tmpHash3[j] << std::dec;
+    }
+    std::cout << std::endl;
+
+    */
 
     const std::vector<Transaction> &transactions = block.tx;
     int baseNoPadding = transactions.size();
     int actualSize = baseNoPadding + baseNoPadding%2;
-    uint256 hashes[actualSize];
+    unsigned char hashes[actualSize][32];
 
     //what should merkle tree do on single transaction?
     //I suppose hash itself twice and than hash sum as normaly
@@ -151,45 +213,86 @@ uint256 Validator::computeMerkleHash(const Block &block){
     //fill hashes for first round
     for(int i = 0; i < baseNoPadding; ++i){
         const unsigned char* ptr = reinterpret_cast<const unsigned char*>(block.binBuffer.get());
-        ptr += transactions.at(i).getOffsets().first;
-        uint64_t size = transactions.at(i).getOffsets().second - transactions.at(i).getOffsets().first;
-        hashes[i] = HashX11<const unsigned char*>(ptr,size);
-        std::cout << "Generated hash: " << hashes[i].ToString() << std::endl;
+        uint64_t first = (transactions.at(i).getOffsets().first);
+        ptr += first;
+        uint64_t size = transactions.at(i).getOffsets().second - first;
+        unsigned char tmpHash[32];
+        {
+        SHA256_CTX ctx;
+        sha256_init(&ctx);
+        sha256_update(&ctx,ptr,size);
+        sha256_final(&ctx,tmpHash);
+        }
+        {
+        SHA256_CTX ctx;
+        sha256_init(&ctx);
+        sha256_update(&ctx,tmpHash,32);
+        sha256_final(&ctx,hashes[i]);
+        }
+        //hashes[i] = HashX11<const unsigned char*>(ptr,size);
+        std::cout << "Initial hash: ";
+        for(int j = 0; j <32; ++j){
+            std::cout << std::hex << (int) hashes[i][j] << std::dec;
+        }
+        std::cout << std::endl;
     }
 
     if(baseNoPadding != actualSize){ // => one element more
-        hashes[actualSize-1] = hashes[baseNoPadding-1];
+        for(int j = 0; j <32; ++j){
+            hashes[actualSize-1][j] = hashes[baseNoPadding-1][j];
+        }
     }
 
     //actual computation
     while(actualSize != 1) {
+        std::cout << "Next round" << std::endl;
         for(int i = 0, j=0; i < actualSize; i+=2,++j){
-            unsigned char* data1begin = hashes[i].begin();
-            unsigned char* data1end = hashes[i].end();
-            unsigned char* data2begin = hashes[i+1].begin();
-            unsigned char* data2end = hashes[i+1].end();
-            int tmpSize = (data1end-data1begin) + (data2end-data2begin);
-            unsigned char data[tmpSize];
+            unsigned char concat[64];
             int offset = 0;
-            for(offset; data1begin < data1end; ++data1begin,++offset){
-                data[offset] = *data1begin;
+            for(; offset < 32;++offset){
+                concat[offset] = hashes[i][offset];
+            }
+            for(; offset < 64;++offset){
+                concat[offset] = hashes[i+1][offset];
             }
 
-            for(offset; data2begin < data2end; ++data2begin, ++offset){
-                data[offset] = *data2begin;
+            unsigned char tmpHash[32];
+            {
+            SHA256_CTX ctx;
+            sha256_init(&ctx);
+            sha256_update(&ctx,concat,64);
+            sha256_final(&ctx,tmpHash);
             }
-            hashes[j] = HashX11<unsigned char*>(data,tmpSize);
-            std::cout << "Generated hash: " << hashes[j].ToString() << std::endl;
+            {
+            SHA256_CTX ctx;
+            sha256_init(&ctx);
+            sha256_update(&ctx,tmpHash,32);
+            sha256_final(&ctx,hashes[j]);
+            }
+
+            //hashes[j] = HashX11<unsigned char*>(data,tmpSize);
+            std::cout << "Generated hash: ";
+            for(int q = 0; q <32; ++q){
+                std::cout << std::hex << (int) hashes[j][q] << std::dec;
+            }
+            std::cout << std::endl;
         }
 
         actualSize = actualSize/2;
         if(actualSize > 1 && actualSize%2 != 0){
-            hashes[actualSize] = hashes[actualSize-1];
+            for(int j = 0; j <32; ++j){
+                hashes[actualSize][j] = hashes[actualSize-1][j];
+            }
             ++actualSize;
         }
     }
 
-    return hashes[0];
+    std::vector<unsigned char> holder;
+    for(int j = 0; j <32; ++j){
+        holder.push_back(hashes[0][j]);
+    }
+    uint256 finalHash(holder);
+    return finalHash;
 }
 
 bool Validator::setIsValidBlockAttribute(const Block& block, bool result, const char* message){

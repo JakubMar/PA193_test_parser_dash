@@ -650,7 +650,7 @@ TEST_CASE("Simple validator tests")
 
             uint256 hash1;
             hash1.SetHex("000000000000000000000000000000000000000000000000000000000000000");
-            TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 0);
+            TxIn input11 = TestHelper::CreateTxInObject(hash1, 0, 4294967295);
             TxOut output11 = TestHelper::CreateTxOutObject(4700600000);
 
             inTrans1.push_back(input11);

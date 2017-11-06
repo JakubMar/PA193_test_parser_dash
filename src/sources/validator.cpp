@@ -117,7 +117,7 @@ bool Validator::isCoinbase(const Transaction &transaction){
     }
 
     //seq. num of coinbase == -1
-    //if(inputs.begin()->GetSeqNumber() != -1) return false; //this is in unsigned??
+    if(inputs.begin()->GetSeqNumber() != 4294967295) return false; //this is in unsigned??
     return true;
 }
 bool Validator::isCoinbaseCorrectScriptSigLen(const Transaction &transaction){
@@ -190,6 +190,7 @@ bool Validator::setIsValidBlockAttribute(const Block& block, bool result, const 
     stat.first = result;
     stat.second = message;
 
+    std::cout << block.getValidStat().second << std::endl;
     return result;
 }
 

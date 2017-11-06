@@ -96,10 +96,23 @@ bool Validator::transactionListNonempty(const std::vector<Transaction> &tx){
 }
 
 bool Validator::isCoinbase(const Transaction &transaction){
-    return false;
+    const std::vector<TxIn>& inputs = transaction.getInputs();
+
+    //coinbase has exactly one input
+    if(inputs.size() != 1) return false;
+
+    //hash of previous transaction of input is 0;
+    if(inputs.begin()->GetHashPrevTrans != 0) return false;
+
+    //seq. num of coinbase == -1
+    if(inputs.begin()->GetSeqNumber() != -1) return false;
+    return true;
 }
 bool Validator::isCoinbaseCorrectScriptSigLen(const Transaction &transaction){
-    return false;
+    offsets offs = transaction.getOffsets();
+    uint64_t size = offs.second - offs.first;
+    if(size < 2 || size > 100) return false;
+    return true;
 }
 
 uint256 Validator::hashBlock(const Block &block){

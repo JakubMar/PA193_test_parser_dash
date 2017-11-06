@@ -12,6 +12,7 @@ int main()
     try
     {
         std::unique_ptr<Blockchain> chain(new Blockchain(fileName));
+        Validator::validateBlockChain(*chain.get());
         unsigned int i = 0;
         bool notEnd;
         do

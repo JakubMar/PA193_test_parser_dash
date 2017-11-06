@@ -30,7 +30,7 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor){
     if (!timestampNotTooNew(head,currentTime)) return setIsValidBlockAttribute(head,false, "Invalid timestamp");
 
     //Verify Merkle hash
-    if(!verifyMerkleHash(head)) return setIsValidBlockAttribute(head,false, "Invalid merkle root hash");
+    //if(!verifyMerkleHash(head)) return setIsValidBlockAttribute(head,false, "Invalid merkle root hash");
 
     return validateTransactions(head);
 }
@@ -87,8 +87,6 @@ bool Validator::verifyPreviousBlocHash(const Block &head, const Block &predecess
     //if(predecessor == nullptr) return true; //implicitly true if no predecessor provided
 
     uint256 predecessorHash = hashBlock(predecessor);
-    std::cout << "Previous my hash:" << predecessorHash.ToString() << std::endl;
-    std::cout << "Previous original hash: " << head.hashPrevBlock.ToString() << std::endl;
     return predecessorHash == head.hashPrevBlock;
 }
 bool Validator::verifyMerkleHash(const Block &block){
@@ -114,6 +112,7 @@ bool Validator::isCoinbase(const Transaction &transaction){
     uint256 hashPrev = inputs.begin()->GetHashPrevTrans();
     unsigned char *hashDataBegin = hashPrev.begin();
     unsigned char* hashDataEnd = hashPrev.end();
+
     for(hashDataBegin; hashDataBegin < hashDataEnd; ++hashDataBegin) {
         if (*hashDataBegin != 0) return false;
     }

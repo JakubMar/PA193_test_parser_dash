@@ -45,7 +45,7 @@ Transaction::Transaction(const char *buffer, uint32_t &globalOffset, size_t &unr
     unread_size -= TIME_SIZE;
 
     //Begin_End_Offsets
-    beginEndOffsets = offsets(globalOffset, localOffset);
+    beginEndOffsets = offsets(globalOffset, globalOffset + localOffset);
     globalOffset += localOffset;
 }
 
@@ -73,31 +73,6 @@ const std::vector<TxOut>& Transaction::getOutputs() const
 uint32_t Transaction::getLockTime() const
 {
     return lockTime;
-}
-
-void Transaction::setVersion(const uint32_t &value)
-{
-    version = value;
-}
-
-void Transaction::setInTrans(const std::vector<TxIn> &value)
-{
-    inTrans = value;
-}
-
-void Transaction::setOutTrans(const std::vector<TxOut> &value)
-{
-    outTrans = value;
-}
-
-void Transaction::setLockTime(const uint32_t &value)
-{
-    lockTime = value;
-}
-
-void Transaction::setBeginEndOffsets(const offsets &value)
-{
-    beginEndOffsets = value;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Transaction& t)

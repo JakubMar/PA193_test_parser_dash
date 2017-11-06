@@ -21,11 +21,6 @@ public:
     const std::vector<TxIn>& getInputs() const;
     const std::vector<TxOut>& getOutputs() const;
     uint32_t getLockTime() const;
-    void setVersion(const uint32_t &value);
-    void setInTrans(const std::vector<TxIn> &value);
-    void setOutTrans(const std::vector<TxOut> &value);
-    void setLockTime(const uint32_t &value);
-    void setBeginEndOffsets(const offsets &value);
 
     friend class TestHelper;
 

@@ -7,21 +7,26 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    if(argc < 2) return 1;
+    if(argc != 2) return 1;
 
     //std::string fileName = "./two_blocks.txt";
+    //std::string fileName = "/home/xvancik/Desktop/PA193_test_parser_dash/blockchainBigTest.bin";
 
     try
     {
-        std::unique_ptr<Blockchain> chain(new Blockchain(argv[1]));
+        Blockchain chain(argv[1]);
+        chain.parseFile();
+
+        Validator::validateBlockChain(chain);
+
         unsigned int i = 0;
         bool notEnd;
         do
         {
-            notEnd = chain->parseFile();
-            for(; i < chain->getBlocks().size(); ++i)
+            notEnd = chain.parseFile();
+            for(; i < chain.getBlocks().size(); ++i)
             {
-               cout << std::endl << chain->getBlocks()[i];
+               cout << std::endl << chain.getBlocks()[i];
             }
             i = 1;
         } while(notEnd);

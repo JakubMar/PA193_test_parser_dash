@@ -6,6 +6,8 @@
 bool Validator::validateBlockChain(const Blockchain &chain){
 
     const std::vector<Block> &blocks = chain.getBlocks();
+    std::cout << "Block size is: " << blocks.size() << std::endl;
+    std::cout << blocks[0].getValidStat().second << std::endl;
 
     //if(!validateBlock(*blocks.begin(),nullptr)) return false;
     for(auto it = ++blocks.begin(); it < blocks.end(); ++it) {

@@ -2,21 +2,6 @@
 #include "invalidtransactionsizeexcepion.h"
 #include "invalidscriptsizeexcepion.h"
 
-void TxIn::setHashPrevTrans(const uint256 &value)
-{
-    hashPrevTrans = value;
-}
-
-void TxIn::setIndexPrevTrans(const uint32_t &value)
-{
-    indexPrevTrans = value;
-}
-
-void TxIn::setSeqNumber(const uint32_t &value)
-{
-    seqNumber = value;
-}
-
 TxIn::TxIn(const char *buffer, uint32_t &globalOffset, size_t &unread_size)
 {
     uint32_t localOffset = 0;

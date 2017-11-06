@@ -23,7 +23,7 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor){
         return setIsValidBlockAttribute(head,false, "Invalid previous block hash");
 
     //block hash proof of work
-    if(!satisfyProofOfWork(head)) return setIsValidBlockAttribute(head,false, "Invalid proof of work");
+    //if(!satisfyProofOfWork(head)) return setIsValidBlockAttribute(head,false, "Invalid proof of work");
 
     //time stamp not more than 2 hours in future
     uint32_t currentTime = static_cast<uint32_t>(time(NULL));
@@ -63,8 +63,15 @@ bool Validator::validateTransactions(const Block &block){
 }
 
 bool Validator::validateTransaction(const Transaction &transaction){
-    //apply "tx" checks 2-4
-    return false;
+    //Make sure neither in or out lists are empty
+    if(transaction.getInputs().size() == 0 || transaction.getOutputs().size() == 0) return false;
+
+    //Size in bytes <= MAX_BLOCK_SIZE
+    uint64_t size =  transaction.getOffsets().second - transaction.getOffsets().first;
+    if(size > MAX_BLOCKFILE_SIZE) return false;
+
+    //Each output value, as well as the total, must be in legal money range - TODO
+    return true;
 }
 
 bool Validator::timestampNotTooNew(const Block &block,uint32_t timestamp){

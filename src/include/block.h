@@ -110,6 +110,9 @@ public:
     friend std::ostream& operator<< (std::ostream& stream, const Block& block_);
 
 private:
+    /**
+     * @brief Block Constructor for testing
+     */
     Block() {}
 };
 

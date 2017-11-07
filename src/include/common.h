@@ -32,6 +32,11 @@ using varInt = std::pair<uint64_t,uint8_t>;
 using offsets = std::pair<uint64_t,uint64_t>;
 using validStat = std::pair<bool, std::string>;
 
+/**
+ * @brief ParseUint32
+ * @param array
+ * @return
+ */
 inline uint32_t ParseUint32(const char* array)
 {
     uint32_t ret;
@@ -39,6 +44,11 @@ inline uint32_t ParseUint32(const char* array)
     return ret;
 }
 
+/**
+ * @brief ParseUint64
+ * @param array
+ * @return
+ */
 inline uint64_t ParseUint64(const char* array)
 {
     uint64_t ret;
@@ -46,13 +56,12 @@ inline uint64_t ParseUint64(const char* array)
     return ret;
 }
 
-// Parse reverse array to unsigned int
-/*inline uint32_t ParseUint32R(const char* array)
-{
-    return 0; //_0xFD_builtin_bswap32(ParseUint32(array)) - gcc function to change endian (if needed in future)
-}*/
-
-
+/**
+ * @brief ParseVarLength
+ * @param array
+ * @param size
+ * @return
+ */
 inline varInt ParseVarLength(const unsigned char* array, size_t size)
 {
     if(size == 0)
@@ -83,6 +92,12 @@ inline varInt ParseVarLength(const unsigned char* array, size_t size)
     }
 }
 
+/**
+ * @brief ParseVarLength
+ * @param array
+ * @param size
+ * @return
+ */
 inline varInt ParseVarLength(const char* array, size_t size)
 {
     return ParseVarLength(reinterpret_cast<const unsigned char*>(array), size);

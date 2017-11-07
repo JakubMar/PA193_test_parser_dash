@@ -14,14 +14,55 @@ private:
     offsets beginEndOffsets;
 
 public:
+    /**
+     * @brief Transaction
+     * @param buffer
+     * @param globalOffset
+     * @param unread_size
+     */
     Transaction(const char* buffer, uint32_t& globalOffset, size_t &unread_size);
-    friend std::ostream& operator<<(std::ostream& stream, const Transaction& t);
+
+    /**
+     * @brief getOffsets
+     * @return
+     */
     const offsets getOffsets() const;
+
+    /**
+     * @brief getVersion
+     * @return
+     */
     uint32_t getVersion() const;
+
+    /**
+     * @brief getInputs
+     * @return
+     */
     const std::vector<TxIn>& getInputs() const;
+
+    /**
+     * @brief getOutputs
+     * @return
+     */
     const std::vector<TxOut>& getOutputs() const;
+
+    /**
+     * @brief getLockTime
+     * @return
+     */
     uint32_t getLockTime() const;
 
+    /**
+     * @brief operator <<
+     * @param stream
+     * @param t
+     * @return
+     */
+    friend std::ostream& operator<<(std::ostream& stream, const Transaction& t);
+
+    /**
+     *
+     */
     friend class TestHelper;
 
 private:

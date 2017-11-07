@@ -42,12 +42,12 @@ TxIn::TxIn(const char *buffer, uint32_t &globalOffset, size_t &unread_size)
 }
 
 
-uint32_t TxIn::GetSeqNumber() const
+uint32_t TxIn::getSeqNumber() const
 {
     return seqNumber;
 }
 
-uint256 TxIn::GetHashPrevTrans() const{
+uint256 TxIn::getHashPrevTrans() const{
     return hashPrevTrans;
 }
 

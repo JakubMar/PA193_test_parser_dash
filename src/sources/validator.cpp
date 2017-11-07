@@ -7,8 +7,6 @@
 bool Validator::validateBlockChain(const Blockchain &chain){
 
     const std::vector<Block> &blocks = chain.getBlocks();
-    std::cout << "Block size is: " << blocks.size() << std::endl;
-    std::cout << blocks[0].getValidStat().second << std::endl;
 
     //if(!validateBlock(*blocks.begin(),nullptr)) return false;
     for(auto it = ++blocks.begin(); it < blocks.end(); ++it) {
@@ -113,7 +111,7 @@ bool Validator::isCoinbase(const Transaction &transaction){
     if(inputs.size() != 1) return false;
 
     //hash of previous transaction of input is 0;
-    uint256 hashPrev = inputs.begin()->GetHashPrevTrans();
+    uint256 hashPrev = inputs.begin()->getHashPrevTrans();
     unsigned char *hashDataBegin = hashPrev.begin();
     unsigned char* hashDataEnd = hashPrev.end();
 
@@ -122,7 +120,7 @@ bool Validator::isCoinbase(const Transaction &transaction){
     }
 
     //seq. num of coinbase == -1
-    if(inputs.begin()->GetSeqNumber() != 4294967295) return false; //this is in unsigned??
+    if(inputs.begin()->getSeqNumber() != 4294967295) return false; //this is in unsigned??
     return true;
 }
 bool Validator::isCoinbaseCorrectScriptSigLen(const Transaction &transaction){

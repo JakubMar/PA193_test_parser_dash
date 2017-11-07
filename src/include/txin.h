@@ -11,12 +11,37 @@ private:
     offsets scriptOffsets;
     uint32_t seqNumber;
 public:
+    /**
+     * @brief TxIn
+     * @param buffer
+     * @param globalOffset
+     * @param unread_size
+     */
     TxIn(const char* buffer, uint32_t& globalOffset, size_t& unread_size);
-    uint32_t GetSeqNumber() const;
-    uint256 GetHashPrevTrans() const;
 
+    /**
+     * @brief getSeqNumber
+     * @return
+     */
+    uint32_t getSeqNumber() const;
 
+    /**
+     * @brief getHashPrevTrans
+     * @return
+     */
+    uint256 getHashPrevTrans() const;
+
+    /**
+     * @brief operator <<
+     * @param stream
+     * @param tin
+     * @return
+     */
     friend std::ostream& operator<< (std::ostream& stream, const TxIn& tin);
+
+    /**
+     *
+     */
     friend class TestHelper;
 
 private:

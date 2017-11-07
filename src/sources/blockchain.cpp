@@ -26,15 +26,15 @@ bool Blockchain::parseFile()
 
     while(numberOfBlocks < MAX_NUMBER_OF_BLOCKS && !srcFile.eof())
     {
-        ReadMagicNumber(srcFile);
+        readMagicNumber(srcFile);
 
         if(srcFile.eof())
         {
             return false;
         }
 
-        uint32_t block_size = ReadBlockSize(srcFile);
-        std::unique_ptr<char[]> block_buffer = ReadBlockContent(srcFile, block_size);
+        uint32_t block_size = readBlockSize(srcFile);
+        std::unique_ptr<char[]> block_buffer = readBlockContent(srcFile, block_size);
 
         nBlocks.push_back(Block(std::move(block_buffer), block_size));
 
@@ -43,7 +43,7 @@ bool Blockchain::parseFile()
     return !srcFile.eof();
 }
 
-void Blockchain::ReadMagicNumber(std::ifstream& file)
+void Blockchain::readMagicNumber(std::ifstream& file)
 {
     unsigned bufferSize = MAGIC_NUMBER_SIZE;
     char buffer[bufferSize];
@@ -66,7 +66,7 @@ void Blockchain::ReadMagicNumber(std::ifstream& file)
 }
 
 
-uint32_t Blockchain::ReadBlockSize(std::ifstream& file)
+uint32_t Blockchain::readBlockSize(std::ifstream& file)
 {
     uint32_t block_size;
     file.read(reinterpret_cast<char*>(&block_size), BLOCK_SIZE_SIZE);
@@ -86,7 +86,7 @@ uint32_t Blockchain::ReadBlockSize(std::ifstream& file)
 }
 
 
-std::unique_ptr<char[]> Blockchain::ReadBlockContent(std::ifstream& file, uint32_t block_size)
+std::unique_ptr<char[]> Blockchain::readBlockContent(std::ifstream& file, uint32_t block_size)
 {
     std::unique_ptr<char[]> block_buffer(new char[block_size]);
     file.read(block_buffer.get(), block_size);

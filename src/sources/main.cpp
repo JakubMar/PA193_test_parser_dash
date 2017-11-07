@@ -15,15 +15,13 @@ int main(int argc, char** argv)
     try
     {
         Blockchain chain(argv[1]);
-        chain.parseFile();
-
-        Validator::validateBlockChain(chain);
 
         unsigned int i = 0;
         bool notEnd;
         do
         {
             notEnd = chain.parseFile();
+            Validator::validateBlockChain(chain);
             for(; i < chain.getBlocks().size(); ++i)
             {
                cout << std::endl << chain.getBlocks()[i];

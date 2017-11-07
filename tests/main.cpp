@@ -126,8 +126,8 @@ TEST_CASE("Blockchain tests")
         REQUIRE(transaction.getLockTime() == expectedLockTime);
         REQUIRE(transaction.getInputs().size() == 1);
         REQUIRE(transaction.getOutputs().size() == 1);
-        REQUIRE(transaction.getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(transaction.getOutputs()[0].GetValue() == 50000000000);
+        REQUIRE(transaction.getInputs()[0].getSeqNumber() == 4294967295);
+        REQUIRE(transaction.getOutputs()[0].getValue() == 50000000000);
     }
 
 
@@ -192,14 +192,14 @@ TEST_CASE("Blockchain tests")
         REQUIRE(transaction1.getLockTime() == expectedLockTime);
         REQUIRE(transaction1.getInputs().size() == 1);
         REQUIRE(transaction1.getOutputs().size() == 1);
-        REQUIRE(transaction1.getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(transaction1.getOutputs()[0].GetValue() == 50000000000);
+        REQUIRE(transaction1.getInputs()[0].getSeqNumber() == 4294967295);
+        REQUIRE(transaction1.getOutputs()[0].getValue() == 50000000000);
         REQUIRE(transaction2.getVersion() == expectedTransactionVersion);
         REQUIRE(transaction2.getLockTime() == expectedLockTime);
         REQUIRE(transaction2.getInputs().size() == 1);
         REQUIRE(transaction2.getOutputs().size() == 1);
-        REQUIRE(transaction2.getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(transaction2.getOutputs()[0].GetValue() == 50000000000);
+        REQUIRE(transaction2.getInputs()[0].getSeqNumber() == 4294967295);
+        REQUIRE(transaction2.getOutputs()[0].getValue() == 50000000000);
     }
 
 
@@ -282,15 +282,15 @@ TEST_CASE("Blockchain tests")
         REQUIRE(transaction1.getLockTime() == expectedLockTime);
         REQUIRE(transaction1.getInputs().size() == 1);
         REQUIRE(transaction1.getOutputs().size() == 1);
-        REQUIRE(transaction1.getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(transaction1.getOutputs()[0].GetValue() == 50000000000);
+        REQUIRE(transaction1.getInputs()[0].getSeqNumber() == 4294967295);
+        REQUIRE(transaction1.getOutputs()[0].getValue() == 50000000000);
 
         REQUIRE(transaction2.getVersion() == expectedTransactionVersion);
         REQUIRE(transaction2.getLockTime() == expectedLockTime);
         REQUIRE(transaction2.getInputs().size() == 1);
         REQUIRE(transaction2.getOutputs().size() == 1);
-        REQUIRE(transaction2.getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(transaction2.getOutputs()[0].GetValue() == 50000000000);
+        REQUIRE(transaction2.getInputs()[0].getSeqNumber() == 4294967295);
+        REQUIRE(transaction2.getOutputs()[0].getValue() == 50000000000);
     }
 
 
@@ -318,8 +318,8 @@ TEST_CASE("Blockchain tests")
         REQUIRE(secondBlock.getTx()[4].getLockTime() == 0);
         REQUIRE(secondBlock.getTx()[3].getInputs().size() == 1);
         REQUIRE(secondBlock.getTx()[2].getOutputs().size() == 2);
-        REQUIRE(secondBlock.getTx()[1].getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(secondBlock.getTx()[5].getOutputs()[1].GetValue() == 176864274);
+        REQUIRE(secondBlock.getTx()[1].getInputs()[0].getSeqNumber() == 4294967295);
+        REQUIRE(secondBlock.getTx()[5].getOutputs()[1].getValue() == 176864274);
     }
 
 
@@ -348,8 +348,8 @@ TEST_CASE("Blockchain tests")
         REQUIRE(fourthBlock.getTx()[4].getLockTime() == 0);
         REQUIRE(fourthBlock.getTx()[3].getInputs().size() == 1);
         REQUIRE(fourthBlock.getTx()[2].getOutputs().size() == 2);
-        REQUIRE(fourthBlock.getTx()[1].getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(fourthBlock.getTx()[5].getOutputs()[1].GetValue() == 176864274);
+        REQUIRE(fourthBlock.getTx()[1].getInputs()[0].getSeqNumber() == 4294967295);
+        REQUIRE(fourthBlock.getTx()[5].getOutputs()[1].getValue() == 176864274);
     }
 
 
@@ -556,8 +556,8 @@ TEST_CASE("Transaction parse tests")
         REQUIRE(transaction.getLockTime() == expectedLockTime);
         REQUIRE(transaction.getInputs().size() == 1);
         REQUIRE(transaction.getOutputs().size() == 1);
-        REQUIRE(transaction.getInputs()[0].GetSeqNumber() == 4294967295);
-        REQUIRE(transaction.getOutputs()[0].GetValue() == 50000000000);
+        REQUIRE(transaction.getInputs()[0].getSeqNumber() == 4294967295);
+        REQUIRE(transaction.getOutputs()[0].getValue() == 50000000000);
     }
 
 

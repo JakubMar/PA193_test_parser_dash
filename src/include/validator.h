@@ -10,9 +10,24 @@
 class Validator
 {
 public:
+    /**
+     * @brief validateBlockChain
+     * @param chain
+     * @return
+     */
     static bool validateBlockChain(const Blockchain &chain);
+
+    /**
+     * @brief validateBlock
+     * @param head
+     * @param predecessor
+     * @return
+     */
     static bool validateBlock(const Block &head, const Block &predecessor);
 
+    /**
+     *
+     */
     friend class TestHelper;
 
 private:

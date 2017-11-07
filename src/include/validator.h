@@ -8,7 +8,7 @@
 #include <transaction.h>
 
 /**
- * @brief The Validator class provides method for semantic validating of blockchain
+ * @brief The Validator class provides methods for semantic validation of blockchain
  */
 class Validator
 {
@@ -26,17 +26,17 @@ private:
 
 public:
     /**
-     * @brief validateBlockChain
-     * @param chain
-     * @return
+     * @brief validateBlockChain validates whole blockchain, iteratively validates all blocks
+     * @param chain blockchain to validate
+     * @return true if whole blockchain is valid
      */
     static bool validateBlockChain(const Blockchain &chain);
 
     /**
-     * @brief validateBlock
-     * @param head
-     * @param predecessor
-     * @return
+     * @brief validateBlock validate one block
+     * @param head block to validate
+     * @param predecessor previous block from blockchain
+     * @return true if block is valid
      */
     static bool validateBlock(const Block &head, const Block &predecessor);
 

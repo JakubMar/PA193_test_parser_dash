@@ -5,7 +5,7 @@
 #include "transaction.h"
 
 /**
- * @brief The Block class data structure for hlding transactions
+ * @brief The Block class data structure for holding transactions
  */
 class Block
 {

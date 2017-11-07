@@ -91,7 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classValidator.html" title="The Validator class provides method for semantic validating of blockchain. ">Validator</a> class provides method for semantic validating of blockchain.  
+<p>The <a class="el" href="classValidator.html" title="The Validator class provides methods for semantic validation of blockchain. ">Validator</a> class provides methods for semantic validation of blockchain.  
  <a href="classValidator.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="validator_8h_source.html">validator.h</a>&gt;</code></p>
@@ -99,10 +99,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:abdaa06320165a08b61999d8fee83a6cf"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#abdaa06320165a08b61999d8fee83a6cf">validateBlockChain</a> (const <a class="el" href="classBlockchain.html">Blockchain</a> &amp;chain)</td></tr>
-<tr class="memdesc:abdaa06320165a08b61999d8fee83a6cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">validateBlockChain  <a href="#abdaa06320165a08b61999d8fee83a6cf">More...</a><br /></td></tr>
+<tr class="memdesc:abdaa06320165a08b61999d8fee83a6cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">validateBlockChain validates whole blockchain, iteratively validates all blocks  <a href="#abdaa06320165a08b61999d8fee83a6cf">More...</a><br /></td></tr>
 <tr class="separator:abdaa06320165a08b61999d8fee83a6cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf1ab832cdf9eeac3304e349ceeed7c2"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#abf1ab832cdf9eeac3304e349ceeed7c2">validateBlock</a> (const <a class="el" href="classBlock.html">Block</a> &amp;head, const <a class="el" href="classBlock.html">Block</a> &amp;predecessor)</td></tr>
-<tr class="memdesc:abf1ab832cdf9eeac3304e349ceeed7c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">validateBlock  <a href="#abf1ab832cdf9eeac3304e349ceeed7c2">More...</a><br /></td></tr>
+<tr class="memdesc:abf1ab832cdf9eeac3304e349ceeed7c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">validateBlock validate one block  <a href="#abf1ab832cdf9eeac3304e349ceeed7c2">More...</a><br /></td></tr>
 <tr class="separator:abf1ab832cdf9eeac3304e349ceeed7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
@@ -113,7 +113,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="separator:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classValidator.html" title="The Validator class provides method for semantic validating of blockchain. ">Validator</a> class provides method for semantic validating of blockchain. </p>
+<div class="textblock"><p>The <a class="el" href="classValidator.html" title="The Validator class provides methods for semantic validation of blockchain. ">Validator</a> class provides methods for semantic validation of blockchain. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="abf1ab832cdf9eeac3304e349ceeed7c2"></a>
 <div class="memitem">
@@ -147,15 +147,15 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </table>
 </div><div class="memdoc">
 
-<p>validateBlock </p>
+<p>validateBlock validate one block </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">head</td><td></td></tr>
-    <tr><td class="paramname">predecessor</td><td></td></tr>
+    <tr><td class="paramname">head</td><td>block to validate </td></tr>
+    <tr><td class="paramname">predecessor</td><td>previous block from blockchain </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if block is valid </dd></dl>
 
 </div>
 </div>
@@ -181,14 +181,14 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </table>
 </div><div class="memdoc">
 
-<p>validateBlockChain </p>
+<p>validateBlockChain validates whole blockchain, iteratively validates all blocks </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">chain</td><td></td></tr>
+    <tr><td class="paramname">chain</td><td>blockchain to validate </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if whole blockchain is valid </dd></dl>
 
 </div>
 </div>

@@ -14,7 +14,6 @@ bool Validator::validateBlockChain(const Blockchain &chain){
             setIsValidBlockAttribute(*it,false,"invalid preceeding block in blockchain");
         }
     }
-
     return validationResult;
 }
 
@@ -75,11 +74,13 @@ bool Validator::timestampNotTooNew(const Block &block,uint32_t timestamp){
 
     return (blockTime-twoHoursInSeconds)<timestamp;
 }
+
 bool Validator::verifyPreviousBlocHash(const Block &head, const Block &predecessor){
 
     uint256 predecessorHash = hashBlock(predecessor);
     return predecessorHash == head.hashPrevBlock;
 }
+
 bool Validator::verifyMerkleHash(const Block &block){
     return  computeMerkleHash(block) == block.hashMerkleRoot;
 }

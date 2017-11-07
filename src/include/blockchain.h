@@ -22,7 +22,7 @@ public:
     const std::vector<Block> &getBlocks() const;
     
     /**
-     * @brief Blockchain Constructor opens file or throws exeption
+     * @brief Blockchain Constructor opens file or throws exception
      * @param fileName file to open
      */
     Blockchain(std::string fileName);

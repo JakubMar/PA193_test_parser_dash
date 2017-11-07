@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -89,55 +90,326 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Block Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="classBlock.html" title="The Block class data structure for hlding transactions. ">Block</a> class data structure for hlding transactions.  
+ <a href="classBlock.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="block_8h_source.html">block.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa8137cd344b152a0e7e9d79c3ac15660"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8137cd344b152a0e7e9d79c3ac15660"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Block</b> (std::unique_ptr&lt; char[]&gt; buffer, uint32_t size)</td></tr>
+<tr class="memitem:aa8137cd344b152a0e7e9d79c3ac15660"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#aa8137cd344b152a0e7e9d79c3ac15660">Block</a> (std::unique_ptr&lt; char[]&gt; buffer, uint32_t size)</td></tr>
+<tr class="memdesc:aa8137cd344b152a0e7e9d79c3ac15660"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classBlock.html" title="The Block class data structure for hlding transactions. ">Block</a> Constructor of data holding structure.  <a href="#aa8137cd344b152a0e7e9d79c3ac15660">More...</a><br /></td></tr>
 <tr class="separator:aa8137cd344b152a0e7e9d79c3ac15660"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a457b7151cba0ac64a7bf27fa55b307dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a457b7151cba0ac64a7bf27fa55b307dd"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getVersion</b> () const </td></tr>
+<tr class="memitem:a457b7151cba0ac64a7bf27fa55b307dd"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a457b7151cba0ac64a7bf27fa55b307dd">getVersion</a> () const </td></tr>
+<tr class="memdesc:a457b7151cba0ac64a7bf27fa55b307dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">getVersion getter for private member: version  <a href="#a457b7151cba0ac64a7bf27fa55b307dd">More...</a><br /></td></tr>
 <tr class="separator:a457b7151cba0ac64a7bf27fa55b307dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7ad7cc28e8fff3f1b94967fa3ce7643"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7ad7cc28e8fff3f1b94967fa3ce7643"></a>
-uint256&#160;</td><td class="memItemRight" valign="bottom"><b>getHashPrevBlock</b> () const </td></tr>
+<tr class="memitem:af7ad7cc28e8fff3f1b94967fa3ce7643"><td class="memItemLeft" align="right" valign="top">uint256&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#af7ad7cc28e8fff3f1b94967fa3ce7643">getHashPrevBlock</a> () const </td></tr>
+<tr class="memdesc:af7ad7cc28e8fff3f1b94967fa3ce7643"><td class="mdescLeft">&#160;</td><td class="mdescRight">getHashPrevBlock getter for private member: hash of previous block  <a href="#af7ad7cc28e8fff3f1b94967fa3ce7643">More...</a><br /></td></tr>
 <tr class="separator:af7ad7cc28e8fff3f1b94967fa3ce7643"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0629a41853981b7f59f538aecb126732"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0629a41853981b7f59f538aecb126732"></a>
-uint256&#160;</td><td class="memItemRight" valign="bottom"><b>getHashMerkleRoot</b> () const </td></tr>
+<tr class="memitem:a0629a41853981b7f59f538aecb126732"><td class="memItemLeft" align="right" valign="top">uint256&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a0629a41853981b7f59f538aecb126732">getHashMerkleRoot</a> () const </td></tr>
+<tr class="memdesc:a0629a41853981b7f59f538aecb126732"><td class="mdescLeft">&#160;</td><td class="mdescRight">getHashMerkleRoot getter for private member: merkle root hash  <a href="#a0629a41853981b7f59f538aecb126732">More...</a><br /></td></tr>
 <tr class="separator:a0629a41853981b7f59f538aecb126732"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8120ba154991453f87ca170e9f0cf775"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8120ba154991453f87ca170e9f0cf775"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getTime</b> () const </td></tr>
+<tr class="memitem:a8120ba154991453f87ca170e9f0cf775"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a8120ba154991453f87ca170e9f0cf775">getTime</a> () const </td></tr>
+<tr class="memdesc:a8120ba154991453f87ca170e9f0cf775"><td class="mdescLeft">&#160;</td><td class="mdescRight">getTime getter for private member: time  <a href="#a8120ba154991453f87ca170e9f0cf775">More...</a><br /></td></tr>
 <tr class="separator:a8120ba154991453f87ca170e9f0cf775"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a906e395f6aa699d30966a68d008325ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a906e395f6aa699d30966a68d008325ae"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getBits</b> () const </td></tr>
+<tr class="memitem:a906e395f6aa699d30966a68d008325ae"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a906e395f6aa699d30966a68d008325ae">getBits</a> () const </td></tr>
+<tr class="memdesc:a906e395f6aa699d30966a68d008325ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">getBits getter for private member: bits  <a href="#a906e395f6aa699d30966a68d008325ae">More...</a><br /></td></tr>
 <tr class="separator:a906e395f6aa699d30966a68d008325ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0887b2d4f5159689ed2103cdef07e1b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0887b2d4f5159689ed2103cdef07e1b"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getNonce</b> () const </td></tr>
+<tr class="memitem:ad0887b2d4f5159689ed2103cdef07e1b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#ad0887b2d4f5159689ed2103cdef07e1b">getNonce</a> () const </td></tr>
+<tr class="memdesc:ad0887b2d4f5159689ed2103cdef07e1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">getNonce getter for private member: nonce  <a href="#ad0887b2d4f5159689ed2103cdef07e1b">More...</a><br /></td></tr>
 <tr class="separator:ad0887b2d4f5159689ed2103cdef07e1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46aad76fe37b74dd2ce0d2d116c848d7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a46aad76fe37b74dd2ce0d2d116c848d7"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getSize</b> () const </td></tr>
+<tr class="memitem:a46aad76fe37b74dd2ce0d2d116c848d7"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a46aad76fe37b74dd2ce0d2d116c848d7">getSize</a> () const </td></tr>
+<tr class="memdesc:a46aad76fe37b74dd2ce0d2d116c848d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">getSize getter for private member: size  <a href="#a46aad76fe37b74dd2ce0d2d116c848d7">More...</a><br /></td></tr>
 <tr class="separator:a46aad76fe37b74dd2ce0d2d116c848d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a134b602f732795a25155be0f0ed21601"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a134b602f732795a25155be0f0ed21601"></a>
-std::vector&lt; <a class="el" href="classTransaction.html">Transaction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getTx</b> () const </td></tr>
+<tr class="memitem:a134b602f732795a25155be0f0ed21601"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classTransaction.html">Transaction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a134b602f732795a25155be0f0ed21601">getTx</a> () const </td></tr>
+<tr class="memdesc:a134b602f732795a25155be0f0ed21601"><td class="mdescLeft">&#160;</td><td class="mdescRight">getTx getter for private member: vector of transactions  <a href="#a134b602f732795a25155be0f0ed21601">More...</a><br /></td></tr>
 <tr class="separator:a134b602f732795a25155be0f0ed21601"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c8a40b7338e06bb2a5cf9c79fc4f754"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c8a40b7338e06bb2a5cf9c79fc4f754"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>getBinBufferData</b> () const </td></tr>
+<tr class="memitem:a9c8a40b7338e06bb2a5cf9c79fc4f754"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a9c8a40b7338e06bb2a5cf9c79fc4f754">getBinBufferData</a> () const </td></tr>
+<tr class="memdesc:a9c8a40b7338e06bb2a5cf9c79fc4f754"><td class="mdescLeft">&#160;</td><td class="mdescRight">getBinBufferData getter for private member: binary data of block  <a href="#a9c8a40b7338e06bb2a5cf9c79fc4f754">More...</a><br /></td></tr>
 <tr class="separator:a9c8a40b7338e06bb2a5cf9c79fc4f754"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c22feb54d1d0ddac5fb9e7d769dea74"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c22feb54d1d0ddac5fb9e7d769dea74"></a>
-validStat &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getValidStat</b> () const </td></tr>
+<tr class="memitem:a0c22feb54d1d0ddac5fb9e7d769dea74"><td class="memItemLeft" align="right" valign="top">validStat &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a0c22feb54d1d0ddac5fb9e7d769dea74">getValidStat</a> () const </td></tr>
+<tr class="memdesc:a0c22feb54d1d0ddac5fb9e7d769dea74"><td class="mdescLeft">&#160;</td><td class="mdescRight">getValidStat getter for private member: isValid attribute  <a href="#a0c22feb54d1d0ddac5fb9e7d769dea74">More...</a><br /></td></tr>
 <tr class="separator:a0c22feb54d1d0ddac5fb9e7d769dea74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0214a4e7f576db9336ddea3f3a9aa855"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>TestHelper</b></td></tr>
-<tr class="separator:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5929181addf27f130c7f8f99eeba3256"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5929181addf27f130c7f8f99eeba3256"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>Validator</b></td></tr>
+class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a5929181addf27f130c7f8f99eeba3256">Validator</a></td></tr>
+<tr class="memdesc:a5929181addf27f130c7f8f99eeba3256"><td class="mdescLeft">&#160;</td><td class="mdescRight">friend class for validating the block <br /></td></tr>
 <tr class="separator:a5929181addf27f130c7f8f99eeba3256"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48a76b07d1941c7fe8b15ef67dc66f6e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a48a76b07d1941c7fe8b15ef67dc66f6e"></a>
-std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (std::ostream &amp;stream, const <a class="el" href="classBlock.html">Block</a> &amp;block_)</td></tr>
+<tr class="memitem:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0214a4e7f576db9336ddea3f3a9aa855"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a0214a4e7f576db9336ddea3f3a9aa855">TestHelper</a></td></tr>
+<tr class="memdesc:a0214a4e7f576db9336ddea3f3a9aa855"><td class="mdescLeft">&#160;</td><td class="mdescRight">friend class for testing <br /></td></tr>
+<tr class="separator:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48a76b07d1941c7fe8b15ef67dc66f6e"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a48a76b07d1941c7fe8b15ef67dc66f6e">operator&lt;&lt;</a> (std::ostream &amp;stream, const <a class="el" href="classBlock.html">Block</a> &amp;block_)</td></tr>
+<tr class="memdesc:a48a76b07d1941c7fe8b15ef67dc66f6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator &lt;&lt; overloaded operator for printing the data  <a href="#a48a76b07d1941c7fe8b15ef67dc66f6e">More...</a><br /></td></tr>
 <tr class="separator:a48a76b07d1941c7fe8b15ef67dc66f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="classBlock.html" title="The Block class data structure for hlding transactions. ">Block</a> class data structure for hlding transactions. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="aa8137cd344b152a0e7e9d79c3ac15660"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Block::Block </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; char[]&gt;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classBlock.html" title="The Block class data structure for hlding transactions. ">Block</a> Constructor of data holding structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>memory to parse to corrsponding values </td></tr>
+    <tr><td class="paramname">size</td><td>size of the buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a9c8a40b7338e06bb2a5cf9c79fc4f754"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* Block::getBinBufferData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getBinBufferData getter for private member: binary data of block </p>
+<dl class="section return"><dt>Returns</dt><dd>binBuffer </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a906e395f6aa699d30966a68d008325ae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Block::getBits </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getBits getter for private member: bits </p>
+<dl class="section return"><dt>Returns</dt><dd>bits </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0629a41853981b7f59f538aecb126732"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint256 Block::getHashMerkleRoot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getHashMerkleRoot getter for private member: merkle root hash </p>
+<dl class="section return"><dt>Returns</dt><dd>hashMerkleRoot </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af7ad7cc28e8fff3f1b94967fa3ce7643"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint256 Block::getHashPrevBlock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getHashPrevBlock getter for private member: hash of previous block </p>
+<dl class="section return"><dt>Returns</dt><dd>hashPrevBlock </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad0887b2d4f5159689ed2103cdef07e1b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Block::getNonce </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getNonce getter for private member: nonce </p>
+<dl class="section return"><dt>Returns</dt><dd>nonce </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a46aad76fe37b74dd2ce0d2d116c848d7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Block::getSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getSize getter for private member: size </p>
+<dl class="section return"><dt>Returns</dt><dd>size </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8120ba154991453f87ca170e9f0cf775"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Block::getTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getTime getter for private member: time </p>
+<dl class="section return"><dt>Returns</dt><dd>time </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a134b602f732795a25155be0f0ed21601"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classTransaction.html">Transaction</a>&gt; Block::getTx </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getTx getter for private member: vector of transactions </p>
+<dl class="section return"><dt>Returns</dt><dd>vector of transactions </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0c22feb54d1d0ddac5fb9e7d769dea74"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">validStat&amp; Block::getValidStat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getValidStat getter for private member: isValid attribute </p>
+<dl class="section return"><dt>Returns</dt><dd>isValid </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a457b7151cba0ac64a7bf27fa55b307dd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t Block::getVersion </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getVersion getter for private member: version </p>
+<dl class="section return"><dt>Returns</dt><dd>version </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a class="anchor" id="a48a76b07d1941c7fe8b15ef67dc66f6e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>block_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>operator &lt;&lt; overloaded operator for printing the data </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream</td><td>stream to write </td></tr>
+    <tr><td class="paramname">block_</td><td>block to print </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>stream </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/include/<a class="el" href="block_8h_source.html">block.h</a></li>
 </ul>

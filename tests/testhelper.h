@@ -121,12 +121,6 @@ public:
     }
 
 
-    static bool satisfyProofOfWork(const Block &block)
-    {
-        return Validator::satisfyProofOfWork(block);
-    }
-
-
     static bool validateTransaction(const Transaction &transaction)
     {
         return Validator::validateTransaction(transaction);
@@ -142,12 +136,6 @@ public:
     static bool isCoinbase(const Transaction &transaction)
     {
         return Validator::isCoinbase(transaction);
-    }
-
-
-    static bool isCoinbaseCorrectScriptSigLen(const Transaction &transaction)
-    {
-        return Validator::isCoinbaseCorrectScriptSigLen(transaction);
     }
 
 

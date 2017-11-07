@@ -13,6 +13,9 @@ Travis CI: [![Build Status](https://travis-ci.org/JakubMar/PA193_test_parser_das
 * Catch framework: https://github.com/philsquared/Catch/blob/master/docs/assertions.md
 * Dash block structure discussion: https://www.reddit.com/r/dashpay/comments/74eagc/dash_block_structure/
 
+## Documentation
+Documentation can be found at html/index.html
+
 ## Authors
 
 * **Jakub Martinka**

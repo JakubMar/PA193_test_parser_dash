@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -89,37 +90,161 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">TxIn Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="classTxIn.html" title="The TxIn class input transaction. ">TxIn</a> class input transaction.  
+ <a href="classTxIn.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="txin_8h_source.html">txin.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aebc27b45b41b259b465cce0d64a82545"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aebc27b45b41b259b465cce0d64a82545"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TxIn</b> (const char *buffer, uint32_t &amp;globalOffset, size_t &amp;unread_size)</td></tr>
+<tr class="memitem:aebc27b45b41b259b465cce0d64a82545"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTxIn.html#aebc27b45b41b259b465cce0d64a82545">TxIn</a> (const char *buffer, uint32_t &amp;globalOffset, size_t &amp;unread_size)</td></tr>
+<tr class="memdesc:aebc27b45b41b259b465cce0d64a82545"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classTxIn.html" title="The TxIn class input transaction. ">TxIn</a> Constructor of data holding structure.  <a href="#aebc27b45b41b259b465cce0d64a82545">More...</a><br /></td></tr>
 <tr class="separator:aebc27b45b41b259b465cce0d64a82545"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf638773eb0643828c0dade630935731"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf638773eb0643828c0dade630935731"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeqNumber</b> () const </td></tr>
-<tr class="separator:abf638773eb0643828c0dade630935731"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2950b877f5d291770702d62781c6eddb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2950b877f5d291770702d62781c6eddb"></a>
-uint256&#160;</td><td class="memItemRight" valign="bottom"><b>GetHashPrevTrans</b> () const </td></tr>
-<tr class="separator:a2950b877f5d291770702d62781c6eddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afae95f5af19168ad200ecc81792d7f66"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afae95f5af19168ad200ecc81792d7f66"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setHashPrevTrans</b> (const uint256 &amp;value)</td></tr>
-<tr class="separator:afae95f5af19168ad200ecc81792d7f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a587bbba55869225e45890634fc99bef6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a587bbba55869225e45890634fc99bef6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setIndexPrevTrans</b> (const uint32_t &amp;value)</td></tr>
-<tr class="separator:a587bbba55869225e45890634fc99bef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ca129c70973ed979c4c0a36cc493e54"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ca129c70973ed979c4c0a36cc493e54"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSeqNumber</b> (const uint32_t &amp;value)</td></tr>
-<tr class="separator:a5ca129c70973ed979c4c0a36cc493e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c32be6eee26e67efd8c2ed1575777a0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTxIn.html#a5c32be6eee26e67efd8c2ed1575777a0">getSeqNumber</a> () const </td></tr>
+<tr class="memdesc:a5c32be6eee26e67efd8c2ed1575777a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">getSeqNumber getter for private member: sequence number  <a href="#a5c32be6eee26e67efd8c2ed1575777a0">More...</a><br /></td></tr>
+<tr class="separator:a5c32be6eee26e67efd8c2ed1575777a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3c4fc00eb3d720d08d6485306f64644"><td class="memItemLeft" align="right" valign="top">uint256&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTxIn.html#ae3c4fc00eb3d720d08d6485306f64644">getHashPrevTrans</a> () const </td></tr>
+<tr class="memdesc:ae3c4fc00eb3d720d08d6485306f64644"><td class="mdescLeft">&#160;</td><td class="mdescRight">getHashPrevTrans getter for private member: hash of previous out transaction  <a href="#ae3c4fc00eb3d720d08d6485306f64644">More...</a><br /></td></tr>
+<tr class="separator:ae3c4fc00eb3d720d08d6485306f64644"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0214a4e7f576db9336ddea3f3a9aa855"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>TestHelper</b></td></tr>
+class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTxIn.html#a0214a4e7f576db9336ddea3f3a9aa855">TestHelper</a></td></tr>
+<tr class="memdesc:a0214a4e7f576db9336ddea3f3a9aa855"><td class="mdescLeft">&#160;</td><td class="mdescRight">friend class for testing <br /></td></tr>
 <tr class="separator:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a75a5b66bf26a7fcc4c75a44f0d10e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a75a5b66bf26a7fcc4c75a44f0d10e4"></a>
-std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (std::ostream &amp;stream, const <a class="el" href="classTxIn.html">TxIn</a> &amp;tin)</td></tr>
+<tr class="memitem:a0a75a5b66bf26a7fcc4c75a44f0d10e4"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTxIn.html#a0a75a5b66bf26a7fcc4c75a44f0d10e4">operator&lt;&lt;</a> (std::ostream &amp;stream, const <a class="el" href="classTxIn.html">TxIn</a> &amp;tin)</td></tr>
+<tr class="memdesc:a0a75a5b66bf26a7fcc4c75a44f0d10e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator &lt;&lt; overloaded operator for printing the data  <a href="#a0a75a5b66bf26a7fcc4c75a44f0d10e4">More...</a><br /></td></tr>
 <tr class="separator:a0a75a5b66bf26a7fcc4c75a44f0d10e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="classTxIn.html" title="The TxIn class input transaction. ">TxIn</a> class input transaction. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="aebc27b45b41b259b465cce0d64a82545"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TxIn::TxIn </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t &amp;&#160;</td>
+          <td class="paramname"><em>globalOffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t &amp;&#160;</td>
+          <td class="paramname"><em>unread_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classTxIn.html" title="The TxIn class input transaction. ">TxIn</a> Constructor of data holding structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>memory to parse to corrsponding values </td></tr>
+    <tr><td class="paramname">globalOffset</td><td>offset to set current position for parsing other transactions from the same buffer </td></tr>
+    <tr><td class="paramname">unread_size</td><td>size of unread part of buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ae3c4fc00eb3d720d08d6485306f64644"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint256 TxIn::getHashPrevTrans </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getHashPrevTrans getter for private member: hash of previous out transaction </p>
+<dl class="section return"><dt>Returns</dt><dd>hashPrevTrans </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5c32be6eee26e67efd8c2ed1575777a0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t TxIn::getSeqNumber </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getSeqNumber getter for private member: sequence number </p>
+<dl class="section return"><dt>Returns</dt><dd>seqNumber </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a class="anchor" id="a0a75a5b66bf26a7fcc4c75a44f0d10e4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classTxIn.html">TxIn</a> &amp;&#160;</td>
+          <td class="paramname"><em>tin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>operator &lt;&lt; overloaded operator for printing the data </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream</td><td>stream to write </td></tr>
+    <tr><td class="paramname">tin</td><td>input transaction to print </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>stream </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/include/<a class="el" href="txin_8h_source.html">txin.h</a></li>
 </ul>

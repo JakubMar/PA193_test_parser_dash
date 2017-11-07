@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -89,28 +90,140 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">TxOut Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="classTxOut.html" title="The TxOut class output transaction. ">TxOut</a> class output transaction.  
+ <a href="classTxOut.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="txout_8h_source.html">txout.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afbb9c0e5864fb5fe25acf12170380e74"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afbb9c0e5864fb5fe25acf12170380e74"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TxOut</b> (const char *buffer, uint32_t &amp;globalOffset, size_t &amp;unread_size)</td></tr>
+<tr class="memitem:afbb9c0e5864fb5fe25acf12170380e74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTxOut.html#afbb9c0e5864fb5fe25acf12170380e74">TxOut</a> (const char *buffer, uint32_t &amp;globalOffset, size_t &amp;unread_size)</td></tr>
+<tr class="memdesc:afbb9c0e5864fb5fe25acf12170380e74"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classTxOut.html" title="The TxOut class output transaction. ">TxOut</a> Constructor of data holding structure.  <a href="#afbb9c0e5864fb5fe25acf12170380e74">More...</a><br /></td></tr>
 <tr class="separator:afbb9c0e5864fb5fe25acf12170380e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae124847896acd89b26df4a976a22fa02"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae124847896acd89b26df4a976a22fa02"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetValue</b> () const </td></tr>
-<tr class="separator:ae124847896acd89b26df4a976a22fa02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75d9368ed35ce73b9304fc91ba370cab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75d9368ed35ce73b9304fc91ba370cab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setValue</b> (const uint64_t &amp;value)</td></tr>
-<tr class="separator:a75d9368ed35ce73b9304fc91ba370cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf6b0e19373bc9c64eae8a412c508bbf"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTxOut.html#adf6b0e19373bc9c64eae8a412c508bbf">getValue</a> () const </td></tr>
+<tr class="memdesc:adf6b0e19373bc9c64eae8a412c508bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">getValue getter for private member: value in DASH * 10^8  <a href="#adf6b0e19373bc9c64eae8a412c508bbf">More...</a><br /></td></tr>
+<tr class="separator:adf6b0e19373bc9c64eae8a412c508bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0214a4e7f576db9336ddea3f3a9aa855"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>TestHelper</b></td></tr>
+class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTxOut.html#a0214a4e7f576db9336ddea3f3a9aa855">TestHelper</a></td></tr>
+<tr class="memdesc:a0214a4e7f576db9336ddea3f3a9aa855"><td class="mdescLeft">&#160;</td><td class="mdescRight">friend class for testing <br /></td></tr>
 <tr class="separator:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88f7ff5f7ac343ef96fb5fa2e2629751"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a88f7ff5f7ac343ef96fb5fa2e2629751"></a>
-std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (std::ostream &amp;stream, const <a class="el" href="classTxOut.html">TxOut</a> &amp;tout)</td></tr>
+<tr class="memitem:a88f7ff5f7ac343ef96fb5fa2e2629751"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTxOut.html#a88f7ff5f7ac343ef96fb5fa2e2629751">operator&lt;&lt;</a> (std::ostream &amp;stream, const <a class="el" href="classTxOut.html">TxOut</a> &amp;tout)</td></tr>
+<tr class="memdesc:a88f7ff5f7ac343ef96fb5fa2e2629751"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator &lt;&lt; overloaded operator for printing the data  <a href="#a88f7ff5f7ac343ef96fb5fa2e2629751">More...</a><br /></td></tr>
 <tr class="separator:a88f7ff5f7ac343ef96fb5fa2e2629751"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="classTxOut.html" title="The TxOut class output transaction. ">TxOut</a> class output transaction. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="afbb9c0e5864fb5fe25acf12170380e74"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TxOut::TxOut </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t &amp;&#160;</td>
+          <td class="paramname"><em>globalOffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t &amp;&#160;</td>
+          <td class="paramname"><em>unread_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classTxOut.html" title="The TxOut class output transaction. ">TxOut</a> Constructor of data holding structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>memory to parse to corrsponding values </td></tr>
+    <tr><td class="paramname">globalOffset</td><td>offset to set current position for parsing other transactions from the same buffer </td></tr>
+    <tr><td class="paramname">unread_size</td><td>size of unread part of buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="adf6b0e19373bc9c64eae8a412c508bbf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t TxOut::getValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getValue getter for private member: value in DASH * 10^8 </p>
+<dl class="section return"><dt>Returns</dt><dd>value </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a class="anchor" id="a88f7ff5f7ac343ef96fb5fa2e2629751"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classTxOut.html">TxOut</a> &amp;&#160;</td>
+          <td class="paramname"><em>tout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>operator &lt;&lt; overloaded operator for printing the data </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream</td><td>stream to write </td></tr>
+    <tr><td class="paramname">tout</td><td>output transaction to print </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>stream </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/include/<a class="el" href="txout_8h_source.html">txout.h</a></li>
 </ul>

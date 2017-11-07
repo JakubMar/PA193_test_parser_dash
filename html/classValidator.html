@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -82,7 +83,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classValidator-members.html">List of all members</a>  </div>
@@ -90,25 +90,108 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Validator Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="classValidator.html" title="The Validator class provides method for semantic validating of blockchain. ">Validator</a> class provides method for semantic validating of blockchain.  
+ <a href="classValidator.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="validator_8h_source.html">validator.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a00262779824cab0f76f418109c6ee452"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00262779824cab0f76f418109c6ee452"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>validateBlockChain</b> (const <a class="el" href="classBlockchain.html">Blockchain</a> &amp;chain)</td></tr>
-<tr class="separator:a00262779824cab0f76f418109c6ee452"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:abf1ab832cdf9eeac3304e349ceeed7c2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf1ab832cdf9eeac3304e349ceeed7c2"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>validateBlock</b> (const <a class="el" href="classBlock.html">Block</a> &amp;head, const <a class="el" href="classBlock.html">Block</a> &amp;predecessor)</td></tr>
+<tr class="memitem:abdaa06320165a08b61999d8fee83a6cf"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#abdaa06320165a08b61999d8fee83a6cf">validateBlockChain</a> (const <a class="el" href="classBlockchain.html">Blockchain</a> &amp;chain)</td></tr>
+<tr class="memdesc:abdaa06320165a08b61999d8fee83a6cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">validateBlockChain  <a href="#abdaa06320165a08b61999d8fee83a6cf">More...</a><br /></td></tr>
+<tr class="separator:abdaa06320165a08b61999d8fee83a6cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf1ab832cdf9eeac3304e349ceeed7c2"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#abf1ab832cdf9eeac3304e349ceeed7c2">validateBlock</a> (const <a class="el" href="classBlock.html">Block</a> &amp;head, const <a class="el" href="classBlock.html">Block</a> &amp;predecessor)</td></tr>
+<tr class="memdesc:abf1ab832cdf9eeac3304e349ceeed7c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">validateBlock  <a href="#abf1ab832cdf9eeac3304e349ceeed7c2">More...</a><br /></td></tr>
 <tr class="separator:abf1ab832cdf9eeac3304e349ceeed7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0214a4e7f576db9336ddea3f3a9aa855"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>TestHelper</b></td></tr>
+class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#a0214a4e7f576db9336ddea3f3a9aa855">TestHelper</a></td></tr>
+<tr class="memdesc:a0214a4e7f576db9336ddea3f3a9aa855"><td class="mdescLeft">&#160;</td><td class="mdescRight">friend class for testing <br /></td></tr>
 <tr class="separator:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="classValidator.html" title="The Validator class provides method for semantic validating of blockchain. ">Validator</a> class provides method for semantic validating of blockchain. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="abf1ab832cdf9eeac3304e349ceeed7c2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Validator::validateBlock </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>head</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>predecessor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>validateBlock </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">head</td><td></td></tr>
+    <tr><td class="paramname">predecessor</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abdaa06320165a08b61999d8fee83a6cf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Validator::validateBlockChain </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBlockchain.html">Blockchain</a> &amp;&#160;</td>
+          <td class="paramname"><em>chain</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>validateBlockChain </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chain</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/include/<a class="el" href="validator_8h_source.html">validator.h</a></li>
 </ul>

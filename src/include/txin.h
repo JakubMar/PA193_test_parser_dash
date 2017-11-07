@@ -3,6 +3,9 @@
 #include "common.h"
 #include <ostream>
 
+/**
+ * @brief The TxIn class input transaction
+ */
 class TxIn
 {
 private:
@@ -10,37 +13,38 @@ private:
     uint32_t indexPrevTrans;
     offsets scriptOffsets;
     uint32_t seqNumber;
+
 public:
     /**
-     * @brief TxIn
-     * @param buffer
-     * @param globalOffset
-     * @param unread_size
+     * @brief TxIn Constructor of data holding structure
+     * @param buffer memory to parse to corrsponding values
+     * @param globalOffset offset to set current position for parsing other transactions from the same buffer
+     * @param unread_size size of unread part of buffer
      */
     TxIn(const char* buffer, uint32_t& globalOffset, size_t& unread_size);
 
     /**
-     * @brief getSeqNumber
-     * @return
+     * @brief getSeqNumber getter for private member: sequence number
+     * @return seqNumber
      */
     uint32_t getSeqNumber() const;
 
     /**
-     * @brief getHashPrevTrans
-     * @return
+     * @brief getHashPrevTrans getter for private member: hash of previous out transaction
+     * @return hashPrevTrans
      */
     uint256 getHashPrevTrans() const;
 
     /**
-     * @brief operator <<
-     * @param stream
-     * @param tin
-     * @return
+     * @brief operator << overloaded operator for printing the data
+     * @param stream stream to write
+     * @param tin input transaction to print
+     * @return stream
      */
     friend std::ostream& operator<< (std::ostream& stream, const TxIn& tin);
 
     /**
-     *
+     * @brief friend class for testing
      */
     friend class TestHelper;
 

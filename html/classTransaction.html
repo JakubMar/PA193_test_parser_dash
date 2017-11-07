@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -89,52 +90,224 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Transaction Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="classTransaction.html" title="The Transaction class data structure for holding TxIn(s) and TxOut(s) ">Transaction</a> class data structure for holding <a class="el" href="classTxIn.html" title="The TxIn class input transaction. ">TxIn(s)</a> and <a class="el" href="classTxOut.html" title="The TxOut class output transaction. ">TxOut(s)</a>  
+ <a href="classTransaction.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="transaction_8h_source.html">transaction.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a59011b056b0ffc054375f19b96f4e430"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59011b056b0ffc054375f19b96f4e430"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Transaction</b> (const char *buffer, uint32_t &amp;globalOffset, size_t &amp;unread_size)</td></tr>
+<tr class="memitem:a59011b056b0ffc054375f19b96f4e430"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#a59011b056b0ffc054375f19b96f4e430">Transaction</a> (const char *buffer, uint32_t &amp;globalOffset, size_t &amp;unread_size)</td></tr>
+<tr class="memdesc:a59011b056b0ffc054375f19b96f4e430"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classTransaction.html" title="The Transaction class data structure for holding TxIn(s) and TxOut(s) ">Transaction</a> Constructor of data holding structure.  <a href="#a59011b056b0ffc054375f19b96f4e430">More...</a><br /></td></tr>
 <tr class="separator:a59011b056b0ffc054375f19b96f4e430"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31a39d146c135b7ae5961066584cf303"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a31a39d146c135b7ae5961066584cf303"></a>
-const offsets&#160;</td><td class="memItemRight" valign="bottom"><b>getOffsets</b> () const </td></tr>
+<tr class="memitem:a31a39d146c135b7ae5961066584cf303"><td class="memItemLeft" align="right" valign="top">const offsets&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#a31a39d146c135b7ae5961066584cf303">getOffsets</a> () const </td></tr>
+<tr class="memdesc:a31a39d146c135b7ae5961066584cf303"><td class="mdescLeft">&#160;</td><td class="mdescRight">getOffsets getter for private member: offsets  <a href="#a31a39d146c135b7ae5961066584cf303">More...</a><br /></td></tr>
 <tr class="separator:a31a39d146c135b7ae5961066584cf303"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a508ac375cf0d603b4f348ec8dfcd7aec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a508ac375cf0d603b4f348ec8dfcd7aec"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getVersion</b> () const </td></tr>
+<tr class="memitem:a508ac375cf0d603b4f348ec8dfcd7aec"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#a508ac375cf0d603b4f348ec8dfcd7aec">getVersion</a> () const </td></tr>
+<tr class="memdesc:a508ac375cf0d603b4f348ec8dfcd7aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">getVersion getter for private member: version  <a href="#a508ac375cf0d603b4f348ec8dfcd7aec">More...</a><br /></td></tr>
 <tr class="separator:a508ac375cf0d603b4f348ec8dfcd7aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a882f1fc938f08de2fbe47908c8b20839"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a882f1fc938f08de2fbe47908c8b20839"></a>
-const std::vector&lt; <a class="el" href="classTxIn.html">TxIn</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getInputs</b> () const </td></tr>
+<tr class="memitem:a882f1fc938f08de2fbe47908c8b20839"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="classTxIn.html">TxIn</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#a882f1fc938f08de2fbe47908c8b20839">getInputs</a> () const </td></tr>
+<tr class="memdesc:a882f1fc938f08de2fbe47908c8b20839"><td class="mdescLeft">&#160;</td><td class="mdescRight">getInputs getter for private member: vector of input transactions  <a href="#a882f1fc938f08de2fbe47908c8b20839">More...</a><br /></td></tr>
 <tr class="separator:a882f1fc938f08de2fbe47908c8b20839"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7982a93d6e22cef719e24027ee7d8bf7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7982a93d6e22cef719e24027ee7d8bf7"></a>
-const std::vector&lt; <a class="el" href="classTxOut.html">TxOut</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getOutputs</b> () const </td></tr>
+<tr class="memitem:a7982a93d6e22cef719e24027ee7d8bf7"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="classTxOut.html">TxOut</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#a7982a93d6e22cef719e24027ee7d8bf7">getOutputs</a> () const </td></tr>
+<tr class="memdesc:a7982a93d6e22cef719e24027ee7d8bf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">getOutputs getter for private member: vector of output transactions  <a href="#a7982a93d6e22cef719e24027ee7d8bf7">More...</a><br /></td></tr>
 <tr class="separator:a7982a93d6e22cef719e24027ee7d8bf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef93775ce56b7a0b2d6af3adcc5714a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef93775ce56b7a0b2d6af3adcc5714a7"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getLockTime</b> () const </td></tr>
+<tr class="memitem:aef93775ce56b7a0b2d6af3adcc5714a7"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#aef93775ce56b7a0b2d6af3adcc5714a7">getLockTime</a> () const </td></tr>
+<tr class="memdesc:aef93775ce56b7a0b2d6af3adcc5714a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">getLockTime getter for private member: lock time  <a href="#aef93775ce56b7a0b2d6af3adcc5714a7">More...</a><br /></td></tr>
 <tr class="separator:aef93775ce56b7a0b2d6af3adcc5714a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04f1e493e15d1a40ee96df70c5e982f5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a04f1e493e15d1a40ee96df70c5e982f5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVersion</b> (const uint32_t &amp;value)</td></tr>
-<tr class="separator:a04f1e493e15d1a40ee96df70c5e982f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9200393c781af0d38364cb663aa25a43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9200393c781af0d38364cb663aa25a43"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setInTrans</b> (const std::vector&lt; <a class="el" href="classTxIn.html">TxIn</a> &gt; &amp;value)</td></tr>
-<tr class="separator:a9200393c781af0d38364cb663aa25a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec8e698b5f0cc328df2f25e2cfc3d550"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec8e698b5f0cc328df2f25e2cfc3d550"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutTrans</b> (const std::vector&lt; <a class="el" href="classTxOut.html">TxOut</a> &gt; &amp;value)</td></tr>
-<tr class="separator:aec8e698b5f0cc328df2f25e2cfc3d550"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcd538d4c24451d40856d062d965057d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abcd538d4c24451d40856d062d965057d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLockTime</b> (const uint32_t &amp;value)</td></tr>
-<tr class="separator:abcd538d4c24451d40856d062d965057d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e02516964da15c10f900f7d29fb0f70"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e02516964da15c10f900f7d29fb0f70"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setBeginEndOffsets</b> (const offsets &amp;value)</td></tr>
-<tr class="separator:a7e02516964da15c10f900f7d29fb0f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0214a4e7f576db9336ddea3f3a9aa855"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>TestHelper</b></td></tr>
+class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#a0214a4e7f576db9336ddea3f3a9aa855">TestHelper</a></td></tr>
+<tr class="memdesc:a0214a4e7f576db9336ddea3f3a9aa855"><td class="mdescLeft">&#160;</td><td class="mdescRight">friend class for testing <br /></td></tr>
 <tr class="separator:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a681e360f81ef6ea584c4769d5ac7d086"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a681e360f81ef6ea584c4769d5ac7d086"></a>
-std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (std::ostream &amp;stream, const <a class="el" href="classTransaction.html">Transaction</a> &amp;t)</td></tr>
+<tr class="memitem:a681e360f81ef6ea584c4769d5ac7d086"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#a681e360f81ef6ea584c4769d5ac7d086">operator&lt;&lt;</a> (std::ostream &amp;stream, const <a class="el" href="classTransaction.html">Transaction</a> &amp;t)</td></tr>
+<tr class="memdesc:a681e360f81ef6ea584c4769d5ac7d086"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator &lt;&lt; overloaded operator for printing the data  <a href="#a681e360f81ef6ea584c4769d5ac7d086">More...</a><br /></td></tr>
 <tr class="separator:a681e360f81ef6ea584c4769d5ac7d086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="classTransaction.html" title="The Transaction class data structure for holding TxIn(s) and TxOut(s) ">Transaction</a> class data structure for holding <a class="el" href="classTxIn.html" title="The TxIn class input transaction. ">TxIn(s)</a> and <a class="el" href="classTxOut.html" title="The TxOut class output transaction. ">TxOut(s)</a> </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a59011b056b0ffc054375f19b96f4e430"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Transaction::Transaction </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t &amp;&#160;</td>
+          <td class="paramname"><em>globalOffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t &amp;&#160;</td>
+          <td class="paramname"><em>unread_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classTransaction.html" title="The Transaction class data structure for holding TxIn(s) and TxOut(s) ">Transaction</a> Constructor of data holding structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>memory to parse to corrsponding values </td></tr>
+    <tr><td class="paramname">globalOffset</td><td>offset to set current position for parsing other transactions from the same buffer </td></tr>
+    <tr><td class="paramname">unread_size</td><td>size of unread part of buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a882f1fc938f08de2fbe47908c8b20839"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;<a class="el" href="classTxIn.html">TxIn</a>&gt;&amp; Transaction::getInputs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getInputs getter for private member: vector of input transactions </p>
+<dl class="section return"><dt>Returns</dt><dd>vector of <a class="el" href="classTxIn.html" title="The TxIn class input transaction. ">TxIn</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aef93775ce56b7a0b2d6af3adcc5714a7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Transaction::getLockTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getLockTime getter for private member: lock time </p>
+<dl class="section return"><dt>Returns</dt><dd>lockTime </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a31a39d146c135b7ae5961066584cf303"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const offsets Transaction::getOffsets </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getOffsets getter for private member: offsets </p>
+<dl class="section return"><dt>Returns</dt><dd>offsets </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7982a93d6e22cef719e24027ee7d8bf7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;<a class="el" href="classTxOut.html">TxOut</a>&gt;&amp; Transaction::getOutputs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getOutputs getter for private member: vector of output transactions </p>
+<dl class="section return"><dt>Returns</dt><dd>vector of <a class="el" href="classTxOut.html" title="The TxOut class output transaction. ">TxOut</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a508ac375cf0d603b4f348ec8dfcd7aec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Transaction::getVersion </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getVersion getter for private member: version </p>
+<dl class="section return"><dt>Returns</dt><dd>version </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a class="anchor" id="a681e360f81ef6ea584c4769d5ac7d086"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classTransaction.html">Transaction</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>operator &lt;&lt; overloaded operator for printing the data </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream</td><td>stream to write </td></tr>
+    <tr><td class="paramname">t</td><td>transaction to print </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>stream </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/include/<a class="el" href="transaction_8h_source.html">transaction.h</a></li>
 </ul>

@@ -9,6 +9,9 @@
 #include <readfileexception.h>
 #include <invalidtransactionsizeexcepion.h>
 
+/**
+ * Forward declaration
+ */
 class TestHelper;
 
 const char MAGIC_NUMBER[] = "\xbf\x0c\x6b\xbd";
@@ -33,9 +36,9 @@ using offsets = std::pair<uint64_t,uint64_t>;
 using validStat = std::pair<bool, std::string>;
 
 /**
- * @brief ParseUint32
- * @param array
- * @return
+ * @brief ParseUint32 transforms raw buffer to uint32_t
+ * @param array buffer with data
+ * @return uint32_t number
  */
 inline uint32_t ParseUint32(const char* array)
 {
@@ -45,9 +48,9 @@ inline uint32_t ParseUint32(const char* array)
 }
 
 /**
- * @brief ParseUint64
- * @param array
- * @return
+ * @brief ParseUint64  transforms raw buffer to uint64_t
+ * @param array buffer with data
+ * @return uint64_t number
  */
 inline uint64_t ParseUint64(const char* array)
 {
@@ -57,10 +60,11 @@ inline uint64_t ParseUint64(const char* array)
 }
 
 /**
- * @brief ParseVarLength
- * @param array
- * @param size
- * @return
+ * @brief ParseVarLength variable length integer value depends on the first byte
+ * values can be uint8_t, uint16_t, uint32_t or uint64_t => 1 up to 8 bytes value
+ * @param array buffer with data
+ * @param size size of buffer
+ * @return pair of value and number of read bytes
  */
 inline varInt ParseVarLength(const unsigned char* array, size_t size)
 {
@@ -93,10 +97,10 @@ inline varInt ParseVarLength(const unsigned char* array, size_t size)
 }
 
 /**
- * @brief ParseVarLength
- * @param array
- * @param size
- * @return
+ * @brief ParseVarLength overloaded function for const char* array
+ * @param array buffer with data
+ * @param size size of buffer
+ * @return pair of value and number of read bytes
  */
 inline varInt ParseVarLength(const char* array, size_t size)
 {

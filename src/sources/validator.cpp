@@ -6,12 +6,18 @@
 
 bool Validator::validateBlockChain(const Blockchain &chain){
 
+
+    int validationResult = true;
     const std::vector<Block> &blocks = chain.getBlocks();
     for(auto it = ++blocks.begin(); it < blocks.end(); ++it) {
-        if(!validateBlock(*it,*(it-1))) return false;
+        if(validationResult){
+            if(!validateBlock(*it,*(it-1))) validationResult = false;
+        } else {
+            setIsValidBlockAttribute(*it,false,"invalid preceeding block in blockchain");
+        }
     }
 
-    return true;
+    return validationResult;
 }
 
 bool Validator::validateBlock(const Block &head, const Block &predecessor){

@@ -7,10 +7,11 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    if(argc != 2) return 1;
-
-    //std::string fileName = "./two_blocks.txt";
-    //std::string fileName = "/home/xvancik/Desktop/PA193_test_parser_dash/blockchainBigTest.bin";
+    if(argc != 2)
+    {
+        cout << "Provide one file with blockchain" << std::endl;
+        return 1;
+    }
 
     try
     {
@@ -18,9 +19,9 @@ int main(int argc, char** argv)
 
         chain.parseFile();
         Validator::validateBlockChain(chain);
-        for(int i = 0; i < chain.getBlocks().size(); ++i)
+        for(auto& it : chain.getBlocks())
         {
-            cout << std::endl << chain.getBlocks()[i];
+            cout << it << std::endl;
         }
     }
     catch(ParserException& ex)

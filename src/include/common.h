@@ -16,7 +16,7 @@ class TestHelper;
 
 const char MAGIC_NUMBER[] = "\xbf\x0c\x6b\xbd";
 const unsigned int MAX_BLOCKFILE_SIZE = 0x8000000; // 128 MiB
-const unsigned int MAX_NUMBER_OF_BLOCKS = 5;
+const unsigned int MAX_NUMBER_OF_BLOCKS = 10;
 const uint32_t MAGIC_NUMBER_SIZE = 4;
 const uint32_t BLOCK_SIZE_SIZE = 4;
 const uint32_t VERSION_SIZE = 4;

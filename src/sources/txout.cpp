@@ -38,8 +38,6 @@ uint64_t TxOut::getValue() const
 std::ostream& operator<< (std::ostream& stream, const TxOut& tout)
 {
     stream << "----------TxOut----------: " << std::endl;
-    stream << "\tValue: " << (double)tout.value / 100000000;
+    stream << "\tValue: " << (double)tout.value / 100000000 << std::endl;
     return stream;
 }
-
-

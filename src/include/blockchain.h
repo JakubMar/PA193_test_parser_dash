@@ -10,7 +10,13 @@
 class Blockchain
 {
 private:
+    /**
+     * @brief nBlocks vector of blocks
+     */
     std::vector<Block> nBlocks;
+    /**
+     * @brief srcFile file to read blockchain from
+     */
     std::ifstream srcFile;
 
 public:

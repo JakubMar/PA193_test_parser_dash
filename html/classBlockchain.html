@@ -84,6 +84,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classBlockchain-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -107,6 +109,33 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a08194f422d823ad1d19d6d6a7882a015"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockchain.html#a08194f422d823ad1d19d6d6a7882a015">parseFile</a> ()</td></tr>
 <tr class="memdesc:a08194f422d823ad1d19d6d6a7882a015"><td class="mdescLeft">&#160;</td><td class="mdescRight">parseFile reads srcFile and cuts data to blocks syntax validation, throws exceptions if invalid blocks occurs  <a href="#a08194f422d823ad1d19d6d6a7882a015">More...</a><br /></td></tr>
 <tr class="separator:a08194f422d823ad1d19d6d6a7882a015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a1d4f66368e00f3579b9341c7cd5a06ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockchain.html#a1d4f66368e00f3579b9341c7cd5a06ac">readMagicNumber</a> (std::ifstream &amp;file)</td></tr>
+<tr class="memdesc:a1d4f66368e00f3579b9341c7cd5a06ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">readMagicNumber reads and checks magic number of block  <a href="#a1d4f66368e00f3579b9341c7cd5a06ac">More...</a><br /></td></tr>
+<tr class="separator:a1d4f66368e00f3579b9341c7cd5a06ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb075b7eb58e026a25245920e962c909"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockchain.html#abb075b7eb58e026a25245920e962c909">readBlockSize</a> (std::ifstream &amp;file)</td></tr>
+<tr class="memdesc:abb075b7eb58e026a25245920e962c909"><td class="mdescLeft">&#160;</td><td class="mdescRight">readBlockSize reads and chceks the size of block  <a href="#abb075b7eb58e026a25245920e962c909">More...</a><br /></td></tr>
+<tr class="separator:abb075b7eb58e026a25245920e962c909"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad51b42aa23d5838477fad4b3acd774e6"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; char[]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockchain.html#ad51b42aa23d5838477fad4b3acd774e6">readBlockContent</a> (std::ifstream &amp;file, uint32_t block_size)</td></tr>
+<tr class="memdesc:ad51b42aa23d5838477fad4b3acd774e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">readBlockContent tries to read block_size of bytes from file  <a href="#ad51b42aa23d5838477fad4b3acd774e6">More...</a><br /></td></tr>
+<tr class="separator:ad51b42aa23d5838477fad4b3acd774e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb66c736ee870ebf75913d01a50f87a4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb66c736ee870ebf75913d01a50f87a4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockchain.html#afb66c736ee870ebf75913d01a50f87a4">Blockchain</a> ()</td></tr>
+<tr class="memdesc:afb66c736ee870ebf75913d01a50f87a4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classBlock.html" title="The Block class data structure for holding transactions. ">Block</a> Constructor for testing. <br /></td></tr>
+<tr class="separator:afb66c736ee870ebf75913d01a50f87a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a592e9fd4a6323fe4fcf89650bb57ad28"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a592e9fd4a6323fe4fcf89650bb57ad28"></a>
+std::vector&lt; <a class="el" href="classBlock.html">Block</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockchain.html#a592e9fd4a6323fe4fcf89650bb57ad28">nBlocks</a></td></tr>
+<tr class="memdesc:a592e9fd4a6323fe4fcf89650bb57ad28"><td class="mdescLeft">&#160;</td><td class="mdescRight">nBlocks vector of blocks <br /></td></tr>
+<tr class="separator:a592e9fd4a6323fe4fcf89650bb57ad28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a128173699bd698a9ea71f864968c82ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a128173699bd698a9ea71f864968c82ee"></a>
+std::ifstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlockchain.html#a128173699bd698a9ea71f864968c82ee">srcFile</a></td></tr>
+<tr class="memdesc:a128173699bd698a9ea71f864968c82ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">srcFile file to read blockchain from <br /></td></tr>
+<tr class="separator:a128173699bd698a9ea71f864968c82ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -176,6 +205,115 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 
 <p>parseFile reads srcFile and cuts data to blocks syntax validation, throws exceptions if invalid blocks occurs </p>
 <dl class="section return"><dt>Returns</dt><dd>true if syntax validation of blockchain is successful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad51b42aa23d5838477fad4b3acd774e6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;char[]&gt; Blockchain::readBlockContent </td>
+          <td>(</td>
+          <td class="paramtype">std::ifstream &amp;&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>block_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>readBlockContent tries to read block_size of bytes from file </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>source of data </td></tr>
+    <tr><td class="paramname">block_size</td><td>size to read </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>unique pointer to read data </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abb075b7eb58e026a25245920e962c909"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Blockchain::readBlockSize </td>
+          <td>(</td>
+          <td class="paramtype">std::ifstream &amp;&#160;</td>
+          <td class="paramname"><em>file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>readBlockSize reads and chceks the size of block </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>source of data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>block size </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1d4f66368e00f3579b9341c7cd5a06ac"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Blockchain::readMagicNumber </td>
+          <td>(</td>
+          <td class="paramtype">std::ifstream &amp;&#160;</td>
+          <td class="paramname"><em>file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>readMagicNumber reads and checks magic number of block </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>source of data </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

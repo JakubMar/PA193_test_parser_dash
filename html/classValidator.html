@@ -84,6 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classValidator-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -105,6 +106,39 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:abf1ab832cdf9eeac3304e349ceeed7c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">validateBlock validate one block  <a href="#abf1ab832cdf9eeac3304e349ceeed7c2">More...</a><br /></td></tr>
 <tr class="separator:abf1ab832cdf9eeac3304e349ceeed7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:ad700d636ed30d0bbf82f4095dd6747ae"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#ad700d636ed30d0bbf82f4095dd6747ae">validateTransactions</a> (const <a class="el" href="classBlock.html">Block</a> &amp;block)</td></tr>
+<tr class="memdesc:ad700d636ed30d0bbf82f4095dd6747ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">validateTransactions validate all ransactions in the block  <a href="#ad700d636ed30d0bbf82f4095dd6747ae">More...</a><br /></td></tr>
+<tr class="separator:ad700d636ed30d0bbf82f4095dd6747ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a819c0dc3c16f958eaba285f0c31f130c"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#a819c0dc3c16f958eaba285f0c31f130c">timestampNotTooNew</a> (const <a class="el" href="classBlock.html">Block</a> &amp;block, uint32_t timestamp)</td></tr>
+<tr class="memdesc:a819c0dc3c16f958eaba285f0c31f130c"><td class="mdescLeft">&#160;</td><td class="mdescRight">timestampNotTooNew checks if timestamp is not more than 2 hours in the future  <a href="#a819c0dc3c16f958eaba285f0c31f130c">More...</a><br /></td></tr>
+<tr class="separator:a819c0dc3c16f958eaba285f0c31f130c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d82996040565f32432d6a8fce1566c9"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#a6d82996040565f32432d6a8fce1566c9">verifyPreviousBlocHash</a> (const <a class="el" href="classBlock.html">Block</a> &amp;head, const <a class="el" href="classBlock.html">Block</a> &amp;predecessor)</td></tr>
+<tr class="memdesc:a6d82996040565f32432d6a8fce1566c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">verifyPreviousBlocHash computes hash of previous block header and compares to hash saved in actual block  <a href="#a6d82996040565f32432d6a8fce1566c9">More...</a><br /></td></tr>
+<tr class="separator:a6d82996040565f32432d6a8fce1566c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54b0baa08b7f7cb9a372baf4722ee4eb"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#a54b0baa08b7f7cb9a372baf4722ee4eb">verifyMerkleHash</a> (const <a class="el" href="classBlock.html">Block</a> &amp;block)</td></tr>
+<tr class="memdesc:a54b0baa08b7f7cb9a372baf4722ee4eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">verifyMerkleHash compute merkle hash and compare with actual stored value  <a href="#a54b0baa08b7f7cb9a372baf4722ee4eb">More...</a><br /></td></tr>
+<tr class="separator:a54b0baa08b7f7cb9a372baf4722ee4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2df99b085c317a08fde2b54fb8805a1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#af2df99b085c317a08fde2b54fb8805a1">validateTransaction</a> (const <a class="el" href="classTransaction.html">Transaction</a> &amp;transaction)</td></tr>
+<tr class="memdesc:af2df99b085c317a08fde2b54fb8805a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">validateTransaction check whether input and output transactions are not empty  <a href="#af2df99b085c317a08fde2b54fb8805a1">More...</a><br /></td></tr>
+<tr class="separator:af2df99b085c317a08fde2b54fb8805a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac188cb2eb81ac7bb983794370bbd0270"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#ac188cb2eb81ac7bb983794370bbd0270">transactionListNonempty</a> (const std::vector&lt; <a class="el" href="classTransaction.html">Transaction</a> &gt; &amp;tx)</td></tr>
+<tr class="memdesc:ac188cb2eb81ac7bb983794370bbd0270"><td class="mdescLeft">&#160;</td><td class="mdescRight">transactionListNonempty checks if there are some transactions  <a href="#ac188cb2eb81ac7bb983794370bbd0270">More...</a><br /></td></tr>
+<tr class="separator:ac188cb2eb81ac7bb983794370bbd0270"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c85c41c92403ae665314bd6251a1bf6"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#a7c85c41c92403ae665314bd6251a1bf6">isCoinbase</a> (const <a class="el" href="classTransaction.html">Transaction</a> &amp;transaction)</td></tr>
+<tr class="memdesc:a7c85c41c92403ae665314bd6251a1bf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">isCoinbase checks whether and if only first transaction is coinbase  <a href="#a7c85c41c92403ae665314bd6251a1bf6">More...</a><br /></td></tr>
+<tr class="separator:a7c85c41c92403ae665314bd6251a1bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20378dd6a5e82b97b932f77ef55523a7"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#a20378dd6a5e82b97b932f77ef55523a7">setIsValidBlockAttribute</a> (const <a class="el" href="classBlock.html">Block</a> &amp;block, bool result, const char *message)</td></tr>
+<tr class="memdesc:a20378dd6a5e82b97b932f77ef55523a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">setIsValidBlockAttribute saves result of validation to block  <a href="#a20378dd6a5e82b97b932f77ef55523a7">More...</a><br /></td></tr>
+<tr class="separator:a20378dd6a5e82b97b932f77ef55523a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4a3145f8919631ac3a3e62f15970d0d"><td class="memItemLeft" align="right" valign="top">static uint256&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#aa4a3145f8919631ac3a3e62f15970d0d">hashBlock</a> (const <a class="el" href="classBlock.html">Block</a> &amp;block)</td></tr>
+<tr class="memdesc:aa4a3145f8919631ac3a3e62f15970d0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">hashBlock uses X11 algorithm to hash block header  <a href="#aa4a3145f8919631ac3a3e62f15970d0d">More...</a><br /></td></tr>
+<tr class="separator:aa4a3145f8919631ac3a3e62f15970d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34bb6723dec19b32a4f4a0b538b76693"><td class="memItemLeft" align="right" valign="top">static uint256&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classValidator.html#a34bb6723dec19b32a4f4a0b538b76693">computeMerkleHash</a> (const <a class="el" href="classBlock.html">Block</a> &amp;block)</td></tr>
+<tr class="memdesc:a34bb6723dec19b32a4f4a0b538b76693"><td class="mdescLeft">&#160;</td><td class="mdescRight">computeMerkleHash computes merkle hash (tree of hashes with padding) of all transactions,  <a href="#a34bb6723dec19b32a4f4a0b538b76693">More...</a><br /></td></tr>
+<tr class="separator:a34bb6723dec19b32a4f4a0b538b76693"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a0214a4e7f576db9336ddea3f3a9aa855"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0214a4e7f576db9336ddea3f3a9aa855"></a>
@@ -115,6 +149,233 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classValidator.html" title="The Validator class provides methods for semantic validation of blockchain. ">Validator</a> class provides methods for semantic validation of blockchain. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a34bb6723dec19b32a4f4a0b538b76693"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint256 Validator::computeMerkleHash </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>computeMerkleHash computes merkle hash (tree of hashes with padding) of all transactions, </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>block to compute merkle hash of </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>merkle hash </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa4a3145f8919631ac3a3e62f15970d0d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint256 Validator::hashBlock </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>hashBlock uses X11 algorithm to hash block header </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>block to compute hash of </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>hash of block header </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7c85c41c92403ae665314bd6251a1bf6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Validator::isCoinbase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classTransaction.html">Transaction</a> &amp;&#160;</td>
+          <td class="paramname"><em>transaction</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>isCoinbase checks whether and if only first transaction is coinbase </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transaction</td><td>transaction to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if valid </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a20378dd6a5e82b97b932f77ef55523a7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Validator::setIsValidBlockAttribute </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>setIsValidBlockAttribute saves result of validation to block </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>block to set result </td></tr>
+    <tr><td class="paramname">result</td><td>true if block is valid, false otherwise </td></tr>
+    <tr><td class="paramname">message</td><td>reason why block is invalid, "all good" if block is valid </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a819c0dc3c16f958eaba285f0c31f130c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Validator::timestampNotTooNew </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>timestamp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>timestampNotTooNew checks if timestamp is not more than 2 hours in the future </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>block with timestamp </td></tr>
+    <tr><td class="paramname">timestamp</td><td>actual time </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if valid </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac188cb2eb81ac7bb983794370bbd0270"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Validator::transactionListNonempty </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classTransaction.html">Transaction</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>tx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>transactionListNonempty checks if there are some transactions </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tx</td><td>vector of transactions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if vector is not empty </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="abf1ab832cdf9eeac3304e349ceeed7c2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -189,6 +450,149 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if whole blockchain is valid </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af2df99b085c317a08fde2b54fb8805a1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Validator::validateTransaction </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classTransaction.html">Transaction</a> &amp;&#160;</td>
+          <td class="paramname"><em>transaction</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>validateTransaction check whether input and output transactions are not empty </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transaction</td><td>transaction to validate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if valid </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad700d636ed30d0bbf82f4095dd6747ae"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Validator::validateTransactions </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>validateTransactions validate all ransactions in the block </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>block to check transactions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if valid </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a54b0baa08b7f7cb9a372baf4722ee4eb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Validator::verifyMerkleHash </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>verifyMerkleHash compute merkle hash and compare with actual stored value </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>block with transactions to compute merkle tree </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if valid </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6d82996040565f32432d6a8fce1566c9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Validator::verifyPreviousBlocHash </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>head</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classBlock.html">Block</a> &amp;&#160;</td>
+          <td class="paramname"><em>predecessor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>verifyPreviousBlocHash computes hash of previous block header and compares to hash saved in actual block </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">head</td><td>actual block </td></tr>
+    <tr><td class="paramname">predecessor</td><td>block whose hash is computed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if hashes are equal, false otherwise </dd></dl>
 
 </div>
 </div>

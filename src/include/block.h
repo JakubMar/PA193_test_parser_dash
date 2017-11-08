@@ -10,16 +10,49 @@
 class Block
 {
 private:
+    /**
+     * @brief version used version
+     */
     int32_t version;
+    /**
+     * @brief hashPrevBlock hash of the previous block
+     */
     uint256 hashPrevBlock;
+    /**
+     * @brief hashMerkleRoot merkle root = hash tree of transactions
+     */
     uint256 hashMerkleRoot;
+    /**
+     * @brief time timestamp
+     */
     uint32_t time;
+    /**
+     * @brief bits difficulty
+     */
     uint32_t bits;
+    /**
+     * @brief nonce nonce value
+     */
     uint32_t nonce;
+    /**
+     * @brief size siye of block
+     */
     uint32_t size;
+    /**
+     * @brief tx vector of transactions
+     */
     std::vector<Transaction> tx;
+    /**
+     * @brief headerOffsets start and end offsets of block header
+     */
     offsets headerOffsets;
+    /**
+     * @brief binBuffer binary representation of block, saved for computation of hash without needed serialization of private members
+     */
     std::unique_ptr<char[]> binBuffer;
+    /**
+     * @brief validStat first value indicates whether the block is valid, second value holds message why block is invalid
+     */
     mutable validStat isValid{false, "unknown reason"};
 
 public:

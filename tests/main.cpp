@@ -335,7 +335,7 @@ TEST_CASE("Blockchain tests")
         std::string expectedHashMerkleRoot = "33f2d169f3e0c651b36b79a0d5b2030a75eb1a2d6bf21ef289a0c74b6556dee0";
         std::string expectedHashPrevBlock = "000000003ed80c7dce5cdde42894e977420fb3d04f8ece07e737b2eb0d20910f";
 
-        REQUIRE(chain.getBlocks().size() == 5);
+        REQUIRE(chain.getBlocks().size() == 10);
         REQUIRE(fourthBlock.getVersion() == 2);
         REQUIRE(fourthBlock.getHashPrevBlock().ToString() == expectedHashPrevBlock);
         REQUIRE(fourthBlock.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);

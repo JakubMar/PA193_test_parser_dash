@@ -17,7 +17,7 @@ bool Validator::validateBlockChain(const Blockchain &chain){
 //    return validationResult;
     int validationResult = true;
     const std::vector<Block> &blocks = chain.getBlocks();
-    for(size_t i = 0; i < blocks.size() ; ++i) {
+    for(size_t i = 0; 0 < blocks.size() ; ++i) {
         if(i == 0){
             setIsValidBlockAttribute(blocks[i],true,"");
             continue;

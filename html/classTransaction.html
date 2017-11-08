@@ -84,6 +84,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classTransaction-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -116,6 +118,36 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aef93775ce56b7a0b2d6af3adcc5714a7"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#aef93775ce56b7a0b2d6af3adcc5714a7">getLockTime</a> () const </td></tr>
 <tr class="memdesc:aef93775ce56b7a0b2d6af3adcc5714a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">getLockTime getter for private member: lock time  <a href="#aef93775ce56b7a0b2d6af3adcc5714a7">More...</a><br /></td></tr>
 <tr class="separator:aef93775ce56b7a0b2d6af3adcc5714a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ab47005b855d38bc324bb79fd023baa13"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab47005b855d38bc324bb79fd023baa13"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#ab47005b855d38bc324bb79fd023baa13">Transaction</a> ()</td></tr>
+<tr class="memdesc:ab47005b855d38bc324bb79fd023baa13"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classTransaction.html" title="The Transaction class data structure for holding TxIn(s) and TxOut(s) ">Transaction</a> Constructor for testing. <br /></td></tr>
+<tr class="separator:ab47005b855d38bc324bb79fd023baa13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a57ab2ac20c23742489fa012214feb523"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57ab2ac20c23742489fa012214feb523"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#a57ab2ac20c23742489fa012214feb523">version</a></td></tr>
+<tr class="memdesc:a57ab2ac20c23742489fa012214feb523"><td class="mdescLeft">&#160;</td><td class="mdescRight">version used version <br /></td></tr>
+<tr class="separator:a57ab2ac20c23742489fa012214feb523"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace8ad1ca6a1c739a87def9768ec4e3d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace8ad1ca6a1c739a87def9768ec4e3d4"></a>
+std::vector&lt; <a class="el" href="classTxIn.html">TxIn</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#ace8ad1ca6a1c739a87def9768ec4e3d4">inTrans</a></td></tr>
+<tr class="memdesc:ace8ad1ca6a1c739a87def9768ec4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">inTrans vector of input transactions <br /></td></tr>
+<tr class="separator:ace8ad1ca6a1c739a87def9768ec4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbff7fe5ba5eb7dbdcecc33d56f59fb6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afbff7fe5ba5eb7dbdcecc33d56f59fb6"></a>
+std::vector&lt; <a class="el" href="classTxOut.html">TxOut</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#afbff7fe5ba5eb7dbdcecc33d56f59fb6">outTrans</a></td></tr>
+<tr class="memdesc:afbff7fe5ba5eb7dbdcecc33d56f59fb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">outTrans vector of output transactions <br /></td></tr>
+<tr class="separator:afbff7fe5ba5eb7dbdcecc33d56f59fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a4d61920a78d14b5ed9fdd521d75149"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a4d61920a78d14b5ed9fdd521d75149"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#a3a4d61920a78d14b5ed9fdd521d75149">lockTime</a></td></tr>
+<tr class="memdesc:a3a4d61920a78d14b5ed9fdd521d75149"><td class="mdescLeft">&#160;</td><td class="mdescRight">lockTime lock time <br /></td></tr>
+<tr class="separator:a3a4d61920a78d14b5ed9fdd521d75149"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc49b7c032ed03382a99655d7a4bdb11"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afc49b7c032ed03382a99655d7a4bdb11"></a>
+offsets&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransaction.html#afc49b7c032ed03382a99655d7a4bdb11">beginEndOffsets</a></td></tr>
+<tr class="memdesc:afc49b7c032ed03382a99655d7a4bdb11"><td class="mdescLeft">&#160;</td><td class="mdescRight">beginEndOffsets start and end offsets of transaction <br /></td></tr>
+<tr class="separator:afc49b7c032ed03382a99655d7a4bdb11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>

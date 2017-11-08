@@ -1,4 +1,21 @@
 var searchData=
 [
-  ['operator_3c_3c',['operator&lt;&lt;',['../classBlock.html#a48a76b07d1941c7fe8b15ef67dc66f6e',1,'Block::operator&lt;&lt;()'],['../classTransaction.html#a681e360f81ef6ea584c4769d5ac7d086',1,'Transaction::operator&lt;&lt;()'],['../classTxIn.html#a0a75a5b66bf26a7fcc4c75a44f0d10e4',1,'TxIn::operator&lt;&lt;()'],['../classTxOut.html#a88f7ff5f7ac343ef96fb5fa2e2629751',1,'TxOut::operator&lt;&lt;()']]]
+  ['getbinbufferdata',['getBinBufferData',['../classBlock.html#a9c8a40b7338e06bb2a5cf9c79fc4f754',1,'Block']]],
+  ['getbits',['getBits',['../classBlock.html#a906e395f6aa699d30966a68d008325ae',1,'Block']]],
+  ['getblocks',['getBlocks',['../classBlockchain.html#aaa5d90050bd64c212a4139f3d8a78d33',1,'Blockchain']]],
+  ['gethashmerkleroot',['getHashMerkleRoot',['../classBlock.html#a0629a41853981b7f59f538aecb126732',1,'Block']]],
+  ['gethashprevblock',['getHashPrevBlock',['../classBlock.html#af7ad7cc28e8fff3f1b94967fa3ce7643',1,'Block']]],
+  ['gethashprevtrans',['getHashPrevTrans',['../classTxIn.html#ae3c4fc00eb3d720d08d6485306f64644',1,'TxIn']]],
+  ['getinputs',['getInputs',['../classTransaction.html#a882f1fc938f08de2fbe47908c8b20839',1,'Transaction']]],
+  ['getlocktime',['getLockTime',['../classTransaction.html#aef93775ce56b7a0b2d6af3adcc5714a7',1,'Transaction']]],
+  ['getnonce',['getNonce',['../classBlock.html#ad0887b2d4f5159689ed2103cdef07e1b',1,'Block']]],
+  ['getoffsets',['getOffsets',['../classTransaction.html#a31a39d146c135b7ae5961066584cf303',1,'Transaction']]],
+  ['getoutputs',['getOutputs',['../classTransaction.html#a7982a93d6e22cef719e24027ee7d8bf7',1,'Transaction']]],
+  ['getseqnumber',['getSeqNumber',['../classTxIn.html#a5c32be6eee26e67efd8c2ed1575777a0',1,'TxIn']]],
+  ['getsize',['getSize',['../classBlock.html#a46aad76fe37b74dd2ce0d2d116c848d7',1,'Block']]],
+  ['gettime',['getTime',['../classBlock.html#a8120ba154991453f87ca170e9f0cf775',1,'Block']]],
+  ['gettx',['getTx',['../classBlock.html#a134b602f732795a25155be0f0ed21601',1,'Block']]],
+  ['getvalidstat',['getValidStat',['../classBlock.html#a0c22feb54d1d0ddac5fb9e7d769dea74',1,'Block']]],
+  ['getvalue',['getValue',['../classTxOut.html#adf6b0e19373bc9c64eae8a412c508bbf',1,'TxOut']]],
+  ['getversion',['getVersion',['../classBlock.html#a457b7151cba0ac64a7bf27fa55b307dd',1,'Block::getVersion()'],['../classTransaction.html#a508ac375cf0d603b4f348ec8dfcd7aec',1,'Transaction::getVersion()']]]
 ];

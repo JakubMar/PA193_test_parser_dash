@@ -10,10 +10,25 @@
 class Transaction
 {
 private:
+    /**
+     * @brief version used version
+     */
     uint32_t version;
+    /**
+     * @brief inTrans vector of input transactions
+     */
     std::vector<TxIn> inTrans;
+    /**
+     * @brief outTrans vector of output transactions
+     */
     std::vector<TxOut> outTrans;
+    /**
+     * @brief lockTime lock time
+     */
     uint32_t lockTime;
+    /**
+     * @brief beginEndOffsets start and end offsets of transaction
+     */
     offsets beginEndOffsets;
 
 public:
@@ -69,5 +84,8 @@ public:
     friend class TestHelper;
 
 private:
+    /**
+     * @brief Transaction Constructor for testing
+     */
     Transaction() {}
 };

@@ -9,7 +9,14 @@
 class TxOut
 {
 private:
+    /**
+     * @brief value value in in DASH * 10^8
+     */
     uint64_t value;
+    /**
+     * @brief scriptOffsets begin and end offsets of script
+     * script is not saved nor parsed
+     */
     offsets scriptOffsets;
 
 public:
@@ -41,6 +48,9 @@ public:
     friend class TestHelper;
 
 private:
+    /**
+     * @brief TxOut Constructor for testing
+     */
     TxOut() {}
 };
 

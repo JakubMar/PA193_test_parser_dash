@@ -9,9 +9,22 @@
 class TxIn
 {
 private:
+    /**
+     * @brief hashPrevTrans hash of corresponding previous TxOut
+     */
     uint256 hashPrevTrans;
+    /**
+     * @brief indexPrevTrans index of corresponding previous TxOut
+     */
     uint32_t indexPrevTrans;
+    /**
+     * @brief scriptOffsets begin and end offsets of script
+     * script is not saved nor parsed
+     */
     offsets scriptOffsets;
+    /**
+     * @brief seqNumber sequence number
+     */
     uint32_t seqNumber;
 
 public:
@@ -49,6 +62,9 @@ public:
     friend class TestHelper;
 
 private:
+    /**
+     * @brief TxIn Constructor for testing
+     */
     TxIn() {}
 };
 

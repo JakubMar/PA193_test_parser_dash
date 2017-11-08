@@ -84,6 +84,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classBlock-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -98,7 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa8137cd344b152a0e7e9d79c3ac15660"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#aa8137cd344b152a0e7e9d79c3ac15660">Block</a> (std::unique_ptr&lt; char[]&gt; buffer, uint32_t size)</td></tr>
+<tr class="memitem:aa8137cd344b152a0e7e9d79c3ac15660"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#aa8137cd344b152a0e7e9d79c3ac15660">Block</a> (std::unique_ptr&lt; char[]&gt; buffer, uint32_t <a class="el" href="classBlock.html#aca6ef54133a93503c74795a38bf34a12">size</a>)</td></tr>
 <tr class="memdesc:aa8137cd344b152a0e7e9d79c3ac15660"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classBlock.html" title="The Block class data structure for holding transactions. ">Block</a> Constructor of data holding structure.  <a href="#aa8137cd344b152a0e7e9d79c3ac15660">More...</a><br /></td></tr>
 <tr class="separator:aa8137cd344b152a0e7e9d79c3ac15660"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a457b7151cba0ac64a7bf27fa55b307dd"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a457b7151cba0ac64a7bf27fa55b307dd">getVersion</a> () const </td></tr>
@@ -131,6 +133,60 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0c22feb54d1d0ddac5fb9e7d769dea74"><td class="memItemLeft" align="right" valign="top">validStat &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a0c22feb54d1d0ddac5fb9e7d769dea74">getValidStat</a> () const </td></tr>
 <tr class="memdesc:a0c22feb54d1d0ddac5fb9e7d769dea74"><td class="mdescLeft">&#160;</td><td class="mdescRight">getValidStat getter for private member: isValid attribute  <a href="#a0c22feb54d1d0ddac5fb9e7d769dea74">More...</a><br /></td></tr>
 <tr class="separator:a0c22feb54d1d0ddac5fb9e7d769dea74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a37658a946bf5067ad01d68d9ff086adc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a37658a946bf5067ad01d68d9ff086adc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a37658a946bf5067ad01d68d9ff086adc">Block</a> ()</td></tr>
+<tr class="memdesc:a37658a946bf5067ad01d68d9ff086adc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classBlock.html" title="The Block class data structure for holding transactions. ">Block</a> Constructor for testing. <br /></td></tr>
+<tr class="separator:a37658a946bf5067ad01d68d9ff086adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a5d6ed55af755f97e6450121298d60ff9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d6ed55af755f97e6450121298d60ff9"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a5d6ed55af755f97e6450121298d60ff9">version</a></td></tr>
+<tr class="memdesc:a5d6ed55af755f97e6450121298d60ff9"><td class="mdescLeft">&#160;</td><td class="mdescRight">version used version <br /></td></tr>
+<tr class="separator:a5d6ed55af755f97e6450121298d60ff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8967d029b22349623fb2f2bdf27a65b1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8967d029b22349623fb2f2bdf27a65b1"></a>
+uint256&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a8967d029b22349623fb2f2bdf27a65b1">hashPrevBlock</a></td></tr>
+<tr class="memdesc:a8967d029b22349623fb2f2bdf27a65b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">hashPrevBlock hash of the previous block <br /></td></tr>
+<tr class="separator:a8967d029b22349623fb2f2bdf27a65b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41722e9ba1d93eb81b14725c526ae26f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a41722e9ba1d93eb81b14725c526ae26f"></a>
+uint256&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a41722e9ba1d93eb81b14725c526ae26f">hashMerkleRoot</a></td></tr>
+<tr class="memdesc:a41722e9ba1d93eb81b14725c526ae26f"><td class="mdescLeft">&#160;</td><td class="mdescRight">hashMerkleRoot merkle root = hash tree of transactions <br /></td></tr>
+<tr class="separator:a41722e9ba1d93eb81b14725c526ae26f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93e83ee9b9c0ea371578b80eb7528138"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a93e83ee9b9c0ea371578b80eb7528138"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a93e83ee9b9c0ea371578b80eb7528138">time</a></td></tr>
+<tr class="memdesc:a93e83ee9b9c0ea371578b80eb7528138"><td class="mdescLeft">&#160;</td><td class="mdescRight">time timestamp <br /></td></tr>
+<tr class="separator:a93e83ee9b9c0ea371578b80eb7528138"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41e78f192de70a5c2c8abd71a61ec5a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a41e78f192de70a5c2c8abd71a61ec5a9"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a41e78f192de70a5c2c8abd71a61ec5a9">bits</a></td></tr>
+<tr class="memdesc:a41e78f192de70a5c2c8abd71a61ec5a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">bits difficulty <br /></td></tr>
+<tr class="separator:a41e78f192de70a5c2c8abd71a61ec5a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27dbe165a7233ba9714eaa27a94d263d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27dbe165a7233ba9714eaa27a94d263d"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a27dbe165a7233ba9714eaa27a94d263d">nonce</a></td></tr>
+<tr class="memdesc:a27dbe165a7233ba9714eaa27a94d263d"><td class="mdescLeft">&#160;</td><td class="mdescRight">nonce nonce value <br /></td></tr>
+<tr class="separator:a27dbe165a7233ba9714eaa27a94d263d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca6ef54133a93503c74795a38bf34a12"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca6ef54133a93503c74795a38bf34a12"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#aca6ef54133a93503c74795a38bf34a12">size</a></td></tr>
+<tr class="memdesc:aca6ef54133a93503c74795a38bf34a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">size siye of block <br /></td></tr>
+<tr class="separator:aca6ef54133a93503c74795a38bf34a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b0177393207dca57b4dc053ba26ce6b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b0177393207dca57b4dc053ba26ce6b"></a>
+std::vector&lt; <a class="el" href="classTransaction.html">Transaction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a2b0177393207dca57b4dc053ba26ce6b">tx</a></td></tr>
+<tr class="memdesc:a2b0177393207dca57b4dc053ba26ce6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">tx vector of transactions <br /></td></tr>
+<tr class="separator:a2b0177393207dca57b4dc053ba26ce6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d35c899d4fec524d7cfc72607c2356d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d35c899d4fec524d7cfc72607c2356d"></a>
+offsets&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a5d35c899d4fec524d7cfc72607c2356d">headerOffsets</a></td></tr>
+<tr class="memdesc:a5d35c899d4fec524d7cfc72607c2356d"><td class="mdescLeft">&#160;</td><td class="mdescRight">headerOffsets start and end offsets of block header <br /></td></tr>
+<tr class="separator:a5d35c899d4fec524d7cfc72607c2356d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fa45e361ee0aee8e7bb892950d5db77"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7fa45e361ee0aee8e7bb892950d5db77"></a>
+std::unique_ptr&lt; char[]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a7fa45e361ee0aee8e7bb892950d5db77">binBuffer</a></td></tr>
+<tr class="memdesc:a7fa45e361ee0aee8e7bb892950d5db77"><td class="mdescLeft">&#160;</td><td class="mdescRight">binBuffer binary representation of block, saved for computation of hash without needed serialization of private members <br /></td></tr>
+<tr class="separator:a7fa45e361ee0aee8e7bb892950d5db77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52d158c1807397dedcd1ace41fdb6e5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a52d158c1807397dedcd1ace41fdb6e5d"></a>
+validStat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBlock.html#a52d158c1807397dedcd1ace41fdb6e5d">isValid</a> {false, &quot;unknown reason&quot;}</td></tr>
+<tr class="memdesc:a52d158c1807397dedcd1ace41fdb6e5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">validStat first value indicates whether the block is valid, second value holds message why block is invalid <br /></td></tr>
+<tr class="separator:a52d158c1807397dedcd1ace41fdb6e5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>

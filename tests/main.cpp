@@ -602,18 +602,6 @@ TEST_CASE("Simple validator tests")
 {
     SECTION("validateTransactions() tests")
     {
-        SECTION("Block without transactions")
-        {
-            Block testBlock = TestHelper::CreateEmptyBlockObject();
-
-            std::vector<Transaction> trans;
-
-            TestHelper::setBlockTx(testBLock, trans);
-
-            REQUIRE(TestHelper::validateTransactions(testBlock) == false);
-        }
-
-
         SECTION("Block without first transactions containing two inputs")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();

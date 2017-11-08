@@ -80,7 +80,7 @@ std::ostream& operator<<(std::ostream& stream, const Transaction& t)
     stream << "  -------TRANSACTION-------: " << std::endl;
     stream << "  Version: " << t.version << std::endl;
     std::time_t time = t.lockTime;
-    stream << "  Time: " << std::asctime(std::localtime(&time));
+    stream << "  Lock time: " << std::asctime(std::localtime(&time));
     stream << "  TxIn(s):" << std::endl;
     for(auto& it : t.inTrans)
     {

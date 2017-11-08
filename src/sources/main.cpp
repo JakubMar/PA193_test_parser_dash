@@ -9,14 +9,13 @@ int main(int argc, char** argv)
 {
     if(argc != 2)
     {
-        cout << "Provide one file with blockchain" << std::endl;
+        cerr << "Argument missing: path to file containing blockchain" << std::endl;
         return 1;
     }
 
     try
     {
         Blockchain chain(argv[1]);
-
         chain.parseFile();
         Validator::validateBlockChain(chain);
         for(auto& it : chain.getBlocks())
@@ -26,7 +25,7 @@ int main(int argc, char** argv)
     }
     catch(ParserException& ex)
     {
-        cout << ex.what() << endl;
+        cerr << ex.what() << endl;
         return 1;
     }
 

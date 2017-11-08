@@ -606,6 +606,10 @@ TEST_CASE("Simple validator tests")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
 
+            std::vector<Transaction> trans;
+
+            TestHelper::setBlockTx(testBLock, trans);
+
             REQUIRE(TestHelper::validateTransactions(testBlock) == false);
         }
 

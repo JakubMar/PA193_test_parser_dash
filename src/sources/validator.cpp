@@ -32,6 +32,9 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor){
     uint32_t currentTime = static_cast<uint32_t>(time(NULL));
     if (!timestampNotTooNew(head,currentTime)) return setIsValidBlockAttribute(head,false, "Invalid timestamp");
 
+    //transaction list nonempty
+    if (!transactionListNonempty(head.tx)) return setIsValidBlockAttribute(head,false, "Empty transaction list");
+
     //Verify Merkle hash
     if(!verifyMerkleHash(head)) return setIsValidBlockAttribute(head,false, "Invalid merkle root hash");
 
@@ -41,9 +44,6 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor){
 bool Validator::validateTransactions(const Block &block){
 
     const std::vector<Transaction> &transactions = block.tx;
-
-    //transaction list nonempty
-    if (!transactionListNonempty(transactions)) return setIsValidBlockAttribute(block,false, "Empty transaction list");
 
     //first transaction coinbase
     if(!isCoinbase(transactions.at(0))) return setIsValidBlockAttribute(block,false, "First transaction is not coinbase");

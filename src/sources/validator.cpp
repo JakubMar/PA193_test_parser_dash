@@ -5,30 +5,21 @@
 #include  <iomanip>
 
 bool Validator::validateBlockChain(const Blockchain &chain){
-//    int validationResult = true;
-//    const std::vector<Block> &blocks = chain.getBlocks();
-//    for(auto it = ++blocks.begin(); it < blocks.end(); ++it) {
-//        if(validationResult){
-//            if(!validateBlock(*it,*(it-1))) validationResult = false;
-//        } else {
-//            setIsValidBlockAttribute(*it,false,"invalid preceeding block in blockchain");
-//        }
-//    }
-//    return validationResult;
     int validationResult = true;
     const std::vector<Block> &blocks = chain.getBlocks();
-    for(size_t i = 0; 0 < blocks.size() ; ++i) {
-        if(i == 0){
-            setIsValidBlockAttribute(blocks[i],true,"");
+    for(auto it = blocks.begin(); it < blocks.end(); ++it) {
+        if(it == blocks.begin()){
+            setIsValidBlockAttribute(*it,true,"");
             continue;
         }
         if(validationResult){
-            if(!validateBlock(blocks[i], blocks[i-1])) validationResult = false;
+            if(!validateBlock(*it,*(it-1))) validationResult = false;
         } else {
-            setIsValidBlockAttribute(blocks[i],false,"invalid preceeding block in blockchain");
+            setIsValidBlockAttribute(*it,false,"invalid preceeding block in blockchain");
         }
     }
     return validationResult;
+
 }
 
 bool Validator::validateBlock(const Block &head, const Block &predecessor){
@@ -55,7 +46,7 @@ bool Validator::validateTransactions(const Block &block){
     if (!transactionListNonempty(transactions)) return setIsValidBlockAttribute(block,false, "Empty transaction list");
 
     //first transaction coinbase
-//    if(!isCoinbase(transactions.at(0))) return setIsValidBlockAttribute(block,false, "First transaction is not coinbase");
+    if(!isCoinbase(transactions.at(0))) return setIsValidBlockAttribute(block,false, "First transaction is not coinbase");
 
     //other transactions not coinbase
     for(auto it = (++transactions.begin()); it != transactions.end(); ++it){

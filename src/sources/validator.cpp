@@ -110,8 +110,6 @@ bool Validator::isCoinbase(const Transaction &transaction){
         if (*hashDataBegin != 0) return false;
     }
 
-    //seq. num of coinbase == -1
-    if(inputs.begin()->getSeqNumber() != 4294967295) return false;
     return true;
 }
 

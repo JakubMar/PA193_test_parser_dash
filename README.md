@@ -24,7 +24,8 @@ build/debug/src/parser <input_file_with_blockchain>
 * Dash block structure discussion: https://www.reddit.com/r/dashpay/comments/74eagc/dash_block_structure/
 
 ## Documentation
-Documentation can be found at html/index.html
+Documentation can be found at [html/index.html](html/index.html)
+
 
 ## Authors
 

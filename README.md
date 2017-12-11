@@ -5,9 +5,19 @@ Project for PA193 - Test parser for Dash cryptocurrency
 Travis CI: [![Build Status](https://travis-ci.org/JakubMar/PA193_test_parser_dash.svg?branch=master)](https://travis-ci.org/JakubMar/PA193_test_parser_dash)
 
 ## Build steps
-* qmake
-* ./build_dir_tree.sh
-* make
+
+```
+qmake
+./build_dir_tree.sh
+make
+```
+
+## Usage
+
+```
+build/debug/src/parser <input_file_with_blockchain>
+```
+
 
 ## References
 * Catch framework: https://github.com/philsquared/Catch/blob/master/docs/assertions.md

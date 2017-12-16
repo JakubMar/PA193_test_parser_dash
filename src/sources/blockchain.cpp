@@ -45,7 +45,7 @@ bool Blockchain::parseFile()
 
 void Blockchain::readMagicNumber(std::ifstream& file)
 {
-    unsigned bufferSize = MAGIC_NUMBER_SIZE;
+    const unsigned bufferSize = MAGIC_NUMBER_SIZE;
     char buffer[bufferSize];
     file.read(buffer, bufferSize);
 

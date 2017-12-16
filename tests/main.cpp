@@ -112,7 +112,7 @@ TEST_CASE("Blockchain tests")
         uint32_t expectedLockTime = 0;
 
         const Block& block = chain.getBlocks()[0];
-        Transaction transaction = block.getTx()[0];
+        Transaction transaction = block.getTxVector()[0];
 
         REQUIRE(block.getVersion() == expectedBlockVersion);
         REQUIRE(block.getHashPrevBlock().ToString() == expectedHashPrevBlock);
@@ -121,7 +121,7 @@ TEST_CASE("Blockchain tests")
         REQUIRE(block.getBits() == expectedBits);
         REQUIRE(block.getNonce() == expectedNonce);
         REQUIRE(block.getSize() == expectedSize);
-        REQUIRE(block.getTx().size() == 1);
+        REQUIRE(block.getTxVector().size() == 1);
         REQUIRE(transaction.getVersion() == expectedTransactionVersion);
         REQUIRE(transaction.getLockTime() == expectedLockTime);
         REQUIRE(transaction.getInputs().size() == 1);
@@ -177,8 +177,8 @@ TEST_CASE("Blockchain tests")
         uint32_t expectedLockTime = 0;
 
         const Block& block = chain.getBlocks()[0];
-        Transaction transaction1 = block.getTx()[0];
-        Transaction transaction2 = block.getTx()[0];
+        Transaction transaction1 = block.getTxVector()[0];
+        Transaction transaction2 = block.getTxVector()[0];
 
         REQUIRE(block.getVersion() == expectedBlockVersion);
         REQUIRE(block.getHashPrevBlock().ToString() == expectedHashPrevBlock);
@@ -187,7 +187,7 @@ TEST_CASE("Blockchain tests")
         REQUIRE(block.getBits() == expectedBits);
         REQUIRE(block.getNonce() == expectedNonce);
         REQUIRE(block.getSize() == expectedSize);
-        REQUIRE(block.getTx().size() == 2);
+        REQUIRE(block.getTxVector().size() == 2);
         REQUIRE(transaction1.getVersion() == expectedTransactionVersion);
         REQUIRE(transaction1.getLockTime() == expectedLockTime);
         REQUIRE(transaction1.getInputs().size() == 1);
@@ -257,8 +257,8 @@ TEST_CASE("Blockchain tests")
 
         const Block& block1 = chain.getBlocks()[0];
         const Block& block2 = chain.getBlocks()[1];
-        Transaction transaction1 = block1.getTx()[0];
-        Transaction transaction2 = block2.getTx()[0];
+        Transaction transaction1 = block1.getTxVector()[0];
+        Transaction transaction2 = block2.getTxVector()[0];
 
         REQUIRE(block1.getVersion() == expectedVersion);
         REQUIRE(block1.getHashPrevBlock().ToString() == expectedHashPrevBlock);
@@ -267,7 +267,7 @@ TEST_CASE("Blockchain tests")
         REQUIRE(block1.getBits() == expectedBits);
         REQUIRE(block1.getNonce() == expectedNonce);
         REQUIRE(block1.getSize() == expectedSize);
-        REQUIRE(block1.getTx().size() == 1);
+        REQUIRE(block1.getTxVector().size() == 1);
 
         REQUIRE(block2.getVersion() == expectedVersion);
         REQUIRE(block2.getHashPrevBlock().ToString() == expectedHashPrevBlock);
@@ -276,7 +276,7 @@ TEST_CASE("Blockchain tests")
         REQUIRE(block2.getBits() == expectedBits);
         REQUIRE(block2.getNonce() == expectedNonce);
         REQUIRE(block2.getSize() == expectedSize);
-        REQUIRE(block2.getTx().size() == 1);
+        REQUIRE(block2.getTxVector().size() == 1);
 
         REQUIRE(transaction1.getVersion() == expectedTransactionVersion);
         REQUIRE(transaction1.getLockTime() == expectedLockTime);
@@ -313,13 +313,13 @@ TEST_CASE("Blockchain tests")
         REQUIRE(secondBlock.getBits() == 474114432);
         REQUIRE(secondBlock.getNonce() == 81630126);
         REQUIRE(secondBlock.getSize() == 1562);
-        REQUIRE(secondBlock.getTx().size() == 7);
-        REQUIRE(secondBlock.getTx()[6].getVersion() == 1);
-        REQUIRE(secondBlock.getTx()[4].getLockTime() == 0);
-        REQUIRE(secondBlock.getTx()[3].getInputs().size() == 1);
-        REQUIRE(secondBlock.getTx()[2].getOutputs().size() == 2);
-        REQUIRE(secondBlock.getTx()[1].getInputs()[0].getSeqNumber() == 4294967295);
-        REQUIRE(secondBlock.getTx()[5].getOutputs()[1].getValue() == 176864274);
+        REQUIRE(secondBlock.getTxVector().size() == 7);
+        REQUIRE(secondBlock.getTxVector()[6].getVersion() == 1);
+        REQUIRE(secondBlock.getTxVector()[4].getLockTime() == 0);
+        REQUIRE(secondBlock.getTxVector()[3].getInputs().size() == 1);
+        REQUIRE(secondBlock.getTxVector()[2].getOutputs().size() == 2);
+        REQUIRE(secondBlock.getTxVector()[1].getInputs()[0].getSeqNumber() == 4294967295);
+        REQUIRE(secondBlock.getTxVector()[5].getOutputs()[1].getValue() == 176864274);
     }
 
 
@@ -343,13 +343,13 @@ TEST_CASE("Blockchain tests")
         REQUIRE(fourthBlock.getBits() == 474114432);
         REQUIRE(fourthBlock.getNonce() == 81630126);
         REQUIRE(fourthBlock.getSize() == 1562);
-        REQUIRE(fourthBlock.getTx().size() == 7);
-        REQUIRE(fourthBlock.getTx()[6].getVersion() == 1);
-        REQUIRE(fourthBlock.getTx()[4].getLockTime() == 0);
-        REQUIRE(fourthBlock.getTx()[3].getInputs().size() == 1);
-        REQUIRE(fourthBlock.getTx()[2].getOutputs().size() == 2);
-        REQUIRE(fourthBlock.getTx()[1].getInputs()[0].getSeqNumber() == 4294967295);
-        REQUIRE(fourthBlock.getTx()[5].getOutputs()[1].getValue() == 176864274);
+        REQUIRE(fourthBlock.getTxVector().size() == 7);
+        REQUIRE(fourthBlock.getTxVector()[6].getVersion() == 1);
+        REQUIRE(fourthBlock.getTxVector()[4].getLockTime() == 0);
+        REQUIRE(fourthBlock.getTxVector()[3].getInputs().size() == 1);
+        REQUIRE(fourthBlock.getTxVector()[2].getOutputs().size() == 2);
+        REQUIRE(fourthBlock.getTxVector()[1].getInputs()[0].getSeqNumber() == 4294967295);
+        REQUIRE(fourthBlock.getTxVector()[5].getOutputs()[1].getValue() == 176864274);
     }
 
 
@@ -362,13 +362,13 @@ TEST_CASE("Blockchain tests")
 
         const Block& block = chain.getBlocks()[3];
 
-        Transaction trans1 = block.getTx()[0];
-        Transaction trans2 = block.getTx()[1];
-        Transaction trans3 = block.getTx()[2];
-        Transaction trans4 = block.getTx()[3];
-        Transaction trans5 = block.getTx()[4];
-        Transaction trans6 = block.getTx()[5];
-        Transaction trans7 = block.getTx()[6];
+        Transaction trans1 = block.getTxVector()[0];
+        Transaction trans2 = block.getTxVector()[1];
+        Transaction trans3 = block.getTxVector()[2];
+        Transaction trans4 = block.getTxVector()[3];
+        Transaction trans5 = block.getTxVector()[4];
+        Transaction trans6 = block.getTxVector()[5];
+        Transaction trans7 = block.getTxVector()[6];
 
         REQUIRE(trans1.getOffsets().first == 81);
         REQUIRE(trans1.getOffsets().second == 207);

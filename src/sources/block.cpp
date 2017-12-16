@@ -52,7 +52,7 @@ Block::Block(std::unique_ptr<char[]> buffer, uint32_t size) : size(size)
     size_t unread_size = size - offset;
     for(size_t i = 0; i < countTx.first; ++i)
     {
-        tx.emplace_back(Transaction(binBuffer.get()+offset, offset, unread_size));
+        txVector.emplace_back(Transaction(binBuffer.get()+offset, offset, unread_size));
     }
 
 }
@@ -92,9 +92,9 @@ uint32_t Block::getSize() const
     return size;
 }
 
-std::vector<Transaction> Block::getTx() const
+std::vector<Transaction> Block::getTxVector() const
 {
-    return tx;
+    return txVector;
 }
 
 char* Block::getBinBufferData() const
@@ -120,7 +120,7 @@ std::ostream& operator<< (std::ostream& stream, const Block& block)
         stream << "Time: " << std::asctime(std::localtime(&time));
         stream << "Bits: " << std::hex << block.bits << std::endl;
         stream << "Nonce: " << std::dec << block.nonce << std::endl;
-        for(auto& it : block.tx)
+        for(auto& it : block.txVector)
         {
             stream << it << std::endl;
         }

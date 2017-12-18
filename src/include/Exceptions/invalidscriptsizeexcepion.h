@@ -2,11 +2,12 @@
 
 #include "parserexception.h"
 
-class InvalidScriptSizeException: public ParserException {
+class InvalidScriptSizeException: public ParserException
+{
 public:
 
-  InvalidScriptSizeException() : ParserException("Size of script is invalid") {}
+    InvalidScriptSizeException() : ParserException("Size of script is invalid") {}
 
-  InvalidScriptSizeException(std::string what) : ParserException(what) {}
+    InvalidScriptSizeException(std::string what) : ParserException(what) {}
 };
 

@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    if(argc != 2)
+    if (argc != 2)
     {
         cerr << "Argument missing: path to file containing blockchain" << std::endl;
         return 1;
@@ -18,12 +18,12 @@ int main(int argc, char** argv)
         Blockchain chain(argv[1]);
         chain.parseFile();
         Validator::validateBlockChain(chain);
-        for(auto& it : chain.getBlocks())
+        for (auto& it : chain.getBlocks())
         {
             cout << it << std::endl;
         }
     }
-    catch(ParserException& ex)
+    catch (ParserException& ex)
     {
         cerr << ex.what() << endl;
         return 1;

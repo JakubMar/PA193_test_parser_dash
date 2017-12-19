@@ -10,69 +10,63 @@
 #include "block.h"
 
 
-TEST_CASE("Hash tests")
+TEST_CASE("x11hash", "Test case for X11 hash function")
 {
-    SECTION("Hash X11")
-    {
-        //block #1 header - taken binary represenation (no change in endianity)
-        const unsigned char b1_header[] = {
-            0x02, 0x00, 0x00, 0x00, 0xb6, 0x7a, 0x40, 0xf3, 0xcd, 0x58, 0x04, 0x43, 0x7a, 0x10, 0x8f, 0x10, 0x55, 0x33, 0x73, 0x9c, 0x37, 0xe6,
-            0x22, 0x9b, 0xc1, 0xad, 0xca, 0xb3, 0x85, 0x14, 0x0b, 0x59, 0xfd, 0x0f, 0x00, 0x00, 0xa7, 0x1c, 0x1a, 0xad, 0xe4, 0x4b, 0xf8, 0x42,
-            0x5b, 0xec, 0x0d, 0xeb, 0x61, 0x1c, 0x20, 0xb1, 0x6d, 0xa3, 0x44, 0x28, 0x18, 0xef, 0x20, 0x48, 0x9c, 0xa1, 0xe2, 0x51, 0x2b, 0xe4,
-            0x3e, 0xef, 0x81, 0x4c, 0xdb, 0x52, 0xf0, 0xff, 0x0f, 0x1e, 0xdb, 0xf7, 0x01, 0x00
-        };
+    //block #1 header - taken binary represenation (no change in endianity)
+    const unsigned char b1_header[] = {
+        0x02, 0x00, 0x00, 0x00, 0xb6, 0x7a, 0x40, 0xf3, 0xcd, 0x58, 0x04, 0x43, 0x7a, 0x10, 0x8f, 0x10, 0x55, 0x33, 0x73, 0x9c, 0x37, 0xe6,
+        0x22, 0x9b, 0xc1, 0xad, 0xca, 0xb3, 0x85, 0x14, 0x0b, 0x59, 0xfd, 0x0f, 0x00, 0x00, 0xa7, 0x1c, 0x1a, 0xad, 0xe4, 0x4b, 0xf8, 0x42,
+        0x5b, 0xec, 0x0d, 0xeb, 0x61, 0x1c, 0x20, 0xb1, 0x6d, 0xa3, 0x44, 0x28, 0x18, 0xef, 0x20, 0x48, 0x9c, 0xa1, 0xe2, 0x51, 0x2b, 0xe4,
+        0x3e, 0xef, 0x81, 0x4c, 0xdb, 0x52, 0xf0, 0xff, 0x0f, 0x1e, 0xdb, 0xf7, 0x01, 0x00
+    };
 
-        REQUIRE(HashX11<const unsigned char*>(b1_header, 80).ToString().compare("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343") == 0);
-    }
+    REQUIRE(HashX11<const unsigned char*>(b1_header, 80).ToString().compare("000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343") == 0);
 }
 
 
-TEST_CASE("Block tests")
+TEST_CASE("block_valid", "Test case for a valid dash block")
 {
-    SECTION("Valid block") {
-
-        //block #1 without magic number and size
-        const unsigned char test_block[] = {
-            0x02, 0x00, 0x00, 0x00, 0xB6, 0x7A, 0x40, 0xF3, 0xCD, 0x58, 0x04, 0x43, 0x7A, 0x10, 0x8F, 0x10,
-            0x55, 0x33, 0x73, 0x9C, 0x37, 0xE6, 0x22, 0x9B, 0xC1, 0xAD, 0xCA, 0xB3, 0x85, 0x14, 0x0B, 0x59,
-            0xFD, 0x0F, 0x00, 0x00, 0xA7, 0x1C, 0x1A, 0xAD, 0xE4, 0x4B, 0xF8, 0x42, 0x5B, 0xEC, 0x0D, 0xEB,
-            0x61, 0x1C, 0x20, 0xB1, 0x6D, 0xA3, 0x44, 0x28, 0x18, 0xEF, 0x20, 0x48, 0x9C, 0xA1, 0xE2, 0x51,
-            0x2B, 0xE4, 0x3E, 0xEF, 0x81, 0x4C, 0xDB, 0x52, 0xF0, 0xFF, 0x0F, 0x1E, 0xDB, 0xF7, 0x01, 0x00,
-            0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0A, 0x51, 0x01, 0x01, 0x06, 0x2F,
-            0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00,
-            0x00, 0x00, 0x23, 0x21, 0x03, 0xA6, 0x98, 0x50, 0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8,
-            0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
-            0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00, 0x00, 0x00
-        };
-
-        uint32_t expectedVersion = 2;
-        std::string expectedHashPrevBlock = "00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6";
-        std::string expectedHashMerkleRoot = "ef3ee42b51e2a19c4820ef182844a36db1201c61eb0dec5b42f84be4ad1a1ca7";
-        uint32_t expectedTime = 1390103681;
-        uint32_t expectedBits = 504365040;
-        uint32_t expectedNonce = 128987;
-        uint32_t expectedSize = 186;
-
-        std::unique_ptr<char[]> binBuffer = std::unique_ptr<char[]>(new char[186]);
-        memcpy(binBuffer.get(), test_block, 186);
-
-        Block block(std::move(binBuffer), 186);
-        REQUIRE(block.getVersion() == expectedVersion);
-        REQUIRE(block.getHashPrevBlock().ToString() == expectedHashPrevBlock);
-        REQUIRE(block.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
-        REQUIRE(block.getTime() == expectedTime);
-        REQUIRE(block.getBits() == expectedBits);
-        REQUIRE(block.getNonce() == expectedNonce);
-        REQUIRE(block.getSize() == expectedSize);
-    }
+    //block #1 without magic number and size
+    const unsigned char test_block[] = {
+        0x02, 0x00, 0x00, 0x00, 0xB6, 0x7A, 0x40, 0xF3, 0xCD, 0x58, 0x04, 0x43, 0x7A, 0x10, 0x8F, 0x10,
+        0x55, 0x33, 0x73, 0x9C, 0x37, 0xE6, 0x22, 0x9B, 0xC1, 0xAD, 0xCA, 0xB3, 0x85, 0x14, 0x0B, 0x59,
+        0xFD, 0x0F, 0x00, 0x00, 0xA7, 0x1C, 0x1A, 0xAD, 0xE4, 0x4B, 0xF8, 0x42, 0x5B, 0xEC, 0x0D, 0xEB,
+        0x61, 0x1C, 0x20, 0xB1, 0x6D, 0xA3, 0x44, 0x28, 0x18, 0xEF, 0x20, 0x48, 0x9C, 0xA1, 0xE2, 0x51,
+        0x2B, 0xE4, 0x3E, 0xEF, 0x81, 0x4C, 0xDB, 0x52, 0xF0, 0xFF, 0x0F, 0x1E, 0xDB, 0xF7, 0x01, 0x00,
+        0x01, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x0A, 0x51, 0x01, 0x01, 0x06, 0x2F,
+        0x50, 0x32, 0x53, 0x48, 0x2F, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x74, 0x3B, 0xA4, 0x0B, 0x00,
+        0x00, 0x00, 0x23, 0x21, 0x03, 0xA6, 0x98, 0x50, 0x24, 0x3C, 0x99, 0x3C, 0x06, 0x45, 0xA6, 0xE8,
+        0xB3, 0x8C, 0x77, 0x41, 0x74, 0x17, 0x4C, 0xC7, 0x66, 0xCD, 0x3E, 0xC2, 0x14, 0x0A, 0xFD, 0x24,
+        0xD8, 0x31, 0xB8, 0x4C, 0x41, 0xAC, 0x00, 0x00, 0x00, 0x00
+    };
+    
+    uint32_t expectedVersion = 2;
+    std::string expectedHashPrevBlock = "00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6";
+    std::string expectedHashMerkleRoot = "ef3ee42b51e2a19c4820ef182844a36db1201c61eb0dec5b42f84be4ad1a1ca7";
+    uint32_t expectedTime = 1390103681;
+    uint32_t expectedBits = 504365040;
+    uint32_t expectedNonce = 128987;
+    uint32_t expectedSize = 186;
+    
+    std::unique_ptr<char[]> binBuffer = std::unique_ptr<char[]>(new char[186]);
+    memcpy(binBuffer.get(), test_block, 186);
+    
+    Block block(std::move(binBuffer), 186);
+    REQUIRE(block.getVersion() == expectedVersion);
+    REQUIRE(block.getHashPrevBlock().ToString() == expectedHashPrevBlock);
+    REQUIRE(block.getHashMerkleRoot().ToString() == expectedHashMerkleRoot);
+    REQUIRE(block.getTime() == expectedTime);
+    REQUIRE(block.getBits() == expectedBits);
+    REQUIRE(block.getNonce() == expectedNonce);
+    REQUIRE(block.getSize() == expectedSize);
 }
 
 
-TEST_CASE("Blockchain tests")
+TEST_CASE("blockchain_tests", "Several cases to test blockchain parsing")
 {
-    SECTION("One valid block with one transaction") {
+    SECTION("one_block_one_tx_valid", "One block with one valid transaction") {
 
         //block #1 with everything
         const unsigned char test_block[] = {
@@ -131,7 +125,7 @@ TEST_CASE("Blockchain tests")
     }
 
 
-    SECTION("One valid block with two transactions") {
+    SECTION("one_bloc_two_txs_valid", "One valid block with two transactions") {
 
         //block #1 with everything
         const unsigned char test_block[] = {
@@ -203,7 +197,7 @@ TEST_CASE("Blockchain tests")
     }
 
 
-    SECTION("Two valid blocks with one transaction each") {
+    SECTION("two_blocks_two_txs_each_valid", "Two valid blocks with one transaction each") {
 
         //2 * block #1 with everything
         const unsigned char test_blocks[] = {
@@ -294,7 +288,7 @@ TEST_CASE("Blockchain tests")
     }
 
 
-    SECTION("Correct pair of blocks with multiple transactions")
+    SECTION("two_block_several_txs_each", "Correct pair of blocks with multiple transactions")
     {
         const std::string FILE_NAME =  "./blockchainAdvancedTest.bin";
 
@@ -323,7 +317,7 @@ TEST_CASE("Blockchain tests")
     }
 
 
-    SECTION("Parse file with many blocks")
+    SECTION("file_many_blocks", "Parse file with many blocks")
     {
         const std::string FILE_NAME =  "./blockchainBigTest.bin";
 
@@ -353,7 +347,7 @@ TEST_CASE("Blockchain tests")
     }
 
 
-    SECTION("Offset test")
+    SECTION("offset", "Offset test")
     {
         const std::string FILE_NAME =  "./blockchainBigTest.bin";
 
@@ -393,7 +387,7 @@ TEST_CASE("Blockchain tests")
     }
 
 
-    SECTION("Magic number cannot be read") {
+    SECTION("can_not_read_magic", "Magic number cannot be read") {
 
         const unsigned char test_blocks[] = {
             0xbf, 0x0c, 0x6b
@@ -411,7 +405,7 @@ TEST_CASE("Blockchain tests")
     }
 
 
-    SECTION("File does not begin with magic number") {
+    SECTION("file_doesnt_begin_with_magic", "File does not begin with magic number") {
 
         const unsigned char test_blocks[] = {
             0xbf, 0x0c, 0x6b, 0x00
@@ -428,7 +422,7 @@ TEST_CASE("Blockchain tests")
     }
 
 
-    SECTION("Size cannot be read") {
+    SECTION("size_unreadable", "Size cannot be read") {
 
         const unsigned char test_blocks[] = {
             0xbf, 0x0c, 0x6b, 0xbd, 0x00
@@ -445,7 +439,7 @@ TEST_CASE("Blockchain tests")
     }
 
 
-    SECTION("Invalid size") {
+    SECTION("invalid_size", "Invalid size") {
 
         const unsigned char test_blocks[] = {
             0xbf, 0x0c, 0x6b, 0xbd, 0xff, 0xff, 0xff, 0xff
@@ -462,7 +456,7 @@ TEST_CASE("Blockchain tests")
     }
 
 
-    SECTION("Invalid size of content") {
+    SECTION("content_size_invalid", "Invalid size of content") {
 
         const unsigned char test_blocks[] = {
             0xbf, 0x0c, 0x6b, 0xbd, 0xba, 0x00, 0x00, 0x00, 0x02
@@ -480,9 +474,9 @@ TEST_CASE("Blockchain tests")
 }
 
 
-TEST_CASE("ParseVarLength tests")
+TEST_CASE("ParseVarLength", "Test cases for variable integer parsing")
 {
-    SECTION("Valid uint8_t length")
+    SECTION("valid_8_bit", "Valid uint8_t length")
     {
         const unsigned char len_buffer[] = { 0x57 };
 
@@ -494,7 +488,7 @@ TEST_CASE("ParseVarLength tests")
     }
 
 
-    SECTION("Valid uint16_t length")
+    SECTION("valid_16_bit", "Valid uint16_t length")
     {
         const unsigned char len_buffer[] = { 0xFD, 0xFC, 0x8A };
 
@@ -506,7 +500,7 @@ TEST_CASE("ParseVarLength tests")
     }
 
 
-    SECTION("Valid uint32_t length")
+    SECTION("valid_32_bit", "Valid uint32_t length")
     {
         const unsigned char len_buffer[] = { 0xFE, 0xFF, 0xFF, 0xFF, 0xFF };
 
@@ -518,7 +512,7 @@ TEST_CASE("ParseVarLength tests")
     }
 
 
-    SECTION("Valid uint64_t length")
+    SECTION("valid_64_bit", "Valid uint64_t length")
     {
         const unsigned char len_buffer[] = { 0xFF, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00};
 
@@ -531,9 +525,9 @@ TEST_CASE("ParseVarLength tests")
 }
 
 
-TEST_CASE("Transaction parse tests")
+TEST_CASE("transaction", "Several test cases for transaction parsing")
 {
-    SECTION("Valid transaction")
+    SECTION("tx_valid", "Valid transaction")
     {
         const unsigned char test_transaction[] = {
          /*0x01,*/0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -561,7 +555,7 @@ TEST_CASE("Transaction parse tests")
     }
 
 
-    SECTION("Transaction with invalid length of input")
+    SECTION("tx_input_len_invalid", "Transaction with invalid length of input")
     {
         const unsigned char test_transaction[] = {
          /*0x01,*/0x01, 0x00, 0x00, 0x00, 0x02, /* <- TxIn count 01->02*/  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -579,7 +573,7 @@ TEST_CASE("Transaction parse tests")
     }
 
 
-    SECTION("Transaction with invalid length of output")
+    SECTION("tx_output_len_invalid", "Transaction with invalid length of output")
     {
         const unsigned char test_transaction[] = {
          /*0x01,*/0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -598,11 +592,11 @@ TEST_CASE("Transaction parse tests")
 }
 
 
-TEST_CASE("Simple validator tests")
+TEST_CASE("validator", "Simple test cases that test the validator")
 {
-    SECTION("validateTransactions() tests")
+    SECTION("validateTrasactions", "validateTransactions() tests")
     {
-        SECTION("Block without first transactions containing two inputs")
+        SECTION("block_without_first_tx_with_two_inputs", "Block without first transactions containing two inputs")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
 
@@ -623,7 +617,7 @@ TEST_CASE("Simple validator tests")
         }
 
 
-        SECTION("Block without first transactions containing two inputs")
+        SECTION("block_without_first_tx_with_two_inputs", "Block without first transactions containing two inputs")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
 
@@ -644,7 +638,7 @@ TEST_CASE("Simple validator tests")
         }
 
 
-        SECTION("Block without first transaction's hash not equal to 0")
+        SECTION("block_1st_tx_hash_not_1", "Block without first transaction's hash not equal to 0")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
 
@@ -673,7 +667,7 @@ TEST_CASE("Simple validator tests")
         }
 
 
-        SECTION("Block with valid coinbase transaction")
+        SECTION("block_coinbase_tx_valid", "Block with valid coinbase transaction")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
 
@@ -702,7 +696,7 @@ TEST_CASE("Simple validator tests")
         }
 
 
-        SECTION("Block with second transaction's hash equal to 0")
+        SECTION("block_2nd_tran_hash_equ_0", "Block with second transaction's hash equal to 0")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
 
@@ -733,7 +727,7 @@ TEST_CASE("Simple validator tests")
         }
 
 
-        SECTION("Block with transaction with empty input list")
+        SECTION("block_tx_input_list_empty", "Block with transaction with empty input list")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
 
@@ -757,7 +751,7 @@ TEST_CASE("Simple validator tests")
         }
 
 
-        SECTION("Block with transaction with empty output list")
+        SECTION("block_tx_output_list_empty", "Block with transaction with empty output list")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
 
@@ -785,9 +779,9 @@ TEST_CASE("Simple validator tests")
     }
 
 
-    SECTION("timesamp tests")
+    SECTION("timestamp", "timestamp tests")
     {
-        SECTION("Valid timestamp")
+        SECTION("timestamp_valid", "Valid timestamp")
         {
             Block testBlock = TestHelper::CreateEmptyBlockObject();
             TestHelper::setBlockTime(testBlock, 1390103681);
@@ -796,7 +790,7 @@ TEST_CASE("Simple validator tests")
         }
 
 
-        SECTION("Invalid timestamp")
+        SECTION("timestamp_invalid", "Invalid timestamp")
         {
             const uint32_t twoHoursAndOneSecond = 2*60*60 + 1;
             uint32_t currentTime = static_cast<uint32_t>(time(NULL));
@@ -809,9 +803,9 @@ TEST_CASE("Simple validator tests")
     }
 
 
-    SECTION("Previous hash tests")
+    SECTION("prev_hash", "Previous hash tests")
     {
-        SECTION("Valid previous hash")
+        SECTION("prev_hash_valid", "Valid previous hash")
         {
             const unsigned char test_block[] = {
                 0x02, 0x00, 0x00, 0x00, 0xB6, 0x7A, 0x40, 0xF3, 0xCD, 0x58, 0x04, 0x43, 0x7A, 0x10, 0x8F, 0x10,
@@ -845,7 +839,7 @@ TEST_CASE("Simple validator tests")
         }
 
 
-        SECTION("Invalid previous block hash")
+        SECTION("prev_block_hash_invalid", "Invalid previous block hash")
         {
             const unsigned char test_block[] = {
                 0x00, 0x00, 0x00, 0x00, 0xB6, 0x7A, 0x40, 0xF3, 0xCD, 0x58, 0x04, 0x43, 0x7A, 0x10, 0x8F, 0x10,
@@ -880,7 +874,7 @@ TEST_CASE("Simple validator tests")
     }
 }
 
-TEST_CASE("Advanced tests")
+TEST_CASE("advanced", "Advanced tests")
 {
     const unsigned char block_part1[] = {
         0x02, 0x00, 0x00, 0x00, 0x0F, 0x91, 0x20, 0x0D, 0xEB, 0xB2, 0x37, 0xE7, 0x07, 0xCE, 0x8E, 0x4F,
@@ -1182,30 +1176,30 @@ TEST_CASE("Advanced tests")
     TestHelper::setBlockBinBuffer(predecessor, std::move(binBuffer2));
     TestHelper::setBlockOffsets(predecessor, headerOffsets);
 
-    SECTION("validateBlock() tests")
+    SECTION("validateBlock", "validateBlock() tests")
     {
-        SECTION("Correct pair of blocks")
+        SECTION("correct_pair", "Correct pair of blocks")
         {
             REQUIRE(TestHelper::validateBlock(testBlock, predecessor) == true);
         }
 
 
-        SECTION("Twice the same block")
+        SECTION("same_block_twice", "Twice the same block")
         {
             REQUIRE(TestHelper::validateBlock(testBlock, testBlock) == false);
         }
     }
 
 
-    SECTION("validateBlock() tests")
+    SECTION("validateBlock", "validateBlock() tests")
     {
-        SECTION("Correct block with 7 transaction")
+        SECTION("block_7_tx_valid", "Correct block with 7 transaction")
         {
             REQUIRE(TestHelper::verifyMerkleHash(testBlock) == true);
         }
 
 
-        SECTION("Incorrect block with 7 transaction")
+        SECTION("block_7_tx_invalid", "Incorrect block with 7 transaction")
         {
             uint256 merkle;
             merkle.SetHex("43f2d169f3e0c651b36b79a0d5b2030a75eb1a2d6bf21ef289a0c74b6556dee0");
@@ -1214,7 +1208,7 @@ TEST_CASE("Advanced tests")
         }
 
 
-        SECTION("Correct block with one transaction")
+        SECTION("block_1_tx_valid", "Correct block with one transaction")
         {
             const unsigned char test_block[] = {
                 0x02, 0x00, 0x00, 0x00, 0xB6, 0x7A, 0x40, 0xF3, 0xCD, 0x58, 0x04, 0x43, 0x7A, 0x10, 0x8F, 0x10,
@@ -1244,7 +1238,7 @@ TEST_CASE("Advanced tests")
         }
 
 
-        SECTION("Incorrect block with one transaction")
+        SECTION("block_1_tx_invalid", "Incorrect block with one transaction")
         {
             const unsigned char test_block[] = {
                 0x02, 0x00, 0x00, 0x00, 0xB6, 0x7A, 0x40, 0xF3, 0xCD, 0x58, 0x04, 0x43, 0x7A, 0x10, 0x8F, 0x10,

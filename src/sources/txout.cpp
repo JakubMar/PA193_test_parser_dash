@@ -5,7 +5,7 @@
 TxOut::TxOut(const char *buffer, uint32_t& globalOffset, size_t& unread_size)
 {
     //VALUE
-    if(unread_size < VALUE_SIZE)
+    if (unread_size < VALUE_SIZE)
         throw InvalidTransactionSizeException("TxOut: invalid read of Value");
     uint32_t localOffset = 0;
     value = ParseUint64(buffer);
@@ -16,7 +16,7 @@ TxOut::TxOut(const char *buffer, uint32_t& globalOffset, size_t& unread_size)
     varInt scriptLen = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer + localOffset), unread_size);
     localOffset += scriptLen.second;
     unread_size -= scriptLen.second;
-    if(unread_size < scriptLen.first)
+    if (unread_size < scriptLen.first)
     {
         throw InvalidScriptSizeException();
     }

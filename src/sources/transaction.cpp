@@ -8,7 +8,7 @@ Transaction::Transaction(const char *buffer, uint32_t &globalOffset, size_t &unr
     uint32_t localOffset = 0;
 
     // VERSION
-    if(unread_size < VERSION_SIZE)
+    if (unread_size < VERSION_SIZE)
     {
         throw InvalidTransactionSizeException("Invalid read of Version");
     }
@@ -20,7 +20,7 @@ Transaction::Transaction(const char *buffer, uint32_t &globalOffset, size_t &unr
     varInt txInCount = ParseVarLength(reinterpret_cast<const unsigned char*>(buffer + localOffset), unread_size);
     localOffset += txInCount.second;
     unread_size -= txInCount.second;
-    for(size_t i = 0; i < txInCount.first; ++i)
+    for (size_t i = 0; i < txInCount.first; ++i)
     {
         inTrans.emplace_back(TxIn(buffer+localOffset, localOffset, unread_size));
     }
@@ -30,13 +30,13 @@ Transaction::Transaction(const char *buffer, uint32_t &globalOffset, size_t &unr
     localOffset += txOutCount.second;
     unread_size -= txOutCount.second;
 
-    for(size_t i = 0; i < txOutCount.first; ++i)
+    for (size_t i = 0; i < txOutCount.first; ++i)
     {
         outTrans.emplace_back(TxOut(buffer+localOffset, localOffset, unread_size));
     }
 
     // LOCK_TIME
-    if(unread_size < TIME_SIZE)
+    if (unread_size < TIME_SIZE)
     {
         throw InvalidTransactionSizeException("Invalid read of Time");
     }
@@ -82,13 +82,13 @@ std::ostream& operator<<(std::ostream& stream, const Transaction& t)
     std::time_t time = t.lockTime;
     stream << "  Lock time: " << std::asctime(std::localtime(&time));
     stream << "  TxIn(s):" << std::endl;
-    for(auto& it : t.inTrans)
+    for (auto& it : t.inTrans)
     {
         stream << "\t" << it << std::endl;
     }
 
     stream << "  TxOut(s):" << std::endl;
-    for(auto& it : t.outTrans)
+    for (auto& it : t.outTrans)
     {
         stream << "\t" << it << std::endl;
     }

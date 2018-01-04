@@ -2,10 +2,11 @@
 
 #include "parserexception.h"
 
-class ReadFileException: public ParserException {
+class ReadFileException: public ParserException
+{
 public:
 
-  ReadFileException() : ParserException("Reading from file failed") {}
+    ReadFileException() : ParserException("Reading from file failed") {}
 
-  ReadFileException(std::string what) : ParserException(what) {}
+    ReadFileException(std::string what) : ParserException(what) {}
 };

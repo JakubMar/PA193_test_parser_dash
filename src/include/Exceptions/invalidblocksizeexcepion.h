@@ -2,11 +2,12 @@
 
 #include "parserexception.h"
 
-class InvalidBlockSizeException: public ParserException {
+class InvalidBlockSizeException: public ParserException
+{
 public:
 
-  InvalidBlockSizeException() : ParserException("Size of block is invalid") {}
+    InvalidBlockSizeException() : ParserException("Size of block is invalid") {}
 
-  InvalidBlockSizeException(std::string what) : ParserException(what) {}
+    InvalidBlockSizeException(std::string what) : ParserException(what) {}
 };
 

@@ -20,13 +20,13 @@ private:
     std::ifstream srcFile;
 
 public:
-    
+
     /**
      * @brief getBlocks getter for private member: vector of blocks
      * @return nBlocks
      */
     const std::vector<Block> &getBlocks() const;
-    
+
     /**
      * @brief Blockchain Constructor opens file or throws exception
      * @param fileName file to open
@@ -71,5 +71,5 @@ private:
      * @brief Block Constructor for testing
      */
     Blockchain() {}
-    
+
 };

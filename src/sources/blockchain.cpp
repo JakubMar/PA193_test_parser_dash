@@ -19,16 +19,16 @@ const std::vector<Block>& Blockchain::getBlocks() const
 bool Blockchain::parseFile()
 {
     unsigned int numberOfBlocks = 0;
-    if(nBlocks.size() > 1)
+    if (nBlocks.size() > 1)
     {
         nBlocks.erase(nBlocks.begin(), nBlocks.end() - 1);
     }
 
-    while(numberOfBlocks < MAX_NUMBER_OF_BLOCKS && !srcFile.eof())
+    while (numberOfBlocks < MAX_NUMBER_OF_BLOCKS && !srcFile.eof())
     {
         readMagicNumber(srcFile);
 
-        if(srcFile.eof())
+        if (srcFile.eof())
         {
             return false;
         }
@@ -49,9 +49,9 @@ void Blockchain::readMagicNumber(std::ifstream& file)
     char buffer[bufferSize];
     file.read(buffer, bufferSize);
 
-    if(file.fail())
+    if (file.fail())
     {
-        if(file.eof() && file.gcount() == 0)
+        if (file.eof() && file.gcount() == 0)
         {
             return;
         }
@@ -59,7 +59,7 @@ void Blockchain::readMagicNumber(std::ifstream& file)
         throw ReadFileException("Reading magic number from the file was not succesfull");
     }
 
-    if(memcmp(buffer, MAGIC_NUMBER, bufferSize) != 0)
+    if (memcmp(buffer, MAGIC_NUMBER, bufferSize) != 0)
     {
         throw MagicNumberException();
     }
@@ -71,12 +71,12 @@ uint32_t Blockchain::readBlockSize(std::ifstream& file)
     uint32_t block_size;
     file.read(reinterpret_cast<char*>(&block_size), BLOCK_SIZE_SIZE);
 
-    if(file.fail())
+    if (file.fail())
     {
         throw ReadFileException("Reading size of the block from the file was not succesfull");
     }
 
-    if(block_size > MAX_BLOCKFILE_SIZE || block_size < BLOCK_HEADER_SIZE)
+    if (block_size > MAX_BLOCKFILE_SIZE || block_size < BLOCK_HEADER_SIZE)
     {
         throw InvalidBlockSizeException();
     }
@@ -91,7 +91,7 @@ std::unique_ptr<char[]> Blockchain::readBlockContent(std::ifstream& file, uint32
     std::unique_ptr<char[]> block_buffer(new char[block_size]);
     file.read(block_buffer.get(), block_size);
 
-    if(file.fail())
+    if (file.fail())
     {
         throw ReadFileException("Reading content of block from file was not succesfull");
     }

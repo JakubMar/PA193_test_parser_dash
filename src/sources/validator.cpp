@@ -40,7 +40,7 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor)
     if (!timestampNotTooNew(head,currentTime)) return setIsValidBlockAttribute(head,false, "Invalid timestamp");
 
     //transaction list nonempty
-    if (!transactionListNonempty(head.tx)) return setIsValidBlockAttribute(head,false, "Empty transaction list");
+    if (!transactionListNonempty(head.txVector)) return setIsValidBlockAttribute(head,false, "Empty transaction list");
 
     //Verify Merkle hash
     if (!verifyMerkleHash(head)) return setIsValidBlockAttribute(head,false, "Invalid merkle root hash");
@@ -51,7 +51,7 @@ bool Validator::validateBlock(const Block &head, const Block &predecessor)
 bool Validator::validateTransactions(const Block &block)
 {
 
-    const std::vector<Transaction> &transactions = block.tx;
+    const std::vector<Transaction> &transactions = block.txVector;
 
     //first transaction coinbase
     if (!isCoinbase(transactions.at(0))) return setIsValidBlockAttribute(block,false, "First transaction is not coinbase");
@@ -105,9 +105,9 @@ bool Validator::verifyMerkleHash(const Block &block)
 }
 
 
-bool Validator::transactionListNonempty(const std::vector<Transaction> &tx)
-{
-    return tx.size() == 0 ? false : true;
+
+bool Validator::transactionListNonempty(const std::vector<Transaction> &txVector){
+    return txVector.size() == 0 ? false : true;
 }
 
 bool Validator::isCoinbase(const Transaction &transaction)
@@ -142,7 +142,7 @@ uint256 Validator::hashBlock(const Block &block)
 uint256 Validator::computeMerkleHash(const Block &block)
 {
 
-    const std::vector<Transaction> &transactions = block.tx;
+    const std::vector<Transaction> &transactions = block.txVector;
     int baseNoPadding = transactions.size();
     int actualSize = baseNoPadding + baseNoPadding%2;
     unsigned char hashes[actualSize][32];

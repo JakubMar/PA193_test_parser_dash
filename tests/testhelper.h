@@ -25,7 +25,7 @@ public:
         ret.nonce = nonce;
         ret.size = size;
         ret.time = time;
-        ret.tx = trans;
+        ret.txVector = trans;
         ret.version = version;
 
         return ret;
@@ -127,9 +127,9 @@ public:
     }
 
 
-    static bool transactionListNonempty(const std::vector<Transaction> &tx)
+    static bool transactionListNonempty(const std::vector<Transaction> &txVector)
     {
-        return Validator::transactionListNonempty(tx);
+        return Validator::transactionListNonempty(txVector);
     }
 
 
@@ -180,9 +180,9 @@ public:
     }
 
 
-    static void setBlockTx(Block &block, const std::vector<Transaction> &tx)
+    static void setBlockTx(Block &block, const std::vector<Transaction> &txVector)
     {
-        block.tx = tx;
+        block.txVector = txVector;
     }
 
 

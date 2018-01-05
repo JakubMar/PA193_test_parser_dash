@@ -41,7 +41,7 @@ private:
     /**
      * @brief tx vector of transactions
      */
-    std::vector<Transaction> tx;
+    std::vector<Transaction> txVector;
     /**
      * @brief headerOffsets start and end offsets of block header
      */
@@ -59,7 +59,7 @@ public:
 
     /**
      * @brief Block Constructor of data holding structure
-     * @param buffer memory to parse to corrsponding values
+     *Vector @param buffer memory to parse to corrsponding values
      * @param size size of the buffer
      */
     Block(std::unique_ptr<char[]> buffer, uint32_t size);
@@ -107,10 +107,10 @@ public:
     uint32_t getSize() const;
 
     /**
-     * @brief getTx getter for private member: vector of transactions
+     * @brief getTxVector getter for private member: vector of transactions
      * @return vector of transactions
      */
-    std::vector<Transaction> getTx() const;
+    std::vector<Transaction> getTxVector() const;
 
     /**
      * @brief getBinBufferData getter for private member: binary data of block

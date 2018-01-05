@@ -9,37 +9,37 @@ Block::Block(std::unique_ptr<char[]> buffer, uint32_t size) : size(size)
     uint32_t offset = 0;
 
     // VERSION
-    if(size < VERSION_SIZE)
+    if (size < VERSION_SIZE)
         throw InvalidBlockSizeException();
     version = ParseUint32(binBuffer.get());
     offset += VERSION_SIZE;
 
     // HASH
-    if(size - offset < HASH_SIZE)
+    if (size - offset < HASH_SIZE)
         throw InvalidBlockSizeException();
     memcpy(&hashPrevBlock, binBuffer.get() + offset, HASH_SIZE);
     offset += HASH_SIZE;
 
     // MERKLE_ROOT
-    if(size - offset < MERKLE_ROOT_SIZE)
+    if (size - offset < MERKLE_ROOT_SIZE)
         throw InvalidBlockSizeException();
     memcpy(&hashMerkleRoot, binBuffer.get() + offset, MERKLE_ROOT_SIZE);
     offset += MERKLE_ROOT_SIZE;
 
     // TIME
-    if(size - offset < TIME_SIZE)
+    if (size - offset < TIME_SIZE)
         throw InvalidBlockSizeException();
     time = ParseUint32(binBuffer.get() + offset);
     offset += TIME_SIZE;
 
     // BITS
-    if(size - offset < BITS_SIZE)
+    if (size - offset < BITS_SIZE)
         throw InvalidBlockSizeException();
     bits =  ParseUint32(binBuffer.get() + offset);
     offset += BITS_SIZE;
 
     // NONCE
-    if(size - offset < NONCE_SIZE)
+    if (size - offset < NONCE_SIZE)
         throw InvalidBlockSizeException();
     nonce = ParseUint32(binBuffer.get() + offset);
     offset += NONCE_SIZE;
@@ -50,7 +50,7 @@ Block::Block(std::unique_ptr<char[]> buffer, uint32_t size) : size(size)
     varInt countTx = ParseVarLength(binBuffer.get()+offset, size - offset);
     offset += countTx.second;
     size_t unread_size = size - offset;
-    for(size_t i = 0; i < countTx.first; ++i)
+    for (size_t i = 0; i < countTx.first; ++i)
     {
         txVector.emplace_back(Transaction(binBuffer.get()+offset, offset, unread_size));
     }
@@ -110,7 +110,7 @@ validStat& Block::getValidStat() const
 std::ostream& operator<< (std::ostream& stream, const Block& block)
 {
     stream << "----------BLOCK----------: " << std::endl;
-    if(block.isValid.first)
+    if (block.isValid.first)
     {
         stream << "Size: " << block.size << std::endl;
         stream << "Version: " << block.version << std::endl;

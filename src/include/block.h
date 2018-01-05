@@ -59,8 +59,10 @@ public:
 
     /**
      * @brief Block Constructor of data holding structure
-     *Vector @param buffer memory to parse to corrsponding values
+     * Vector @param buffer memory to parse to corrsponding values
      * @param size size of the buffer
+     *
+     * @throws InvalidBlockSizeException
      */
     Block(std::unique_ptr<char[]> buffer, uint32_t size);
 

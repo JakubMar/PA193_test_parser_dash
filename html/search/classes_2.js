@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['validator',['Validator',['../classValidator.html',1,'']]]
+  ['magicnumberexception',['MagicNumberException',['../classMagicNumberException.html',1,'']]]
 ];

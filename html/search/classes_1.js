@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['transaction',['Transaction',['../classTransaction.html',1,'']]],
-  ['txin',['TxIn',['../classTxIn.html',1,'']]],
-  ['txout',['TxOut',['../classTxOut.html',1,'']]]
+  ['invalidblocksizeexception',['InvalidBlockSizeException',['../classInvalidBlockSizeException.html',1,'']]],
+  ['invalidscriptsizeexception',['InvalidScriptSizeException',['../classInvalidScriptSizeException.html',1,'']]],
+  ['invalidtransactionsizeexception',['InvalidTransactionSizeException',['../classInvalidTransactionSizeException.html',1,'']]],
+  ['invalidvarlengthexception',['InvalidVarLengthException',['../classInvalidVarLengthException.html',1,'']]]
 ];

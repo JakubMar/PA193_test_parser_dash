@@ -33,6 +33,8 @@ public:
      * @param buffer memory to parse to corrsponding values
      * @param globalOffset offset to set current position for parsing other transactions from the same buffer
      * @param unread_size size of unread part of buffer
+     * @throws InvalidTransactionSizeException
+     * @throws InvalidScriptSizeException
      */
     TxIn(const char* buffer, uint32_t& globalOffset, size_t& unread_size);
 

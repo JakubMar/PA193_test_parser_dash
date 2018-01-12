@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['validateblock',['validateBlock',['../classValidator.html#abf1ab832cdf9eeac3304e349ceeed7c2',1,'Validator']]],
-  ['validateblockchain',['validateBlockChain',['../classValidator.html#abdaa06320165a08b61999d8fee83a6cf',1,'Validator']]],
-  ['validatetransaction',['validateTransaction',['../classValidator.html#af2df99b085c317a08fde2b54fb8805a1',1,'Validator']]],
-  ['validatetransactions',['validateTransactions',['../classValidator.html#ad700d636ed30d0bbf82f4095dd6747ae',1,'Validator']]],
-  ['validator',['Validator',['../classValidator.html',1,'Validator'],['../classBlock.html#a5929181addf27f130c7f8f99eeba3256',1,'Block::Validator()']]],
-  ['value',['value',['../classTxOut.html#a9a7ee91964ccfd8d25b5984df2249853',1,'TxOut']]],
-  ['verifymerklehash',['verifyMerkleHash',['../classValidator.html#a54b0baa08b7f7cb9a372baf4722ee4eb',1,'Validator']]],
-  ['verifypreviousblochash',['verifyPreviousBlocHash',['../classValidator.html#a6d82996040565f32432d6a8fce1566c9',1,'Validator']]],
-  ['version',['version',['../classBlock.html#a5d6ed55af755f97e6450121298d60ff9',1,'Block::version()'],['../classTransaction.html#a57ab2ac20c23742489fa012214feb523',1,'Transaction::version()']]]
+  ['testhelper',['TestHelper',['../classBlock.html#a0214a4e7f576db9336ddea3f3a9aa855',1,'Block::TestHelper()'],['../classBlockchain.html#a0214a4e7f576db9336ddea3f3a9aa855',1,'Blockchain::TestHelper()'],['../classTransaction.html#a0214a4e7f576db9336ddea3f3a9aa855',1,'Transaction::TestHelper()'],['../classTxIn.html#a0214a4e7f576db9336ddea3f3a9aa855',1,'TxIn::TestHelper()'],['../classTxOut.html#a0214a4e7f576db9336ddea3f3a9aa855',1,'TxOut::TestHelper()'],['../classValidator.html#a0214a4e7f576db9336ddea3f3a9aa855',1,'Validator::TestHelper()']]],
+  ['time',['time',['../classBlock.html#a93e83ee9b9c0ea371578b80eb7528138',1,'Block']]],
+  ['timestampnottoonew',['timestampNotTooNew',['../classValidator.html#a819c0dc3c16f958eaba285f0c31f130c',1,'Validator']]],
+  ['transaction',['Transaction',['../classTransaction.html',1,'Transaction'],['../classTransaction.html#a59011b056b0ffc054375f19b96f4e430',1,'Transaction::Transaction(const char *buffer, uint32_t &amp;globalOffset, size_t &amp;unread_size)'],['../classTransaction.html#ab47005b855d38bc324bb79fd023baa13',1,'Transaction::Transaction()']]],
+  ['transactionlistnonempty',['transactionListNonempty',['../classValidator.html#ac188cb2eb81ac7bb983794370bbd0270',1,'Validator']]],
+  ['txin',['TxIn',['../classTxIn.html',1,'TxIn'],['../classTxIn.html#aebc27b45b41b259b465cce0d64a82545',1,'TxIn::TxIn(const char *buffer, uint32_t &amp;globalOffset, size_t &amp;unread_size)'],['../classTxIn.html#ae1c2bbac6fbd8f048fe39f37809a43d8',1,'TxIn::TxIn()']]],
+  ['txout',['TxOut',['../classTxOut.html',1,'TxOut'],['../classTxOut.html#afbb9c0e5864fb5fe25acf12170380e74',1,'TxOut::TxOut(const char *buffer, uint32_t &amp;globalOffset, size_t &amp;unread_size)'],['../classTxOut.html#a1580dff4ad7dd739d34df3f864650d09',1,'TxOut::TxOut()']]],
+  ['txvector',['txVector',['../classBlock.html#a107c898b01b1aeaf2832cdbf521a9196',1,'Block']]]
 ];

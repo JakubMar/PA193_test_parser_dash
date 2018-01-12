@@ -30,6 +30,7 @@ public:
     /**
      * @brief Blockchain Constructor opens file or throws exception
      * @param fileName file to open
+     * @throws ReadFileException
      */
     Blockchain(std::string fileName);
 
@@ -49,12 +50,16 @@ private:
     /**
      * @brief readMagicNumber reads and checks magic number of block
      * @param file source of data
+     * @throws ReadFileException
+     * @throws MagicNumberException
      */
     void readMagicNumber(std::ifstream& file);
 
     /**
      * @brief readBlockSize reads and chceks the size of block
      * @param file source of data
+     * @throws ReadFileException
+     * @throws InvalidBlockSizeException
      * @return block size
      */
     uint32_t readBlockSize(std::ifstream& file);
@@ -63,6 +68,7 @@ private:
      * @brief readBlockContent tries to read block_size of bytes from file
      * @param file source of data
      * @param block_size size to read
+     * @throws ReadFileException
      * @return unique pointer to read data
      */
     std::unique_ptr<char[]> readBlockContent(std::ifstream& file, uint32_t block_size);

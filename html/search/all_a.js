@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['scriptoffsets',['scriptOffsets',['../classTxIn.html#abacdff9483233316e6ba5e7e719e65b8',1,'TxIn::scriptOffsets()'],['../classTxOut.html#a24905ff65ebf9e81b936917336f0362c',1,'TxOut::scriptOffsets()']]],
-  ['seqnumber',['seqNumber',['../classTxIn.html#a7ef70f3479f0b26ed782562f61742473',1,'TxIn']]],
-  ['setisvalidblockattribute',['setIsValidBlockAttribute',['../classValidator.html#a20378dd6a5e82b97b932f77ef55523a7',1,'Validator']]],
-  ['size',['size',['../classBlock.html#aca6ef54133a93503c74795a38bf34a12',1,'Block']]],
-  ['srcfile',['srcFile',['../classBlockchain.html#a128173699bd698a9ea71f864968c82ee',1,'Blockchain']]]
+  ['readblockcontent',['readBlockContent',['../classBlockchain.html#ad51b42aa23d5838477fad4b3acd774e6',1,'Blockchain']]],
+  ['readblocksize',['readBlockSize',['../classBlockchain.html#abb075b7eb58e026a25245920e962c909',1,'Blockchain']]],
+  ['readfileexception',['ReadFileException',['../classReadFileException.html',1,'']]],
+  ['readmagicnumber',['readMagicNumber',['../classBlockchain.html#a1d4f66368e00f3579b9341c7cd5a06ac',1,'Blockchain']]]
 ];

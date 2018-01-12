@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classInvalidVarLengthException.html" title="InvalidVarLengthException is an exception class that inherits from ParserException. " alt="" coords="5,107,183,133"/>
+<area shape="rect" id="node2" href="$classParserException.html" title="Base exception class for other exceptions to inherit from. " alt="" coords="231,107,349,133"/>
+<area shape="rect" id="node3" href="$classInvalidBlockSizeException.html" title="InvalidBlockSizeException is an exception class that inherits from ParserException. " alt="" coords="415,5,592,32"/>
+<area shape="rect" id="node4" href="$classInvalidScriptSizeException.html" title="InvalidScriptSizeException is an exception class that inherits from ParserException. " alt="" coords="414,56,593,83"/>
+<area shape="rect" id="node5" href="$classInvalidTransactionSizeException.html" title="InvalidTransactionSizeException is an exception class that inherits from ParserException. " alt="" coords="397,107,609,133"/>
+<area shape="rect" id="node6" href="$classMagicNumberException.html" title="MagicNumberException is an exception class that inherits from ParserException. " alt="" coords="423,157,584,184"/>
+<area shape="rect" id="node7" href="$classReadFileException.html" title="ReadFileException is an exception class that inherits from ParserException. " alt="" coords="437,208,569,235"/>
+</map>
